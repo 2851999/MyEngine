@@ -1,3 +1,13 @@
+/***********************************************
+ * SIMPLE CORPORATION
+ * 
+ * MYENGINE
+ * 
+ * COPYRIGHT @ 2013
+ * 
+ * USE - EDUCATIONAL PURPOSES ONLY
+ ***********************************************/
+
 package org.simplecorporation.myengine.core.window;
 
 import java.awt.Dimension;
@@ -33,6 +43,12 @@ public class OpenGLWindow {
 			Logger.log("OpenGLWindow create()" , "LWJGL Exception");
 			e.printStackTrace();
 		}
+	}
+	
+	/* The method to close the window */
+	public static void close() {
+		//Close the window
+		Display.destroy();
 	}
 	
 	/* The method to set the window to the right settings */
@@ -126,6 +142,16 @@ public class OpenGLWindow {
 		
 		//Return nothing
 		return null;
+	}
+	
+	/* Is the window still visible */
+	public static boolean isVisible() {
+		return Display.isVisible();
+	}
+	
+	/* Is a close requested */
+	public static boolean isCloseRequested() {
+		return Display.isCloseRequested();
 	}
 	
 }

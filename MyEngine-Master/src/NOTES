@@ -4,3 +4,7 @@ VSync if changed from initial value will require the engine
 to be restart for the change to be applied.
 
 Turning OpenGL on/off will require the engine to restart also
+
+Both types of window have a FPS limiting device. The one in
+the Java Window is not as accurate. By setting the MAX_FPS
+variable to 0 the FPS will not be limited.
