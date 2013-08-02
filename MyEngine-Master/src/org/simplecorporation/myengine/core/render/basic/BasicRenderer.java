@@ -10,6 +10,7 @@
 
 package org.simplecorporation.myengine.core.render.basic;
 
+import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.settings.Settings;
 
@@ -59,4 +60,25 @@ public class BasicRenderer {
 			BasicRendererJava.renderLine(startx , starty , endx , endy);
 	}
 	
+	/* The method to render an image */
+	public static void renderImage(Image image , double x , double y) {
+		//Find out what rendering mode to use
+		if (Settings.Video.OpenGL)
+			//Render the image using OpenGL
+			BasicRendererOpenGL.renderImage(image , x , y);
+		else
+			//Render the image using Java
+			BasicRendererJava.renderImage(image , x , y);
+	}
+	
+	/* The method to render an image with a specified width and height */
+	public static void renderImage(Image image , double x , double y , double width , double height) {
+		//Find out what rendering mode to use
+		if (Settings.Video.OpenGL)
+			//Render the image using OpenGL
+			BasicRendererOpenGL.renderImage(image , x , y , width , height);
+		else
+			//Render the image using Java
+			BasicRendererJava.renderImage(image , x , y , width , height);
+	}
 }

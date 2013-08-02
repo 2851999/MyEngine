@@ -11,6 +11,8 @@
 package org.simplecorporation.myengine.core.render.basic;
 
 import static org.lwjgl.opengl.GL11.*;
+
+import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 
 public class BasicRendererOpenGL {
@@ -56,4 +58,33 @@ public class BasicRendererOpenGL {
 		glEnd();
 	}
 	
+	/* The method to render an image */
+	public static void renderImage(Image image , double x , double y) {
+		//Render the image
+		glBegin(GL_QUADS);
+		glTexCoord2d(0 , 0);
+		glVertex2d(x , y);
+		glTexCoord2d(1 , 0);
+		glVertex2d(x + image.getWidth() , y);
+		glTexCoord2d(1 , 1);
+		glVertex2d(x + image.getWidth() , y + image.getHeight());
+		glTexCoord2d(0 , 1);
+		glVertex2d(x , y + image.getHeight());
+		glEnd();
+	}
+	
+	/* The method to render an image with a specified width and height */
+	public static void renderImage(Image image , double x , double y , double width , double height) {
+		//Render the image
+		glBegin(GL_QUADS);
+		glTexCoord2d(0 , 0);
+		glVertex2d(x , y);
+		glTexCoord2d(1 , 0);
+		glVertex2d(x + width , y);
+		glTexCoord2d(1 , 1);
+		glVertex2d(x + width , y + height);
+		glTexCoord2d(0 , 1);
+		glVertex2d(x , y + height);
+		glEnd();
+	}
 }

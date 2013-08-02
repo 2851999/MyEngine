@@ -12,6 +12,7 @@ package org.simplecorporation.myengine.core.render.basic;
 
 import java.awt.Color;
 
+import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.core.window.JavaWindow;
 
@@ -39,6 +40,18 @@ public class BasicRendererJava {
 	public static void renderLine(double startx , double starty , double endx , double endy) {
 		//Render the line
 		JavaWindow.g2d.drawLine((int)startx , (int)starty , (int)endx , (int)endy);
+	}
+	
+	/* The method to render an image */
+	public static void renderImage(Image image , double x , double y) {
+		//Render the image
+		JavaWindow.g2d.drawImage(image.getJavaImage() , (int)x , (int)y , JavaWindow.frame);
+	}
+	
+	/* The method to render an image with a specified width and height */
+	public static void renderImage(Image image , double x , double y , double width , double height) {
+		//Render the image
+		JavaWindow.g2d.drawImage(image.getJavaImage() , (int)x , (int)y , (int) width , (int) height , JavaWindow.frame);
 	}
 	
 }
