@@ -26,8 +26,19 @@ public class BasicRenderer {
 			BasicRendererJava.setColour(colour);
 	}
 	
+	/* The method to render an unfilled rectangle */
+	public static void renderRectangle(double x , double y , double width , double height) {
+		//Find out what rendering mode to use
+		if (Settings.Video.OpenGL)
+			//Render an unfilled rectangle using OpenGL
+			BasicRendererOpenGL.renderRectangle(x , y , width , height);
+		else
+			//Render an unfilled rectangle using Java
+			BasicRendererJava.renderRectangle(x , y , width , height);
+	}
+	
 	/* The method to render a filled rectangle */
-	public static void renderFilledRectangle(float x , float y , float width , float height) {
+	public static void renderFilledRectangle(double x , double y , double width , double height) {
 		//Find out what rendering mode to use
 		if (Settings.Video.OpenGL)
 			//Render a filled rectangle using OpenGL
@@ -35,6 +46,17 @@ public class BasicRenderer {
 		else
 			//Render a filled rectangle using Java
 			BasicRendererJava.renderFilledRectangle(x , y , width , height);
+	}
+	
+	/* The method to render a line */
+	public static void renderLine(double startx , double starty , double endx , double endy) {
+		//Find out what rendering mode to use
+		if (Settings.Video.OpenGL)
+			//Render a line using OpenGL
+			BasicRendererOpenGL.renderLine(startx , starty , endx , endy);
+		else
+			//Render a line using Java
+			BasicRendererJava.renderLine(startx , starty , endx , endy);
 	}
 	
 }

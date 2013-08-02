@@ -9,7 +9,7 @@ import org.simplecorporation.myengine.settings.Settings;
 public class RectangleTest extends EngineLoop {
 	
 	public RectangleTest() {
-		Settings.Video.OpenGL = true;
+		Settings.Video.OpenGL = false;
 		create();
 	}
 	
@@ -45,7 +45,7 @@ public class RectangleTest extends EngineLoop {
 		}
 		
 		BasicRenderer.setColour(Colour.BLUE);
-		BasicRenderer.renderFilledRectangle(100 , 100 , 100 , 100);
+		BasicRenderer.renderRectangle(100 , 100 , 100 , 100);
 	}
 
 	@Override

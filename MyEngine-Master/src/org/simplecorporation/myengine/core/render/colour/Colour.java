@@ -13,29 +13,29 @@ package org.simplecorporation.myengine.core.render.colour;
 public class Colour {
 	
 	/* The predefined colours */
-	public static final Colour BLACK = new Colour(0f , 0f , 0f , 1f);
-	public static final Colour RED = new Colour(1f , 0f , 0f , 1f);
-	public static final Colour YELLOW = new Colour(1f , 1f , 0f , 1f);
-	public static final Colour PINK = new Colour(1f , 0f , 1f , 1f);
-	public static final Colour GREEN = new Colour(0f , 1f , 0f , 1f);
-	public static final Colour LIGHT_BLUE = new Colour(0f , 1f , 1f , 1f);
-	public static final Colour BLUE = new Colour(0f , 0f , 1f , 1f);
-	public static final Colour WHITE = new Colour(1f , 1f , 1f , 1f);
+	public static final Colour BLACK = new Colour(0d , 0d , 0d , 1d);
+	public static final Colour RED = new Colour(1d , 0d , 0d , 1d);
+	public static final Colour YELLOW = new Colour(1d , 1d , 0d , 1d);
+	public static final Colour PINK = new Colour(1d , 0d , 1d , 1d);
+	public static final Colour GREEN = new Colour(0d , 1d , 0d , 1d);
+	public static final Colour LIGHT_BLUE = new Colour(0d , 1d , 1d , 1d);
+	public static final Colour BLUE = new Colour(0d , 0d , 1d , 1d);
+	public static final Colour WHITE = new Colour(1d , 1d , 1d , 1d);
 	
 	/* The red value */
-	public float r;
+	public double r;
 	
 	/* The green value */
-	public float g;
+	public double g;
 	
 	/* The blue value */
-	public float b;
+	public double b;
 	
 	/* The alpha value */
-	public float a;
+	public double a;
 	
 	/* The constructor of a colour */
-	public Colour(float r , float g , float b , float a) {
+	public Colour(double r , double g , double b , double a) {
 		this.r = r;
 		this.g = g;
 		this.b = b;
