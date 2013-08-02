@@ -17,23 +17,23 @@ public class Window {
 	/* The method to create the window */
 	public static void create() {
 		//Check weather OpenGL is being used
-		if (Settings.Video.OpenGL) {
+		if (Settings.Video.OpenGL)
+			//Create the OpenGL window
 			OpenGLWindow.create();
-		} else {
+		else
+			//Create the Java window
 			JavaWindow.create();
-		}
 	}
 	
 	/* The method to close the window */
 	public static void close() {
 		//Check what window is being used
-		if (Settings.Video.OpenGL) {
-			//Close the window
+		if (Settings.Video.OpenGL)
+			//Close the OpenGL window
 			OpenGLWindow.close();
-		} else {
-			//Close the window
+		else
+			//Close the Java window
 			JavaWindow.close();
-		}
 	}
 	
 	/* The method to update the window */
@@ -53,25 +53,24 @@ public class Window {
 	/* Is the window still visible */
 	public static boolean isVisble() {
 		//Check what window is being used
-		if (Settings.Video.OpenGL) {
-			//Return whether the window is visible
+		if (Settings.Video.OpenGL)
+			//Return whether the OpenGL window is visible
 			return OpenGLWindow.isVisible();
-		} else {
-			//Return whether the window is visible
+		else
+			//Return whether the Java window is visible
 			return JavaWindow.isVisible();
-		}
+		
 	}
 	
 	/* Is a close requested */
 	public static boolean isCloseRequested() {
 		//Check what window is being used
-		if (Settings.Video.OpenGL) {
+		if (Settings.Video.OpenGL)
 			//Return the correct value
 			return OpenGLWindow.isCloseRequested();
-		} else {
+		else
 			//Return the correct value
 			return JavaWindow.isCloseRequested();
-		}
 	}
 	
 }
