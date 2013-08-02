@@ -1,3 +1,13 @@
+/***********************************************
+ * SIMPLE CORPORATION
+ * 
+ * MYENGINE
+ * 
+ * COPYRIGHT @ 2013
+ * 
+ * USE - EDUCATIONAL PURPOSES ONLY
+ ***********************************************/
+
 package org.simplecorporation.myengine.utils.file;
 
 import java.io.BufferedReader;
