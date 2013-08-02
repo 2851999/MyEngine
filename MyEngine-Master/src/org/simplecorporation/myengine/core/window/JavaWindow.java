@@ -72,8 +72,13 @@ public class JavaWindow {
 		//Set the maximum FPS
 		maxFPS = Settings.Video.MaxFPS;
 		
-		//Set the wait time
-		waitTime = 1000 / maxFPS;
+		//Check if the max FPS is 0
+		if (maxFPS == 0)
+			//Set the wait time
+			waitTime = 0;
+		else
+			//Set the wait time
+			waitTime = 1000 / maxFPS;
 		
 		//Set the last frame's time
 		lastFrameTime = System.currentTimeMillis();
@@ -142,8 +147,13 @@ public class JavaWindow {
 		if (maxFPS != Settings.Video.MaxFPS) {
 			//Set the max FPS
 			maxFPS = Settings.Video.MaxFPS;
-			//Set the wait time
-			waitTime = 1000 / maxFPS;
+			//Check if the max FPS is 0
+			if (maxFPS == 0)
+				//Set the wait time
+				waitTime = 0;
+			else
+				//Set the wait time
+				waitTime = 1000 / maxFPS;
 		}
 	}
 	
@@ -162,11 +172,14 @@ public class JavaWindow {
 			frameCount = 0;
 			lastFPSSecond = System.currentTimeMillis();
 			
-			//Check whether the FPS is higher or lower than the maximum
-			if (fps > maxFPS) {
-				waitTime ++;
-			} else if (fps < maxFPS) {
-				waitTime --;
+			//Check whether the maximum FPS isn't equal to 0
+			if (maxFPS != 0) {
+				//Check whether the FPS is higher or lower than the maximum
+				if (fps > maxFPS) {
+					waitTime ++;
+				} else if (fps < maxFPS) {
+					waitTime --;
+				}
 			}
 		}
 		
