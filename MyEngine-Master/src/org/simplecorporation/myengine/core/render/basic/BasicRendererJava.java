@@ -23,4 +23,10 @@ public class BasicRendererJava {
 		JavaWindow.g2d.setColor(new Color(colour.r , colour.g , colour.b , colour.a));
 	}
 	
+	/* The method to render a filled rectangle */
+	public static void renderFilledRectangle(float x , float y , float width , float height) {
+		//Render the rectangle
+		JavaWindow.g2d.fillRect((int) x , (int) y , (int) width , (int) height);
+	}
+	
 }

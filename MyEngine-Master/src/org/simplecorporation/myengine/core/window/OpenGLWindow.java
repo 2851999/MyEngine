@@ -102,7 +102,6 @@ public class OpenGLWindow {
 		Display.sync(Settings.Video.MaxFPS);
 	}
 	
-	@SuppressWarnings("unused")
 	public static DisplayMode getFullscreenDisplayMode(int width , int height) {
  
 		try {
@@ -127,10 +126,10 @@ public class OpenGLWindow {
 						break;
 					}
 				}
-				
-				//Return the display mode that hopefully has been found
-				return targetDisplayMode;
 			}
+			
+			//Return the display mode that hopefully has been found
+			return targetDisplayMode;
  
 		} catch (LWJGLException e) {
 			//Log a message
@@ -140,8 +139,8 @@ public class OpenGLWindow {
 			e.printStackTrace();
 		}
 		
-		//Return nothing
-		return null;
+		//Return new display mode
+		return new DisplayMode(width , height);
 	}
 	
 	/* Is the window still visible */

@@ -26,4 +26,15 @@ public class BasicRenderer {
 			BasicRendererJava.setColour(colour);
 	}
 	
+	/* The method to render a filled rectangle */
+	public static void renderFilledRectangle(float x , float y , float width , float height) {
+		//Find out what rendering mode to use
+		if (Settings.Video.OpenGL)
+			//Render a filled rectangle using OpenGL
+			BasicRendererOpenGL.renderFilledRectangle(x , y , width , height);
+		else
+			//Render a filled rectangle using Java
+			BasicRendererJava.renderFilledRectangle(x , y , width , height);
+	}
+	
 }

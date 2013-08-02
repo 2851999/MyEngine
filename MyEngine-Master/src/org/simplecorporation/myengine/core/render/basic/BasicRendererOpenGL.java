@@ -21,4 +21,15 @@ public class BasicRendererOpenGL {
 		glColor4f(colour.r , colour.g , colour.b , colour.a);
 	}
 	
+	/* The method to render a filled rectangle */
+	public static void renderFilledRectangle(float x , float y , float width , float height) {
+		//Render the rectangle
+		glBegin(GL_QUADS);
+		glVertex2f(x , y);
+		glVertex2f(x + width , y);
+		glVertex2f(x + width , y + height);
+		glVertex2f(x , y + height);
+		glEnd();
+	}
+	
 }
