@@ -33,31 +33,31 @@ public class InputManagerLWJGL {
 		//Left
 		if (Mouse.isButtonDown(0)) {
 			MouseInput.isLeftButtonDown = true;
-			Input.callMousePressed(new MouseEvent(0 , Mouse.getX() , Mouse.getY()));
+			Input.callMousePressed(new MouseEvent(0 , Mouse.getX() , Settings.Window.Size.Height - Mouse.getY()));
 		} else if (MouseInput.isLeftButtonDown) {
 			MouseInput.isLeftButtonDown = false;
-			Input.callMouseReleased(new MouseEvent(0 , Mouse.getX() , Mouse.getY()));
-			Input.callMouseClicked(new MouseEvent(0 , Mouse.getX() , Mouse.getY()));
+			Input.callMouseReleased(new MouseEvent(0 , Mouse.getX() , Settings.Window.Size.Height - Mouse.getY()));
+			Input.callMouseClicked(new MouseEvent(0 , Mouse.getX() , Settings.Window.Size.Height - Mouse.getY()));
 		}
 		
 		//Right
 		if (Mouse.isButtonDown(1)) {
 			MouseInput.isRightButtonDown = true;
-			Input.callMousePressed(new MouseEvent(1 , Mouse.getX() , Mouse.getY()));
+			Input.callMousePressed(new MouseEvent(1 , Mouse.getX() , Settings.Window.Size.Height - Mouse.getY()));
 		} else if (MouseInput.isRightButtonDown) {
 			MouseInput.isRightButtonDown = false;
-			Input.callMouseReleased(new MouseEvent(1 , Mouse.getX() , Mouse.getY()));
-			Input.callMouseClicked(new MouseEvent(1 , Mouse.getX() , Mouse.getY()));
+			Input.callMouseReleased(new MouseEvent(1 , Mouse.getX() , Settings.Window.Size.Height - Mouse.getY()));
+			Input.callMouseClicked(new MouseEvent(1 , Mouse.getX() , Settings.Window.Size.Height - Mouse.getY()));
 		}
 		
 		//Middle
 		if (Mouse.isButtonDown(2)) {
 			MouseInput.isMiddleButtonDown = true;
-			Input.callMousePressed(new MouseEvent(2 , Mouse.getX() , Mouse.getY()));
+			Input.callMousePressed(new MouseEvent(2 , Mouse.getX() , Settings.Window.Size.Height - Mouse.getY()));
 		} else if (MouseInput.isMiddleButtonDown) {
 			MouseInput.isMiddleButtonDown = false;
-			Input.callMouseReleased(new MouseEvent(2 , Mouse.getX() , Mouse.getY()));
-			Input.callMouseClicked(new MouseEvent(2 , Mouse.getX() , Mouse.getY()));
+			Input.callMouseReleased(new MouseEvent(2 , Mouse.getX() , Settings.Window.Size.Height - Mouse.getY()));
+			Input.callMouseClicked(new MouseEvent(2 , Mouse.getX() , Settings.Window.Size.Height - Mouse.getY()));
 		}
 		
 		//Check if the current mouse position is bigger/smaller than the last

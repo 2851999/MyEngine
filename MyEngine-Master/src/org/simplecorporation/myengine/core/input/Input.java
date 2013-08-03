@@ -26,7 +26,6 @@ public class Input {
 	public static void addListener(InputListener listener) {
 		//Add the listener
 		inputListeners.add(listener);
-		System.out.println(inputListeners.size());
 	}
 	
 	/* The method to call a mouse pressed event */

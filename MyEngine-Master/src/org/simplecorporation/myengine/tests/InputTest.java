@@ -17,7 +17,6 @@ public class InputTest extends EngineLoop implements InputListener {
 		Settings.Video.OpenGL = true;
 		Settings.Window.Title = "InputTest";
 		create();
-		Input.addListener(this);
 	}
 	
 	public static void main(String[] args) {
@@ -27,7 +26,7 @@ public class InputTest extends EngineLoop implements InputListener {
 	@Override
 	public void engineCreated() {
 		// TODO Auto-generated method stub
-		
+		Input.addListener(this);
 	}
 
 	@Override
