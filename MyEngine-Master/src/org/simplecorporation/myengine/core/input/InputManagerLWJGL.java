@@ -13,6 +13,7 @@ package org.simplecorporation.myengine.core.input;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
 import org.simplecorporation.myengine.settings.Settings;
@@ -24,6 +25,8 @@ public class InputManagerLWJGL {
 	public static void checkInput() {
 		//Check the mouse
 		checkMouse();
+		//Check the keyboard
+		checkKeyboard();
 	}
 	
 	/* The method to check the mouse */
@@ -72,6 +75,21 @@ public class InputManagerLWJGL {
 			//Call a mouse moved event
 			Input.callMouseMoved(new MouseMotionEvent(MouseInput.x , MouseInput.y ,
 					MouseInput.lastX , MouseInput.lastY));
+		}
+	}
+	
+	/* The method to check the keyboard */
+	public static void checkKeyboard() {
+		//Check for an event
+		while (Keyboard.next()) {
+			if (Keyboard.getEventKeyState()) {
+				//Call a keyboard event
+				Input.callKeyPressed(new KeyboardEvent(Keyboard.getEventCharacter() , Keyboard.getEventKey()));
+			} else {
+				//Call a keyboard event
+				Input.callKeyTyped(new KeyboardEvent(Keyboard.getEventCharacter() , Keyboard.getEventKey()));
+				Input.callKeyReleased(new KeyboardEvent(Keyboard.getEventCharacter() , Keyboard.getEventKey()));
+			}
 		}
 	}
 	

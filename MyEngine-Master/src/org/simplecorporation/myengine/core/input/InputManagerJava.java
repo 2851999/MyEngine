@@ -16,6 +16,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
 import org.simplecorporation.myengine.core.window.JavaWindow;
 
@@ -47,17 +48,20 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , K
 	
 	/* Method for key/mouse listeners */
 	public void keyPressed(KeyEvent e) {
-		
+		//Call the event
+		Input.callKeyPressed(new KeyboardEvent(e.getKeyChar() , e.getKeyCode()));
 	}
 	
 	/* Method for key/mouse listeners */
 	public void keyReleased(KeyEvent e) {
-		
+		//Call the event
+		Input.callKeyReleased(new KeyboardEvent(e.getKeyChar() , e.getKeyCode()));
 	}
 	
 	/* Method for key/mouse listeners */
 	public void keyTyped(KeyEvent e) {
-		
+		//Call the event
+		Input.callKeyTyped(new KeyboardEvent(e.getKeyChar() , e.getKeyCode()));
 	}
 	
 	/* Method for key/mouse listeners */

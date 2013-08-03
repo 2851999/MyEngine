@@ -14,7 +14,7 @@ import org.simplecorporation.myengine.settings.Settings;
 public class InputTest extends EngineLoop implements InputListener {
 	
 	public InputTest() {
-		Settings.Video.OpenGL = false;
+		Settings.Video.OpenGL = true;
 		Settings.Window.Title = "InputTest";
 		create();
 	}
@@ -88,20 +88,17 @@ public class InputTest extends EngineLoop implements InputListener {
 
 	@Override
 	public void onKeyPressed(KeyboardEvent e) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("KeyPressed " + e.keyChar + " " + e.keyCode);
 	}
 
 	@Override
 	public void onKeyReleased(KeyboardEvent e) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("KeyReleased " + e.keyChar + " " + e.keyCode);
 	}
 
 	@Override
 	public void onKeyTyped(KeyboardEvent e) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("KeyTyped " + e.keyChar + " " + e.keyCode);
 	}
 	
 }
