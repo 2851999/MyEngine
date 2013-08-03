@@ -11,6 +11,7 @@
 package org.simplecorporation.myengine.core.engine.loop;
 
 import org.lwjgl.Sys;
+import org.simplecorporation.myengine.core.input.InputManager;
 import org.simplecorporation.myengine.core.window.Window;
 
 public abstract class EngineLoop {
@@ -54,6 +55,8 @@ public abstract class EngineLoop {
 	public void create() {
 		//Create the window
 		Window.create();
+		//Create the input
+		InputManager.create();
 		//Call the engineCreated event
 		this.engineCreated();
 		//Start the engine loop
@@ -71,6 +74,10 @@ public abstract class EngineLoop {
 		this.fps = 0;
 		//While the window is open
 		while (! Window.isCloseRequested()) {
+			
+			//Check the input
+			InputManager.checkInput();
+			
 			//Update the engine
 			this.engineUpdate();
 			//Render the engine
@@ -93,6 +100,8 @@ public abstract class EngineLoop {
 		}
 		//Call the engineStopped method
 		this.engineStopped();
+		//Destroy the input
+		InputManager.destroy();
 		//Close the window
 		Window.close();
 		//Call the engineClosing method
