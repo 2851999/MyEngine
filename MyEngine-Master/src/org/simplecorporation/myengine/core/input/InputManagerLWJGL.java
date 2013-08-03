@@ -8,8 +8,10 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.input.event;
+package org.simplecorporation.myengine.core.input;
 
-public class KeyboardEvent {
+public class InputManagerLWJGL {
+	
+	
 	
 }

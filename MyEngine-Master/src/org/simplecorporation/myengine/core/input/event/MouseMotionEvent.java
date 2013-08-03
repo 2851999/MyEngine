@@ -10,6 +10,6 @@
 
 package org.simplecorporation.myengine.core.input.event;
 
-public class KeyboardEvent {
+public class MouseMotionEvent {
 	
 }
