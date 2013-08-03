@@ -28,9 +28,6 @@ public interface InputListener {
 	/* The mouse moved event */
 	public void onMouseMoved(MouseMotionEvent e);
 	
-	/* The mouse dragged event */
-	public void onMouseDragged(MouseMotionEvent e);
-	
 	/* The key pressed event */
 	public void onKeyPressed(KeyboardEvent e);
 	

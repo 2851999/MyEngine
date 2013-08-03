@@ -60,14 +60,6 @@ public class Input {
 		}
 	}
 	
-	/* The method to call a mouse dragged event */
-	public static void callMouseDragged(MouseMotionEvent e) {
-		//Call all the listeners
-		for (int a = 0; a < inputListeners.size(); a++) {
-			inputListeners.get(a).onMouseDragged(e);
-		}
-	}
-	
 	/* The method to call a key pressed event */
 	public static void callKeyPressed(KeyboardEvent e) {
 		//Call all the listeners

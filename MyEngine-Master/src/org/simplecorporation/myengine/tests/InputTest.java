@@ -14,7 +14,7 @@ import org.simplecorporation.myengine.settings.Settings;
 public class InputTest extends EngineLoop implements InputListener {
 	
 	public InputTest() {
-		Settings.Video.OpenGL = true;
+		Settings.Video.OpenGL = false;
 		Settings.Window.Title = "InputTest";
 		create();
 	}
@@ -84,12 +84,6 @@ public class InputTest extends EngineLoop implements InputListener {
 	@Override
 	public void onMouseMoved(MouseMotionEvent e) {
 		System.out.println("MouseMoved " + e.dx + " " + e.dy);
-	}
-
-	@Override
-	public void onMouseDragged(MouseMotionEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

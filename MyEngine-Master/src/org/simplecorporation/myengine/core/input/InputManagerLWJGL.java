@@ -61,7 +61,7 @@ public class InputManagerLWJGL {
 		}
 		
 		//Check if the current mouse position is bigger/smaller than the last
-		if (MouseInput.lastX != -1 && MouseInput.lastX != Mouse.getX() ||
+		if (MouseInput.lastX != Mouse.getX() ||
 				MouseInput.lastY != Settings.Window.Size.Height - Mouse.getY()) {
 			//Set the last x and y position
 			MouseInput.lastX = MouseInput.x;
