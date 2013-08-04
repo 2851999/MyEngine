@@ -35,4 +35,17 @@ public class MouseEvent {
 		this.y = y;
 	}
 	
+	/* The method to return the buttons's id */
+	public int getButton() {
+		//Check what button it is then return the value
+		if (this.isLeftButton)
+			return 0;
+		else if (this.isRightButton)
+			return 1;
+		else if (this.isMiddleButton)
+			return 2;
+		else
+			return -1;
+	}
+	
 }

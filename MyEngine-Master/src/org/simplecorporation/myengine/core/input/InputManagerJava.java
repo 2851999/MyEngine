@@ -82,8 +82,18 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , K
 	
 	/* Method for key/mouse listeners */
 	public void mouseClicked(MouseEvent e) {
+		//The id of the button
+		int id = -1;
+		//Check what button it is
+		if (e.getButton() == MouseEvent.BUTTON1)
+			id = 0;
+		else if (e.getButton() == MouseEvent.BUTTON2)
+			id = 2;
+		else if (e.getButton() == MouseEvent.BUTTON3)
+			id = 1;
+		
 		//Call a mouse clicked event
-		Input.callMouseClicked(new org.simplecorporation.myengine.core.input.event.MouseEvent(e.getButton() , e.getX() , e.getY()));
+		Input.callMouseClicked(new org.simplecorporation.myengine.core.input.event.MouseEvent(id , e.getX() , e.getY()));
 	}
 	
 	/* Method for key/mouse listeners */
@@ -98,26 +108,53 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , K
 	
 	/* Method for key/mouse listeners */
 	public void mousePressed(MouseEvent e) {
+		//The id of the button
+		int id = -1;
+		//Check what button it is
+		if (e.getButton() == MouseEvent.BUTTON1)
+			id = 0;
+		else if (e.getButton() == MouseEvent.BUTTON2)
+			id = 2;
+		else if (e.getButton() == MouseEvent.BUTTON3)
+			id = 1;
+		
 		//Check what button it was and assign it
-		if (e.getButton() == 0)
+		if (id == 0)
 			MouseInput.isLeftButtonDown = true;
-		else if (e.getButton() == 1)
+		else if (id == 1)
 			MouseInput.isRightButtonDown = true;
-		else if (e.getButton() == 2)
+		else if (id == 2)
 			MouseInput.isMiddleButtonDown = true;
+		
+		//Call a mouse clicked event
+		Input.callMouseClicked(new org.simplecorporation.myengine.core.input.event.MouseEvent(id , e.getX() , e.getY()));
+		
 		//Call a mouse pressed event
 		Input.callMousePressed(new org.simplecorporation.myengine.core.input.event.MouseEvent(e.getButton() , e.getX() , e.getY()));
 	}
 	
 	/* Method for key/mouse listeners */
 	public void mouseReleased(MouseEvent e) {
+		//The id of the button
+		int id = -1;
+		//Check what button it is
+		if (e.getButton() == MouseEvent.BUTTON1)
+			id = 0;
+		else if (e.getButton() == MouseEvent.BUTTON2)
+			id = 2;
+		else if (e.getButton() == MouseEvent.BUTTON3)
+			id = 1;
+		
 		//Check what button it was and assign it
-		if (e.getButton() == 0)
+		if (id == 0)
 			MouseInput.isLeftButtonDown = false;
-		else if (e.getButton() == 1)
+		else if (id == 1)
 			MouseInput.isRightButtonDown = false;
-		else if (e.getButton() == 2)
+		else if (id == 2)
 			MouseInput.isMiddleButtonDown = false;
+		
+		//Call a mouse clicked event
+		Input.callMouseClicked(new org.simplecorporation.myengine.core.input.event.MouseEvent(id , e.getX() , e.getY()));
 		//Call a mouse released event
 		Input.callMouseReleased(new org.simplecorporation.myengine.core.input.event.MouseEvent(e.getButton() , e.getX() , e.getY()));
 	}
