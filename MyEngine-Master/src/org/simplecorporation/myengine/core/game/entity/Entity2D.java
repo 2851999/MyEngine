@@ -96,14 +96,26 @@ public class Entity2D {
 	
 	/* The method to set the x position */
 	public void setX(double x) {
-		//Set the x position]
+		//Set the x position
 		this.position.setX(x);
 	}
 	
 	/* The method to set the y position */
 	public void setY(double y) {
-		//Set the y position]
+		//Set the y position
 		this.position.setY(y);
+	}
+	
+	/* The method to set the x velocity */
+	public void setVelocityX(double x) {
+		//Set the x position
+		this.velocity.setX(x);
+	}
+	
+	/* The method to set the y velocity */
+	public void setVelocityY(double y) {
+		//Set the y velocity
+		this.velocity.setY(y);
 	}
 	
 	/* The method to set the width */
@@ -128,6 +140,18 @@ public class Entity2D {
 	public double getY() {
 		//Return the y position
 		return this.position.getY();
+	}
+	
+	/* The method to get the x velocity */
+	public double getVelocityX() {
+		//Return the x velocity
+		return this.velocity.getX();
+	}
+	
+	/* The method to get the y velocity */
+	public double getVelocityY() {
+		//Return the y velocity
+		return this.velocity.getY();
 	}
 	
 	/* The method to get the width */
