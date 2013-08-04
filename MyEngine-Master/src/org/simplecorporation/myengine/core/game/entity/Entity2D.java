@@ -10,6 +10,8 @@
 
 package org.simplecorporation.myengine.core.game.entity;
 
+import java.awt.Rectangle;
+
 import org.simplecorporation.myengine.core.point.Point2D;
 
 public class Entity2D {
@@ -80,6 +82,64 @@ public class Entity2D {
 	/* The render method */
 	public void render() {
 		
+	}
+	
+	/* Method that returns the bounds as a rectangle */
+	public Rectangle getBounds() {
+		return new Rectangle((int) this.position.x , (int) this.position.y , (int) this.width , (int) this.height);
+	}
+	
+	/* Method to check for a collision between two entity's */
+	public boolean collidesWith(Entity2D other) {
+		return getBounds().intersects(other.getBounds());
+	}
+	
+	/* The method to set the x position */
+	public void setX(double x) {
+		//Set the x position]
+		this.position.setX(x);
+	}
+	
+	/* The method to set the y position */
+	public void setY(double y) {
+		//Set the y position]
+		this.position.setY(y);
+	}
+	
+	/* The method to set the width */
+	public void setWidth(double width) {
+		//Set the width
+		this.width = width;
+	}
+	
+	/* The method to set the height */
+	public void setHeight(double height) {
+		//Set the height
+		this.height = height;
+	}
+	
+	/* The method to get the x position */
+	public double getX() {
+		//Return the x position
+		return this.position.getX();
+	}
+	
+	/* The method to get the y position */
+	public double getY() {
+		//Return the y position
+		return this.position.getY();
+	}
+	
+	/* The method to get the width */
+	public double getWidth() {
+		//Return the width
+		return width;
+	}
+	
+	/* The method to get the height */
+	public double getHeight() {
+		//Return the height
+		return height;
 	}
 	
 }
