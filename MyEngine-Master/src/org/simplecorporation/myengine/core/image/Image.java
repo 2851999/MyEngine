@@ -53,7 +53,7 @@ public class Image {
 					this.openGLImage = TextureLoader.getTexture(format , new FileInputStream(FileUtils.asFileString(filePath)));
 				else
 					//NOTE COULD BE VERY WRONG IF THERE IS AN ERROR MAKE A NOTE IN THE ISSUES SECTION
-					this.openGLImage = TextureLoader.getTexture(format , new FileInputStream(getURL(filePath).toString()));
+					this.openGLImage = TextureLoader.getTexture(format , new FileInputStream(filePath));
 			} catch (FileNotFoundException e) {
 				//Log a message
 				Logger.log("Image load()" , "FileNotFound " + filePath);

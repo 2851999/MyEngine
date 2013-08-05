@@ -35,6 +35,9 @@ public class GUIImageButton extends GUIButton {
 		this.images = images;
 		//Assign the font
 		this.font = font;
+		//Set the width and height of the button
+		this.width = images[0].getWidth();
+		this.height = images[0].getHeight();
 	}
 	
 	/* The method to render the button */
@@ -51,8 +54,9 @@ public class GUIImageButton extends GUIButton {
 		//Render the image
 		BasicRenderer.renderImage(current , this.position.x , this.position.y , this.width , this.height);
 		//Render the font
-		this.font.render(this.text , ((this.position.x + this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
-				((this.position.y + this.height) / 2) - (this.font.getHeight(this.text) / 2));
+		this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
+				(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
+		System.out.println(this.font.getHeight(this.text));
 	}
 	
 }

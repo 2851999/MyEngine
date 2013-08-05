@@ -11,7 +11,9 @@
 package org.simplecorporation.myengine.core.gui.font;
 
 import java.awt.Font;
+import java.awt.FontMetrics;
 
+import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
@@ -23,6 +25,7 @@ public class GUIFont {
 	
 	/* The font */
 	public Font font;
+	public TrueTypeFont ttfFont;
 	
 	/* The font size */
 	public float size;
@@ -35,6 +38,9 @@ public class GUIFont {
 		//Set the font
 		this.font = font;
 		
+		if (Settings.Video.OpenGL)
+			ttfFont = new TrueTypeFont(this.font.deriveFont(size) , Settings.Video.AntiAliasing);
+		
 		//Set the colour and size
 		this.colour = colour;
 		this.size = size;
@@ -44,15 +50,15 @@ public class GUIFont {
 	public void render(String text , double x , double y) {
 		//Check what rendering mode to use
 		if (Settings.Video.OpenGL) {
-			//Create the true type font
-			TrueTypeFont trueTypeFont = new TrueTypeFont(this.font.deriveFont(size) , Settings.Video.AntiAliasing);
 			//Render the text
-			trueTypeFont.drawString((float)x , (float)y , text , new Color((float)this.colour.r , (float)this.colour.g , (float)this.colour.b , (float)this.colour.a));
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			ttfFont.drawString((float)x , (float)y , text , new Color((float)this.colour.r , (float)this.colour.g , (float)this.colour.b , (float)this.colour.a));
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
 		} else {
-			//Set the size of the font
-			this.font.deriveFont(size);
 			//Set the colour
 			BasicRenderer.setColour(this.colour);
+			//Set the font
+			JavaWindow.g2d.setFont(this.font.deriveFont(size));
 			//Render the text
 			JavaWindow.g2d.drawString(text , (float) x , (float) y);
 		}
@@ -60,14 +66,22 @@ public class GUIFont {
 	
 	/* The method to get the width of a string */
 	public double getWidth(String text) {
-		TrueTypeFont trueTypeFont = new TrueTypeFont(this.font.deriveFont(size) , false);
-		return trueTypeFont.getWidth(text);
+		if (Settings.Video.OpenGL) {
+			return ttfFont.getWidth(text);
+		} else {
+			FontMetrics metrics = JavaWindow.g2d.getFontMetrics(font.deriveFont(size));
+			return metrics.getStringBounds(text , JavaWindow.g2d).getWidth();
+		}
 	}
 	
 	/* The method to get the height of a string */
 	public double getHeight(String text) {
-		TrueTypeFont trueTypeFont = new TrueTypeFont(this.font.deriveFont(size) , false);
-		return trueTypeFont.getHeight(text);
+		if (Settings.Video.OpenGL) {
+			return ttfFont.getHeight(text);
+		} else {
+			FontMetrics metrics = JavaWindow.g2d.getFontMetrics(font.deriveFont(size));
+			return metrics.getStringBounds(text , JavaWindow.g2d).getHeight();
+		}
 	}
 	
 	

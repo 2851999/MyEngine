@@ -60,6 +60,8 @@ public class BasicRendererOpenGL {
 	
 	/* The method to render an image */
 	public static void renderImage(Image image , double x , double y) {
+		//Bind the texture
+		image.getOpenGLImage().bind();
 		//Render the image
 		glBegin(GL_QUADS);
 		glTexCoord2d(0 , 0);
@@ -75,6 +77,8 @@ public class BasicRendererOpenGL {
 	
 	/* The method to render an image with a specified width and height */
 	public static void renderImage(Image image , double x , double y , double width , double height) {
+		//Bind the texture
+		image.getOpenGLImage().bind();
 		//Render the image
 		glBegin(GL_QUADS);
 		glTexCoord2d(0 , 0);
