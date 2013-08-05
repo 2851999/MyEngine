@@ -12,6 +12,8 @@ package org.simplecorporation.myengine.core.gui;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.utils.logger.Logger;
+
 public class GUI {
 	
 	/* The components in the GUI */
@@ -49,6 +51,31 @@ public class GUI {
 		//Set all of the components to hide
 		for (int a = 0; a < this.components.size(); a++)
 			this.components.get(a).visible = false;
+	}
+	
+	/* The method to add a component */
+	public void add(GUIComponent component) {
+		//Add the component to the linked list
+		this.components.add(component);
+	}
+	
+	/* The method that returns a component given its name */
+	public GUIComponent get(String name) {
+		//The component
+		GUIComponent component = null;
+		//Check the whole list
+		for (int a = 0; a < this.components.size(); a++) {
+			//Check if it has the right name
+			if (this.components.get(a).name.equals(name))
+				//Assign the component
+				component = this.components.get(a);
+		}
+		//Check if the component is null
+		if (component == null)
+			//Log a message
+			Logger.log("GUI get()" , "The component with the name " + name + " was not found");
+		//Return the compoent
+		return component;
 	}
 	
 }
