@@ -74,7 +74,7 @@ public class GUI {
 		if (component == null)
 			//Log a message
 			Logger.log("GUI get()" , "The component with the name " + name + " was not found");
-		//Return the compoent
+		//Return the component
 		return component;
 	}
 	

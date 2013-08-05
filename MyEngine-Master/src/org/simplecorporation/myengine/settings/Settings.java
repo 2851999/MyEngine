@@ -38,6 +38,8 @@ public class Settings {
 		public static boolean VSync = true;
 		/* Is OpenGL being used */
 		public static boolean OpenGL = false;
+		/* Should anti aliasing be used */
+		public static boolean AntiAliasing = false;
 	}
 	
 }

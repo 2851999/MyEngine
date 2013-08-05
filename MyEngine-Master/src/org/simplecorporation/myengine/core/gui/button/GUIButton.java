@@ -8,17 +8,18 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.gui;
+package org.simplecorporation.myengine.core.gui.button;
 
+import org.simplecorporation.myengine.core.gui.GUIComponent;
 import org.simplecorporation.myengine.core.input.MouseInput;
 
 public abstract class GUIButton extends GUIComponent {
 
 	/* Is the button selected */
-	private boolean selected;
+	public boolean selected;
 	
 	/* Is the button clicked */
-	private boolean clicked;
+	public boolean clicked;
 	
 	/* The constructor */
 	public GUIButton(String name) {
