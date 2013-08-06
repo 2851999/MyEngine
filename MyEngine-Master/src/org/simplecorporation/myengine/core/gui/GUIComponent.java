@@ -11,8 +11,13 @@
 package org.simplecorporation.myengine.core.gui;
 
 import org.simplecorporation.myengine.core.game.entity.AbstractEntity2D;
+import org.simplecorporation.myengine.core.input.Input;
+import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
+import org.simplecorporation.myengine.core.input.event.MouseEvent;
+import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
+import org.simplecorporation.myengine.core.input.listener.InputListener;
 
-public abstract class GUIComponent extends AbstractEntity2D {
+public abstract class GUIComponent extends AbstractEntity2D implements InputListener {
 	
 	/* The name of the component */
 	public String name;
@@ -30,8 +35,11 @@ public abstract class GUIComponent extends AbstractEntity2D {
 		this.name = name;
 		//Set visible to false
 		this.visible = false;
+		//Add the listener
+		Input.addListener(this);
 	}
 	
+	/* Method inherited from AbstractEntity2D */
 	public void entityUpdate() {
 		//Check that the component is visible
 		if (this.visible)
@@ -39,11 +47,47 @@ public abstract class GUIComponent extends AbstractEntity2D {
 			update();
 	}
 	
+	/* Method inherited from AbstractEntity2D */
 	public void entityRender() {
 		//Check that the component is visible
 		if (this.visible)
 			//Render the component
 			render();
+	}
+	
+	/* Method inherited from InputListener */
+	public void onMousePressed(MouseEvent e) {
+		
+	}
+	
+	/* Method inherited from InputListener */
+	public void onMouseReleased(MouseEvent e) {
+		
+	}
+	
+	/* Method inherited from InputListener */
+	public void onMouseClicked(MouseEvent e) {
+		
+	}
+	
+	/* Method inherited from InputListener */
+	public void onMouseMoved(MouseMotionEvent e) {
+		
+	}
+	
+	/* Method inherited from InputListener */
+	public void onKeyPressed(KeyboardEvent e) {
+		
+	}
+	
+	/* Method inherited from InputListener */
+	public void onKeyReleased(KeyboardEvent e) {
+		
+	}
+	
+	/* Method inherited from InputListener */
+	public void onKeyTyped(KeyboardEvent e) {
+		
 	}
 	
 }

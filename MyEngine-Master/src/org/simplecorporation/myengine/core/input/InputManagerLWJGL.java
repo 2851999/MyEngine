@@ -85,10 +85,11 @@ public class InputManagerLWJGL {
 			if (Keyboard.getEventKeyState()) {
 				//Call a keyboard event
 				Input.callKeyPressed(new KeyboardEvent(Keyboard.getEventCharacter() , Keyboard.getEventKey()));
+				KeyboardInput.lastKeyboardEvent = new KeyboardEvent(Keyboard.getEventCharacter() , Keyboard.getEventKey());
 			} else {
 				//Call a keyboard event
-				Input.callKeyTyped(new KeyboardEvent(Keyboard.getEventCharacter() , Keyboard.getEventKey()));
-				Input.callKeyReleased(new KeyboardEvent(Keyboard.getEventCharacter() , Keyboard.getEventKey()));
+				Input.callKeyTyped(KeyboardInput.lastKeyboardEvent);
+				Input.callKeyReleased(KeyboardInput.lastKeyboardEvent);
 			}
 		}
 	}
