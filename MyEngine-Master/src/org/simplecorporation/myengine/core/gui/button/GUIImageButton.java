@@ -13,6 +13,7 @@ package org.simplecorporation.myengine.core.gui.button;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
+import org.simplecorporation.myengine.settings.Settings;
 
 public class GUIImageButton extends GUIButton {
 	
@@ -54,9 +55,13 @@ public class GUIImageButton extends GUIButton {
 		//Render the image
 		BasicRenderer.renderImage(current , this.position.x , this.position.y , this.width , this.height);
 		//Render the font
-		this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
-				(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
-		System.out.println(this.font.getHeight(this.text));
+		if (Settings.Video.OpenGL)
+			this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
+					(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
+		else
+			//Not a clue why it can't be the same as OpenGL
+			this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
+					(this.position.y + (this.height / 2)) + (this.font.getHeight(this.text) / 4));
 	}
 	
 }
