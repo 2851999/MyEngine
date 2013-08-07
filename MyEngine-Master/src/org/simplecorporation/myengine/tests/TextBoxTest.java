@@ -17,7 +17,7 @@ public class TextBoxTest extends Game {
 	
 	public TextBoxTest() {
 		Settings.Window.Title = "TextBox Test";
-		Settings.Video.OpenGL = false;
+		Settings.Video.OpenGL = true;
 		//Create
 		createGame();
 	}
@@ -30,6 +30,7 @@ public class TextBoxTest extends Game {
 		textBox.height = 30;
 		textBox.outlineColour = Colour.GREEN;
 		textBox.visible = true;
+		textBox.hideCharacters = true;
 	}
 	
 	public void gameUpdate() {

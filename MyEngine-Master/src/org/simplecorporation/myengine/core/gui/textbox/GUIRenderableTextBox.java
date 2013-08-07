@@ -37,12 +37,6 @@ public class GUIRenderableTextBox extends GUITextBox {
 		this.font = font;
 	}
 	
-	/* The method to update the text box */
-	public void update() {
-		
-	}
-	
-	
 	/* The method to render the text box */
 	public void render() {
 		if (this.visible) {
@@ -63,6 +57,12 @@ public class GUIRenderableTextBox extends GUITextBox {
 				for (int a = 0; a < this.text.length(); a++)
 					//Add the masked character
 					renderedText += this.maskCharacter;
+			}
+			
+			//Check if the cursor is showing
+			if (this.cursorShown) {
+				//Add the cursor
+				renderedText += "|";
 			}
 			
 			//Render the text
