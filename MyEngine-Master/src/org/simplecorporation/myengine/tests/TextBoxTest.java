@@ -26,9 +26,10 @@ public class TextBoxTest extends Game {
 		textBox = new GUIRenderableTextBox("TextBox" , FontUtils.buildFont(new Font("Arial" , Font.PLAIN , 1) , Colour.RED , 20f));
 		textBox.position.x = 100;
 		textBox.position.y = 100;
-		textBox.width = 100;
+		textBox.width = 200;
 		textBox.height = 30;
 		textBox.outlineColour = Colour.GREEN;
+		textBox.defaultText = "This is a text box!";
 		textBox.visible = true;
 	}
 	

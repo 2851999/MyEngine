@@ -11,28 +11,25 @@
 package org.simplecorporation.myengine.core.gui.textbox;
 
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
+import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.settings.Settings;
 
-public class GUIRenderableTextBox extends GUITextBox {
+public class GUIImageTextBox extends GUITextBox {
 	
-	/* The background colour of the text box */
-	public Colour backgroundColour;
-	
-	/* The outline colour of the text box */
-	public Colour outlineColour;
+	/* The image */
+	public Image image;
 	
 	/* The font */
 	public GUIFont font;
 	
 	/* The constructor */
-	public GUIRenderableTextBox(String name , GUIFont font) {
+	public GUIImageTextBox(String name , Image image , GUIFont font) {
 		//Call the super constructor
 		super(name);
-		//Set the colours
-		this.backgroundColour = Colour.WHITE;
-		this.outlineColour = Colour.BLACK;
+		//Set the image
+		this.image = image;
 		//Set the font
 		this.font = font;
 	}
@@ -41,10 +38,8 @@ public class GUIRenderableTextBox extends GUITextBox {
 	public void render() {
 		if (this.visible) {
 			//Render the box
-			BasicRenderer.setColour(this.outlineColour);
-			BasicRenderer.renderFilledRectangle(this.position.x , this.position.y , this.width , this.height);
-			BasicRenderer.setColour(this.backgroundColour);
-			BasicRenderer.renderFilledRectangle(this.position.x + 1 , this.position.y + 1 , this.width - 2 , this.height - 2);
+			BasicRenderer.setColour(Colour.WHITE);
+			BasicRenderer.renderImage(this.image , this.position.x , this.position.y , this.width , this.height);
 			
 			//The text to be rendered
 			String renderedText = this.text;

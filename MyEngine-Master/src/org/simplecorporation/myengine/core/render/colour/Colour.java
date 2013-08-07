@@ -42,4 +42,9 @@ public class Colour {
 		this.a = a;
 	}
 	
+	/* The method to clone this colour */
+	public Colour clone() {
+		return new Colour(this.r , this.g , this.b , this.a);
+	}
+	
 }
