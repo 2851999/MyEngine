@@ -10,7 +10,13 @@
 
 package org.simplecorporation.myengine.core.input.event;
 
-public class MouseEvent {
+public class MouseEvent extends Event {
+	
+	/* The name of the event */
+	public static final String EVENT_NAME = "Mouse Event";
+	
+	/* The description of the event */
+	public static final String EVENT_DESCRIPTION = "Event from the mouse";
 	
 	/* Is a mouse button down */
 	public boolean isLeftButton = false;
@@ -23,6 +29,8 @@ public class MouseEvent {
 	
 	/* The constructor for a button pressed/released/clicked event */
 	public MouseEvent(int button , double x , double y) {
+		//Call the super constructor
+		super(EVENT_NAME , EVENT_DESCRIPTION);
 		//Check what button is pressed and assign it
 		if (button == 0)
 			this.isLeftButton = true;

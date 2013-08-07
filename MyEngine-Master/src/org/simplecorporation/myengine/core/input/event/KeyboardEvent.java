@@ -10,7 +10,13 @@
 
 package org.simplecorporation.myengine.core.input.event;
 
-public class KeyboardEvent {
+public class KeyboardEvent extends Event {
+	
+	/* The name of the event */
+	public static final String EVENT_NAME = "Keyboard Event";
+	
+	/* The description of the event */
+	public static final String EVENT_DESCRIPTION = "Event from the keyboard";
 	
 	/* The key's char */
 	public char keyChar;
@@ -20,9 +26,21 @@ public class KeyboardEvent {
 	
 	/* The method to create a keyboard event */
 	public KeyboardEvent(char keyChar , int keyCode) {
+		//Call the super constructor
+		super(EVENT_NAME , EVENT_DESCRIPTION);
 		//Assign the variables
 		this.keyChar = keyChar;
 		this.keyCode = keyCode;
+	}
+	
+	/* Returns the key's character */
+	public char getCharacter() {
+		return this.keyChar;
+	}
+	
+	/* Returns the key's code */
+	public int getCode() {
+		return this.keyCode;
 	}
 	
 }
