@@ -92,14 +92,14 @@ public abstract class GUITextBox extends GUIComponent {
 		//Check if this is visible and selected
 		if (this.visible && this.selected) {
 			//Check the time
-			if (System.currentTimeMillis() - this.cursorLastBlink > this.timeBetweenBlink) {
+			if (System.currentTimeMillis() - this.cursorLastBlink >= this.timeBetweenBlink) {
 				//Set the last blink
 				this.cursorLastBlink = System.currentTimeMillis();
 				this.cursorShown = !this.cursorShown;
 			}
 			
 			//Check if backspace was pressed
-			if (this.backspace && System.currentTimeMillis() - this.backspaceLastPressed > this.timeBetweenBackspace) {
+			if (this.backspace && System.currentTimeMillis() - this.backspaceLastPressed >= this.timeBetweenBackspace) {
 				//Set the last backspace time
 				this.backspaceLastPressed = System.currentTimeMillis();
 				//Remove the last letter if there is one
