@@ -56,6 +56,12 @@ public abstract class GUITextBox extends GUIComponent {
 	/* Is another character pressed that is unknown */
 	public boolean unknowncharacter;
 	
+	/* Is shift pressed*/
+	public boolean shift;
+	
+	/* Already had shift event */
+	public boolean alreadyHadShift;
+	
 	/* Is the shift key being released */
 	public boolean releasedShiftKey;
 	
@@ -76,6 +82,8 @@ public abstract class GUITextBox extends GUIComponent {
 		this.timeBetweenBackspace = 50;
 		this.backspaceLastPressed = System.currentTimeMillis();
 		this.unknowncharacter = false;
+		this.shift = false;
+		this.alreadyHadShift = false;
 		this.releasedShiftKey = false;
 	}
 	
@@ -98,6 +106,20 @@ public abstract class GUITextBox extends GUIComponent {
 				if (this.text.length() > 0)
 					this.text = this.text.substring(0 , this.text.length() - 1);
 			}
+			
+			//Check and remove any unwanted characters
+			for (int a = 0; a < this.text.length(); a++) {
+				if (this.text.charAt(a) == '\u0000' || ! Character.isDefined(this.text.charAt(a))
+						 || Character.isISOControl(this.text.charAt(a))) {
+					System.out.println("UNWATED CHAR");
+					//Remove the character
+					String string = this.text;
+					this.text = "";
+					string = new StringBuilder(string).deleteCharAt(a).toString();
+					this.text = string;
+				}
+			}
+			
 		} else {
 			//Set the cursor shown to false
 			this.cursorShown = false;
@@ -136,6 +158,9 @@ public abstract class GUITextBox extends GUIComponent {
 				if (e.keyCode == Keyboard.KEY_BACK) {
 					this.backspace = true;
 					this.backspaceLastPressed = System.currentTimeMillis() - this.timeBetweenBackspace;
+				} else if (e.keyCode == Keyboard.KEY_LSHIFT || e.keyCode == Keyboard.KEY_RSHIFT) {
+					this.shift = true;
+					this.alreadyHadShift = false;
 				}
 			} else {
 				//Check what key was pressed
@@ -161,6 +186,8 @@ public abstract class GUITextBox extends GUIComponent {
 					this.backspace = false;
 				} else if (e.keyCode == Keyboard.KEY_LSHIFT || e.keyCode == Keyboard.KEY_RSHIFT) {
 					this.releasedShiftKey = true;
+					this.shift = false;
+					this.alreadyHadShift = false;
 				}
 			} else {
 				//Check what key was pressed
@@ -185,7 +212,15 @@ public abstract class GUITextBox extends GUIComponent {
 					this.text += " ";
 				} else if (e.keyCode == Keyboard.KEY_RETURN) {
 					
-				} else if (! this.releasedShiftKey) {
+				} else if (this.shift) {
+					if (! this.alreadyHadShift) {
+						this.alreadyHadShift = true;
+						this.text += e.keyChar;
+					} else {
+						this.alreadyHadShift = false;
+						this.shift = false;
+					}
+				} else if (! this.releasedShiftKey && this.unknowncharacter && e.keyCode != Keyboard.KEY_BACK) {
 					//Check if the the character was null
 					if (e.keyChar != ' ' && (e.keyChar != '\u0000')) {
 							//Add the character to the text
@@ -204,7 +239,7 @@ public abstract class GUITextBox extends GUIComponent {
 					this.text += " ";
 				} else if (e.keyCode == KeyEvent.VK_ENTER) {
 					
-				} else if (! this.releasedShiftKey) {
+				} else if (! this.releasedShiftKey && ! this.unknowncharacter && e.keyCode != KeyEvent.VK_BACK_SPACE) {
 					//Check if the the character was null
 					if (e.keyChar != ' ' && (e.keyChar != '\u0000')) {
 						//Add the character to the text
