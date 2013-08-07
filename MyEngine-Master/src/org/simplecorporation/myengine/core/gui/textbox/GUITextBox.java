@@ -56,6 +56,9 @@ public abstract class GUITextBox extends GUIComponent {
 	/* Is another character pressed that is unknown */
 	public boolean unknowncharacter;
 	
+	/* Is the shift key being released */
+	public boolean releasedShiftKey;
+	
 	/* The constructor */
 	public GUITextBox(String name) {
 		//Call the super constructor
@@ -73,6 +76,7 @@ public abstract class GUITextBox extends GUIComponent {
 		this.timeBetweenBackspace = 50;
 		this.backspaceLastPressed = System.currentTimeMillis();
 		this.unknowncharacter = false;
+		this.releasedShiftKey = false;
 	}
 	
 	/* The method to update the text box */
@@ -140,6 +144,9 @@ public abstract class GUITextBox extends GUIComponent {
 					this.backspaceLastPressed = System.currentTimeMillis() - this.timeBetweenBackspace;
 				}
 			}
+			
+			if (e.keyChar == '\u0000')
+				this.unknowncharacter = true;
 		}
 	}
 	
@@ -152,11 +159,15 @@ public abstract class GUITextBox extends GUIComponent {
 				//Check what key was pressed
 				if (e.keyCode == Keyboard.KEY_BACK) {
 					this.backspace = false;
+				} else if (e.keyCode == Keyboard.KEY_LSHIFT || e.keyCode == Keyboard.KEY_RSHIFT) {
+					this.releasedShiftKey = true;
 				}
 			} else {
 				//Check what key was pressed
 				if (e.keyCode == KeyEvent.VK_BACK_SPACE) {
 					this.backspace = false;
+				} else if (e.keyCode == KeyEvent.VK_SHIFT) {
+					this.releasedShiftKey = true;
 				}
 			}
 		}
@@ -174,7 +185,7 @@ public abstract class GUITextBox extends GUIComponent {
 					this.text += " ";
 				} else if (e.keyCode == Keyboard.KEY_RETURN) {
 					
-				} else {
+				} else if (! this.releasedShiftKey) {
 					//Check if the the character was null
 					if (e.keyChar != ' ' && (e.keyChar != '\u0000')) {
 							//Add the character to the text
@@ -183,6 +194,8 @@ public abstract class GUITextBox extends GUIComponent {
 							this.cursorShown = false;
 							this.cursorLastBlink = System.currentTimeMillis();
 					}
+				} else {
+					this.releasedShiftKey = false;
 				}
 			} else {
 				//Check it wasn't space
@@ -191,7 +204,7 @@ public abstract class GUITextBox extends GUIComponent {
 					this.text += " ";
 				} else if (e.keyCode == KeyEvent.VK_ENTER) {
 					
-				} else {
+				} else if (! this.releasedShiftKey) {
 					//Check if the the character was null
 					if (e.keyChar != ' ' && (e.keyChar != '\u0000')) {
 						//Add the character to the text
@@ -200,6 +213,8 @@ public abstract class GUITextBox extends GUIComponent {
 						this.cursorShown = false;
 						this.cursorLastBlink = System.currentTimeMillis();
 					}
+				} else {
+					this.releasedShiftKey = false;
 				}
 			}
 		}
