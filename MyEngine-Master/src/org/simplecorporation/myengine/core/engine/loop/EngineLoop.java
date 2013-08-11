@@ -95,7 +95,6 @@ public abstract class EngineLoop {
 				this.fps = this.frameCount;
 				this.frameCount = 0;
 				this.lastFPSSecond = getTime();
-				System.out.println(getFPS());
 			}
 		}
 		//Call the engineStopped method
