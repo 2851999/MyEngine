@@ -13,6 +13,7 @@ package org.simplecorporation.myengine.core.game.entity;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.point.Point2D;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
+import org.simplecorporation.myengine.core.render.colour.Colour;
 
 public class ImageEntity2D extends AbstractEntity2D {
 	
@@ -87,6 +88,8 @@ public class ImageEntity2D extends AbstractEntity2D {
 	
 	/* The entity's render method */
 	public void entityRender() {
+		//Set the colour
+		BasicRenderer.setColour(Colour.WHITE);
 		//Render the image
 		BasicRenderer.renderImage(this.image , this.position.x , this.position.y  , this.width , this.height);
 	}
