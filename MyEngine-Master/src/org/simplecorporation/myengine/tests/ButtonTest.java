@@ -28,7 +28,7 @@ public class ButtonTest extends Game {
 				new Image(System.getenv("AppData") + "/SimpleCorporation/MyEngine/MainMenuButton1.png" , "PNG" , true) ,
 				new Image(System.getenv("AppData") + "/SimpleCorporation/MyEngine/MainMenuButton2.png" , "PNG" , true) , 
 				new Image(System.getenv("AppData") + "/SimpleCorporation/MyEngine/MainMenuButton3.png" , "PNG" , true)
-		} , FontUtils.buildFont(new Font("Segoe UI" , Font.PLAIN , 1) , Colour.WHITE , 20f));
+		} , FontUtils.buildGUIFont(new Font("Segoe UI" , Font.PLAIN , 1) , Colour.WHITE , 20f));
 		button.visible = true;
 		button.position.x = 100;
 		button.position.y = 100;

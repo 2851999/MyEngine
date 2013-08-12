@@ -23,7 +23,7 @@ public class TextBoxTest extends Game {
 	}
 	
 	public void gameCreated() {
-		textBox = new GUIRenderableTextBox("TextBox" , FontUtils.buildFont(new Font("Arial" , Font.PLAIN , 1) , Colour.RED , 20f));
+		textBox = new GUIRenderableTextBox("TextBox" , FontUtils.buildGUIFont(new Font("Arial" , Font.PLAIN , 1) , Colour.RED , 20f));
 		textBox.position.x = 100;
 		textBox.position.y = 100;
 		textBox.width = 200;

@@ -22,8 +22,18 @@ import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class FontUtils {
 	
+	/* The method to build a font */
+	public static Font buildFont(String font , float size) {
+		return new Font(font , Font.PLAIN , (int)size);
+	}
+	
 	/* The method to build a GUIFont */
-	public static GUIFont buildFont(Font font , Colour colour , float size) {
+	public static GUIFont buildGUIFont(String font , Colour colour , float size) {
+		return buildGUIFont(buildFont(font , 1) , colour , size);
+	}
+	
+	/* The method to build a GUIFont */
+	public static GUIFont buildGUIFont(Font font , Colour colour , float size) {
 		return new GUIFont(font , colour , size);
 	}
 	
