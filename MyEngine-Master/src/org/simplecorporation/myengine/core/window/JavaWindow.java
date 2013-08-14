@@ -125,7 +125,7 @@ public class JavaWindow {
 				Settings.Window.Size.Height = frame.getHeight();
 			} else {
 				//Set the screen size
-				frame.setSize((int)Settings.Window.Size.Width , (int)Settings.Window.Size.Height);
+				frame.setSize((int)Settings.Window.Size.Width , (int)Settings.Window.Size.Height + 30);
 				//Make sure the window isn't full screen
 				if (frame.isUndecorated() != Settings.Window.Fullscreen) {
 					//Make the window decorated
@@ -160,7 +160,7 @@ public class JavaWindow {
 	/* The method to update the window graphics */
 	public static void updateGraphics() {
 		//Paint the back buffer to the window
-		frame.getGraphics().drawImage(backBuffer , 0 , 0 , frame);
+		frame.getGraphics().drawImage(backBuffer , 0 , 27 , frame);
 		
 		//Set the last frame
 		lastFrameTime = System.currentTimeMillis();
