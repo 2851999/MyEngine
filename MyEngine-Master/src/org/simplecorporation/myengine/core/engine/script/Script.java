@@ -14,8 +14,10 @@ import java.util.LinkedList;
 
 import org.simplecorporation.myengine.core.engine.script.file.ScriptFile;
 import org.simplecorporation.myengine.core.engine.script.library.AbstractLibrary;
+import org.simplecorporation.myengine.core.engine.script.library.LibraryDefault;
 import org.simplecorporation.myengine.core.engine.script.method.ScriptMethod;
 import org.simplecorporation.myengine.core.engine.script.parser.ScriptParser;
+import org.simplecorporation.myengine.core.engine.script.variable.ScriptVariable;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class Script {
@@ -31,6 +33,12 @@ public class Script {
 	
 	/* The parser */
 	public ScriptParser scriptParser;
+	
+	/* The default library */
+	public LibraryDefault defaultLibrary;
+	
+	/* The local variables */
+	public LinkedList<ScriptVariable> publicVariables;
 	
 	/* The constructor of the script */
 	public Script(String filePath) {
@@ -48,6 +56,10 @@ public class Script {
 		this.importedLibraries = this.scriptParser.parseImportedLibraries();
 		//Parse the methods
 		this.scriptMethods = this.scriptParser.parseMethods(this.importedLibraries);
+		//Parse the public variables
+		this.publicVariables = this.scriptParser.parsePublicVariables();
+		//Create the default library
+		this.defaultLibrary = new LibraryDefault();
 	}
 	
 	/* The method to call a certain method */
@@ -70,7 +82,7 @@ public class Script {
 			Logger.log("Script callMethod()" , "The method " + methodName + " was not found");
 		
 		//Call the method
-		method.callMethod(this);
+		method.callMethod(this , this.defaultLibrary , this.publicVariables);
 	}
 	
 }

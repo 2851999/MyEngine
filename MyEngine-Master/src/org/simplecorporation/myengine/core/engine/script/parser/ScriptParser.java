@@ -17,6 +17,7 @@ import org.simplecorporation.myengine.core.engine.script.file.ScriptFile;
 import org.simplecorporation.myengine.core.engine.script.library.AbstractLibrary;
 import org.simplecorporation.myengine.core.engine.script.library.Library;
 import org.simplecorporation.myengine.core.engine.script.method.ScriptMethod;
+import org.simplecorporation.myengine.core.engine.script.variable.ScriptVariable;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class ScriptParser {
@@ -99,6 +100,54 @@ public class ScriptParser {
 		
 		//Return the script methods
 		return scriptMethods;
+	}
+	
+	/* The method to parse the public variables */
+	public LinkedList<ScriptVariable> parsePublicVariables() {
+		//The variables linked list
+		LinkedList<ScriptVariable> publicVariables = new LinkedList<ScriptVariable>();
+		
+		//The file text
+		LinkedList<String> fileText = this.scriptFile.getFileText();
+		
+		//Boolean that states whether the parser is looking in a method
+		boolean inMethod = false;
+		
+		//Loop through the file text
+		for (int a = 0; a < fileText.size(); a++) {
+			//Check if the parser is looking in a method
+			if (fileText.get(a).startsWith(ScriptData.SYNTAX_KEY_WORD_METHOD))
+				//Set inMethod to true
+				inMethod = true;
+			else if (fileText.get(a).startsWith(ScriptData.SYNTAX_KEY_WORD_METHOD_END))
+				//Set inMethod to false
+				inMethod = false;
+			
+			//Make sure the parser is not in a method
+			if (! inMethod && ! fileText.get(a).startsWith(ScriptData.SYNTAX_KEY_WORD_METHOD_END)) {
+				//Check if a variable has been declared
+				if (fileText.get(a).startsWith(ScriptData.SYNTAX_KEY_WORD_VARIABLE_DECLARATION)) {
+					//Split up the line
+					String[] splitLine = fileText.get(a).split(" ");
+					//Get the variable name
+					String variableName = splitLine[1];
+					//The variables value
+					String variableValue = "";
+					//Check if the value has been set
+					if (fileText.get(a).contains("=")) {
+						//Set the variable value
+						variableValue = splitLine[3];
+					}
+					//Create, set and add the variable
+					ScriptVariable variable = new ScriptVariable(variableName);
+					variable.value = variableValue;
+					publicVariables.add(variable);
+				}
+			}
+		}
+		
+		//Return the public variables
+		return publicVariables;
 	}
 	
 }

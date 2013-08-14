@@ -32,5 +32,9 @@ public class ScriptData {
 	public static final String SYNTAX_KEY_WORD_METHOD_DECLARATION = ":";
 	/* The key word separator */
 	public static final String SYNTAX_KEY_WORD_SEPERATOR = " ";
+	/* The key word to define a variable */
+	public static final String SYNTAX_KEY_WORD_VARIABLE_DECLARATION = "var";
+	/* The key word to reference a variable */
+	public static final String SYNTAX_KEY_WORD_VARIABLE_REFERENCE = "var:";
 	
 }
