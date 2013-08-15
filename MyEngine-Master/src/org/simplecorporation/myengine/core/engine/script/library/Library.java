@@ -48,6 +48,7 @@ public class Library {
 		//Add the libraries
 		libraries.add(new LibraryBasicRenderer());
 		libraries.add(new LibraryLogger());
+		libraries.add(new LibraryMessageBox());
 	}
 	
 	/* The method to find and return a library given its package name */
