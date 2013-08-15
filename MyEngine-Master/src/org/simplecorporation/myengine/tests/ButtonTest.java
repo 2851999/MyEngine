@@ -5,6 +5,7 @@ import java.awt.Font;
 import org.lwjgl.opengl.GL11;
 import org.simplecorporation.myengine.core.game.Game;
 import org.simplecorporation.myengine.core.gui.button.GUIImageButton;
+import org.simplecorporation.myengine.core.gui.button.GUIRenderableButton;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
@@ -15,10 +16,12 @@ import org.simplecorporation.myengine.utils.opengl.OpenGLSetupUtils;
 public class ButtonTest extends Game {
 	
 	public GUIImageButton button;
+	public GUIRenderableButton button2;
 	
 	public ButtonTest() {
 		Settings.Window.Title = "Button Test";
-		Settings.Video.OpenGL = false;
+		Settings.Video.OpenGL = true;
+		Settings.Video.AntiAliasing = true;
 		//Create
 		createGame();
 	}
@@ -34,11 +37,25 @@ public class ButtonTest extends Game {
 		button.position.y = 100;
 		button.width = 100;
 		button.height = 30;
+		
+		button2 = new GUIRenderableButton("Button2" , "Test2" , new Colour[] {
+				Colour.WHITE ,
+				Colour.LIGHT_BLUE ,
+				Colour.BLUE
+		} , FontUtils.buildGUIFont(new Font("Segoe UI" , Font.PLAIN , 1) , Colour.WHITE , 20f));
+		
+		button2.visible = true;
+		button2.position.x = 200;
+		button2.position.y = 200;
+		button2.width = 100;
+		button2.height = 30;
+		
 	}
 	
 	public void gameUpdate() {
 		button.update();
-		if (button.isClicked()) {
+		button2.update();
+		if (button.isClicked() || button2.isClicked()) {
 			System.out.println("CLICKED");
 		}
 	}
@@ -54,6 +71,7 @@ public class ButtonTest extends Game {
 		BasicRenderer.renderFilledRectangle(0 , 0 , 640 , 480);
 		BasicRenderer.setColour(Colour.WHITE);
 		button.render();
+		button2.render();
 	}
 	
 	public static void main(String[] args) {
