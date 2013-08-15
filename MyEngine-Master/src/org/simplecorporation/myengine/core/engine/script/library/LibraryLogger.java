@@ -14,12 +14,26 @@ import java.util.LinkedList;
 
 import org.simplecorporation.myengine.core.engine.script.ScriptData;
 import org.simplecorporation.myengine.core.engine.script.variable.ScriptVariable;
+import org.simplecorporation.myengine.utils.logger.Logger;
 
-public class LibraryDefault extends Library {
+public class LibraryLogger extends AbstractLibrary {
+	
+	/* The name of this library */
+	public static final String NAME = "Logger";
+	
+	/* The description of this library */
+	public static final String DESCRIPTION = "The Logger Library";
+	
+	/* The package of this library */
+	public static final String PACKAGE = "org.simplecorporation.myengine.utils.logger.Logger";
+	
+	/* The key word of this library */
+	public static final String KEYWORD = "Logger";
 	
 	/* The constructor */
-	public LibraryDefault() {
-		super("LibraryDefault" , "" , "" , "");
+	public LibraryLogger() {
+		//Call the super constructor
+		super(NAME , DESCRIPTION , PACKAGE , KEYWORD);
 	}
 	
 	/* The method called to parse a line of code */
@@ -28,16 +42,10 @@ public class LibraryDefault extends Library {
 		line = this.replaceVariables(line , publicVariables, localVariables);
 		//Split up the line
 		String[] splitLine = line.split(ScriptData.SYNTAX_KEY_WORD_SEPERATOR);
-		//Check the first key word
-		if (splitLine[0].equals("System")) {
-			//Check what the second key word is
-			if (splitLine[1].equals("print")) {
-				//Print out a message
-				System.out.print(getVariableValue(splitLine , 1));
-			} else if (splitLine[1].equals("println")) {
-				//Print out a message
-				System.out.println(getVariableValue(splitLine , 1));
-			}
+		//Check what the second key word is
+		if (splitLine[1].equals("log")) {
+			//Log a message
+			Logger.log(getVariableValue(splitLine , 1) , getVariableValue(splitLine , 2));
 		}
 	}
 	

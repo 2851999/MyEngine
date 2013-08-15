@@ -10,7 +10,10 @@
 
 package org.simplecorporation.myengine.core.engine.script.library;
 
+import java.util.LinkedList;
+
 import org.simplecorporation.myengine.core.engine.script.ScriptData;
+import org.simplecorporation.myengine.core.engine.script.variable.ScriptVariable;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.settings.Settings;
@@ -36,7 +39,9 @@ public class LibraryBasicRenderer extends AbstractLibrary {
 	}
 	
 	/* The method called to parse a line of code */
-	public void parseCode(String line) {
+	public void parseCode(String line , LinkedList<ScriptVariable> publicVariables , LinkedList<ScriptVariable> localVariables) {
+		//Replace the variables
+		line = this.replaceVariables(line , publicVariables, localVariables);
 		//Split up the line
 		String[] splitLine = line.split(ScriptData.SYNTAX_KEY_WORD_SEPERATOR);
 		//Check what the second key word is

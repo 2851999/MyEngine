@@ -57,30 +57,6 @@ public class ScriptMethod {
 			//The line of code to be parsed
 			String currentLine = this.methodCode.get(a);
 			
-			//Check if the line has a variable reference
-			if (currentLine.contains(ScriptData.SYNTAX_KEY_WORD_VARIABLE_REFERENCE)) {
-				//The split line
-				String[] splitLine = currentLine.split(" ");
-				//The variable name
-				String variableName = "";
-				//Set the current line to nothing
-				currentLine = "";
-				//Loop through the split line
-				for (int c = 0; c < splitLine.length; c++) {
-					//Check if this contains the variable
-					if (splitLine[c].contains(ScriptData.SYNTAX_KEY_WORD_VARIABLE_REFERENCE)) {
-						//Set the variable name
-						variableName = splitLine[c].split(ScriptData.SYNTAX_KEY_WORD_VARIABLE_REFERENCE)[1];
-						//The variable value
-						String variableValue = getVariable(variableName , publicVariables).value;
-						//Set the current split line
-						splitLine[c] = variableValue;
-					}
-					//Add current split line to the current line
-					currentLine += splitLine[c] + " ";
-				}
-			}
-			
 			//Check the line of code
 			if (this.methodCode.get(a).startsWith(ScriptData.SYNTAX_KEY_WORD_CALL)) {
 				//The method name
@@ -102,7 +78,7 @@ public class ScriptMethod {
 							this.importedLibraries.get(b).libraryName.equals(firstKeyWord)) {
 						
 						//Send the code to the library
-						this.importedLibraries.get(b).parseCode(currentLine);
+						this.importedLibraries.get(b).parseCode(currentLine , publicVariables , this.localVariables);
 						//The library has been found
 						libraryFound = true;
 						//Exit the loop
@@ -121,7 +97,11 @@ public class ScriptMethod {
 						//Check if the value has been set
 						if (this.methodCode.get(a).contains("=")) {
 							//Set the variable value
-							variableValue = splitLine[3];
+							for (int b = 3; b < splitLine.length; b++) {
+								variableValue += splitLine[b] + " ";
+							}
+							//Clean up the value
+							variableValue.trim();
 						}
 						//Create, set and add the variable
 						ScriptVariable variable = new ScriptVariable(variableName);
@@ -129,39 +109,11 @@ public class ScriptMethod {
 						this.localVariables.add(variable);
 					} else {
 						//Send the code to the default library
-						defaultLibrary.parseCode(currentLine);
+						defaultLibrary.parseCode(currentLine , publicVariables , this.localVariables);
 					}
 				}
 			}
 		}
-	}
-	
-	/* The method to get a variable given its name */
-	public ScriptVariable getVariable(String name , LinkedList<ScriptVariable> publicVariables) {
-		//The variable
-		ScriptVariable variable = null;
-		//Loop through the public variables
-		for (int a = 0; a < publicVariables.size(); a++) {
-			//Check the name
-			if (publicVariables.get(a).name.equals(name)) {
-				//Set the variable
-				variable = publicVariables.get(a);
-				//Exit the loop
-				break;
-			}
-		}
-		//Loop through the public variables
-		for (int b = 0; b < this.localVariables.size(); b++) {
-			//Check the name
-			if (this.localVariables.get(b).name.equals(name)) {
-				//Set the variable
-				variable = this.localVariables.get(b);
-				//Exit the loop
-				break;
-			}
-		}
-		//Return the variable
-		return variable;
 	}
 	
 }

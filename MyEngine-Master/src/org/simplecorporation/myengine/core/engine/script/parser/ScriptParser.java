@@ -136,7 +136,11 @@ public class ScriptParser {
 					//Check if the value has been set
 					if (fileText.get(a).contains("=")) {
 						//Set the variable value
-						variableValue = splitLine[3];
+						for (int b = 3; b < splitLine.length; b++) {
+							variableValue += splitLine[b] + " ";
+						}
+						//Clean up the value
+						variableValue.trim();
 					}
 					//Create, set and add the variable
 					ScriptVariable variable = new ScriptVariable(variableName);
