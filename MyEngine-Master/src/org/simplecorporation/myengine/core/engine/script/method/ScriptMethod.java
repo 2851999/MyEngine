@@ -94,19 +94,17 @@ public class ScriptMethod {
 						String variableName = splitLine[1];
 						//The variables value
 						String variableValue = "";
-						//Check if the value has been set
-						if (this.methodCode.get(a).contains("=")) {
-							//Set the variable value
-							for (int b = 3; b < splitLine.length; b++) {
-								variableValue += splitLine[b] + " ";
-							}
-							//Clean up the value
-							variableValue.trim();
-						}
+						//Set the variable value
+						variableValue = getVariableValue(splitLine , 3);
 						//Create, set and add the variable
 						ScriptVariable variable = new ScriptVariable(variableName);
 						variable.value = variableValue;
 						this.localVariables.add(variable);
+					} else if (isVariable(currentLine , publicVariables , this.localVariables)) {
+						//Check the operation
+						String[] splitLine = currentLine.split(" ");
+						if (splitLine[1].equals("="))
+							getVariable(splitLine[0] , publicVariables , this.localVariables).value = getVariableValue(splitLine , 2);
 					} else {
 						//Send the code to the default library
 						defaultLibrary.parseCode(currentLine , publicVariables , this.localVariables);
@@ -114,6 +112,80 @@ public class ScriptMethod {
 				}
 			}
 		}
+	}
+	
+	/* The method to check if the start of a line is a variable */
+	public boolean isVariable(String line , LinkedList<ScriptVariable> publicVariables , LinkedList<ScriptVariable> localVariables) {
+		//The name of the possible variable
+		String variableName = line.split(" ")[0];
+		//Does the line start with a variable
+		boolean isVariable = false;
+		//Loop through the public variables
+		for (int a = 0; a < publicVariables.size(); a++){
+			//Check if the current variable has the right name
+			if (publicVariables.get(a).name.equals(variableName))
+				//Set is variable to true
+				isVariable = true;
+		}
+		//Loop through the local variables
+		for (int a = 0; a < localVariables.size(); a++){
+			//Check if the current variable has the right name
+			if (localVariables.get(a).name.equals(variableName))
+				//Set is variable to true
+				isVariable = true;
+		}
+		//Return the value
+		return isVariable;
+	}
+	
+	/* The method to get a variable */
+	public ScriptVariable getVariable(String variableName , LinkedList<ScriptVariable> publicVariables , LinkedList<ScriptVariable> localVariables) {
+		//The variable
+		ScriptVariable variable = null;
+		//Loop through the public variables
+		for (int a = 0; a < publicVariables.size(); a++){
+			//Check if the current variable has the right name
+			if (publicVariables.get(a).name.equals(variableName))
+				//Set is variable to true
+				variable = publicVariables.get(a);
+		}
+		//Loop through the local variables
+		for (int a = 0; a < localVariables.size(); a++){
+			//Check if the current variable has the right name
+			if (localVariables.get(a).name.equals(variableName))
+				//Set is variable to true
+				variable = localVariables.get(a);
+		}
+		//Return the variable
+		return variable;
+	}
+	
+	/* The method to get a variable's value from a line */
+	public String getVariableValue(String[] splitLine , int start) {
+		//The variable value
+		String variableValue = "";
+		//Set the variable value
+		for (int b = start; b < splitLine.length; b++) {
+			variableValue += splitLine[b] + " ";
+		}
+		//Clean up the value
+		variableValue.trim();
+		//Return the variables value
+		return variableValue;
+	}
+	
+	/* The method to check if a variable is a double */
+	public boolean isDouble(String value) {
+		//The boolean value
+		boolean isDouble = false;
+		try {
+			Double.parseDouble(value);
+			isDouble = true;
+		} catch (NumberFormatException e) {
+			isDouble = false;
+		}
+		//Retrun the value
+		return isDouble;
 	}
 	
 }
