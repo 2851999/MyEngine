@@ -13,7 +13,7 @@ package org.simplecorporation.myengine.settings;
 public class Settings {
 	
 	/* The version of the engine */
-	public static final String EngineVersion = "V0.0.1";
+	public static final String EngineVersion = "V1.0.0";
 	
 	/* The window settings */
 	public static class Window {
