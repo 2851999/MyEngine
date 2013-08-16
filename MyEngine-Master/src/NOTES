@@ -1,7 +1,7 @@
 NOTES
 
 VSync if changed from initial value will require the engine
-to be restart for the change to be applied.
+to be restarted for the change to be applied.
 
 Turning OpenGL on/off will require the engine to restart also
 
