@@ -1,4 +1,4 @@
-NOTES
+NOTES EXPERIMENTAL VERSION
 
 VSync if changed from initial value will require the engine
 to be restarted for the change to be applied.
