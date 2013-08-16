@@ -11,6 +11,7 @@
 package org.simplecorporation.myengine.core.gui.builder;
 
 import org.simplecorporation.myengine.core.gui.button.GUIImageButton;
+import org.simplecorporation.myengine.core.gui.button.GUIRenderableButton;
 import org.simplecorporation.myengine.core.gui.checkbox.GUIImageCheckBox;
 import org.simplecorporation.myengine.core.gui.checkbox.GUIRenderableCheckBox;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
@@ -49,6 +50,13 @@ public class GUIBuilder {
 	public static GUIImageButton createImageButton(String name , String text , String imagePath , GUIFont font ,
 			int numberOfImages , double x , double y , double width , double height) {
 		return GUIButtonBuilder.createImageButton(name, text, imagePath, font, numberOfImages, x, y, width, height);
+	}
+	
+	/* The method to create a renderable button given
+	   its name, text, images, font, position, width and height */
+	public static GUIRenderableButton createRenderableButton(String name , String text , Colour[] colours , GUIFont font ,
+			double x , double y , double width , double height) {
+		return GUIButtonBuilder.createRenderableButton(name, text, colours, font, x, y, width, height);
 	}
 	
 	/* The method to create a renderable check box button

@@ -26,8 +26,8 @@ public abstract class GUIComponent extends AbstractEntity2D implements InputList
 	public boolean visible;
 	
 	/* The abstract methods */
-	public abstract void update();
-	public abstract void render();
+	public abstract void updateComponent();
+	public abstract void renderComponent();
 	
 	/* The constructor */
 	public GUIComponent(String name) {
@@ -44,7 +44,7 @@ public abstract class GUIComponent extends AbstractEntity2D implements InputList
 		//Check that the component is visible
 		if (this.visible)
 			//Update the component
-			update();
+			updateComponent();
 	}
 	
 	/* Method inherited from AbstractEntity2D */
@@ -52,7 +52,7 @@ public abstract class GUIComponent extends AbstractEntity2D implements InputList
 		//Check that the component is visible
 		if (this.visible)
 			//Render the component
-			render();
+			renderComponent();
 	}
 	
 	/* Method inherited from InputListener */

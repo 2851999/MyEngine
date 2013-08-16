@@ -40,7 +40,7 @@ public abstract class GUIButton extends GUIComponent {
 	}
 	
 	/* The update method */
-	public void update() {
+	public void updateComponent() {
 		//Check the mouse and see whether the button is selected
 		if (this.getBounds().contains(MouseInput.x , MouseInput.y))
 			//Set selected to true

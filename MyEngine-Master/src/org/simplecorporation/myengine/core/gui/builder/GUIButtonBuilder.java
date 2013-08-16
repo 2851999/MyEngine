@@ -11,6 +11,7 @@
 package org.simplecorporation.myengine.core.gui.builder;
 
 import org.simplecorporation.myengine.core.gui.button.GUIImageButton;
+import org.simplecorporation.myengine.core.gui.button.GUIRenderableButton;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
@@ -100,6 +101,25 @@ public class GUIButtonBuilder {
 		
 		//Create the button
 		GUIImageButton button = new GUIImageButton(name , text , images ,
+				font);
+		
+		//Set the position, width and height
+		button.position.x = x;
+		button.position.y = y;
+		button.width = width;
+		button.height = height;
+		
+		//Return the button
+		return button;
+	}
+	
+	/* The method to create a renderable button given
+	   its name, text, images, font, position, width and height */
+	public static GUIRenderableButton createRenderableButton(String name , String text , Colour[] colours , GUIFont font ,
+			double x , double y , double width , double height) {
+		
+		//Create the button
+		GUIRenderableButton button = new GUIRenderableButton(name , text , colours ,
 				font);
 		
 		//Set the position, width and height

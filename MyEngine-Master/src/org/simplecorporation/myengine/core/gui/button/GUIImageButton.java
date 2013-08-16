@@ -42,7 +42,7 @@ public class GUIImageButton extends GUIButton {
 	}
 	
 	/* The method to render the button */
-	public void render() {
+	public void renderComponent() {
 		//The current image
 		Image current = null;
 		//Render the right image

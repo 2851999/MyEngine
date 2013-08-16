@@ -30,12 +30,12 @@ public class GUILabel extends GUIComponent {
 	}
 	
 	/* The update method */
-	public void update() {
+	public void updateComponent() {
 		
 	}
 	
 	/* The render method */
-	public void render() {
+	public void renderComponent() {
 		//Render the text
 		this.font.render(this.text , this.position.x , this.position.y);
 	}

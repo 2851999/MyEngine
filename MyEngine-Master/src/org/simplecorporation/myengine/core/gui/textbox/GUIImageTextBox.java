@@ -35,7 +35,7 @@ public class GUIImageTextBox extends GUITextBox {
 	}
 	
 	/* The method to render the text box */
-	public void render() {
+	public void renderComponent() {
 		if (this.visible) {
 			//Render the box
 			BasicRenderer.setColour(Colour.WHITE);

@@ -39,7 +39,7 @@ public class GUIRenderableButton extends GUIButton {
 	}
 	
 	/* The method to render the button */
-	public void render() {
+	public void renderComponent() {
 		//The current image
 		Colour current = null;
 		//Render the right colour

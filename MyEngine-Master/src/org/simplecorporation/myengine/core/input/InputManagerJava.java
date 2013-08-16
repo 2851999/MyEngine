@@ -76,7 +76,7 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , K
 		MouseInput.lastX = MouseInput.x;
 		MouseInput.lastY = MouseInput.y;
 		MouseInput.x = e.getX();
-		MouseInput.y = e.getY() - 27;
+		MouseInput.y = e.getY();
 		//Call the event
 		Input.callMouseMoved(new MouseMotionEvent(MouseInput.x , MouseInput.y , MouseInput.lastX , MouseInput.lastY));
 	}

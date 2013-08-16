@@ -37,7 +37,7 @@ public class GUIRenderableCheckBox extends GUICheckBox {
 	}
 	
 	/* The render method */
-	public void render() {
+	public void renderComponent() {
 		//Render the check box based on whether it is checked or not
 		
 		//The box

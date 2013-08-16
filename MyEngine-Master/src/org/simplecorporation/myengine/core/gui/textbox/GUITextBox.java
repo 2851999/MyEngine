@@ -88,7 +88,7 @@ public abstract class GUITextBox extends GUIComponent {
 	}
 	
 	/* The method to update the text box */
-	public void update() {
+	public void updateComponent() {
 		//Check if this is visible and selected
 		if (this.visible && this.selected) {
 			//Check the time

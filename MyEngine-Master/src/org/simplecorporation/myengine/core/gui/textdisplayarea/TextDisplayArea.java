@@ -35,11 +35,11 @@ public class TextDisplayArea extends GUIComponent {
 	}
 	
 	/* The method to update the display area */
-	public void update() {
+	public void updateComponent() {
 		
 	}
 	
-	public void render() {
+	public void renderComponent() {
 		//The position
 		double xPos = this.position.x;
 		double yPos = this.position.y;
