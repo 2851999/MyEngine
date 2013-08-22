@@ -14,6 +14,7 @@ import java.util.LinkedList;
 
 import org.simplecorporation.myengine.core.effect.Effect;
 import org.simplecorporation.myengine.core.point.Point2D;
+import org.simplecorporation.myengine.utils.logger.Logger;
 
 public abstract class AbstractEntity2D extends Entity2D {
 	
@@ -86,6 +87,50 @@ public abstract class AbstractEntity2D extends Entity2D {
 		}
 		//Call the render method
 		this.entityRender();
+	}
+	
+	/* The method to get an effect by its name */
+	public Effect getEffectByName(String name) {
+		//The effect
+		Effect effect = null;
+		//Loop
+		for (int a = 0; a < this.effects.size(); a++) {
+			//Check the name
+			if (this.effects.get(a).getName().equals(name)) {
+				//Set the effect
+				effect = this.effects.get(a);
+				//Break out of the loop
+				break;
+			}
+		}
+		//Check if the found effect is null
+		if (effect == null)
+			//Log a message
+			Logger.log("AbstractEntity getEffectByName()" , "Effect not found by the name " + name);
+		//Return the effect
+		return effect;
+	}
+	
+	/* The method to get an effect by its name */
+	public Effect getEffectById(int id) {
+		//The effect
+		Effect effect = null;
+		//Loop
+		for (int a = 0; a < this.effects.size(); a++) {
+			//Check the name
+			if (this.effects.get(a).getId() == id) {
+				//Set the effect
+				effect = this.effects.get(a);
+				//Break out of the loop
+				break;
+			}
+		}
+		//Check if the found effect is null
+		if (effect == null)
+			//Log a message
+			Logger.log("AbstractEntity getEffectByName()" , "Effect not found by the id " + id);
+		//Return the effect
+		return effect;
 	}
 	
 }

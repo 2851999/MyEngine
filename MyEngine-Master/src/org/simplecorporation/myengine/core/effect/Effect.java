@@ -54,7 +54,7 @@ public abstract class Effect {
 	}
 	
 	/* The method that returns the id */
-	public int getID() {
+	public int getId() {
 		//Return the id
 		return this.id;
 	}
