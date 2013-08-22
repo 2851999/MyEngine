@@ -18,6 +18,9 @@ public abstract class AI implements BaseAI {
 	/* The description of the AI*/
 	public String description;
 	
+	/* The abstract void to run a certain operation */
+	public abstract void run(String operation);
+	
 	/* The constructor */
 	public AI(String name , String description) {
 		//Assign the variables
