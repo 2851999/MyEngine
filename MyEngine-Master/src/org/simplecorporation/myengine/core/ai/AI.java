@@ -28,4 +28,16 @@ public abstract class AI implements BaseAI {
 		this.description = description;
 	}
 	
+	/* Returns the name of the AI */
+	public String getName() {
+		//Return the name
+		return this.name;
+	}
+	
+	/* Returns the description of the AI */
+	public String getDescription() {
+		//Return the description
+		return this.description;
+	}
+	
 }

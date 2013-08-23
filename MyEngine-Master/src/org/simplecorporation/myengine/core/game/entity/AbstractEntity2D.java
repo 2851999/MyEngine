@@ -14,6 +14,8 @@ import java.util.LinkedList;
 
 import org.simplecorporation.myengine.core.effect.Effect;
 import org.simplecorporation.myengine.core.point.Point2D;
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
 public abstract class AbstractEntity2D extends Entity2D {
@@ -106,7 +108,7 @@ public abstract class AbstractEntity2D extends Entity2D {
 		//Check if the found effect is null
 		if (effect == null)
 			//Log a message
-			Logger.log("AbstractEntity getEffectByName()" , "Effect not found by the name " + name);
+			Logger.log(new Log("AbstractEntity getEffectByName()" , "Effect not found by the name " + name , LogType.ERROR));
 		//Return the effect
 		return effect;
 	}
@@ -128,7 +130,7 @@ public abstract class AbstractEntity2D extends Entity2D {
 		//Check if the found effect is null
 		if (effect == null)
 			//Log a message
-			Logger.log("AbstractEntity getEffectByName()" , "Effect not found by the id " + id);
+			Logger.log(new Log("AbstractEntity getEffectByName()" , "Effect not found by the id " + id , LogType.ERROR));
 		//Return the effect
 		return effect;
 	}

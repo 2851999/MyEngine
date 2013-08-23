@@ -223,11 +223,11 @@ public abstract class GUITextBox extends GUIComponent {
 				} else if (! this.releasedShiftKey && this.unknowncharacter && e.keyCode != Keyboard.KEY_BACK) {
 					//Check if the the character was null
 					if (e.keyChar != ' ' && (e.keyChar != '\u0000')) {
-							//Add the character to the text
-							this.text += e.keyChar;
-							//Set the cursor time
-							this.cursorShown = false;
-							this.cursorLastBlink = System.currentTimeMillis();
+						//Add the character to the text
+						this.text += e.keyChar;
+						//Set the cursor time
+						this.cursorShown = false;
+						this.cursorLastBlink = System.currentTimeMillis();
 					}
 				} else {
 					this.releasedShiftKey = false;

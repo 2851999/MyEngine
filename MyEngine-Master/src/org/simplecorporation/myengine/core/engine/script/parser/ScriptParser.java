@@ -18,6 +18,8 @@ import org.simplecorporation.myengine.core.engine.script.library.AbstractLibrary
 import org.simplecorporation.myengine.core.engine.script.library.Library;
 import org.simplecorporation.myengine.core.engine.script.method.ScriptMethod;
 import org.simplecorporation.myengine.core.engine.script.variable.ScriptVariable;
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class ScriptParser {
@@ -53,7 +55,7 @@ public class ScriptParser {
 				//Check if the library was found
 				if (library == null)
 					//Log a message
-					Logger.log("ScriptParser.parseImportedLibraries()", "Library/Libraries not found " + libraryPackage);
+					Logger.log(new Log("ScriptParser.parseImportedLibraries()", "Library/Libraries not found " + libraryPackage , LogType.ERROR));
 				//Add the library to the linked list
 				importedLibraries.add(library);
 			}

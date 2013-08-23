@@ -8,11 +8,14 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.game.entity;
+package org.simplecorporation.myengine.core.game.entity.sprite;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.core.game.entity.ImageEntity2D;
 import org.simplecorporation.myengine.core.image.Image;
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class Sprite2D extends ImageEntity2D {
@@ -72,6 +75,14 @@ public class Sprite2D extends ImageEntity2D {
 		this.currentAnimation.start(start);
 	}
 	
+	/* The method to stop the current animation */
+	public void stopAnimation() {
+		//Make sure the current animation is not null
+		if (this.currentAnimation != null)
+			//Stop the animation
+			this.currentAnimation.stop();
+	}
+	
 	/* The method to get an animation based on its name */
 	public SpriteAnimation2D getAnimationByName(String name) {
 		//The sprite animation
@@ -91,7 +102,7 @@ public class Sprite2D extends ImageEntity2D {
 		//Check if the sprite animation wasn't found
 		if (spriteAnimation == null)
 			//Log a message
-			Logger.log("Sprite2D getAnimationByName()" , "The animation " + name + " was not found");
+			Logger.log(new Log("Sprite2D getAnimationByName()" , "The animation " + name + " was not found" , LogType.ERROR));
 		
 		//Return the animation
 		return spriteAnimation;
@@ -116,10 +127,16 @@ public class Sprite2D extends ImageEntity2D {
 		//Check if the sprite animation wasn't found
 		if (spriteAnimation == null)
 			//Log a message
-			Logger.log("Sprite2D getAnimationById()" , "The animation " + id + " was not found");
+			Logger.log(new Log("Sprite2D getAnimationById()" , "The animation " + id + " was not found" , LogType.ERROR));
 		
 		//Return the animation
 		return spriteAnimation;
+	}
+	
+	/* The method to add an animation */
+	public void addAnimation(SpriteAnimation2D spriteAnimation) {
+		//Add the animation
+		this.animations.add(spriteAnimation);
 	}
 	
 }
