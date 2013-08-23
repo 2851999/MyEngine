@@ -20,6 +20,8 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 import org.simplecorporation.myengine.settings.Settings;
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class JavaWindow {
@@ -188,7 +190,7 @@ public class JavaWindow {
 			Thread.sleep(waitTime);
 		} catch (InterruptedException e) {
 			//Log a message
-			Logger.log("JavaWindow updateGraphics()" , "InterruptedException");
+			Logger.log(new Log("JavaWindow updateGraphics()" , "InterruptedException" , LogType.ERROR));
 			e.printStackTrace();
 		}
 	}

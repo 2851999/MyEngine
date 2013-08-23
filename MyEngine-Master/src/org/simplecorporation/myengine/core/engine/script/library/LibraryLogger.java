@@ -14,6 +14,8 @@ import java.util.LinkedList;
 
 import org.simplecorporation.myengine.core.engine.script.ScriptData;
 import org.simplecorporation.myengine.core.engine.script.variable.ScriptVariable;
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class LibraryLogger extends AbstractLibrary {
@@ -44,8 +46,25 @@ public class LibraryLogger extends AbstractLibrary {
 		String[] splitLine = line.split(ScriptData.SYNTAX_KEY_WORD_SEPERATOR);
 		//Check what the second key word is
 		if (splitLine[1].equals("log")) {
+			//The log type
+			LogType logType = LogType.INFORMATION;
+			//The string from the script
+			String logTypeString = getVariableValue(splitLine , 3);
+			//Check what log type to use
+			if (logTypeString.equals("INFORMATION"))
+				//Set the log type
+				logType = LogType.INFORMATION;
+			else if (logTypeString.equals("WARNING"))
+				//Set the log type
+				logType = LogType.WARNING;
+			else if (logTypeString.equals("ERROR"))
+				//Set the log type
+				logType = LogType.ERROR;
+			else if (logTypeString.equals("DEBUG"))
+				//Set the log type
+				logType = LogType.DEBUG;
 			//Log a message
-			Logger.log(getVariableValue(splitLine , 1) , getVariableValue(splitLine , 2));
+			Logger.log(new Log(getVariableValue(splitLine , 1) , getVariableValue(splitLine , 2) , logType));
 		}
 	}
 	

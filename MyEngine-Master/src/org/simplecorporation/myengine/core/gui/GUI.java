@@ -12,6 +12,8 @@ package org.simplecorporation.myengine.core.gui;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class GUI {
@@ -73,7 +75,7 @@ public class GUI {
 		//Check if the component is null
 		if (panel == null)
 			//Log a message
-			Logger.log("GUI get()" , "The panel with the name " + name + " was not found");
+			Logger.log(new Log("GUI get()" , "The panel with the name " + name + " was not found" , LogType.ERROR));
 		//Return the component
 		return panel;
 	}
