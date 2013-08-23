@@ -13,6 +13,8 @@ package org.simplecorporation.myengine.core.game.entity;
 import java.util.LinkedList;
 
 import org.simplecorporation.myengine.core.image.Image;
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class Sprite2D extends ImageEntity2D {
@@ -91,7 +93,7 @@ public class Sprite2D extends ImageEntity2D {
 		//Check if the sprite animation wasn't found
 		if (spriteAnimation == null)
 			//Log a message
-			Logger.log("Sprite2D getAnimationByName()" , "The animation " + name + " was not found");
+			Logger.log(new Log("Sprite2D getAnimationByName()" , "The animation " + name + " was not found" , LogType.ERROR));
 		
 		//Return the animation
 		return spriteAnimation;
@@ -116,7 +118,7 @@ public class Sprite2D extends ImageEntity2D {
 		//Check if the sprite animation wasn't found
 		if (spriteAnimation == null)
 			//Log a message
-			Logger.log("Sprite2D getAnimationById()" , "The animation " + id + " was not found");
+			Logger.log(new Log("Sprite2D getAnimationById()" , "The animation " + id + " was not found" , LogType.ERROR));
 		
 		//Return the animation
 		return spriteAnimation;

@@ -18,6 +18,8 @@ import org.simplecorporation.myengine.core.engine.script.library.LibraryDefault;
 import org.simplecorporation.myengine.core.engine.script.method.ScriptMethod;
 import org.simplecorporation.myengine.core.engine.script.parser.ScriptParser;
 import org.simplecorporation.myengine.core.engine.script.variable.ScriptVariable;
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class Script {
@@ -79,7 +81,7 @@ public class Script {
 		//Check that the method was found
 		if (method == null)
 			//Log a message
-			Logger.log("Script callMethod()" , "The method " + methodName + " was not found");
+			Logger.log(new Log("Script callMethod()" , "The method " + methodName + " was not found" , LogType.ERROR));
 		
 		//Call the method
 		method.callMethod(this , this.defaultLibrary , this.publicVariables);

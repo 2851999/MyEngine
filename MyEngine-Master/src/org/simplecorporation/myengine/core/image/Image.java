@@ -22,6 +22,8 @@ import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.window.JavaWindow;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.file.FileUtils;
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class Image {
@@ -57,11 +59,11 @@ public class Image {
 					this.openGLImage = TextureLoader.getTexture(format , new FileInputStream(filePath));
 			} catch (FileNotFoundException e) {
 				//Log a message
-				Logger.log("Image load()" , "FileNotFound " + filePath);
+				Logger.log(new Log("Image load()" , "FileNotFound " + filePath , LogType.ERROR));
 				e.printStackTrace();
 			} catch (IOException e) {
 				//Log a message
-				Logger.log("Image load()" , "IOException " + filePath);
+				Logger.log(new Log("Image load()" , "IOException " + filePath , LogType.ERROR));
 				e.printStackTrace();
 			}
 		} else {
