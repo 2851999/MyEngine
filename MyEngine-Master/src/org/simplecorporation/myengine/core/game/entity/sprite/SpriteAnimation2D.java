@@ -8,8 +8,9 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.game.entity;
+package org.simplecorporation.myengine.core.game.entity.sprite;
 
+import org.simplecorporation.myengine.core.game.entity.AnimatedImageEntity2D;
 import org.simplecorporation.myengine.core.image.Image;
 
 public class SpriteAnimation2D extends AnimatedImageEntity2D {

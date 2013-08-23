@@ -8,10 +8,11 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.game.entity;
+package org.simplecorporation.myengine.core.game.entity.sprite;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.core.game.entity.ImageEntity2D;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
@@ -74,6 +75,14 @@ public class Sprite2D extends ImageEntity2D {
 		this.currentAnimation.start(start);
 	}
 	
+	/* The method to stop the current animation */
+	public void stopAnimation() {
+		//Make sure the current animation is not null
+		if (this.currentAnimation != null)
+			//Stop the animation
+			this.currentAnimation.stop();
+	}
+	
 	/* The method to get an animation based on its name */
 	public SpriteAnimation2D getAnimationByName(String name) {
 		//The sprite animation
@@ -122,6 +131,12 @@ public class Sprite2D extends ImageEntity2D {
 		
 		//Return the animation
 		return spriteAnimation;
+	}
+	
+	/* The method to add an animation */
+	public void addAnimation(SpriteAnimation2D spriteAnimation) {
+		//Add the animation
+		this.animations.add(spriteAnimation);
 	}
 	
 }
