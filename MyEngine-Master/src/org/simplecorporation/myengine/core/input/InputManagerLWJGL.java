@@ -17,6 +17,8 @@ import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
 import org.simplecorporation.myengine.settings.Settings;
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class InputManagerLWJGL {
@@ -102,7 +104,7 @@ public class InputManagerLWJGL {
 			Mouse.create();
 		} catch (LWJGLException e) {
 			//Log a message
-			Logger.log("InputManagerLWJGL create()" , "LWJGLException");
+			Logger.log(new Log("InputManagerLWJGL create()" , "LWJGLException" , LogType.ERROR));
 			e.printStackTrace();
 		}
 	}
