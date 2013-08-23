@@ -17,6 +17,8 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.simplecorporation.myengine.settings.Settings;
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 import org.simplecorporation.myengine.utils.messagebox.MessageBox;
 
@@ -40,7 +42,7 @@ public class OpenGLWindow {
 			//Log a message
 			//Display an error message box
 			MessageBox.showErrorMessage("LWJGL Exception" , "Error in OpenGLWindow create()");
-			Logger.log("OpenGLWindow create()" , "LWJGL Exception");
+			Logger.log(new Log("OpenGLWindow create()" , "LWJGL Exception" , LogType.ERROR));
 			e.printStackTrace();
 		}
 	}
@@ -88,7 +90,7 @@ public class OpenGLWindow {
 			}
 		} catch (LWJGLException e) {
 			//Log a message
-			Logger.log("OpenGLWindow updateSettings()" , "LWJGL Exception");
+			Logger.log(new Log("OpenGLWindow updateSettings()" , "LWJGL Exception" , LogType.ERROR));
 			//Display an error message box
 			MessageBox.showErrorMessage("LWJGL Exception" , "Error in OpenGLWindow updateSettings()");
 			e.printStackTrace();
@@ -133,7 +135,7 @@ public class OpenGLWindow {
  
 		} catch (LWJGLException e) {
 			//Log a message
-			Logger.log("OpenGLWindow getFullscreenDisplayMode()" , "LWJGL Exception");
+			Logger.log(new Log("OpenGLWindow getFullscreenDisplayMode()" , "LWJGL Exception" , LogType.ERROR));
 			//Display an error message box
 			MessageBox.showErrorMessage("LWJGL Exception" , "Error in OpenGLWindow getFullscreenDisplayMode()");
 			e.printStackTrace();

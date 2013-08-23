@@ -18,6 +18,8 @@ import java.io.IOException;
 
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.render.colour.Colour;
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class FontUtils {
@@ -45,13 +47,13 @@ public class FontUtils {
 			//Load font from file path
 			font = Font.createFont(Font.TRUETYPE_FONT , new FileInputStream(fontPath));
 		} catch (FileNotFoundException e) {
-			Logger.log("FontUtils getFont()" , "File not found: " + fontPath);
+			Logger.log(new Log("FontUtils getFont()" , "File not found: " + fontPath , LogType.ERROR));
 			e.printStackTrace();
 		} catch (FontFormatException e) {
-			Logger.log("FontUtils getFont()" , "Font format exception: " + fontPath);
+			Logger.log(new Log("FontUtils getFont()" , "Font format exception: " + fontPath , LogType.ERROR));
 			e.printStackTrace();
 		} catch (IOException e) {
-			Logger.log("FontUtils getFont()" , "IOException: " + fontPath);
+			Logger.log(new Log("FontUtils getFont()" , "IOException: " + fontPath , LogType.ERROR));
 			e.printStackTrace();
 		}
 		return font;

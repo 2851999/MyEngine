@@ -19,6 +19,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class FileUtils {
@@ -87,15 +89,15 @@ public class FileUtils {
 					}
 				} else {
 					//Log a message
-					Logger.log("FileUtils read()" , "File cant be read " + filePath);
+					Logger.log(new Log("FileUtils read()" , "File cant be read " + filePath , LogType.ERROR));
 				}
 			} else {
 				//Log a message
-				Logger.log("FileUtils read()" , "File not a file " + filePath);
+				Logger.log(new Log("FileUtils read()" , "File not a file " + filePath , LogType.ERROR));
 			}
 		} else {
 			//Log a message
-			Logger.log("FileUtils read()" , "File not found " + filePath);
+			Logger.log(new Log("FileUtils read()" , "File not found " + filePath , LogType.ERROR));
 		}
 		//Return the file text
 		return fileText;
@@ -105,7 +107,7 @@ public class FileUtils {
 		//Check if the file path already exists
 		if (doesExist(filePath)) {
 			//Log a message
-			Logger.log("FileUtils write()" , "File already exists so will be overwritten " + filePath);
+			Logger.log(new Log("FileUtils write()" , "File already exists so will be overwritten " + filePath , LogType.WARNING));
 		}
 		
 		try {
@@ -125,7 +127,7 @@ public class FileUtils {
 			fileWriter.close();
 		} catch (IOException e) {
 			//Log a message
-			Logger.log("FileUtils write()" , "IOException writing the file " + filePath);
+			Logger.log(new Log("FileUtils write()" , "IOException writing the file " + filePath , LogType.ERROR));
 			e.printStackTrace();
 		}
 	}
