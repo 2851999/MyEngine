@@ -37,6 +37,12 @@ public class GUIImageTextBox extends GUITextBox {
 	/* The method to render the text box */
 	public void renderComponent() {
 		if (this.visible) {
+			
+			//Check to see if the text fits in the box
+			if (this.font.getWidth(this.text) > this.width - 4)
+				//Remove the last letter
+				this.text = this.text.substring(0 , this.text.length() - 1);
+			
 			//Render the box
 			BasicRenderer.setColour(Colour.WHITE);
 			BasicRenderer.renderImage(this.image , this.position.x , this.position.y , this.width , this.height);
