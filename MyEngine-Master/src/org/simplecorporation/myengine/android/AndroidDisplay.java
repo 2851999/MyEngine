@@ -1,0 +1,86 @@
+/***********************************************
+ * SIMPLE CORPORATION
+ * 
+ * MYENGINE
+ * 
+ * COPYRIGHT @ 2013
+ * 
+ * USE - EDUCATIONAL PURPOSES ONLY
+ ***********************************************/
+
+package org.simplecorporation.myengine.android;
+
+import android.content.Context;
+import android.graphics.Paint;
+import android.view.MotionEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+
+public abstract class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callback {
+	
+	/* The android game */
+	public AndroidGame androidGame;
+	
+	/* The android game thread */
+	public AndroidGameThread androidGameThread;
+	
+	/* The constructor */
+	public AndroidDisplay(Context context , AndroidGame androidGame) {
+		//Call the super constructor
+		super(context);
+		//Add the callback
+		this.getHolder().addCallback(this);
+		
+		//Set the android game
+		this.androidGame = androidGame;
+		
+		//Create the android game thread
+		this.androidGameThread=  new AndroidGameThread(this.getHolder() ,this.androidGame);
+		
+		//Set the surface view focusable
+		this.setFocusable(true);
+	}
+	
+	/* Called when the surface is created */
+	public void surfaceCreated(SurfaceHolder surfaceHolder) {
+		//Set the game resources
+		AndroidStore.gameResources = this.getResources();
+		//Create the game
+		this.androidGame.createGame();
+		//Create the paint object
+		AndroidStore.gamePaint = new Paint();
+		//Start the android game thread
+		this.androidGameThread.setRunning(true);
+		this.androidGameThread.start();
+	}
+	
+	/* Called when the surface is changed */
+	public void surfaceChanged(SurfaceHolder surfaceHolder , int format , int width , int height) {
+		
+	}
+	
+	/* Called when the surface is destroyed */
+	public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+		//Should the loop continue
+		boolean retry = true;
+		while(retry) {
+			//Try and catch statement
+			try {
+				//Destroy the game
+				this.androidGame.destroyGame();
+				//Join the thread
+				this.androidGameThread.join();
+				//Stop the while loop
+				retry = false;
+			} catch (InterruptedException e) {
+				
+			}
+		}
+	}
+	
+	/* The on touch method */
+	public boolean onTouch(MotionEvent event) {
+		return super.onTouchEvent(event);
+	}
+	
+}
