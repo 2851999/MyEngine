@@ -15,6 +15,9 @@ public class Settings {
 	/* The version of the engine goes up 1 every development build */
 	public static final String EngineVersion = "V1.0.0.8";
 	
+	/* Is using android */
+	public static boolean Android = false;
+	
 	/* The window settings */
 	public static class Window {
 		/* The title of the window */
