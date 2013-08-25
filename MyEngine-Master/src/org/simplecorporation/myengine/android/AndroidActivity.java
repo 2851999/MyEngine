@@ -32,10 +32,10 @@ public abstract class AndroidActivity extends Activity {
 	public AndroidDisplay androidDisplay;
 	
 	/* The onCreate method */
-	protected void onCreate(String title , Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//Set the title
-		this.setTitle(title);
+		this.setTitle(Settings.Window.Title);
 		//Check the orientation and set it
 		if (AndroidSettings.ScreenOrientation == AndroidSettings.SCREEN_ORIENTATION_PORTRAIT)
 			this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -51,10 +51,10 @@ public abstract class AndroidActivity extends Activity {
 	}
 	
 	/* The onCreate method */
-	protected void onCreate(String title , AndroidGame androidGame , Bundle savedInstanceState) {
+	protected void onCreate(AndroidGame androidGame , Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//Set the title
-		this.setTitle(title);
+		this.setTitle(Settings.Window.Title);
 		//Check the orientation and set it
 		if (AndroidSettings.ScreenOrientation == AndroidSettings.SCREEN_ORIENTATION_PORTRAIT)
 			this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
