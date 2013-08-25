@@ -10,13 +10,16 @@
 
 package org.simplecorporation.myengine.android;
 
-import android.content.Context;
+import org.simplecorporation.myengine.settings.Settings;
+import org.simplecorporation.myengine.utils.screen.ScreenUtils;
+
+import android.app.Activity;
 import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public abstract class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callback {
+public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callback {
 	
 	/* The android game */
 	public AndroidGame androidGame;
@@ -25,11 +28,15 @@ public abstract class AndroidDisplay extends SurfaceView implements SurfaceHolde
 	public AndroidGameThread androidGameThread;
 	
 	/* The constructor */
-	public AndroidDisplay(Context context , AndroidGame androidGame) {
+	public AndroidDisplay(Activity gameActivity , AndroidGame androidGame) {
 		//Call the super constructor
-		super(context);
+		super(gameActivity);
+		
 		//Add the callback
 		this.getHolder().addCallback(this);
+		
+		//Set the game activity in the AndroidStore
+		AndroidStore.gameActivity = gameActivity;
 		
 		//Set the android game
 		this.androidGame = androidGame;
@@ -43,6 +50,15 @@ public abstract class AndroidDisplay extends SurfaceView implements SurfaceHolde
 	
 	/* Called when the surface is created */
 	public void surfaceCreated(SurfaceHolder surfaceHolder) {
+		//Set the size of the screen in the settings if fullscreen
+		if (Settings.Window.Fullscreen) {
+			Settings.Window.Size.Width = ScreenUtils.getScreenWidth();
+			Settings.Window.Size.Height = ScreenUtils.getScreenHeight();
+		} else {
+			//Set the size of the screen in the settings
+			Settings.Window.Size.Width = this.getWidth();
+			Settings.Window.Size.Height = this.getHeight();
+		}
 		//Set the game resources
 		AndroidStore.gameResources = this.getResources();
 		//Create the game
@@ -56,7 +72,9 @@ public abstract class AndroidDisplay extends SurfaceView implements SurfaceHolde
 	
 	/* Called when the surface is changed */
 	public void surfaceChanged(SurfaceHolder surfaceHolder , int format , int width , int height) {
-		
+		//Set the size of the screen in the settings
+		Settings.Window.Size.Width = ScreenUtils.getScreenWidth();
+		Settings.Window.Size.Height = ScreenUtils.getScreenHeight();
 	}
 	
 	/* Called when the surface is destroyed */

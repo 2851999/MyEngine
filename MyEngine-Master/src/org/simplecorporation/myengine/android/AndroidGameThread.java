@@ -54,7 +54,6 @@ public class AndroidGameThread extends Thread {
 				if (AndroidStore.gameCanvas != null) {
 					this.surfaceHolder.unlockCanvasAndPost(AndroidStore.gameCanvas);
 				}
-
 			}
 		}
 	}
