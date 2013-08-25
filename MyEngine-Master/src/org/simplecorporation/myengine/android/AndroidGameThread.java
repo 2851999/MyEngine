@@ -45,9 +45,9 @@ public class AndroidGameThread extends Thread {
 				AndroidStore.gameCanvas = this.surfaceHolder.lockCanvas();
 				synchronized (this.surfaceHolder) {
 					//Update the game
-					this.androidGame.updateGame();
+					this.androidGame.gameUpdate();
 					//Render the game
-					this.androidGame.renderGame();
+					this.androidGame.gameRender();
 				}
 			} finally {
 				//Check that the canvas isn't null

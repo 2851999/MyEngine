@@ -62,7 +62,7 @@ public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callbac
 		//Set the game resources
 		AndroidStore.gameResources = this.getResources();
 		//Create the game
-		this.androidGame.createGame();
+		this.androidGame.gameCreated();
 		//Create the paint object
 		AndroidStore.gamePaint = new Paint();
 		//Start the android game thread
@@ -85,7 +85,7 @@ public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callbac
 			//Try and catch statement
 			try {
 				//Destroy the game
-				this.androidGame.destroyGame();
+				this.androidGame.gameDestroy();
 				//Join the thread
 				this.androidGameThread.join();
 				//Stop the while loop
