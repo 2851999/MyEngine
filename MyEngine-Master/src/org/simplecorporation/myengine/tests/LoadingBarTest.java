@@ -33,6 +33,7 @@ public class LoadingBarTest extends Game {
 		if (System.currentTimeMillis() - lastTime > 90) {
 			loadingBar.completedStage();
 			lastTime = System.currentTimeMillis();
+			System.out.println(loadingBar.getPercentageComplete());
 		}
 	}
 	

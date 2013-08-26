@@ -18,6 +18,7 @@ import java.net.URL;
 
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
+import org.simplecorporation.myengine.core.android.AndroidStore;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.window.JavaWindow;
 import org.simplecorporation.myengine.settings.Settings;
@@ -26,6 +27,9 @@ import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 public class Image {
 	
 	/* The image object for Java */
@@ -33,6 +37,9 @@ public class Image {
 	
 	/* The image object for OpenGL */
 	private Texture openGLImage;
+	
+	/* The image object for Android */
+	private Bitmap androidImage;
 	
 	/* The default constructor */
 	public Image() {
@@ -43,6 +50,12 @@ public class Image {
 	public Image(String filePath , String format , boolean inFolder) {
 		//Load the image
 		load(filePath , format , inFolder);
+	}
+	
+	/* The constructor for android */
+	public Image(int id) {
+		//Load the image
+		load(id);
 	}
 	
 	/* The method to load the image */
@@ -81,6 +94,12 @@ public class Image {
 		}
 	}
 	
+	/* The method to load an image for android */
+	public void load(int id) {
+		//Set the image
+		this.androidImage = BitmapFactory.decodeResource(AndroidStore.gameResources , id);
+	}
+	
 	/* The method to get the URL of the image */
 	public URL getURL(String filePath) {
 		URL url = null;
@@ -104,13 +123,23 @@ public class Image {
 		return this.openGLImage;
 	}
 	
+	/* Returns the android image */
+	public Bitmap getAndroidImage() {
+		//Return the image
+		return this.androidImage;
+	}
+	
 	/* The method that returns the width of the image */
 	public int getWidth() {
 		//Return the right image's width
 		if (Settings.Video.OpenGL)
 			return this.openGLImage.getImageWidth();
-		else
+		else if (! Settings.Android)
 			return this.javaImage.getWidth(JavaWindow.frame);
+		else if (Settings.Android)
+			return this.androidImage.getWidth();
+		else
+			return 0;
 	}
 	
 	/* The method that returns the height of the image */
@@ -118,8 +147,12 @@ public class Image {
 		//Return the right image's height
 		if (Settings.Video.OpenGL)
 			return this.openGLImage.getImageHeight();
-		else
+		else if (! Settings.Android)
 			return this.javaImage.getHeight(JavaWindow.frame);
+		else if (Settings.Android)
+			return this.androidImage.getHeight();
+		else
+			return 0;
 	}
 	
 }

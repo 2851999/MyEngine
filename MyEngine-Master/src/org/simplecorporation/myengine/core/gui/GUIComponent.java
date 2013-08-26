@@ -26,8 +26,8 @@ public abstract class GUIComponent extends AbstractEntity2D implements InputList
 	public boolean visible;
 	
 	/* The abstract methods */
-	public abstract void updateComponent();
-	public abstract void renderComponent();
+	protected abstract void updateComponent();
+	protected abstract void renderComponent();
 	
 	/* The constructor */
 	public GUIComponent(String name) {

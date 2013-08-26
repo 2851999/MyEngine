@@ -10,7 +10,6 @@
 
 package org.simplecorporation.myengine.core.engine.loop;
 
-import org.lwjgl.Sys;
 import org.simplecorporation.myengine.core.input.InputManager;
 import org.simplecorporation.myengine.core.window.Window;
 
@@ -111,7 +110,7 @@ public abstract class EngineLoop {
 	
 	/* Method to get the current system time */
 	public long getTime() {
-		return (Sys.getTime() * 1000) / Sys.getTimerResolution();
+		return System.currentTimeMillis();
 	}
 	
 	/* The method to get the delta */

@@ -47,7 +47,7 @@ public class AnimatedImageEntity2D extends ImageEntity2D {
 	}
 	
 	/* The update method */
-	public void entityUpdate() {
+	protected void entityUpdate() {
 		//Check if the animation is running
 		if (this.running) {
 			//Check if the right time has passed

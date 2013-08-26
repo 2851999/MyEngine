@@ -53,7 +53,7 @@ public abstract class GUILoadingBar extends GUIComponent {
 	/* Returns the percentage of the process that is completed */
 	public double getPercentageComplete() {
 		//Return the percentage
-		return (this.currentLoadingStage / this.loadingStages) * 100;
+		return (double)((double)this.currentLoadingStage / (double)this.loadingStages) * 100;
 	}
 	
 }

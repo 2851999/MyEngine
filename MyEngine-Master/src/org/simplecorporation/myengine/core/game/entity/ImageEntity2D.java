@@ -82,12 +82,12 @@ public class ImageEntity2D extends AbstractEntity2D {
 	}
 	
 	/* The entity's update method */
-	public void entityUpdate() {
+	protected void entityUpdate() {
 		
 	}
 	
 	/* The entity's render method */
-	public void entityRender() {
+	protected void entityRender() {
 		//Set the colour
 		BasicRenderer.setColour(Colour.WHITE);
 		//Render the image
