@@ -25,24 +25,24 @@ import org.simplecorporation.myengine.utils.logger.Logger;
 public class FontUtils {
 	
 	/* The method to build a font */
-	public static Font buildFont(String font , float size) {
+	public static Font buildFont(String font , double size) {
 		return new Font(font , Font.PLAIN , (int)size);
 	}
 	
 	/* The method to build a GUIFont */
-	public static GUIFont buildGUIFont(String font , Colour colour , float size) {
+	public static GUIFont buildGUIFont(String font , Colour colour , double size) {
 		return buildGUIFont(buildFont(font , 1) , colour , size);
 	}
 	
 	/* The method to build a GUIFont */
-	public static GUIFont buildGUIFont(Font font , Colour colour , float size) {
+	public static GUIFont buildGUIFont(Font font , Colour colour , double size) {
 		return new GUIFont(font , colour , size);
 	}
 	
 	/* The method to get a font from a file */
 	public static Font getFont(String fontPath) {
 		//Default font
-		Font font = new Font("Arial" , Font.PLAIN , 12);
+		Font font = buildFont("Arial" , 12);
 		try {
 			//Load font from file path
 			font = Font.createFont(Font.TRUETYPE_FONT , new FileInputStream(fontPath));
@@ -58,6 +58,5 @@ public class FontUtils {
 		}
 		return font;
 	}
-
 	
 }

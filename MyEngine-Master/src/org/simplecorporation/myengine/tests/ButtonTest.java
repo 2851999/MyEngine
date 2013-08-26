@@ -39,7 +39,7 @@ public class ButtonTest extends Game {
 		button.height = 30;
 		
 		button2 = new GUIRenderableButton("Button2" , "Test2" , new Colour[] {
-				Colour.WHITE ,
+				Colour.ORANGE ,
 				Colour.LIGHT_BLUE ,
 				Colour.BLUE
 		} , FontUtils.buildGUIFont(new Font("Segoe UI" , Font.PLAIN , 1) , Colour.WHITE , 20f));

@@ -28,18 +28,18 @@ public class GUIFont {
 	public TrueTypeFont ttfFont;
 	
 	/* The font size */
-	public float size;
+	public double size;
 	
 	/* The colour */
 	public Colour colour;
 	
 	/* The constructor of the font */
-	public GUIFont(Font font , Colour colour , float size) {
+	public GUIFont(Font font , Colour colour , double size) {
 		//Set the font
 		this.font = font;
 		
 		if (Settings.Video.OpenGL)
-			ttfFont = new TrueTypeFont(this.font.deriveFont(size) , Settings.Video.AntiAliasing);
+			ttfFont = new TrueTypeFont(this.font.deriveFont((float)size) , Settings.Video.AntiAliasing);
 		
 		//Set the colour and size
 		this.colour = colour;
@@ -58,7 +58,7 @@ public class GUIFont {
 			//Set the colour
 			BasicRenderer.setColour(this.colour);
 			//Set the font
-			JavaWindow.g2d.setFont(this.font.deriveFont(size));
+			JavaWindow.g2d.setFont(this.font.deriveFont((float)size));
 			//Render the text
 			JavaWindow.g2d.drawString(text , (float) x , (float) y);
 		}
@@ -69,7 +69,7 @@ public class GUIFont {
 		if (! Settings.Android && Settings.Video.OpenGL) {
 			return ttfFont.getWidth(text);
 		} else if (! Settings.Android && ! Settings.Video.OpenGL) {
-			FontMetrics metrics = JavaWindow.g2d.getFontMetrics(font.deriveFont(size));
+			FontMetrics metrics = JavaWindow.g2d.getFontMetrics(font.deriveFont((float)size));
 			return metrics.getStringBounds(text , JavaWindow.g2d).getWidth();
 		} else
 			return 0;
@@ -80,7 +80,7 @@ public class GUIFont {
 		if (! Settings.Android && Settings.Video.OpenGL) {
 			return ttfFont.getHeight(text);
 		} else if (! Settings.Android && ! Settings.Video.OpenGL) {
-			FontMetrics metrics = JavaWindow.g2d.getFontMetrics(font.deriveFont(size));
+			FontMetrics metrics = JavaWindow.g2d.getFontMetrics(font.deriveFont((float)size));
 			return metrics.getStringBounds(text , JavaWindow.g2d).getHeight();
 		} else
 			return 0;

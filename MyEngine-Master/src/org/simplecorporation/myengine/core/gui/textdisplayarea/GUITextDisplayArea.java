@@ -12,7 +12,6 @@ package org.simplecorporation.myengine.core.gui.textdisplayarea;
 
 import java.util.LinkedList;
 
-import org.newdawn.slick.Color;
 import org.simplecorporation.myengine.core.gui.GUIComponent;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 
@@ -24,7 +23,7 @@ public class GUITextDisplayArea extends GUIComponent {
 	/* The font */
 	private GUIFont font;
 	
-	public GUITextDisplayArea(String name , LinkedList<String> textToDisplay , GUIFont font , Color colour , int width) {
+	public GUITextDisplayArea(String name , LinkedList<String> textToDisplay , GUIFont font , int width) {
 		//Call the super constructor
 		super(name);
 		//Assign the variables

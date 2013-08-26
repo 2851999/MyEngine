@@ -14,6 +14,8 @@ import java.awt.Rectangle;
 
 import org.simplecorporation.myengine.core.point.Point2D;
 
+import android.graphics.Rect;
+
 public class Entity2D {
 	
 	/* The position of the entity */
@@ -87,6 +89,11 @@ public class Entity2D {
 	/* Method that returns the bounds as a rectangle */
 	public Rectangle getBounds() {
 		return new Rectangle((int) this.position.x , (int) this.position.y , (int) this.width , (int) this.height);
+	}
+	
+	/* Method that returns the bounds as a rectangle for android */
+	public Rect getAndroidBounds() {
+		return new Rect((int)this.position.x , (int)this.position.y , (int)this.position.x + (int)this.width , (int)this.position.y + (int)height);
 	}
 	
 	/* Method to check for a collision between two entity's */
