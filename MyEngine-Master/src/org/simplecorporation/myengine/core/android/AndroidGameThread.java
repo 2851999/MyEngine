@@ -1,3 +1,13 @@
+/***********************************************
+ * SIMPLE CORPORATION
+ * 
+ * MYENGINE
+ * 
+ * COPYRIGHT @ 2013
+ * 
+ * USE - EDUCATIONAL PURPOSES ONLY
+ ***********************************************/
+
 package org.simplecorporation.myengine.core.android;
 
 import android.view.SurfaceHolder;
@@ -57,6 +67,5 @@ public class AndroidGameThread extends Thread {
 			}
 		}
 	}
-	
 	
 }
