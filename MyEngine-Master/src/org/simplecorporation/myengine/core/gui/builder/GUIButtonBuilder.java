@@ -29,10 +29,10 @@ public class GUIButtonBuilder {
 				FontUtils.buildGUIFont("Arial" , Colour.WHITE , 30f));
 		
 		//Set the position, width and height
-		button.position.x = x;
-		button.position.y = y;
-		button.width = width;
-		button.height = height;
+		button.getBase().position.x = x;
+		button.getBase().position.y = y;
+		button.getBase().width = width;
+		button.getBase().height = height;
 		
 		//Return the button
 		return button;
@@ -57,10 +57,10 @@ public class GUIButtonBuilder {
 				FontUtils.buildGUIFont("Arial" , Colour.WHITE , 30f));
 		
 		//Set the position, width and height
-		button.position.x = x;
-		button.position.y = y;
-		button.width = width;
-		button.height = height;
+		button.getBase().position.x = x;
+		button.getBase().position.y = y;
+		button.getBase().width = width;
+		button.getBase().height = height;
 		
 		//Return the button
 		return button;
@@ -76,10 +76,10 @@ public class GUIButtonBuilder {
 				font);
 		
 		//Set the position, width and height
-		button.position.x = x;
-		button.position.y = y;
-		button.width = width;
-		button.height = height;
+		button.getBase().position.x = x;
+		button.getBase().position.y = y;
+		button.getBase().width = width;
+		button.getBase().height = height;
 		
 		//Return the button
 		return button;
@@ -104,10 +104,10 @@ public class GUIButtonBuilder {
 				font);
 		
 		//Set the position, width and height
-		button.position.x = x;
-		button.position.y = y;
-		button.width = width;
-		button.height = height;
+		button.getBase().position.x = x;
+		button.getBase().position.y = y;
+		button.getBase().width = width;
+		button.getBase().height = height;
 		
 		//Return the button
 		return button;
@@ -123,10 +123,10 @@ public class GUIButtonBuilder {
 				font);
 		
 		//Set the position, width and height
-		button.position.x = x;
-		button.position.y = y;
-		button.width = width;
-		button.height = height;
+		button.getBase().position.x = x;
+		button.getBase().position.y = y;
+		button.getBase().width = width;
+		button.getBase().height = height;
 		
 		//Return the button
 		return button;

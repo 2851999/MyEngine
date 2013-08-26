@@ -8,22 +8,22 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.android.gui.textdisplayarea;
+package org.simplecorporation.myengine.core.gui.textdisplayarea;
 
 import java.util.LinkedList;
 
-import org.simplecorporation.myengine.core.android.gui.GUIComponent;
-import org.simplecorporation.myengine.core.android.gui.font.GUIFont;
+import org.simplecorporation.myengine.core.gui.GUIComponent;
+import org.simplecorporation.myengine.core.gui.font.AndroidGUIFont;
 
-public class GUITextDisplayArea extends GUIComponent {
+public class AndroidGUITextDisplayArea extends GUIComponent {
 	
 	/* The text in the display area */
 	private LinkedList<String> text;
 	
 	/* The font */
-	private GUIFont font;
+	private AndroidGUIFont font;
 	
-	public GUITextDisplayArea(String name , LinkedList<String> textToDisplay , GUIFont font , int width) {
+	public AndroidGUITextDisplayArea(String name , LinkedList<String> textToDisplay , AndroidGUIFont font , int width) {
 		//Call the super constructor
 		super(name);
 		//Assign the variables
@@ -34,11 +34,11 @@ public class GUITextDisplayArea extends GUIComponent {
 	}
 	
 	/* The method to update the display area */
-	public void updateComponent() {
+	protected void updateComponent() {
 		
 	}
 	
-	public void renderComponent() {
+	protected void renderComponent() {
 		//The position
 		double xPos = this.position.x;
 		double yPos = this.position.y;

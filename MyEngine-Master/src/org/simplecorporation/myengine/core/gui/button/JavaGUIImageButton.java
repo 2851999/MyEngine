@@ -8,48 +8,52 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.android.gui.button;
+package org.simplecorporation.myengine.core.gui.button;
 
-import org.simplecorporation.myengine.core.android.gui.font.GUIFont;
+import org.simplecorporation.myengine.core.gui.font.GUIFont;
+import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
-import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.settings.Settings;
 
-public class GUIRenderableButton extends GUIButton {
+public class JavaGUIImageButton extends JavaGUIButton {
 	
 	/* The text */
 	public String text;
 	
-	/* The colours */
-	public Colour[] colours;
+	/* The images */
+	public Image[] images;
 	
 	/* The font */
 	public GUIFont font;
 	
 	/* The constructor */
-	public GUIRenderableButton(String name , String text , Colour[] colours , GUIFont font) {
+	public JavaGUIImageButton(String name , String text , Image[] images , GUIFont font) {
 		//Call the super constructor
 		super(name);
 		//Assign the text
 		this.text = text;
-		//Assign the colours
-		this.colours = colours;
+		//Assign the images
+		this.images = images;
 		//Assign the font
 		this.font = font;
+		//Set the width and height of the button
+		this.width = images[0].getWidth();
+		this.height = images[0].getHeight();
 	}
 	
 	/* The method to render the button */
-	public void renderComponent() {
+	protected void renderComponent() {
 		//The current image
-		Colour current = null;
-		//Render the right colour
-		if (! this.clicked)
-			current = this.colours[0];
-		else if (this.clicked && this.colours.length > 1)
-			current = this.colours[1];
-		//Render the rectangle
-		BasicRenderer.setColour(current);
-		BasicRenderer.renderFilledRectangle(this.position.x , this.position.y , this.width , this.height);
+		Image current = null;
+		//Render the right image
+		if (! this.selected && ! this.clicked)
+			current = this.images[0];
+		else if (this.selected && this.images.length > 1)
+			current = this.images[1];
+		else if (this.clicked && this.images.length > 2)
+			current = this.images[2];
+		//Render the image
+		BasicRenderer.renderImage(current , this.position.x , this.position.y , this.width , this.height);
 		//Render the font
 		if (Settings.Video.OpenGL)
 			this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,

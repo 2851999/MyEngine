@@ -1,12 +1,12 @@
-package org.simplecorporation.myengine.utils.android.font;
+package org.simplecorporation.myengine.utils.font;
 
 import org.simplecorporation.myengine.core.android.AndroidStore;
-import org.simplecorporation.myengine.core.android.gui.font.GUIFont;
+import org.simplecorporation.myengine.core.gui.font.AndroidGUIFont;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 
 import android.graphics.Typeface;
 
-public class FontUtils {
+public class AndroidFontUtils {
 	
 	/* The method to build a font for android */
 	public static Typeface buildFont(String font) {
@@ -14,13 +14,13 @@ public class FontUtils {
 	}
 	
 	/* The method to build a GUIFont for android */
-	public static GUIFont buildGUIFont(String font , Colour colour , double size) {
+	public static AndroidGUIFont buildGUIFont(String font , Colour colour , double size) {
 		return buildGUIFont(buildFont(font) , colour , size);
 	}
 	
 	/* The method to build a GUIFont for android */
-	public static GUIFont buildGUIFont(Typeface font , Colour colour , double size) {
-		return new GUIFont(font , colour , size);
+	public static AndroidGUIFont buildGUIFont(Typeface font , Colour colour , double size) {
+		return new AndroidGUIFont(font , colour , size);
 	}
 	
 	/* The method to get a font for android from a file */

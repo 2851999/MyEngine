@@ -24,15 +24,13 @@ public class GUICheckBoxBuilder {
 			Colour checkBoxColour , Colour checkColour , double x , double y , double width , double height) {
 		
 		//Create the check box
-		GUIRenderableCheckBox checkBox = new GUIRenderableCheckBox(name);
+		GUIRenderableCheckBox checkBox = new GUIRenderableCheckBox(name , checkBoxColour , checkColour);
 		
 		//Set the variables of the check box
-		checkBox.checkBoxColour = checkBoxColour;
-		checkBox.checkColour = checkColour;
-		checkBox.position.x = x;
-		checkBox.position.y = y;
-		checkBox.width = width;
-		checkBox.height = height;
+		checkBox.getBase().position.x = x;
+		checkBox.getBase().position.y = y;
+		checkBox.getBase().width = width;
+		checkBox.getBase().height = height;
 		
 		//Return the check box
 		return checkBox;
@@ -46,17 +44,15 @@ public class GUICheckBoxBuilder {
 			double width , double height) {
 		
 		//Create the check box
-		GUIRenderableCheckBox checkBox = new GUIRenderableCheckBox(name);
+		GUIRenderableCheckBox checkBox = new GUIRenderableCheckBox(name , checkBoxColour , checkColour);
 		
 		//Set the variables of the check box
-		checkBox.checkBoxColour = checkBoxColour;
-		checkBox.checkColour = checkColour;
-		checkBox.checkWidth = checkWidth;
-		checkBox.checkHeight = checkHeight;
-		checkBox.position.x = x;
-		checkBox.position.y = y;
-		checkBox.width = width;
-		checkBox.height = height;
+		checkBox.getBase().checkWidth = checkWidth;
+		checkBox.getBase().checkHeight = checkHeight;
+		checkBox.getBase().position.x = x;
+		checkBox.getBase().position.y = y;
+		checkBox.getBase().width = width;
+		checkBox.getBase().height = height;
 		
 		//Return the check box
 		return checkBox;
@@ -72,10 +68,10 @@ public class GUICheckBoxBuilder {
 		GUIImageCheckBox checkBox = new GUIImageCheckBox(name , images);
 		
 		//Set the variables of the check box
-		checkBox.position.x = x;
-		checkBox.position.y = y;
-		checkBox.width = width;
-		checkBox.height = height;
+		checkBox.getBase().position.x = x;
+		checkBox.getBase().position.y = y;
+		checkBox.getBase().width = width;
+		checkBox.getBase().height = height;
 		
 		//Return the check box
 		return checkBox;
@@ -100,10 +96,10 @@ public class GUICheckBoxBuilder {
 		GUIImageCheckBox checkBox = new GUIImageCheckBox(name , images);
 		
 		//Set the variables of the check box
-		checkBox.position.x = x;
-		checkBox.position.y = y;
-		checkBox.width = width;
-		checkBox.height = height;
+		checkBox.getBase().position.x = x;
+		checkBox.getBase().position.y = y;
+		checkBox.getBase().width = width;
+		checkBox.getBase().height = height;
 		
 		//Return the check box
 		return checkBox;

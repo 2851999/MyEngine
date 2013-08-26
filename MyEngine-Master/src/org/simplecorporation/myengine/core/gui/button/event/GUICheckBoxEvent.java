@@ -10,7 +10,6 @@
 
 package org.simplecorporation.myengine.core.gui.button.event;
 
-import org.simplecorporation.myengine.core.gui.checkbox.GUICheckBox;
 import org.simplecorporation.myengine.core.input.event.Event;
 
 public class GUICheckBoxEvent extends Event {
@@ -21,9 +20,6 @@ public class GUICheckBoxEvent extends Event {
 	/* The description of the event */
 	public static final String EVENT_DESCRIPTION = "Event made when a check box is toggled";
 	
-	/* The button that called the event */
-	public GUICheckBox checkBox;
-	
 	/* The name of the button that called the event */
 	public String checkBoxName;
 	
@@ -31,17 +27,12 @@ public class GUICheckBoxEvent extends Event {
 	public boolean checked;
 	
 	/* The constructor of the event */
-	public GUICheckBoxEvent(GUICheckBox checkBox , String checkBoxName , boolean checked) {
+	public GUICheckBoxEvent(String checkBoxName , boolean checked) {
 		//Call the super constructor
 		super(EVENT_NAME , EVENT_DESCRIPTION);
 		//Assign the variables
-		this.checkBox = checkBox;
 		this.checkBoxName = checkBoxName;
-	}
-	
-	/* Returns the button */
-	public GUICheckBox getCheckBox() {
-		return this.checkBox;
+		this.checked = checked;
 	}
 	
 	/* Returns the button name */

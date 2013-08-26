@@ -8,14 +8,14 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.android.gui.button;
+package org.simplecorporation.myengine.core.gui.button;
 
-import org.simplecorporation.myengine.core.android.gui.font.GUIFont;
+import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.settings.Settings;
 
-public class GUIImageButton extends GUIButton {
+public class AndroidGUIImageButton extends AndroidGUIButton {
 	
 	/* The text */
 	public String text;
@@ -27,7 +27,7 @@ public class GUIImageButton extends GUIButton {
 	public GUIFont font;
 	
 	/* The constructor */
-	public GUIImageButton(String name , String text , Image[] images , GUIFont font) {
+	public AndroidGUIImageButton(String name , String text , Image[] images , GUIFont font) {
 		//Call the super constructor
 		super(name);
 		//Assign the text
@@ -42,7 +42,7 @@ public class GUIImageButton extends GUIButton {
 	}
 	
 	/* The method to render the button */
-	public void renderComponent() {
+	protected void renderComponent() {
 		//The current image
 		Image current = null;
 		//Render the right image

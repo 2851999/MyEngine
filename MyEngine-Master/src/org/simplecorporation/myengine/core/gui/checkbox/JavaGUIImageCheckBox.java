@@ -8,19 +8,19 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.android.gui.checkbox;
+package org.simplecorporation.myengine.core.gui.checkbox;
 
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 
-public class GUIImageCheckBox extends GUICheckBox {
+public class JavaGUIImageCheckBox extends JavaGUICheckBox {
 	
 	/* The images */
 	public Image[] images;
 	
 	/* The constructor */
-	public GUIImageCheckBox(String name , Image[] images) {
+	public JavaGUIImageCheckBox(String name , Image[] images) {
 		//Call the super constructor
 		super(name);
 		//Set the default values of the variables
@@ -31,7 +31,7 @@ public class GUIImageCheckBox extends GUICheckBox {
 	}
 	
 	/* The render method */
-	public void renderComponent() {
+	protected void renderComponent() {
 		//Render the check box based on whether it is checked or not
 		
 		//Set the colour to white
@@ -41,10 +41,21 @@ public class GUIImageCheckBox extends GUICheckBox {
 		Image renderImage = null;
 		
 		//Check what image should be used then set it
-		if (this.checked && this.images.length > 1)
+		if (this.checked && this.selected && this.images.length == 4) {
+			renderImage = this.images[3];
+		} else if (this.checked && ! this.selected && this.images.length == 4) {
+			renderImage = this.images[2];
+		} else if (this.selected && this.images.length == 4) {
 			renderImage = this.images[1];
-		else
+		} else if (this.checked && this.images.length == 2) {
+			renderImage = this.images[1];
+		} else if (this.checked && this.images.length == 3) {
+			renderImage = this.images[2];
+		} else if (this.selected && this.images.length == 3) {
+			renderImage = this.images[1];
+		} else {
 			renderImage = this.images[0];
+		}
 		
 		BasicRenderer.renderImage(renderImage , this.position.x , this.position.y , this.width , this.height);
 		

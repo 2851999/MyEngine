@@ -8,7 +8,7 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.android.gui.font;
+package org.simplecorporation.myengine.core.gui.font;
 
 import org.simplecorporation.myengine.core.android.AndroidStore;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
@@ -18,7 +18,7 @@ import org.simplecorporation.myengine.settings.Settings;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 
-public class GUIFont {
+public class AndroidGUIFont {
 	
 	/* The font */
 	public Typeface typeface;
@@ -30,7 +30,7 @@ public class GUIFont {
 	public Colour colour;
 	
 	/* The constructor of the font */
-	public GUIFont(Typeface typeface , Colour colour , double size) {
+	public AndroidGUIFont(Typeface typeface , Colour colour , double size) {
 		//Set the typeface
 		this.typeface = typeface;
 		

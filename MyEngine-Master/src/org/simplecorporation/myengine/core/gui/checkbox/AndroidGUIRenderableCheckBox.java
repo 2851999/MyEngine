@@ -8,12 +8,12 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.android.gui.checkbox;
+package org.simplecorporation.myengine.core.gui.checkbox;
 
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 
-public class GUIRenderableCheckBox extends GUICheckBox {
+public class AndroidGUIRenderableCheckBox extends AndroidGUICheckBox {
 	
 	/* The colour of the check box */
 	public Colour checkBoxColour;
@@ -21,23 +21,19 @@ public class GUIRenderableCheckBox extends GUICheckBox {
 	/* The colour of the check */
 	public Colour checkColour;
 	
-	/* The size of the check */
-	public double checkWidth;
-	public double checkHeight;
-	
 	/* The constructor */
-	public GUIRenderableCheckBox(String name) {
+	public AndroidGUIRenderableCheckBox(String name , Colour checkBoxColour , Colour checkColour) {
 		//Call the super constructor
 		super(name);
 		//Set the default values of the variables
-		this.checkBoxColour = Colour.WHITE;
-		this.checkColour = Colour.BLACK;
+		this.checkBoxColour = checkBoxColour;
+		this.checkColour = checkColour;
 		this.checkWidth = 0;
 		this.checkHeight = 0;
 	}
 	
 	/* The render method */
-	public void renderComponent() {
+	protected void renderComponent() {
 		//Render the check box based on whether it is checked or not
 		
 		//The box
