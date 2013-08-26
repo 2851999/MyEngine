@@ -12,7 +12,7 @@ package org.simplecorporation.myengine.utils.screen;
 
 import java.awt.Toolkit;
 
-import org.simplecorporation.myengine.android.AndroidStore;
+import org.simplecorporation.myengine.core.android.AndroidStore;
 import org.simplecorporation.myengine.settings.Settings;
 
 import android.util.DisplayMetrics;

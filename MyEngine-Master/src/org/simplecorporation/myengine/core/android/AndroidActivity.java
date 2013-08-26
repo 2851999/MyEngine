@@ -8,7 +8,7 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.android;
+package org.simplecorporation.myengine.core.android;
 
 import org.simplecorporation.myengine.settings.Settings;
 

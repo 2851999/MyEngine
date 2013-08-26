@@ -8,8 +8,9 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.android;
+package org.simplecorporation.myengine.core.android;
 
+import org.simplecorporation.myengine.core.android.input.AndroidInput;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.screen.ScreenUtils;
 
@@ -97,8 +98,11 @@ public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callbac
 	}
 	
 	/* The on touch method */
-	public boolean onTouch(MotionEvent event) {
-		return super.onTouchEvent(event);
+	public boolean onTouchEvent(MotionEvent event) {
+		//Call the touch event
+		AndroidInput.callTouchEvent(event);
+		//The event was handled
+		return true;
 	}
 	
 }

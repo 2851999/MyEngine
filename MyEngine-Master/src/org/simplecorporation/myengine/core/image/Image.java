@@ -18,7 +18,7 @@ import java.net.URL;
 
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
-import org.simplecorporation.myengine.android.AndroidStore;
+import org.simplecorporation.myengine.core.android.AndroidStore;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.window.JavaWindow;
 import org.simplecorporation.myengine.settings.Settings;
