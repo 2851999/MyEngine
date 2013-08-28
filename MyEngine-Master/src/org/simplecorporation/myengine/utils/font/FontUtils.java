@@ -1,63 +1,20 @@
-/***********************************************
- * SIMPLE CORPORATION
- * 
- * MYENGINE
- * 
- * COPYRIGHT @ 2013
- * 
- * USE - EDUCATIONAL PURPOSES ONLY
- ***********************************************/
-
 package org.simplecorporation.myengine.utils.font;
-
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
+import org.simplecorporation.myengine.settings.Settings;
 
 public class FontUtils {
 	
-	/* The method to build a font */
-	public static Font buildFont(String font , float size) {
-		return new Font(font , Font.PLAIN , (int)size);
+	/* The method to create a font from its name */
+	public static GUIFont buildGUIFont(String font , Colour colour , double size) {
+		//Check what font to create
+		if (! Settings.Android)
+			return new GUIFont(JavaFontUtils.buildGUIFont(font , colour , size));
+		else if (Settings.Android)
+			return new GUIFont(AndroidFontUtils.buildGUIFont(font , colour , size));
+		else
+			return null;
 	}
-	
-	/* The method to build a GUIFont */
-	public static GUIFont buildGUIFont(String font , Colour colour , float size) {
-		return buildGUIFont(buildFont(font , 1) , colour , size);
-	}
-	
-	/* The method to build a GUIFont */
-	public static GUIFont buildGUIFont(Font font , Colour colour , float size) {
-		return new GUIFont(font , colour , size);
-	}
-	
-	/* The method to get a font from a file */
-	public static Font getFont(String fontPath) {
-		//Default font
-		Font font = new Font("Arial" , Font.PLAIN , 12);
-		try {
-			//Load font from file path
-			font = Font.createFont(Font.TRUETYPE_FONT , new FileInputStream(fontPath));
-		} catch (FileNotFoundException e) {
-			Logger.log(new Log("FontUtils getFont()" , "File not found: " + fontPath , LogType.ERROR));
-			e.printStackTrace();
-		} catch (FontFormatException e) {
-			Logger.log(new Log("FontUtils getFont()" , "Font format exception: " + fontPath , LogType.ERROR));
-			e.printStackTrace();
-		} catch (IOException e) {
-			Logger.log(new Log("FontUtils getFont()" , "IOException: " + fontPath , LogType.ERROR));
-			e.printStackTrace();
-		}
-		return font;
-	}
-
 	
 }

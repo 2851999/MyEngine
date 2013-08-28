@@ -8,20 +8,20 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.android;
+package org.simplecorporation.myengine.core.android;
 
 public interface AndroidGame {
 	
 	/* The method to create the game */
-	public void createGame();
+	public void gameCreated();
 	
 	/* The method to update the game */
-	public void updateGame();
+	public void gameUpdate();
 	
 	/* The method to render the game */
-	public void renderGame();
+	public void gameRender();
 	
 	/* The method to destroy the game */
-	public void destroyGame();
+	public void gameDestroy();
 	
 }

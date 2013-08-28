@@ -10,7 +10,7 @@
 
 package org.simplecorporation.myengine.core.render.basic;
 
-import org.simplecorporation.myengine.android.AndroidStore;
+import org.simplecorporation.myengine.core.android.AndroidStore;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 

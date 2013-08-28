@@ -14,6 +14,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.settings.Settings;
+
 public class Logger {
 	
 	/* The current log level */
@@ -58,8 +60,6 @@ public class Logger {
 		int seconds = date.get(Calendar.SECOND);
 		int minutes = date.get(Calendar.MINUTE);
 		int hours   = date.get(Calendar.HOUR);
-		//Print the message
-		System.out.println("[" + hours + ":" + minutes + ":" + seconds + "]" + "[" + log.source + "] " + log.message);
 		//The message
 		String message = "";
 		//Check what type of log it is
@@ -76,7 +76,7 @@ public class Logger {
 				lastLog = message;
 				lastInformationLog = message;
 				//Print out the message
-				System.out.println(message);
+				println(message);
 			}
 		} else if (log.logType == LogType.WARNING) {
 			//Check if the right log level is being used
@@ -91,7 +91,7 @@ public class Logger {
 				lastWarningLog = message;
 				lastWarningLog = message;
 				//Print out the message
-				System.out.println(message);
+				println(message);
 			}
 		} else if (log.logType == LogType.ERROR) {
 			//Check if the right log level is being used
@@ -106,7 +106,7 @@ public class Logger {
 				lastLog = message;
 				lastErrorLog = message;
 				//Print out the message
-				System.out.println(message);
+				println(message);
 			}
 		} else if (log.logType == LogType.DEBUG) {
 			//Check if debugging is enabled
@@ -120,9 +120,18 @@ public class Logger {
 				lastLog = message;
 				lastDebugLog = message;
 				//Print out the message
-				System.out.println(message);
+				println(message);
 			}
 		}
+	}
+	
+	/* The method to print out a line */
+	public static void println(String message) {
+		//Check whether the engine is running on android
+		if (Settings.Android)
+			android.util.Log.d("MyEngine" , message);
+		else if (! Settings.Android)
+			System.out.println(message);
 	}
 	
 }

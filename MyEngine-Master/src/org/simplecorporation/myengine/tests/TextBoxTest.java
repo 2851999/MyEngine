@@ -1,7 +1,5 @@
 package org.simplecorporation.myengine.tests;
 
-import java.awt.Font;
-
 import org.lwjgl.opengl.GL11;
 import org.simplecorporation.myengine.core.game.Game;
 import org.simplecorporation.myengine.core.gui.textbox.GUIRenderableTextBox;
@@ -23,14 +21,13 @@ public class TextBoxTest extends Game {
 	}
 	
 	public void gameCreated() {
-		textBox = new GUIRenderableTextBox("TextBox" , FontUtils.buildGUIFont(new Font("Arial" , Font.PLAIN , 1) , Colour.RED , 20f));
-		textBox.position.x = 100;
-		textBox.position.y = 100;
-		textBox.width = 200;
-		textBox.height = 30;
-		textBox.outlineColour = Colour.GREEN;
-		textBox.defaultText = "This is a text box!";
-		textBox.visible = true;
+		textBox = new GUIRenderableTextBox("TextBox" , Colour.WHITE , Colour.GREEN , FontUtils.buildGUIFont("Arial" , Colour.RED , 20f));
+		textBox.getBase().position.x = 100;
+		textBox.getBase().position.y = 100;
+		textBox.getBase().width = 200;
+		textBox.getBase().height = 30;
+		textBox.getBase().defaultText = "This is a text box!";
+		textBox.getBase().visible = true;
 	}
 	
 	public void gameUpdate() {

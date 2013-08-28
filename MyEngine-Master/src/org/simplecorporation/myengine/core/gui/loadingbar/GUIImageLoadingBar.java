@@ -32,12 +32,12 @@ public class GUIImageLoadingBar extends GUILoadingBar {
 	}
 	
 	/* The method to update the loading bar */
-	public void updateComponent() {
+	protected void updateComponent() {
 		
 	}
 	
 	/* The method to render the loading bar */
-	public void renderComponent() {
+	protected void renderComponent() {
 		//Set the colour and render the background
 		BasicRenderer.setColour(Colour.WHITE);
 		BasicRenderer.renderImage(this.backgroundImage , this.position.x , this.position.y ,

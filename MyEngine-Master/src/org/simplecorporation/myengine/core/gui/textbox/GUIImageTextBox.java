@@ -12,86 +12,63 @@ package org.simplecorporation.myengine.core.gui.textbox;
 
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.image.Image;
-import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
-import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.settings.Settings;
 
-public class GUIImageTextBox extends GUITextBox {
+public class GUIImageTextBox {
 	
-	/* The image */
-	public Image image;
-	
-	/* The font */
-	public GUIFont font;
+	/* The java GUIImageTextBox */
+	public JavaGUIImageTextBox javaGUIImageTextbox;
 	
 	/* The constructor */
 	public GUIImageTextBox(String name , Image image , GUIFont font) {
-		//Call the super constructor
-		super(name);
-		//Set the image
-		this.image = image;
-		//Set the font
-		this.font = font;
+		//Create the right GUIImageCheckBox
+		if (! Settings.Android)
+			this.javaGUIImageTextbox = new JavaGUIImageTextBox(name , image , font);
+		else if (Settings.Android) {
+			
+		}
 	}
 	
-	/* The method to render the text box */
-	public void renderComponent() {
-		if (this.visible) {
+	/* The constructor */
+	public GUIImageTextBox(String name , Image image , GUIFont font , char maskCharacter) {
+		//Create the right GUIImageCheckBox
+		if (! Settings.Android) {
+			this.javaGUIImageTextbox = new JavaGUIImageTextBox(name , image , font);
+			this.javaGUIImageTextbox.maskCharacter = maskCharacter;
+			this.javaGUIImageTextbox.hideCharacters = true;
+		} else if (Settings.Android) {
 			
-			//Check to see if the text fits in the box
-			if (this.font.getWidth(this.text) > this.width - 4)
-				//Remove the last letter
-				this.text = this.text.substring(0 , this.text.length() - 1);
-			
-			//Render the box
-			BasicRenderer.setColour(Colour.WHITE);
-			BasicRenderer.renderImage(this.image , this.position.x , this.position.y , this.width , this.height);
-			
-			//The text to be rendered
-			String renderedText = this.text;
-			
-			//The colour of the text
-			Colour renderColour = this.font.colour.clone();
-			
-			//The font
-			GUIFont renderFont = new GUIFont(this.font.font , this.font.colour , this.font.size);
-			
-			//Check if the characters are hidden
-			if (this.hideCharacters) {
-				//Set the rendered text to nothing
-				renderedText = "";
-				//Loop the text's length
-				for (int a = 0; a < this.text.length(); a++)
-					//Add the masked character
-					renderedText += this.maskCharacter;
-			}
-			
-			//Check if the default text should be rendered
-			if (this.text.equals("") && ! this.defaultText.equals("") && ! this.selected) {
-				//Set the rendered text
-				renderedText = this.defaultText;
-				//Set the colour
-				renderColour.a = renderColour.a / 2;
-			}
-			
-			//Check if the cursor is showing
-			if (this.cursorShown) {
-				//Add the cursor
-				renderedText += "|";
-			}
-			
-			//Set the colour of the font
-			renderFont.colour = renderColour;
-			
-			//Render the text
-			if (Settings.Video.OpenGL)
-				renderFont.render(renderedText , this.position.x + 2 ,
-						(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
-			else
-				//Not a clue why it can't be the same as OpenGL
-				renderFont.render(renderedText , this.position.x + 2 ,
-						(this.position.y + (this.height / 2)) + (this.font.getHeight(this.text) / 4));
 		}
+	}
+	
+	/* The update method */
+	public void update() {
+		//Update the right GUIImageTextBox
+		if (! Settings.Android)
+			this.javaGUIImageTextbox.update();
+		else if (Settings.Android) {
+			
+		}
+	}
+	
+	/* The render method */
+	public void render() {
+		//Render the right GUIImageTextBox
+		if (! Settings.Android)
+			this.javaGUIImageTextbox.render();
+		else if (Settings.Android) {
+			
+		}
+	}
+	
+	/* The method to get the base */
+	public GUITextBoxBase getBase() {
+		if (! Settings.Android)
+			return this.javaGUIImageTextbox;
+		else if (Settings.Android)
+			return null;
+		else
+			return null;
 	}
 	
 }

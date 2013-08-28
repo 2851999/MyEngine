@@ -42,7 +42,7 @@ public class Sprite2D extends ImageEntity2D {
 	}
 	
 	/* The entity's update method */
-	public void entityUpdate() {
+	protected void entityUpdate() {
 		//Check if the animation is running
 		if (this.currentAnimation != null) {
 			if (this.currentAnimation.running) {

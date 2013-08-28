@@ -24,10 +24,10 @@ public abstract class AbstractEntity2D extends Entity2D {
 	public LinkedList<Effect> effects;
 	
 	/* The abstract method for update */
-	public abstract void entityUpdate();
+	protected abstract void entityUpdate();
 	
 	/* The abstract method for render */
-	public abstract void entityRender();
+	protected abstract void entityRender();
 	
 	/* The constructor */
 	public AbstractEntity2D() {
