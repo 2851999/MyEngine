@@ -11,55 +11,52 @@
 package org.simplecorporation.myengine.core.gui.button;
 
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
-import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.settings.Settings;
 
-public class GUIRenderableButton extends GUIButton {
+public class GUIRenderableButton {
 	
-	/* The text */
-	public String text;
+	/* The java GUIRenderableButton */
+	public JavaGUIRenderableButton javaGUIImageButton;
 	
-	/* The colours */
-	public Colour[] colours;
-	
-	/* The font */
-	public GUIFont font;
+	/* The android GUIRenderableButton */
+	public AndroidGUIRenderableButton androidGUIImageButton;
 	
 	/* The constructor */
 	public GUIRenderableButton(String name , String text , Colour[] colours , GUIFont font) {
-		//Call the super constructor
-		super(name);
-		//Assign the text
-		this.text = text;
-		//Assign the colours
-		this.colours = colours;
-		//Assign the font
-		this.font = font;
+		//Create the right GUIImageCheckBox
+		if (! Settings.Android)
+			this.javaGUIImageButton = new JavaGUIRenderableButton(name , text , colours , font);
+		else if (Settings.Android)
+			this.androidGUIImageButton = new AndroidGUIRenderableButton(name , text , colours , font);
 	}
 	
-	/* The method to render the button */
-	public void renderComponent() {
-		//The current image
-		Colour current = null;
-		//Render the right colour
-		if (! this.selected && ! this.clicked)
-			current = this.colours[0];
-		else if (this.selected && this.colours.length > 1)
-			current = this.colours[1];
-		else if (this.clicked && this.colours.length > 2)
-			current = this.colours[2];
-		//Render the rectangle
-		BasicRenderer.setColour(current);
-		BasicRenderer.renderFilledRectangle(this.position.x , this.position.y , this.width , this.height);
-		//Render the font
-		if (Settings.Video.OpenGL)
-			this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
-					(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
+	/* The update method */
+	public void update() {
+		//Update the right GUIImageTextBox
+		if (! Settings.Android)
+			this.javaGUIImageButton.update();
+		else if (Settings.Android)
+			this.androidGUIImageButton.update();
+	}
+	
+	/* The render method */
+	public void render() {
+		//Render the right GUIImageTextBox
+		if (! Settings.Android)
+			this.javaGUIImageButton.render();
+		else if (Settings.Android)
+			this.androidGUIImageButton.render();
+	}
+	
+	/* The method to get the base */
+	public GUIButtonBase getBase() {
+		if (! Settings.Android)
+			return this.javaGUIImageButton;
+		else if (Settings.Android)
+			return this.androidGUIImageButton;
 		else
-			//Not a clue why it can't be the same as OpenGL
-			this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
-					(this.position.y + (this.height / 2)) + (this.font.getHeight(this.text) / 4));
+			return null;
 	}
 	
 }

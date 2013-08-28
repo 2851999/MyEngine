@@ -10,53 +10,52 @@
 
 package org.simplecorporation.myengine.core.gui.checkbox;
 
-import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
+import org.simplecorporation.myengine.settings.Settings;
 
-public class GUIRenderableCheckBox extends GUICheckBox {
+public class GUIRenderableCheckBox {
 	
-	/* The colour of the check box */
-	public Colour checkBoxColour;
+	/* The java GUIRenderableCheckBox */
+	public JavaGUIRenderableCheckBox javaGUIImageCheckBox;
 	
-	/* The colour of the check */
-	public Colour checkColour;
-	
-	/* The size of the check */
-	public double checkWidth;
-	public double checkHeight;
+	/* The android GUIRenderableCheckBox */
+	public AndroidGUIRenderableCheckBox androidGUIImageCheckBox;
 	
 	/* The constructor */
-	public GUIRenderableCheckBox(String name) {
-		//Call the super constructor
-		super(name);
-		//Set the default values of the variables
-		this.checkBoxColour = Colour.WHITE;
-		this.checkColour = Colour.BLACK;
-		this.checkWidth = 0;
-		this.checkHeight = 0;
+	public GUIRenderableCheckBox(String name , Colour checkBackgroundColour , Colour checkColour) {
+		//Create the right GUIImageCheckBox
+		if (! Settings.Android)
+			this.javaGUIImageCheckBox = new JavaGUIRenderableCheckBox(name , checkBackgroundColour , checkColour);
+		else if (Settings.Android)
+			this.androidGUIImageCheckBox = new AndroidGUIRenderableCheckBox(name , checkBackgroundColour , checkColour);
+	}
+	
+	/* The update method */
+	public void update() {
+		//Update the right GUIImageTextBox
+		if (! Settings.Android)
+			this.javaGUIImageCheckBox.update();
+		else if (Settings.Android)
+			this.androidGUIImageCheckBox.update();
 	}
 	
 	/* The render method */
-	public void renderComponent() {
-		//Render the check box based on whether it is checked or not
-		
-		//The box
-		BasicRenderer.setColour(this.checkBoxColour);
-		BasicRenderer.renderFilledRectangle(this.position.x , this.position.y , this.width , this.height);
-		
-		//The check (if needed)
-		if (this.checked) {
-			//Set the colour
-			BasicRenderer.setColour(this.checkColour);
-			//Is the width/height the default values
-			if (this.checkWidth == 0 || this.checkHeight == 0)
-				//Render the box
-				BasicRenderer.renderFilledRectangle(this.position.x + 4 , this.position.y + 4 , this.width - 8 , this.height - 8);
-			else
-				//Render the box
-				BasicRenderer.renderFilledRectangle((this.position.x + (this.width / 2)) - (this.checkWidth / 2) ,
-						(this.position.y + (this.height / 2)) - (this.checkHeight / 2) , this.checkWidth , this.checkHeight);
-		}
+	public void render() {
+		//Render the right GUIImageTextBox
+		if (! Settings.Android)
+			this.javaGUIImageCheckBox.render();
+		else if (Settings.Android)
+			this.androidGUIImageCheckBox.render();
+	}
+	
+	/* The method to get the base */
+	public GUICheckBoxBase getBase() {
+		if (! Settings.Android)
+			return this.javaGUIImageCheckBox;
+		else if (Settings.Android)
+			return this.androidGUIImageCheckBox;
+		else
+			return null;
 	}
 	
 }
