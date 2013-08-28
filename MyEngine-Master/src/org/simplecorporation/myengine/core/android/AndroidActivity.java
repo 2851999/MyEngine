@@ -77,30 +77,39 @@ public abstract class AndroidActivity extends Activity {
 	
 	/* Called when the activity is paused */
 	public void onPause() {
+		super.onPause();
+		//Pause the thread
+		this.androidDisplay.androidGameThread.paused = true;
 		//Call the method
 		this.activityPaused();
 	}
 	
 	/* Called when the activity is resumed */
 	public void onResume() {
+		super.onResume();
+		//Resume the thread
+		this.androidDisplay.androidGameThread.paused = false;
 		//Call the method
 		this.activityResumed();
 	}
 	
 	/* Called when the activity is stopped */
 	public void onStop() {
+		super.onStop();
 		//Call the method
 		this.activityStopped();
 	}
 	
 	/* Called when the activity is restarted */
 	public void onRestart() {
+		super.onRestart();
 		//Call the method
 		this.activityRestarted();
 	}
 	
 	/* Called when the activity is destroyed */
 	public void onDestroy() {
+		super.onDestroy();
 		//Call the method
 		this.activityDestroy();
 		//Destroy
