@@ -1,3 +1,5 @@
+package org.simplecorporation.myengine.core.gui;
+
 /***********************************************
  * SIMPLE CORPORATION
  * 
@@ -7,8 +9,6 @@
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
-
-package org.simplecorporation.myengine.core.gui;
 
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 
