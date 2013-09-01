@@ -45,4 +45,12 @@ public class Settings {
 		public static boolean AntiAliasing = false;
 	}
 	
+	/* The settings for audio */
+	public static class Audio {
+		/* The sound effect volume */
+		public static int SoundEffectVolume = 100;
+		/* The music volume */
+		public static int MusicVolume = 100;
+	}
+	
 }

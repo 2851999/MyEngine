@@ -16,7 +16,7 @@ import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
-public class Images {
+public class ImageStore {
 	
 	/* The image packs */
 	private static LinkedList<ImagePack> imagePacks = new LinkedList<ImagePack>();
@@ -24,6 +24,13 @@ public class Images {
 	/* The method to add an image pack */
 	public static void add(ImagePack imagePack) {
 		imagePacks.add(imagePack);
+	}
+	
+	/* The method to load all of the image packs */
+	public static void load() {
+		for (int a = 0; a < imagePacks.size(); a++) {
+			imagePacks.get(a).load();
+		}
 	}
 	
 	/* The method that returns an image pack given its name */
@@ -43,7 +50,7 @@ public class Images {
 		//Check to see whether the image pack was found
 		if (imagePack == null)
 			//Log an error
-			Logger.log(new Log("Images getPackByName()" , "The pack with the name " + name + " was not found" , LogType.ERROR));
+			Logger.log(new Log("ImageStore getPackByName()" , "The pack with the name " + name + " was not found" , LogType.ERROR));
 		//Return the image pack
 		return imagePack;
 	}
@@ -65,7 +72,7 @@ public class Images {
 		//Check to see whether the image pack was found
 		if (imagePack == null)
 			//Log an error
-			Logger.log(new Log("Images getPackById()" , "The pack with the id " + id + " was not found" , LogType.ERROR));
+			Logger.log(new Log("ImageStore getPackById()" , "The pack with the id " + id + " was not found" , LogType.ERROR));
 		//Return the image pack
 		return imagePack;
 	}
