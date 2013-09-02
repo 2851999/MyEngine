@@ -40,6 +40,8 @@ public class ImagePack {
 		this.packName = packName;
 		this.packId = packId;
 		this.images = new LinkedList<Image>();
+		this.imageNames = new LinkedList<String>();
+		this.imageIds = new LinkedList<Integer>();
 	}
 	
 	/* The method to add an image to the images */
