@@ -5,6 +5,7 @@ import org.simplecorporation.myengine.core.game.Game;
 import org.simplecorporation.myengine.core.gui.button.GUIRenderableButton;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.gui.font.bitmap.BitmapFont;
+import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.settings.Settings;
@@ -25,7 +26,7 @@ public class BitmapFontTest extends Game {
 	}
 	
 	public void gameCreated() {
-		font = new BitmapFont("C:/Users/Joel/Documents/test.png" , "PNG" , true , 30);
+		font = new BitmapFont(new Image("C:/Users/Joel/Documents/test.png" , "PNG" , true) , 30);
 		font.gridWidth = 16;
 		font.gridHeight = 16;
 		button = new GUIRenderableButton("Button" , "Hello" , new Colour[] { Colour.WHITE , Colour.BLUE , Colour.ORANGE } , new GUIFont(font));

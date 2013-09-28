@@ -68,9 +68,9 @@ public class BasicRendererAndroid {
 	public static void renderImage(Image image , double x , double y , double width , double height , double imageX , double imageY ,
 			double imageWidth , double imageHeight) {
 		//Create the rectangle of the image that should be used
-		Rect src = new Rect((int) imageX , (int) imageY , (int) imageWidth , (int) imageHeight);
+		Rect src = new Rect((int) imageX , (int) imageY , (int) imageX + (int) imageWidth , (int) imageY + (int) imageHeight);
 		//Create the rectangle that the image should fit into
-		Rect dst = new Rect((int) x , (int) y , (int) width , (int) height);
+		Rect dst = new Rect((int) x , (int) y , (int)x + (int) width , (int) y + (int) height);
 		//Render the image
 		AndroidStore.gameCanvas.drawBitmap(image.getAndroidImage() , src , dst , AndroidStore.gamePaint);
 	}

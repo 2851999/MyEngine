@@ -37,9 +37,9 @@ public class BitmapFont {
 	public double cellHeight;
 	
 	/* The constructor of the font */
-	public BitmapFont(String imagePath , String imageFormat , boolean inFolder , double fontSize) {
+	public BitmapFont(Image image , double fontSize) {
 		//Load the font image
-		this.image = new Image(imagePath , imageFormat , inFolder);
+		this.image = image;
 		
 		//Set the size
 		this.fontSize = fontSize;
