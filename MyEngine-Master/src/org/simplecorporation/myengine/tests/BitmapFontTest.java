@@ -4,27 +4,30 @@ import org.lwjgl.opengl.GL11;
 import org.simplecorporation.myengine.core.game.Game;
 import org.simplecorporation.myengine.core.gui.button.GUIRenderableButton;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
-import org.simplecorporation.myengine.core.gui.font.image.ImageFolderFont;
+import org.simplecorporation.myengine.core.gui.font.bitmap.BitmapFont;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.opengl.OpenGLSetupUtils;
 
-public class ImageFolderFontTest extends Game {
+public class BitmapFontTest extends Game {
 	
-	public ImageFolderFont font;
+	public BitmapFont font;
 	public GUIRenderableButton button;
 	
-	public ImageFolderFontTest() {
-		Settings.Window.Title = "ImageFolderFont Test";
+	public BitmapFontTest() {
+		Settings.Window.Title = "BitmapFont Test";
 		Settings.Video.OpenGL = true;
+		Settings.Video.VSync = true;
 		Settings.Video.AntiAliasing = true;
 		//Create
 		createGame();
 	}
 	
 	public void gameCreated() {
-		font = new ImageFolderFont("C:/Users/Joel/Documents/TestFont" , "PNG" , true , 30);
+		font = new BitmapFont("C:/Users/Joel/Documents/test.png" , "PNG" , true , 30);
+		font.gridWidth = 16;
+		font.gridHeight = 16;
 		button = new GUIRenderableButton("Button" , "Hello" , new Colour[] { Colour.WHITE , Colour.BLUE , Colour.ORANGE } , new GUIFont(font));
 		button.getBase().visible = true;
 		button.getBase().position.x = 200;
@@ -47,13 +50,13 @@ public class ImageFolderFontTest extends Game {
 		BasicRenderer.setColour(Colour.BLACK);
 		BasicRenderer.renderFilledRectangle(0 , 0 , 640 , 480);
 		BasicRenderer.setColour(Colour.WHITE);
-		font.render("Hello World" , 100 , 100);
-		GL11.glDisable(GL11.GL_BLEND);
-		button.render();
+		font.render("I like Java YAY IT WORKS!!!! :)" , 20 , 100);
+		//GL11.glDisable(GL11.GL_BLEND);
+		//button.render();
 	}
 	
 	public static void main(String[] args) {
-		new ImageFolderFontTest();
+		new BitmapFontTest();
 	}
 	
 }

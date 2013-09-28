@@ -17,6 +17,7 @@ import org.simplecorporation.myengine.core.render.colour.Colour;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Rect;
 
 public class BasicRendererAndroid {
 	
@@ -61,6 +62,17 @@ public class BasicRendererAndroid {
 		matrix.setScale((float)width / (float)image.getWidth() , (float)height / (float)image.getHeight());
 		//Render the image
 		AndroidStore.gameCanvas.drawBitmap(image.getAndroidImage() , matrix , AndroidStore.gamePaint);
+	}
+	
+	/* The method to render an image with a specified x, y, width, height, imageX, imageY, imageWidth, imageHeight */
+	public static void renderImage(Image image , double x , double y , double width , double height , double imageX , double imageY ,
+			double imageWidth , double imageHeight) {
+		//Create the rectangle of the image that should be used
+		Rect src = new Rect((int) imageX , (int) imageY , (int) imageWidth , (int) imageHeight);
+		//Create the rectangle that the image should fit into
+		Rect dst = new Rect((int) x , (int) y , (int) width , (int) height);
+		//Render the image
+		AndroidStore.gameCanvas.drawBitmap(image.getAndroidImage() , src , dst , AndroidStore.gamePaint);
 	}
 	
 }
