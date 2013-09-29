@@ -76,6 +76,8 @@ public class BitmapFont {
 	public double getWidth(String text) {
 		//The width of the text
 		double width = 0;
+		//Set the width to the cellSize times the number of letters
+		width = text.length() * this.cellWidth;
 		return width;
 	}
 	
@@ -83,6 +85,8 @@ public class BitmapFont {
 	public double getHeight(String text) {
 		//The height of the text
 		double height = 0;
+		//The height is the font size
+		height = this.fontSize;
 		return height;
 	}
 	
