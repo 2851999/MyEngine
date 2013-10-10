@@ -18,7 +18,7 @@ public class BitmapFontTest extends Game {
 	
 	public BitmapFontTest() {
 		Settings.Window.Title = "BitmapFont Test";
-		Settings.Video.OpenGL = true;
+		Settings.Video.OpenGL = false;
 		Settings.Video.VSync = true;
 		Settings.Video.AntiAliasing = true;
 		//Create
@@ -53,7 +53,7 @@ public class BitmapFontTest extends Game {
 		BasicRenderer.renderFilledRectangle(0 , 0 , 640 , 480);
 		BasicRenderer.setColour(Colour.WHITE);
 		font.render("Hello World!" , 20 , 100);
-		GL11.glDisable(GL11.GL_BLEND);
+		//GL11.glDisable(GL11.GL_BLEND);
 		button.render();
 	}
 	
