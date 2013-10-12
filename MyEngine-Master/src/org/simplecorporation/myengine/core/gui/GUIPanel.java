@@ -183,6 +183,16 @@ public class GUIPanel {
 					(double) Integer.parseInt(rgbSplit[1]) / 255 ,
 					(double) Integer.parseInt(rgbSplit[2]) /255 ,
 					1.0d);
+		} else if (line.startsWith("rgba")) {
+			//Get the trimmed value
+			String rgbaValue = line.substring(5 , line.length() - 1);
+			//Split value
+			String[] rgbaSplit = rgbaValue.split(",");
+			//Get the r,g,b values and set the colour
+			colour = new Colour((double) Integer.parseInt(rgbaSplit[0]) / 255 ,
+					(double) Integer.parseInt(rgbaSplit[1]) / 255 ,
+					(double) Integer.parseInt(rgbaSplit[2]) / 255 ,
+					(double) Integer.parseInt(rgbaSplit[3]) / 255);
 		}
 		//Return the colour
 		return colour;
