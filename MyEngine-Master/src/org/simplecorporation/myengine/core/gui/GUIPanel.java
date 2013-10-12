@@ -12,7 +12,13 @@ package org.simplecorporation.myengine.core.gui;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.core.gui.builder.GUIBuilder;
+import org.simplecorporation.myengine.core.gui.button.GUIRenderableButton;
+import org.simplecorporation.myengine.core.gui.loadingbar.GUIRenderableLoadingBar;
+import org.simplecorporation.myengine.core.gui.textbox.GUIRenderableTextBox;
+import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.utils.file.FileUtils;
+import org.simplecorporation.myengine.utils.font.FontUtils;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
@@ -73,19 +79,113 @@ public class GUIPanel {
 		LinkedList<String> fileText = FileUtils.read(filePath);
 		//Go through each line
 		for (int a = 0; a < fileText.size(); a++) {
-			//Split the line
-			String[] line = fileText.get(a).split(" ");
-			//Check the first word says
-			if (line[0].equals("GUIRenderableButton")) {
-			} else if (line[0].equals("GUIImageButton")) {
-			} else if (line[0].equals("GUIRenderableTextBox")) {
-			} else if (line[0].equals("GUIImageTextBox")) {
-			} else if (line[0].equals("GUIRenderableLoadingBar")) {
-			} else if (line[0].equals("GUIImageLoadingBar")) {
-			} else if (line[0].equals("GUIRenderbleCheckBox")) {
-			} else if (line[0].equals("GUIImageCheckBox")) {
-			}
+			//Parse the current line
+			parseLine(fileText.get(a));
 		}
+	}
+	
+	/* The method to parse a line to add a component */
+	public void parseLine(String line1) {
+		//Split the line
+		String[] line = line1.split(" ");
+		//Check the first word says
+		if (line[0].equals("GUIRenderableButton")) {
+			
+			/*
+			 * CREATE A BUTTON LIKE THIS
+			 * GUIRenderableButton name Test_Button Colour.RED Colour.GREEN Colour.BLUE Arial Colour.WHITE 20 100 100 200 200
+			 */
+			
+			//Create the component and add it to this panel
+			GUIRenderableButton button = GUIBuilder.createRenderableButton(
+					line[1].replace('_' , ' ') , line[2].replace('_' , ' ') ,
+					new Colour[] { parseColour(line[3]) , parseColour(line[4]) , parseColour(line[5]) } ,
+					FontUtils.buildGUIFont(line[6] , parseColour(line[7]) , Integer.parseInt(line[8])) ,
+					Integer.parseInt(line[9]) , Integer.parseInt(line[10]) , Integer.parseInt(line[11]) , Integer.parseInt(line[12]));
+			//Add the component to the components
+			this.add(button.getBase());
+		} else if (line[0].equals("GUIImageButton")) {
+		} else if (line[0].equals("GUIRenderableTextBox")) {
+			//Check whether it should be masked or not
+			if (line.length > 11) {
+				//Create the component and add it to this panel
+				GUIRenderableTextBox textbox = GUIBuilder.createRenderableTextBox(
+						line[1].replace('_' , ' ') ,
+						parseColour(line[2]) , parseColour(line[3]) ,
+						FontUtils.buildGUIFont(line[4] , parseColour(line[5]) , Integer.parseInt(line[6])) , line[7].charAt(0) ,
+						Integer.parseInt(line[8]) , Integer.parseInt(line[9]) , Integer.parseInt(line[10]) , Integer.parseInt(line[11]));
+				//Add the component to the components
+				this.add(textbox.getBase());
+			} else {
+				//Create the component and add it to this panel
+				GUIRenderableTextBox textbox = GUIBuilder.createRenderableTextBox(
+						line[1].replace('_' , ' ') ,
+						parseColour(line[2]) , parseColour(line[3]) ,
+						FontUtils.buildGUIFont(line[4] , parseColour(line[5]) , Integer.parseInt(line[6])) ,
+						Integer.parseInt(line[7]) , Integer.parseInt(line[8]) , Integer.parseInt(line[9]) , Integer.parseInt(line[10]));
+				//Add the component to the components
+				this.add(textbox.getBase());
+			}
+		} else if (line[0].equals("GUIImageTextBox")) {
+		} else if (line[0].equals("GUIRenderableLoadingBar")) {
+			//Create the component and add it to this panel
+			GUIRenderableLoadingBar loadingBar = GUIBuilder.createRenderableLoadingBar(
+					line[1].replace('_' , ' ') ,
+					parseColour(line[2]) , parseColour(line[3]) ,
+					Integer.parseInt(line[4]) ,
+					Integer.parseInt(line[5]) , Integer.parseInt(line[6]) , Integer.parseInt(line[7]) , Integer.parseInt(line[8]));
+			//Add the component to the components
+			this.add(loadingBar);
+		} else if (line[0].equals("GUIImageLoadingBar")) {
+		} else if (line[0].equals("GUIRenderbleCheckBox")) {
+		} else if (line[0].equals("GUIImageCheckBox")) {
+		}
+	}
+	
+	/* The method to parse a colour and return it */
+	private Colour parseColour(String line) {
+		//The colour
+		Colour colour = new Colour(0.0 , 0.0 , 0.0 , 0.0);
+		//Check whether it starts with 'Colour.'
+		if (line.startsWith("Colour.")) {
+			//Split the line
+			String colourString = line.split("Colour.")[1];
+			//Check and set the colour
+			if (colourString.equalsIgnoreCase("black"))
+				colour = Colour.BLACK;
+			else if (colourString.equalsIgnoreCase("grey"))
+				colour = Colour.GREY;
+			else if (colourString.equalsIgnoreCase("light_grey"))
+				colour = Colour.LIGHT_GREY;
+			else if (colourString.equalsIgnoreCase("red"))
+				colour = Colour.RED;
+			else if (colourString.equalsIgnoreCase("orange"))
+				colour = Colour.ORANGE;
+			else if (colourString.equalsIgnoreCase("yellow"))
+				colour = Colour.YELLOW;
+			else if (colourString.equalsIgnoreCase("pink"))
+				colour = Colour.PINK;
+			else if (colourString.equalsIgnoreCase("green"))
+				colour = Colour.GREEN;
+			else if (colourString.equalsIgnoreCase("blue"))
+				colour = Colour.BLUE;
+			else if (colourString.equalsIgnoreCase("light_blue"))
+				colour = Colour.LIGHT_BLUE;
+			else if (colourString.equalsIgnoreCase("white"))
+				colour = Colour.WHITE;
+		} else if (line.startsWith("rgb")) {
+			//Get the trimmed value
+			String rgbValue = line.substring(4 , line.length() - 1);
+			//Split value
+			String[] rgbSplit = rgbValue.split(",");
+			//Get the r,g,b values and set the colour
+			colour = new Colour((double) Integer.parseInt(rgbSplit[0]) / 255 ,
+					(double) Integer.parseInt(rgbSplit[1]) / 255 ,
+					(double) Integer.parseInt(rgbSplit[2]) /255 ,
+					1.0d);
+		}
+		//Return the colour
+		return colour;
 	}
 	
 	/* The method that returns a component given its name */
