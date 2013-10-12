@@ -12,6 +12,7 @@ package org.simplecorporation.myengine.core.gui;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.utils.file.FileUtils;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
@@ -64,6 +65,27 @@ public class GUIPanel {
 	public void add(GUIComponent component) {
 		//Add the component to the linked list
 		this.components.add(component);
+	}
+	
+	/* The method to add components using a file */
+	public void parseFile(String filePath) {
+		//Read the file
+		LinkedList<String> fileText = FileUtils.read(filePath);
+		//Go through each line
+		for (int a = 0; a < fileText.size(); a++) {
+			//Split the line
+			String[] line = fileText.get(a).split(" ");
+			//Check the first word says
+			if (line[0].equals("GUIRenderableButton")) {
+			} else if (line[0].equals("GUIImageButton")) {
+			} else if (line[0].equals("GUIRenderableTextBox")) {
+			} else if (line[0].equals("GUIImageTextBox")) {
+			} else if (line[0].equals("GUIRenderableLoadingBar")) {
+			} else if (line[0].equals("GUIImageLoadingBar")) {
+			} else if (line[0].equals("GUIRenderbleCheckBox")) {
+			} else if (line[0].equals("GUIImageCheckBox")) {
+			}
+		}
 	}
 	
 	/* The method that returns a component given its name */
