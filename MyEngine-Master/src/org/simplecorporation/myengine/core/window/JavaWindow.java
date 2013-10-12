@@ -19,6 +19,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
+import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
@@ -193,6 +194,11 @@ public class JavaWindow {
 			Logger.log(new Log("JavaWindow updateGraphics()" , "InterruptedException" , LogType.ERROR));
 			e.printStackTrace();
 		}
+	}
+	
+	/* The method to set the window icon */
+	public static void setIcon(Image[] images) {
+		frame.setIconImage(images[0].getJavaImage());
 	}
 	
 	/* Is the window still visible */

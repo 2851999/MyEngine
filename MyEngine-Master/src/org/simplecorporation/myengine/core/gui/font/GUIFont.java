@@ -10,6 +10,7 @@
 
 package org.simplecorporation.myengine.core.gui.font;
 
+import org.simplecorporation.myengine.core.gui.font.bitmap.BitmapFont;
 import org.simplecorporation.myengine.settings.Settings;
 
 public class GUIFont {
@@ -17,6 +18,7 @@ public class GUIFont {
 	/* The font */
 	public JavaGUIFont javaGUIFont;
 	public AndroidGUIFont androidGUIFont;
+	public BitmapFont bitmapFont;
 	
 	/* The constructor of the font for java */
 	public GUIFont(JavaGUIFont javaGUIFont) {
@@ -30,35 +32,47 @@ public class GUIFont {
 		this.androidGUIFont = androidGUIFont;
 	}
 	
+	/* The constructor of the font for an ImageFolderFont */
+	public GUIFont(BitmapFont bitmapFont) {
+		//Set the font
+		this.bitmapFont = bitmapFont;
+	}
+	
 	/* The method that renders the font */
 	public void render(String text , double x , double y) {
 		//Check what rendering mode to use
-		if (! Settings.Android) {
+		if (this.bitmapFont != null)
+			//Render the image folder font
+			this.bitmapFont.render(text , x , y);
+		else if (! Settings.Android) {
 			//Render the text
 			this.javaGUIFont.render(text , x , y);
-		} else if (Settings.Android && ! Settings.Video.OpenGL) {
+		} else if (Settings.Android && ! Settings.Video.OpenGL)
 			//Render the text
 			this.androidGUIFont.render(text , x , y);
-		}
 	}
 	
 	/* The method to get the width of a string */
 	public double getWidth(String text) {
-		if (! Settings.Android) {
+		if (this.bitmapFont != null)
+			return this.bitmapFont.getWidth(text);
+		else if (! Settings.Android)
 			return this.javaGUIFont.getWidth(text);
-		} else if (Settings.Android && ! Settings.Video.OpenGL) {
+		else if (Settings.Android && ! Settings.Video.OpenGL)
 			return this.androidGUIFont.getWidth(text);
-		} else
+		else
 			return 0;
 	}
 	
 	/* The method to get the height of a string */
 	public double getHeight(String text) {
-		if (! Settings.Android) {
+		if (this.bitmapFont != null)
+			return this.bitmapFont.getHeight(text);
+		else if (! Settings.Android)
 			return this.javaGUIFont.getHeight(text);
-		} else if (Settings.Android && ! Settings.Video.OpenGL) {
+		else if (Settings.Android && ! Settings.Video.OpenGL)
 			return this.androidGUIFont.getHeight(text);
-		} else
+		else
 			return 0;
 	}
 	

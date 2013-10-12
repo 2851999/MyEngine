@@ -13,7 +13,7 @@ package org.simplecorporation.myengine.settings;
 public class Settings {
 	
 	/* The version of the engine goes up 1 every development build */
-	public static final String EngineVersion = "V1.0.2.0";
+	public static final String EngineVersion = "V1.0.2.1";
 	
 	/* Is using android */
 	public static boolean Android = false;
@@ -43,6 +43,14 @@ public class Settings {
 		public static boolean OpenGL = false;
 		/* Should anti aliasing be used */
 		public static boolean AntiAliasing = false;
+	}
+	
+	/* The settings for audio */
+	public static class Audio {
+		/* The sound effect volume */
+		public static int SoundEffectVolume = 100;
+		/* The music volume */
+		public static int MusicVolume = 100;
 	}
 	
 }
