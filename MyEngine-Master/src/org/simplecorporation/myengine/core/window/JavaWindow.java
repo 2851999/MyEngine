@@ -107,7 +107,7 @@ public class JavaWindow {
 		//Check if the window settings are right
 		if (frame.getTitle() != Settings.Window.Title || frame.getWidth() != Settings.Window.Size.Width ||
 				frame.getHeight() != Settings.Window.Size.Height || frame.isUndecorated() != Settings.Window.Fullscreen ||
-				frame.isUndecorated() != !Settings.Window.Border) {
+				frame.isUndecorated() != ! Settings.Window.Border) {
 			//Setup the window
 			frame.setTitle(Settings.Window.Title);
 			//Check if the window should be full screen
@@ -129,9 +129,8 @@ public class JavaWindow {
 			} else {
 				//Set the screen size
 				frame.setSize((int)Settings.Window.Size.Width , (int)Settings.Window.Size.Height);
-				//Make sure the window isn't full screen
-				if (frame.isUndecorated() != Settings.Window.Fullscreen) {
-					//Make the window decorated
+				//Check if the window should have a borders
+				if (frame.isUndecorated() == Settings.Window.Border) {	
 					frame.dispose();
 					frame.setUndecorated(!Settings.Window.Border);
 					frame.setVisible(true);

@@ -17,7 +17,7 @@ import org.simplecorporation.myengine.utils.file.FileUtils;
 public class Settings {
 	
 	/* The version of the engine goes up 1 every development build */
-	public static final String EngineVersion = "V1.0.2.9";
+	public static final String EngineVersion = "V1.0.3.0";
 	
 	/* Is using android */
 	public static boolean Android = false;
@@ -31,7 +31,7 @@ public class Settings {
 		/* Should the window have a border (NOTE: Only works for Java)
 		 * if you wish to run in borderless mode when using OpenGL, when executing the code add
 		 * this parameter: -Dorg.lwjgl.opengl.Window.undecorated=true */
-		public static boolean Border = false;
+		public static boolean Border = true;
 		/* The size of the window */
 		public static class Size {
 			/* The width */
