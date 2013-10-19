@@ -17,6 +17,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.LinkedList;
 
 import org.simplecorporation.myengine.utils.logger.Log;
@@ -60,6 +62,41 @@ public class FileUtils {
 		//If it returns false it may be because the file doesn't exist
 		//in the first place
 		return new File(asFileString(filePath)).canWrite();
+	}
+	
+	/* The method to delete a file and return whether it was deleted */
+	public static boolean delete(String filePath) {
+		return new File(asFileString(filePath)).delete();
+	}
+	
+	/* The method to copy a file and returns whether it was successful*/
+	public static boolean copy(String filePath1, String filePath2) {
+		try {
+			Files.copy(new File(asFileString(filePath1)).toPath(),
+					new File(asFileString(filePath2)).toPath(), StandardCopyOption.REPLACE_EXISTING);
+			return true;
+		} catch (IOException e) {
+			//Log a message
+			Logger.log(new Log("FileUtils copy()", "Error copying file/folder: " + filePath1 + " to " + filePath2 ,
+					LogType.ERROR));
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	/* The method to move a file and returns whether it was successful*/
+	public static boolean move(String filePath1, String filePath2) {
+		try {
+			Files.move(new File(asFileString(filePath1)).toPath(),
+					new File(asFileString(filePath2)).toPath(), StandardCopyOption.REPLACE_EXISTING);
+			return true;
+		} catch (IOException e) {
+			//Log a message
+			Logger.log(new Log("FileUtils move()", "Error moving file/folder: " + filePath1 + " to " + filePath2 ,
+					LogType.ERROR));
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	/* The method that reads a file */

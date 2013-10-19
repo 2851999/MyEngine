@@ -10,6 +10,7 @@
 
 package org.simplecorporation.myengine.core.window;
 
+import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.settings.Settings;
 
 public class Window {
@@ -48,6 +49,17 @@ public class Window {
 			JavaWindow.updateSettings();
 			JavaWindow.updateGraphics();
 		}
+	}
+	
+	/* The method to set the window icon */
+	public static void setIcon(Image[] images) {
+		//Check what window is being used
+		if (Settings.Video.OpenGL)
+			//Set the OpenGL window icon
+			OpenGLWindow.setIcon(images);
+		else
+			//Set the Java window icon
+			JavaWindow.setIcon(images);
 	}
 	
 	/* Is the window still visible */

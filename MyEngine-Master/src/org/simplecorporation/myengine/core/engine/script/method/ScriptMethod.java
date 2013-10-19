@@ -13,7 +13,6 @@ package org.simplecorporation.myengine.core.engine.script.method;
 import java.util.LinkedList;
 
 import org.simplecorporation.myengine.core.engine.script.Script;
-import org.simplecorporation.myengine.core.engine.script.ScriptData;
 import org.simplecorporation.myengine.core.engine.script.library.AbstractLibrary;
 import org.simplecorporation.myengine.core.engine.script.library.LibraryDefault;
 import org.simplecorporation.myengine.core.engine.script.parser.ScriptParser;
@@ -58,12 +57,12 @@ public class ScriptMethod {
 			String currentLine = this.methodCode.get(a);
 			
 			//Check the line of code
-			if (this.methodCode.get(a).startsWith(ScriptData.SYNTAX_KEY_WORD_CALL)) {
+			if (this.methodCode.get(a).startsWith(script.scriptFile.scriptSyntax.SYNTAX_KEY_WORD_CALL)) {
 				//The method name
-				String methodName = currentLine.split(ScriptData.SYNTAX_KEY_WORD_CALL + " ")[1];
+				String methodName = currentLine.split(script.scriptFile.scriptSyntax.SYNTAX_KEY_WORD_CALL + " ")[1];
 				//Call the method
 				script.callMethod(methodName);
-			} else if ((! currentLine.startsWith(ScriptData.SYNTAX_KEY_WORD_COMMENT)) &&
+			} else if ((! currentLine.startsWith(script.scriptFile.scriptSyntax.SYNTAX_KEY_WORD_COMMENT)) &&
 					(! currentLine.equals(""))) {
 				
 				//Get the first key word
@@ -78,7 +77,7 @@ public class ScriptMethod {
 							this.importedLibraries.get(b).libraryName.equals(firstKeyWord)) {
 						
 						//Send the code to the library
-						this.importedLibraries.get(b).parseCode(currentLine , publicVariables , this.localVariables);
+						this.importedLibraries.get(b).parseCode(script.scriptFile , currentLine , publicVariables , this.localVariables);
 						//The library has been found
 						libraryFound = true;
 						//Exit the loop
@@ -87,7 +86,7 @@ public class ScriptMethod {
 				}
 				//Check if the library wasn't found
 				if (! libraryFound) {
-					if (this.methodCode.get(a).startsWith(ScriptData.SYNTAX_KEY_WORD_VARIABLE_DECLARATION)) {
+					if (this.methodCode.get(a).startsWith(script.scriptFile.scriptSyntax.SYNTAX_KEY_WORD_VARIABLE_DECLARATION)) {
 						//Split up the line
 						String[] splitLine = this.methodCode.get(a).split(" ");
 						//Get the variable name
@@ -107,7 +106,7 @@ public class ScriptMethod {
 							getVariable(splitLine[0] , publicVariables , this.localVariables).value = getVariableValue(splitLine , 2);
 					} else {
 						//Send the code to the default library
-						defaultLibrary.parseCode(currentLine , publicVariables , this.localVariables);
+						defaultLibrary.parseCode(script.scriptFile , currentLine , publicVariables , this.localVariables);
 					}
 				}
 			}

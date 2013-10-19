@@ -50,6 +50,8 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , K
 	public void keyPressed(KeyEvent e) {
 		//Call the event
 		Input.callKeyPressed(new KeyboardEvent(e.getKeyChar() , e.getKeyCode()));
+		//Set the keyboard event in the KeyboardInput class
+		KeyboardInput.lastKeyboardEvent = new KeyboardEvent(e.getKeyChar() , e.getKeyCode());
 	}
 	
 	/* Method for key/mouse listeners */

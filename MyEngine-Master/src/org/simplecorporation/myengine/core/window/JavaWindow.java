@@ -19,6 +19,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
+import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
@@ -106,17 +107,18 @@ public class JavaWindow {
 	public static void updateSettings() {
 		//Check if the window settings are right
 		if (frame.getTitle() != Settings.Window.Title || frame.getWidth() != Settings.Window.Size.Width ||
-				frame.getHeight() != Settings.Window.Size.Height || frame.isUndecorated() != Settings.Window.Fullscreen) {
+				frame.getHeight() != Settings.Window.Size.Height || frame.isUndecorated() != Settings.Window.Fullscreen ||
+				frame.isUndecorated() != !Settings.Window.Border) {
 			//Setup the window
 			frame.setTitle(Settings.Window.Title);
 			//Check if the window should be full screen
 			if (Settings.Window.Fullscreen) {
 				//Make the window full screen
 				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-				//Set the window width and height
-				frame.setSize(screenSize);
 				//Make the window full screen
-				if (frame.isUndecorated() != Settings.Window.Fullscreen) {
+				if (frame.isUndecorated() != Settings.Window.Fullscreen && (frame.getWidth() != screenSize.width || frame.getHeight() != screenSize.height )) {
+					//Set the window width and height
+					frame.setSize(screenSize);
 					//Make the window undecorated
 					frame.dispose();
 					frame.setUndecorated(true);
@@ -132,7 +134,7 @@ public class JavaWindow {
 				if (frame.isUndecorated() != Settings.Window.Fullscreen) {
 					//Make the window decorated
 					frame.dispose();
-					frame.setUndecorated(false);
+					frame.setUndecorated(!Settings.Window.Border);
 					frame.setVisible(true);
 				}
 			}
@@ -193,6 +195,11 @@ public class JavaWindow {
 			Logger.log(new Log("JavaWindow updateGraphics()" , "InterruptedException" , LogType.ERROR));
 			e.printStackTrace();
 		}
+	}
+	
+	/* The method to set the window icon */
+	public static void setIcon(Image[] images) {
+		frame.setIconImage(images[0].getJavaImage());
 	}
 	
 	/* Is the window still visible */
