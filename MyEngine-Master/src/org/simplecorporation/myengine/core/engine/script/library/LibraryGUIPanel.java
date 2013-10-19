@@ -59,7 +59,7 @@ public class LibraryGUIPanel extends AbstractLibrary {
 			//Trim the line
 			guiLine.trim();
 			//Parse the line
-			this.guiPanel.parseLine(guiLine);
+			this.guiPanel.parseLine(guiLine , currentFile.filePath);
 		} else if (splitLine[1].equals("show")) {
 			//Show the GUIPanel
 			this.guiPanel.showPanel();

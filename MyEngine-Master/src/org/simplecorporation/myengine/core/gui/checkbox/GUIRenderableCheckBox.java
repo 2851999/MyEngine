@@ -17,44 +17,44 @@ import org.simplecorporation.myengine.settings.Settings;
 public class GUIRenderableCheckBox {
 	
 	/* The java GUIRenderableCheckBox */
-	public JavaGUIRenderableCheckBox javaGUIImageCheckBox;
+	public JavaGUIRenderableCheckBox javaGUIRenderableCheckBox;
 	
 	/* The android GUIRenderableCheckBox */
-	public AndroidGUIRenderableCheckBox androidGUIImageCheckBox;
+	public AndroidGUIRenderableCheckBox androidGUIRenderableCheckBox;
 	
 	/* The constructor */
 	public GUIRenderableCheckBox(String name , Colour checkBackgroundColour , Colour checkColour) {
 		//Create the right GUIImageCheckBox
 		if (! Settings.Android)
-			this.javaGUIImageCheckBox = new JavaGUIRenderableCheckBox(name , checkBackgroundColour , checkColour);
+			this.javaGUIRenderableCheckBox = new JavaGUIRenderableCheckBox(name , checkBackgroundColour , checkColour);
 		else if (Settings.Android)
-			this.androidGUIImageCheckBox = new AndroidGUIRenderableCheckBox(name , checkBackgroundColour , checkColour);
+			this.androidGUIRenderableCheckBox = new AndroidGUIRenderableCheckBox(name , checkBackgroundColour , checkColour);
 	}
 	
 	/* The update method */
 	public void update() {
 		//Update the right GUIImageTextBox
 		if (! Settings.Android)
-			this.javaGUIImageCheckBox.update();
+			this.javaGUIRenderableCheckBox.update();
 		else if (Settings.Android)
-			this.androidGUIImageCheckBox.update();
+			this.androidGUIRenderableCheckBox.update();
 	}
 	
 	/* The render method */
 	public void render() {
 		//Render the right GUIImageTextBox
 		if (! Settings.Android)
-			this.javaGUIImageCheckBox.render();
+			this.javaGUIRenderableCheckBox.render();
 		else if (Settings.Android)
-			this.androidGUIImageCheckBox.render();
+			this.androidGUIRenderableCheckBox.render();
 	}
 	
 	/* The method to get the base */
 	public GUICheckBoxBase getBase() {
 		if (! Settings.Android)
-			return this.javaGUIImageCheckBox;
+			return this.javaGUIRenderableCheckBox;
 		else if (Settings.Android)
-			return this.androidGUIImageCheckBox;
+			return this.androidGUIRenderableCheckBox;
 		else
 			return null;
 	}

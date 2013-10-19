@@ -107,17 +107,18 @@ public class JavaWindow {
 	public static void updateSettings() {
 		//Check if the window settings are right
 		if (frame.getTitle() != Settings.Window.Title || frame.getWidth() != Settings.Window.Size.Width ||
-				frame.getHeight() != Settings.Window.Size.Height || frame.isUndecorated() != Settings.Window.Fullscreen) {
+				frame.getHeight() != Settings.Window.Size.Height || frame.isUndecorated() != Settings.Window.Fullscreen ||
+				frame.isUndecorated() != !Settings.Window.Border) {
 			//Setup the window
 			frame.setTitle(Settings.Window.Title);
 			//Check if the window should be full screen
 			if (Settings.Window.Fullscreen) {
 				//Make the window full screen
 				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-				//Set the window width and height
-				frame.setSize(screenSize);
 				//Make the window full screen
-				if (frame.isUndecorated() != Settings.Window.Fullscreen) {
+				if (frame.isUndecorated() != Settings.Window.Fullscreen && (frame.getWidth() != screenSize.width || frame.getHeight() != screenSize.height )) {
+					//Set the window width and height
+					frame.setSize(screenSize);
 					//Make the window undecorated
 					frame.dispose();
 					frame.setUndecorated(true);
@@ -133,7 +134,7 @@ public class JavaWindow {
 				if (frame.isUndecorated() != Settings.Window.Fullscreen) {
 					//Make the window decorated
 					frame.dispose();
-					frame.setUndecorated(false);
+					frame.setUndecorated(!Settings.Window.Border);
 					frame.setVisible(true);
 				}
 			}

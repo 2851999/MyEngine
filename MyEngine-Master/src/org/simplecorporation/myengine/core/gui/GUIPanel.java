@@ -10,12 +10,19 @@
 
 package org.simplecorporation.myengine.core.gui;
 
+import java.io.File;
 import java.util.LinkedList;
 
 import org.simplecorporation.myengine.core.gui.builder.GUIBuilder;
+import org.simplecorporation.myengine.core.gui.button.GUIImageButton;
 import org.simplecorporation.myengine.core.gui.button.GUIRenderableButton;
+import org.simplecorporation.myengine.core.gui.checkbox.GUIImageCheckBox;
+import org.simplecorporation.myengine.core.gui.checkbox.GUIRenderableCheckBox;
+import org.simplecorporation.myengine.core.gui.loadingbar.GUIImageLoadingBar;
 import org.simplecorporation.myengine.core.gui.loadingbar.GUIRenderableLoadingBar;
+import org.simplecorporation.myengine.core.gui.textbox.GUIImageTextBox;
 import org.simplecorporation.myengine.core.gui.textbox.GUIRenderableTextBox;
+import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.utils.file.FileUtils;
 import org.simplecorporation.myengine.utils.font.FontUtils;
@@ -80,12 +87,12 @@ public class GUIPanel {
 		//Go through each line
 		for (int a = 0; a < fileText.size(); a++) {
 			//Parse the current line
-			parseLine(fileText.get(a));
+			parseLine(fileText.get(a) , filePath);
 		}
 	}
 	
 	/* The method to parse a line to add a component */
-	public void parseLine(String line1) {
+	public void parseLine(String line1 , String filePath) {
 		//Split the line
 		String[] line = line1.split(" ");
 		//Check the first word says
@@ -105,6 +112,14 @@ public class GUIPanel {
 			//Add the component to the components
 			this.add(button.getBase());
 		} else if (line[0].equals("GUIImageButton")) {
+			//Create the component and add it to this panel
+			GUIImageButton button = GUIBuilder.createImageButton(
+					line[1].replace('_' , ' ') , line[2].replace('_' , ' ') ,
+					new Image[] { parseImage(line[3] , filePath) , parseImage(line[4] , filePath) , parseImage(line[5] , filePath) } ,
+					FontUtils.buildGUIFont(line[6] , parseColour(line[7]) , Integer.parseInt(line[8])) ,
+					Integer.parseInt(line[9]) , Integer.parseInt(line[10]) , Integer.parseInt(line[11]) , Integer.parseInt(line[12]));
+			//Add the component to the components
+			this.add(button.getBase());
 		} else if (line[0].equals("GUIRenderableTextBox")) {
 			//Check whether it should be masked or not
 			if (line.length > 11) {
@@ -127,6 +142,26 @@ public class GUIPanel {
 				this.add(textbox.getBase());
 			}
 		} else if (line[0].equals("GUIImageTextBox")) {
+			//Check whether it should be masked or not
+			if (line.length > 11) {
+				//Create the component and add it to this panel
+				GUIImageTextBox textbox = GUIBuilder.createImageTextBox(
+						line[1].replace('_' , ' ') ,
+						parseImage(line[2] , filePath) ,
+						FontUtils.buildGUIFont(line[3] , parseColour(line[4]) , Integer.parseInt(line[5])) , line[6].charAt(0) ,
+						Integer.parseInt(line[7]) , Integer.parseInt(line[8]) , Integer.parseInt(line[9]) , Integer.parseInt(line[10]));
+				//Add the component to the components
+				this.add(textbox.getBase());
+			} else {
+				//Create the component and add it to this panel
+				GUIImageTextBox textbox = GUIBuilder.createImageTextBox(
+						line[1].replace('_' , ' ') ,
+						parseImage(line[2] , filePath) ,
+						FontUtils.buildGUIFont(line[3] , parseColour(line[4]) , Integer.parseInt(line[5])) ,
+						Integer.parseInt(line[7]) , Integer.parseInt(line[8]) , Integer.parseInt(line[9]) , Integer.parseInt(line[10]));
+				//Add the component to the components
+				this.add(textbox.getBase());
+			}
 		} else if (line[0].equals("GUIRenderableLoadingBar")) {
 			//Create the component and add it to this panel
 			GUIRenderableLoadingBar loadingBar = GUIBuilder.createRenderableLoadingBar(
@@ -137,9 +172,58 @@ public class GUIPanel {
 			//Add the component to the components
 			this.add(loadingBar);
 		} else if (line[0].equals("GUIImageLoadingBar")) {
+			//Create the component and add it to this panel
+			GUIImageLoadingBar loadingBar = GUIBuilder.createImageLoadingBar(
+					line[1].replace('_' , ' ') ,
+					parseImage(line[2] , filePath) , parseImage(line[3] , filePath) ,
+					Integer.parseInt(line[4]) ,
+					Integer.parseInt(line[5]) , Integer.parseInt(line[6]) , Integer.parseInt(line[7]) , Integer.parseInt(line[8]));
+			//Add the component to the components
+			this.add(loadingBar);
 		} else if (line[0].equals("GUIRenderbleCheckBox")) {
+			//Create the component and add it to this panel
+			GUIRenderableCheckBox checkBox = GUIBuilder.createRenderableCheckBox(
+					line[1].replace('_' , ' ') ,
+					parseColour(line[2]) , parseColour(line[3]) ,
+					Integer.parseInt(line[4]) , Integer.parseInt(line[5]) ,
+					Integer.parseInt(line[6]) , Integer.parseInt(line[7]) , Integer.parseInt(line[8]) , Integer.parseInt(line[9]));
+			//Add the component to the components
+			this.add(checkBox.getBase());
 		} else if (line[0].equals("GUIImageCheckBox")) {
+			//Create the component and add it to this panel
+			GUIImageCheckBox checkBox = GUIBuilder.createImageCheckBox(
+					line[1].replace('_' , ' ') ,
+					new Image[] { parseImage(line[2] , filePath) , parseImage(line[3] , filePath) , parseImage(line[4] , filePath) } ,
+					Integer.parseInt(line[5]) , Integer.parseInt(line[6]) , Integer.parseInt(line[7]) , Integer.parseInt(line[8]));
+			//Add the component to the components
+			this.add(checkBox.getBase());
 		}
+	}
+	
+	/* The method to parse an image and return it */
+	private Image parseImage(String line , String filePath) {
+		//The image path
+		String imagePath = "";
+		//The image
+		Image image = null;
+		//Check whether the start starts with a certain key word
+		if (line.startsWith("$FILE$"))
+			//Get the file path
+			imagePath = filePath.replace(new File(filePath).getName() , "") + line.replace("$FILE$" , "");
+		else if (line.startsWith("$FILE-1$")) {
+			//Get the file path
+			imagePath = filePath.replace(new File(filePath).getName() , "");
+			imagePath = filePath.replace(new File(imagePath).getName() , "") + line.replace("$FILE-1$" , "");
+		} else if (line.startsWith("$FILE-2$")) {
+			//Get the file path
+			imagePath = filePath.replace(new File(filePath).getName() , "");
+			imagePath = filePath.replace(new File(imagePath).getName() , "");
+			imagePath = filePath.replace(new File(filePath).getName() , "") + line.replace("$FILE-2$" , "");
+		}
+		//Set the image
+		image = new Image(imagePath , "PNG" , true);
+		//Return the image
+		return image;
 	}
 	
 	/* The method to parse a colour and return it */
