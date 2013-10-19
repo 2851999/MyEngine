@@ -147,6 +147,14 @@ public class OpenGLWindow {
 		return new DisplayMode(width , height);
 	}
 	
+	/* The method to centre the window */
+	public static void centre() {
+		//Get the screen size
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		//Centre the window by setting its location
+		Display.setLocation((int)(screenSize.width / 2) - (int)(Settings.Window.Size.Width / 2) , (int)(screenSize.height / 2) - (int)(Settings.Window.Size.Height / 2));
+	}
+	
 	/* The method to set the window icon */
 	public static void setIcon(Image[] images) {
 		ByteBuffer buffer1 = ByteBuffer.wrap(images[0].getOpenGLImage().getTextureData());

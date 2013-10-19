@@ -16,7 +16,6 @@ import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-
 import javax.swing.JFrame;
 
 import org.simplecorporation.myengine.core.image.Image;
@@ -195,6 +194,14 @@ public class JavaWindow {
 			Logger.log(new Log("JavaWindow updateGraphics()" , "InterruptedException" , LogType.ERROR));
 			e.printStackTrace();
 		}
+	}
+	
+	/* The method to centre the window */
+	public static void centre() {
+		//Get the screen size
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		//Centre the window by setting its location
+		frame.setLocation((int)(screenSize.width / 2) - (int)(Settings.Window.Size.Width / 2) , (int)(screenSize.height / 2) - (int)(Settings.Window.Size.Height / 2));
 	}
 	
 	/* The method to set the window icon */

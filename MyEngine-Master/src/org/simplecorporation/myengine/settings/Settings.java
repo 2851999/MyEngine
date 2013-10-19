@@ -17,7 +17,7 @@ import org.simplecorporation.myengine.utils.file.FileUtils;
 public class Settings {
 	
 	/* The version of the engine goes up 1 every development build */
-	public static final String EngineVersion = "V1.0.2.8";
+	public static final String EngineVersion = "V1.0.2.9";
 	
 	/* Is using android */
 	public static boolean Android = false;
