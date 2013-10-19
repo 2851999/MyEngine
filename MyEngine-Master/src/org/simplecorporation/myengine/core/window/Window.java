@@ -51,6 +51,17 @@ public class Window {
 		}
 	}
 	
+	/* The method to set the cursor image */
+	public static void setCursor(Image image , int pointX , int pointY , String cursorName) {
+		//Check what window is being used
+		if (! Settings.Android && Settings.Video.OpenGL)
+			//Create the cursor for the OpenGL window
+			OpenGLWindow.setCursor(image , pointX , pointY , cursorName);
+		else if (! Settings.Android && ! Settings.Video.OpenGL)
+			//Create the cursor for the Java window
+			JavaWindow.setCursor(image , pointX , pointY , cursorName);
+	}
+	
 	/* The method to centre the window */
 	public static void centre() {
 		//Check what window is being used

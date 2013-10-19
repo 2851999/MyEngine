@@ -12,10 +12,12 @@ package org.simplecorporation.myengine.core.window;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+
 import javax.swing.JFrame;
 
 import org.simplecorporation.myengine.core.image.Image;
@@ -193,6 +195,12 @@ public class JavaWindow {
 			Logger.log(new Log("JavaWindow updateGraphics()" , "InterruptedException" , LogType.ERROR));
 			e.printStackTrace();
 		}
+	}
+	
+	/* The method to set the cursor image */
+	public static void setCursor(Image image , int pointX , int pointY , String cursorName) {
+		//Set the cursor
+		frame.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(image.getJavaImage() , new Point(pointX , pointY) , cursorName));
 	}
 	
 	/* The method to centre the window */

@@ -147,6 +147,11 @@ public class OpenGLWindow {
 		return new DisplayMode(width , height);
 	}
 	
+	/* The method to set the cursor image */
+	public static void setCursor(Image image , int pointX , int pointY , String cursorName) {
+		//NOT FINISHED YET
+	}
+	
 	/* The method to centre the window */
 	public static void centre() {
 		//Get the screen size
