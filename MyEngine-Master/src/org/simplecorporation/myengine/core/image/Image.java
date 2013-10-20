@@ -89,7 +89,7 @@ public class Image {
 				this.javaImage = tk.getImage(getURL(filePath));
 			}
 			
-			//Render one to stop flash
+			//Render once to stop flash
 			BasicRenderer.renderImage(this , 0 , 0);
 		}
 	}
