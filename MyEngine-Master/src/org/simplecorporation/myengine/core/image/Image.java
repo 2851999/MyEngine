@@ -19,7 +19,6 @@ import java.net.URL;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.simplecorporation.myengine.core.android.AndroidStore;
-import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.window.JavaWindow;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.file.FileUtils;
@@ -88,9 +87,6 @@ public class Image {
 				Toolkit tk = Toolkit.getDefaultToolkit();
 				this.javaImage = tk.getImage(getURL(filePath));
 			}
-			
-			//Render once to stop flash
-			BasicRenderer.renderImage(this , 0 , 0);
 		}
 	}
 	
