@@ -55,7 +55,7 @@ public class JavaGUIImageTextBox extends JavaGUITextBox {
 			Colour renderColour = this.font.colour.clone();
 			
 			//The font
-			JavaGUIFont renderFont = new JavaGUIFont(this.font.font , this.font.colour , this.font.size);
+			JavaGUIFont renderFont = new JavaGUIFont(this.font.font , this.font.colour , this.font.fontSize);
 			
 			//Check if the characters are hidden
 			if (this.hideCharacters) {
