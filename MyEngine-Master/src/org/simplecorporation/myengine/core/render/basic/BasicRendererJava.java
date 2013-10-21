@@ -39,19 +39,27 @@ public class BasicRendererJava {
 	/* The method to render a line */
 	public static void renderLine(double startx , double starty , double endx , double endy) {
 		//Render the line
-		JavaWindow.g2d.drawLine((int)startx , (int)starty , (int)endx , (int)endy);
+		JavaWindow.g2d.drawLine((int) startx , (int) starty , (int) endx , (int) endy);
 	}
 	
 	/* The method to render an image */
 	public static void renderImage(Image image , double x , double y) {
 		//Render the image
-		JavaWindow.g2d.drawImage(image.getJavaImage() , (int)x , (int)y , JavaWindow.frame);
+		JavaWindow.g2d.drawImage(image.getJavaImage() , (int) x , (int) y , JavaWindow.frame);
 	}
 	
 	/* The method to render an image with a specified width and height */
 	public static void renderImage(Image image , double x , double y , double width , double height) {
 		//Render the image
-		JavaWindow.g2d.drawImage(image.getJavaImage() , (int)x , (int)y , (int) width , (int) height , JavaWindow.frame);
+		JavaWindow.g2d.drawImage(image.getJavaImage() , (int) x , (int) y , (int) width , (int) height , JavaWindow.frame);
+	}
+	
+	/* The method to render an image with a specified x, y, width, height, imageX, imageY, imageWidth, imageHeight */
+	public static void renderImage(Image image , double x , double y , double width , double height , double imageX , double imageY ,
+			double imageWidth , double imageHeight) {
+		//Render the image
+		JavaWindow.g2d.drawImage(image.getJavaImage() , (int) x , (int) y , (int) x + (int) width , (int) y + (int) height , (int) imageX , (int) imageY ,
+				(int) imageX + (int) imageWidth , (int) imageY + (int) imageHeight , JavaWindow.frame);
 	}
 	
 }

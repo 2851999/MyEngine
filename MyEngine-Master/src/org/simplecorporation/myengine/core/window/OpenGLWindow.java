@@ -12,10 +12,12 @@ package org.simplecorporation.myengine.core.window;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.nio.ByteBuffer;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
@@ -143,6 +145,26 @@ public class OpenGLWindow {
 		
 		//Return new display mode
 		return new DisplayMode(width , height);
+	}
+	
+	/* The method to set the cursor image */
+	public static void setCursor(Image image , int pointX , int pointY , String cursorName) {
+		//NOT FINISHED YET
+	}
+	
+	/* The method to centre the window */
+	public static void centre() {
+		//Get the screen size
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		//Centre the window by setting its location
+		Display.setLocation((int)(screenSize.width / 2) - (int)(Settings.Window.Size.Width / 2) , (int)(screenSize.height / 2) - (int)(Settings.Window.Size.Height / 2));
+	}
+	
+	/* The method to set the window icon */
+	public static void setIcon(Image[] images) {
+		ByteBuffer buffer1 = ByteBuffer.wrap(images[0].getOpenGLImage().getTextureData());
+		ByteBuffer buffer2 = ByteBuffer.wrap(images[1].getOpenGLImage().getTextureData());
+		Display.setIcon(new ByteBuffer[] { buffer1 , buffer2 });
 	}
 	
 	/* Is the window still visible */
