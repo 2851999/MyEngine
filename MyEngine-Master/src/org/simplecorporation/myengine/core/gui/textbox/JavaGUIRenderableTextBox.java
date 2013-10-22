@@ -11,7 +11,6 @@
 package org.simplecorporation.myengine.core.gui.textbox;
 
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
-import org.simplecorporation.myengine.core.gui.font.JavaGUIFont;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.settings.Settings;
@@ -25,7 +24,7 @@ public class JavaGUIRenderableTextBox extends JavaGUITextBox {
 	public Colour outlineColour;
 	
 	/* The font */
-	public JavaGUIFont font;
+	public GUIFont font;
 	
 	/* The constructor */
 	public JavaGUIRenderableTextBox(String name , GUIFont font) {
@@ -35,7 +34,7 @@ public class JavaGUIRenderableTextBox extends JavaGUITextBox {
 		this.backgroundColour = Colour.WHITE;
 		this.outlineColour = Colour.BLACK;
 		//Set the font
-		this.font = font.javaGUIFont;
+		this.font = font;
 	}
 	
 	/* The method to render the text box */
@@ -57,10 +56,12 @@ public class JavaGUIRenderableTextBox extends JavaGUITextBox {
 			String renderedText = this.text;
 			
 			//The colour of the text
-			Colour renderColour = this.font.colour.clone();
+			Colour renderColour = Colour.WHITE;
 			
-			//The font
-			JavaGUIFont renderFont = new JavaGUIFont(this.font.font , this.font.colour , this.font.fontSize);
+			//Check if the java font is null
+			if (this.font.javaGUIFont != null)
+				//Get the colour
+				renderColour = this.font.javaGUIFont.colour;
 			
 			//Check if the characters are hidden
 			if (this.hideCharacters) {
@@ -86,16 +87,18 @@ public class JavaGUIRenderableTextBox extends JavaGUITextBox {
 				renderedText += "|";
 			}
 			
-			//Set the colour of the font
-			renderFont.colour = renderColour;
+			//Check if the java font  is null
+			if (this.font.javaGUIFont != null)
+				//Set the colour of the font
+				this.font.javaGUIFont.colour = renderColour;
 			
 			//Render the text
 			if (Settings.Video.OpenGL)
-				renderFont.render(renderedText , this.position.x + 2 ,
+				this.font.render(renderedText , this.position.x + 2 ,
 						(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
 			else
 				//Not a clue why it can't be the same as OpenGL
-				renderFont.render(renderedText , this.position.x + 2 ,
+				this.font.render(renderedText , this.position.x + 2 ,
 						(this.position.y + (this.height / 2)) + (this.font.getHeight(this.text) / 4));
 		}
 	}
