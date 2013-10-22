@@ -19,7 +19,7 @@ import org.simplecorporation.myengine.settings.Settings;
 public class Logger {
 	
 	/* The current log level */
-	public static LogLevel logLevel;
+	public static LogLevel logLevel = LogLevel.LOG_LEVEL_ALL;
 	
 	/* Is debugging on */
 	public static boolean debugging = false;
