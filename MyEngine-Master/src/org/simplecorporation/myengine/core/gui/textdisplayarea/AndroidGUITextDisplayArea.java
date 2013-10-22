@@ -13,7 +13,7 @@ package org.simplecorporation.myengine.core.gui.textdisplayarea;
 import java.util.LinkedList;
 
 import org.simplecorporation.myengine.core.gui.GUIComponent;
-import org.simplecorporation.myengine.core.gui.font.AndroidGUIFont;
+import org.simplecorporation.myengine.core.gui.font.GUIFont;
 
 public class AndroidGUITextDisplayArea extends GUIComponent {
 	
@@ -21,9 +21,9 @@ public class AndroidGUITextDisplayArea extends GUIComponent {
 	private LinkedList<String> text;
 	
 	/* The font */
-	private AndroidGUIFont font;
+	private GUIFont font;
 	
-	public AndroidGUITextDisplayArea(String name , LinkedList<String> textToDisplay , AndroidGUIFont font , int width) {
+	public AndroidGUITextDisplayArea(String name , LinkedList<String> textToDisplay , GUIFont font , int width) {
 		//Call the super constructor
 		super(name);
 		//Assign the variables

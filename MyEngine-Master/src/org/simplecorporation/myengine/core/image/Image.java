@@ -14,12 +14,12 @@ import java.awt.Toolkit;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.simplecorporation.myengine.core.android.AndroidStore;
-import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.window.JavaWindow;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.file.FileUtils;
@@ -61,15 +61,14 @@ public class Image {
 	/* The method to load the image */
 	public void load(String filePath , String format , boolean inFolder) {
 		//Check what rendering mode is being used
-		if (Settings.Video.OpenGL) {
+		if (! Settings.Android && Settings.Video.OpenGL) {
 			//Load the OpenGL image
 			try {
 				//Check if the image is in a folder
 				if (inFolder)
 					this.openGLImage = TextureLoader.getTexture(format , new FileInputStream(FileUtils.asFileString(filePath)));
 				else
-					//NOTE COULD BE VERY WRONG IF THERE IS AN ERROR MAKE A NOTE IN THE ISSUES SECTION
-					this.openGLImage = TextureLoader.getTexture(format , new FileInputStream(filePath));
+					this.openGLImage = TextureLoader.getTexture(format , getURLInputStream(filePath));
 			} catch (FileNotFoundException e) {
 				//Log a message
 				Logger.log(new Log("Image load()" , "FileNotFound " + filePath , LogType.ERROR));
@@ -79,7 +78,7 @@ public class Image {
 				Logger.log(new Log("Image load()" , "IOException " + filePath , LogType.ERROR));
 				e.printStackTrace();
 			}
-		} else {
+		} else if (! Settings.Android && ! Settings.Video.OpenGL) {
 			//Load the Java image after checking if the image is in a folder
 			if (inFolder) {
 				Toolkit tk = Toolkit.getDefaultToolkit();
@@ -88,9 +87,6 @@ public class Image {
 				Toolkit tk = Toolkit.getDefaultToolkit();
 				this.javaImage = tk.getImage(getURL(filePath));
 			}
-			
-			//Render one to stop flash
-			BasicRenderer.renderImage(this , 0 , 0);
 		}
 	}
 	
@@ -109,6 +105,17 @@ public class Image {
 			e.printStackTrace();
 		}
 		return url;
+	}
+	
+	/* The method to get the URL input stream of the image */
+	public InputStream getURLInputStream(String filePath) {
+		InputStream stream = null;
+		try {
+			stream = this.getClass().getResourceAsStream(filePath);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return stream;
 	}
 	
 	/* Returns the Java image */

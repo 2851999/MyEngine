@@ -12,6 +12,7 @@ package org.simplecorporation.myengine.core.window;
 
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -108,7 +109,7 @@ public class JavaWindow {
 		//Check if the window settings are right
 		if (frame.getTitle() != Settings.Window.Title || frame.getWidth() != Settings.Window.Size.Width ||
 				frame.getHeight() != Settings.Window.Size.Height || frame.isUndecorated() != Settings.Window.Fullscreen ||
-				frame.isUndecorated() != !Settings.Window.Border) {
+				frame.isUndecorated() != ! Settings.Window.Border) {
 			//Setup the window
 			frame.setTitle(Settings.Window.Title);
 			//Check if the window should be full screen
@@ -130,9 +131,8 @@ public class JavaWindow {
 			} else {
 				//Set the screen size
 				frame.setSize((int)Settings.Window.Size.Width , (int)Settings.Window.Size.Height);
-				//Make sure the window isn't full screen
-				if (frame.isUndecorated() != Settings.Window.Fullscreen) {
-					//Make the window decorated
+				//Check if the window should have a borders
+				if (frame.isUndecorated() == Settings.Window.Border) {	
 					frame.dispose();
 					frame.setUndecorated(!Settings.Window.Border);
 					frame.setVisible(true);
@@ -195,6 +195,20 @@ public class JavaWindow {
 			Logger.log(new Log("JavaWindow updateGraphics()" , "InterruptedException" , LogType.ERROR));
 			e.printStackTrace();
 		}
+	}
+	
+	/* The method to set the cursor image */
+	public static void setCursor(Image image , int pointX , int pointY , String cursorName) {
+		//Set the cursor
+		frame.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(image.getJavaImage() , new Point(pointX , pointY) , cursorName));
+	}
+	
+	/* The method to centre the window */
+	public static void centre() {
+		//Get the screen size
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		//Centre the window by setting its location
+		frame.setLocation((int)(screenSize.width / 2) - (int)(Settings.Window.Size.Width / 2) , (int)(screenSize.height / 2) - (int)(Settings.Window.Size.Height / 2));
 	}
 	
 	/* The method to set the window icon */

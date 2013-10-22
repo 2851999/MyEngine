@@ -24,19 +24,19 @@ public class AndroidGUIFont {
 	public Typeface typeface;
 	
 	/* The font size */
-	public double size;
+	public double fontSize;
 	
 	/* The colour */
 	public Colour colour;
 	
 	/* The constructor of the font */
-	public AndroidGUIFont(Typeface typeface , Colour colour , double size) {
+	public AndroidGUIFont(Typeface typeface , Colour colour , double fontSize) {
 		//Set the typeface
 		this.typeface = typeface;
 		
 		//Set the colour and size
 		this.colour = colour;
-		this.size = size;
+		this.fontSize = fontSize;
 	}
 	
 	/* The method that renders the font */
@@ -44,7 +44,7 @@ public class AndroidGUIFont {
 		//Check what rendering mode to use
 		if (Settings.Android && ! Settings.Video.OpenGL) {
 			//Set the size and colour
-			AndroidStore.gamePaint.setTextSize((float)this.size);
+			AndroidStore.gamePaint.setTextSize((float)this.fontSize);
 			BasicRenderer.setColour(this.colour);
 			//Set the typeface
 			AndroidStore.gamePaint.setTypeface(this.typeface);
@@ -57,7 +57,7 @@ public class AndroidGUIFont {
 	public double getWidth(String text) {
 		if (Settings.Android && ! Settings.Video.OpenGL) {
 			Rect bounds = new Rect();
-			AndroidStore.gamePaint.setTextSize((float)this.size);
+			AndroidStore.gamePaint.setTextSize((float)this.fontSize);
 			AndroidStore.gamePaint.setTypeface(this.typeface);
 			AndroidStore.gamePaint.getTextBounds(text , 0 , text.length() , bounds);
 			return bounds.width();
@@ -69,7 +69,7 @@ public class AndroidGUIFont {
 	public double getHeight(String text) {
 		if (Settings.Android && ! Settings.Video.OpenGL) {
 			Rect bounds = new Rect();
-			AndroidStore.gamePaint.setTextSize((float)this.size);
+			AndroidStore.gamePaint.setTextSize((float)this.fontSize);
 			AndroidStore.gamePaint.setTypeface(this.typeface);
 			AndroidStore.gamePaint.getTextBounds(text , 0 , text.length() , bounds);
 			return bounds.height();
