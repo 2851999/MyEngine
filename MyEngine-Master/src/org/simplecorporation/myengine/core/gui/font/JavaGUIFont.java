@@ -28,22 +28,22 @@ public class JavaGUIFont {
 	public TrueTypeFont ttfFont;
 	
 	/* The font size */
-	public double size;
+	public double fontSize;
 	
 	/* The colour */
 	public Colour colour;
 	
 	/* The constructor of the font */
-	public JavaGUIFont(Font font , Colour colour , double size) {
+	public JavaGUIFont(Font font , Colour colour , double fontSize) {
 		//Set the font
 		this.font = font;
 		
 		if (Settings.Video.OpenGL)
-			ttfFont = new TrueTypeFont(this.font.deriveFont((float)size) , Settings.Video.AntiAliasing);
+			ttfFont = new TrueTypeFont(this.font.deriveFont((float)fontSize) , Settings.Video.AntiAliasing);
 		
 		//Set the colour and size
 		this.colour = colour;
-		this.size = size;
+		this.fontSize = fontSize;
 	}
 	
 	/* The method that renders the font */
@@ -58,7 +58,7 @@ public class JavaGUIFont {
 			//Set the colour
 			BasicRenderer.setColour(this.colour);
 			//Set the font
-			JavaWindow.g2d.setFont(this.font.deriveFont((float)size));
+			JavaWindow.g2d.setFont(this.font.deriveFont((float)fontSize));
 			//Render the text
 			JavaWindow.g2d.drawString(text , (float) x , (float) y);
 		}
@@ -69,7 +69,7 @@ public class JavaGUIFont {
 		if (! Settings.Android && Settings.Video.OpenGL) {
 			return ttfFont.getWidth(text);
 		} else if (! Settings.Android && ! Settings.Video.OpenGL) {
-			FontMetrics metrics = JavaWindow.g2d.getFontMetrics(font.deriveFont((float)size));
+			FontMetrics metrics = JavaWindow.g2d.getFontMetrics(font.deriveFont((float)fontSize));
 			return metrics.getStringBounds(text , JavaWindow.g2d).getWidth();
 		} else
 			return 0;
@@ -80,7 +80,7 @@ public class JavaGUIFont {
 		if (! Settings.Android && Settings.Video.OpenGL) {
 			return ttfFont.getHeight(text);
 		} else if (! Settings.Android && ! Settings.Video.OpenGL) {
-			FontMetrics metrics = JavaWindow.g2d.getFontMetrics(font.deriveFont((float)size));
+			FontMetrics metrics = JavaWindow.g2d.getFontMetrics(font.deriveFont((float)fontSize));
 			return metrics.getStringBounds(text , JavaWindow.g2d).getHeight();
 		} else
 			return 0;

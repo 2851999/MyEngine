@@ -12,7 +12,7 @@ package org.simplecorporation.myengine.core.engine.script.library;
 
 import java.util.LinkedList;
 
-import org.simplecorporation.myengine.core.engine.script.ScriptData;
+import org.simplecorporation.myengine.core.engine.script.file.ScriptFile;
 import org.simplecorporation.myengine.core.engine.script.variable.ScriptVariable;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
@@ -39,11 +39,11 @@ public class LibraryLogger extends AbstractLibrary {
 	}
 	
 	/* The method called to parse a line of code */
-	public void parseCode(String line , LinkedList<ScriptVariable> publicVariables , LinkedList<ScriptVariable> localVariables) {
+	public void parseCode(ScriptFile currentFile , String currentLine , LinkedList<ScriptVariable> publicVariables , LinkedList<ScriptVariable> localVariables) {
 		//Replace the variables
-		line = this.replaceVariables(line , publicVariables, localVariables);
+		currentLine = this.replaceVariables(currentFile , currentLine , publicVariables, localVariables);
 		//Split up the line
-		String[] splitLine = line.split(ScriptData.SYNTAX_KEY_WORD_SEPERATOR);
+		String[] splitLine = currentLine.split(currentFile.scriptSyntax.SYNTAX_KEY_WORD_SEPARATOR);
 		//Check what the second key word is
 		if (splitLine[1].equals("log")) {
 			//The log type

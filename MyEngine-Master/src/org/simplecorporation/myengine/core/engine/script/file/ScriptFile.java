@@ -12,6 +12,7 @@ package org.simplecorporation.myengine.core.engine.script.file;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.core.engine.script.ScriptSyntax;
 import org.simplecorporation.myengine.utils.file.FileUtils;
 
 public class ScriptFile {
@@ -22,18 +23,27 @@ public class ScriptFile {
 	/* The text in the file */
 	public LinkedList<String> fileText;
 	
+	/* The syntax used in the file */
+	public ScriptSyntax scriptSyntax;
+	
 	/* The constructor */
 	public ScriptFile(String filePath) {
 		//Assign the file path
 		this.filePath = filePath;
 		//Create the file text
 		this.fileText = new LinkedList<String>();
+		//Create the script syntax
+		this.scriptSyntax = new ScriptSyntax();
 	}
 	
 	/* The method to read the file */
 	public void read() {
 		//Read the file
 		this.fileText = parseWhitespace(FileUtils.read(this.filePath));
+		//Check the first line to see if it should use a specific syntax
+		if (this.fileText.get(0).toLowerCase().startsWith("syntax"))
+			//Set the syntax
+			this.scriptSyntax.setSyntax(this.filePath , this.fileText.get(0));
 	}
 	
 	/* The method to write the file */

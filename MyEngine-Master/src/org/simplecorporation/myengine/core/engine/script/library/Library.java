@@ -12,7 +12,7 @@ package org.simplecorporation.myengine.core.engine.script.library;
 
 import java.util.LinkedList;
 
-import org.simplecorporation.myengine.core.engine.script.ScriptData;
+import org.simplecorporation.myengine.core.engine.script.file.ScriptFile;
 import org.simplecorporation.myengine.core.engine.script.variable.ScriptVariable;
 
 public class Library {
@@ -49,6 +49,7 @@ public class Library {
 		libraries.add(new LibraryBasicRenderer());
 		libraries.add(new LibraryLogger());
 		libraries.add(new LibraryMessageBox());
+		libraries.add(new LibraryGUIPanel());
 	}
 	
 	/* The method to find and return a library given its package name */
@@ -72,9 +73,9 @@ public class Library {
 	}
 	
 	/* The method to replace a variable if needed */
-	public String replaceVariables(String currentLine , LinkedList<ScriptVariable> publicVariables , LinkedList<ScriptVariable> localVariables) {
+	public String replaceVariables(ScriptFile currentFile , String currentLine , LinkedList<ScriptVariable> publicVariables , LinkedList<ScriptVariable> localVariables) {
 		//Check if the line has a variable reference
-		if (currentLine.contains(ScriptData.SYNTAX_KEY_WORD_VARIABLE_REFERENCE)) {
+		if (currentLine.contains(currentFile.scriptSyntax.SYNTAX_KEY_WORD_VARIABLE_REFERENCE)) {
 			//The split line
 			String[] splitLine = currentLine.split(" ");
 			//The variable name
@@ -84,9 +85,9 @@ public class Library {
 			//Loop through the split line
 			for (int c = 0; c < splitLine.length; c++) {
 				//Check if this contains the variable
-				if (splitLine[c].contains(ScriptData.SYNTAX_KEY_WORD_VARIABLE_REFERENCE)) {
+				if (splitLine[c].contains(currentFile.scriptSyntax.SYNTAX_KEY_WORD_VARIABLE_REFERENCE)) {
 					//Set the variable name
-					variableName = splitLine[c].split(ScriptData.SYNTAX_KEY_WORD_VARIABLE_REFERENCE)[1];
+					variableName = splitLine[c].split(currentFile.scriptSyntax.SYNTAX_KEY_WORD_VARIABLE_REFERENCE)[1];
 					//The variable value
 					String variableValue = getVariable(variableName , publicVariables , localVariables).value;
 					//Set the current split line
