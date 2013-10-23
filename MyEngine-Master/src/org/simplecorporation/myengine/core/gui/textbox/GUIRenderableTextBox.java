@@ -56,7 +56,7 @@ public class GUIRenderableTextBox extends GUITextBox {
 		if (this.visible) {
 			
 			//Check to see if the text fits in the box
-			if (this.font.getWidth(this.text) > this.width - 4)
+			if (this.font.getWidth(this.text) > this.width - this.font.fontSize / 2)
 				//Remove the last letter
 				this.text = this.text.substring(0 , this.text.length() - 1);
 			
@@ -108,11 +108,11 @@ public class GUIRenderableTextBox extends GUITextBox {
 			
 			//Render the text
 			if (Settings.Video.OpenGL)
-				this.font.render(renderedText , this.position.x + 2 ,
+				this.font.render(renderedText , this.position.x + 4 ,
 						(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
 			else
 				//Not a clue why it can't be the same as OpenGL
-				this.font.render(renderedText , this.position.x + 2 ,
+				this.font.render(renderedText , this.position.x + 4 ,
 						(this.position.y + (this.height / 2)) + (this.font.getHeight(this.text) / 4));
 		}
 	}

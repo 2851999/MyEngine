@@ -66,7 +66,7 @@ public class BitmapFont {
 			double cellY = (Math.floor((int) asciiCode / this.gridHeight)) * this.cellHeight;
 			
 			//Render the current letter
-			BasicRenderer.renderImage(this.image , x + (this.fontSize / 1) , y - (this.fontSize / 1.25) , (this.cellWidth / this.cellHeight) * this.fontSize , this.fontSize , cellX , cellY , cellWidth , cellHeight);
+			BasicRenderer.renderImage(this.image , x + 6 , y - (this.fontSize / 1.25) , (this.cellWidth / this.cellHeight) * this.fontSize , this.fontSize , cellX , cellY , cellWidth , cellHeight);
 			
 			x += ((this.cellWidth / this.cellHeight) * this.fontSize) / 1.5;
 		}
@@ -77,7 +77,7 @@ public class BitmapFont {
 		//The width of the text
 		double width = 0;
 		//Set the width to the cellSize times the number of letters
-		width = text.length() * ((this.cellWidth / this.cellHeight) * this.fontSize);
+		width = (text.length() *  (((this.cellWidth / this.cellHeight) * this.fontSize) / 1.5));
 		return width;
 	}
 	
