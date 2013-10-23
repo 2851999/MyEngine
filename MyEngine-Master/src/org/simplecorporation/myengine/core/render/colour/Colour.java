@@ -37,7 +37,30 @@ public class Colour {
 	/* The alpha value */
 	public double a;
 	
-	/* The constructor of a colour */
+	/* The constructor of a colour r,g,b using integers */
+	public Colour(int r , int g , int b) {
+		this.r = r / 255;
+		this.g = g / 255;
+		this.b = b / 255;
+	}
+	
+	/* The constructor of a colour r,g,b,a using integers */
+	public Colour(int r , int g , int b , int a) {
+		this.r = r / 255;
+		this.g = g / 255;
+		this.b = b / 255;
+		this.a = a / 255;
+	}
+	
+	/* The constructor of a colour r,g,b using doubles*/
+	public Colour(double r , double g , double b) {
+		this.r = r;
+		this.g = g;
+		this.b = b;
+		this.a = 1.0;
+	}
+	
+	/* The constructor of a colour r,g,b,a using doubles */
 	public Colour(double r , double g , double b , double a) {
 		this.r = r;
 		this.g = g;

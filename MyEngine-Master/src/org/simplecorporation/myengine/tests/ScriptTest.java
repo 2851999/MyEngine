@@ -14,13 +14,13 @@ public class ScriptTest extends Game {
 	
 	public ScriptTest() {
 		Settings.Window.Title = "Script Test";
-		Settings.Video.OpenGL = false;
+		Settings.Video.OpenGL = true;
 		createGame();
 	}
 	
 	public void gameCreated() {
 		Library.findAndAddLibraries();
-		script = new Script("myenginescripttest.txt");
+		script = new Script("C:/Users/Joel/Documents/myenginescripttest.txt");
 		script.parse();
 		script.callMethod("setupPanel()");
 	}
