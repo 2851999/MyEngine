@@ -20,7 +20,7 @@ public class ScriptTest extends Game {
 	
 	public void gameCreated() {
 		Library.findAndAddLibraries();
-		script = new Script("C:/Users/Joel/Documents/myenginescripttest.txt");
+		script = new Script("myenginescripttest.txt");
 		script.parse();
 		script.callMethod("setupPanel()");
 	}

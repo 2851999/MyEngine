@@ -10,75 +10,55 @@
 
 package org.simplecorporation.myengine.core.gui.checkbox;
 
-import org.simplecorporation.myengine.core.gui.button.listener.GUICheckBoxListener;
 import org.simplecorporation.myengine.core.image.Image;
-import org.simplecorporation.myengine.settings.Settings;
+import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
+import org.simplecorporation.myengine.core.render.colour.Colour;
 
-public class GUIImageCheckBox {
+public class GUIImageCheckBox extends GUICheckBox {
 	
-	/* The java GUIImageCheckBox */
-	public JavaGUIImageCheckBox javaGUIImageCheckBox;
-	
-	/* The android GUIImageCheckBox */
-	public AndroidGUIImageCheckBox androidGUIImageCheckBox;
+	/* The images */
+	public Image[] images;
 	
 	/* The constructor */
 	public GUIImageCheckBox(String name , Image[] images) {
-		//Create the right GUIImageCheckBox
-		if (! Settings.Android)
-			this.javaGUIImageCheckBox = new JavaGUIImageCheckBox(name , images);
-		else if (Settings.Android)
-			this.androidGUIImageCheckBox = new AndroidGUIImageCheckBox(name , images);
-	}
-	
-	/* The update method */
-	public void update() {
-		//Update the right GUIImageTextBox
-		if (! Settings.Android)
-			this.javaGUIImageCheckBox.update();
-		else if (Settings.Android)
-			this.androidGUIImageCheckBox.update();
+		//Call the super constructor
+		super(name);
+		//Set the default values of the variables
+		this.images = images;
+		//Set the width and height of the box
+		this.width = images[0].getWidth();
+		this.height = images[0].getHeight();
 	}
 	
 	/* The render method */
-	public void render() {
-		//Render the right GUIImageTextBox
-		if (! Settings.Android)
-			this.javaGUIImageCheckBox.render();
-		else if (Settings.Android)
-			this.androidGUIImageCheckBox.render();
+	protected void renderComponent() {
+		//Render the check box based on whether it is checked or not
+		
+		//Set the colour to white
+		BasicRenderer.setColour(Colour.WHITE);
+		
+		//The image to be rendered
+		Image renderImage = null;
+		
+		//Check what image should be used then set it
+		if (this.checked && this.selected && this.images.length == 4) {
+			renderImage = this.images[3];
+		} else if (this.checked && ! this.selected && this.images.length == 4) {
+			renderImage = this.images[2];
+		} else if (this.selected && this.images.length == 4) {
+			renderImage = this.images[1];
+		} else if (this.checked && this.images.length == 2) {
+			renderImage = this.images[1];
+		} else if (this.checked && this.images.length == 3) {
+			renderImage = this.images[2];
+		} else if (this.selected && this.images.length == 3) {
+			renderImage = this.images[1];
+		} else {
+			renderImage = this.images[0];
+		}
+		
+		BasicRenderer.renderImage(renderImage , this.position.x , this.position.y , this.width , this.height);
+		
 	}
-	
-	/* The method to get the base */
-	public GUICheckBoxBase getBase() {
-		if (! Settings.Android)
-			return this.javaGUIImageCheckBox;
-		else if (Settings.Android)
-			return this.androidGUIImageCheckBox;
-		else
-			return null;
-	}
-	
-	/* Methods to set and return things in the base */
-	public void setX(double x) { this.getBase().position.x = x; }
-	public void setY(double y) { this.getBase().position.y = y; }
-	public void setWidth(double width) { this.getBase().width = width; }
-	public void setHeight(double height) { this.getBase().height = height; }
-	public void setVisible(boolean visible) { this.getBase().visible = visible; }
-	
-	public double getX() { return this.getBase().position.x; }
-	public double getY() { return this.getBase().position.y; }
-	public double getWidth() { return this.getBase().width; }
-	public double getHeight() { return this.getBase().height; }
-	public String getName() { return this.getBase().name; }
-	public boolean isVisible() { return this.getBase().visible; }
-	
-	//Base specific
-	public void setSelected(boolean selected) { this.getBase().selected = selected; }
-	public void setClicked(boolean clicked) { this.getBase().clicked = clicked; }
-	public void addListener(GUICheckBoxListener listener) { this.getBase().addListener(listener); }
-	
-	public boolean isSelected() { return this.getBase().selected; }
-	public boolean isClicked() { return this.getBase().isClicked(); }
 	
 }

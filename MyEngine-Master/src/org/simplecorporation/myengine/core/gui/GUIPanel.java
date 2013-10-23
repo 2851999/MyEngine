@@ -110,7 +110,7 @@ public class GUIPanel {
 					FontUtils.buildGUIFont(line[6] , parseColour(line[7]) , Integer.parseInt(line[8])) ,
 					Integer.parseInt(line[9]) , Integer.parseInt(line[10]) , Integer.parseInt(line[11]) , Integer.parseInt(line[12]));
 			//Add the component to the components
-			this.add(button.getBase());
+			this.add(button);
 		} else if (line[0].equals("GUIImageButton")) {
 			//Create the component and add it to this panel
 			GUIImageButton button = GUIBuilder.createImageButton(
@@ -119,7 +119,7 @@ public class GUIPanel {
 					FontUtils.buildGUIFont(line[6] , parseColour(line[7]) , Integer.parseInt(line[8])) ,
 					Integer.parseInt(line[9]) , Integer.parseInt(line[10]) , Integer.parseInt(line[11]) , Integer.parseInt(line[12]));
 			//Add the component to the components
-			this.add(button.getBase());
+			this.add(button);
 		} else if (line[0].equals("GUIRenderableTextBox")) {
 			//Check whether it should be masked or not
 			if (line.length > 11) {
@@ -130,7 +130,7 @@ public class GUIPanel {
 						FontUtils.buildGUIFont(line[4] , parseColour(line[5]) , Integer.parseInt(line[6])) , line[7].charAt(0) ,
 						Integer.parseInt(line[8]) , Integer.parseInt(line[9]) , Integer.parseInt(line[10]) , Integer.parseInt(line[11]));
 				//Add the component to the components
-				this.add(textbox.getBase());
+				this.add(textbox);
 			} else {
 				//Create the component and add it to this panel
 				GUIRenderableTextBox textbox = GUIBuilder.createRenderableTextBox(
@@ -139,7 +139,7 @@ public class GUIPanel {
 						FontUtils.buildGUIFont(line[4] , parseColour(line[5]) , Integer.parseInt(line[6])) ,
 						Integer.parseInt(line[7]) , Integer.parseInt(line[8]) , Integer.parseInt(line[9]) , Integer.parseInt(line[10]));
 				//Add the component to the components
-				this.add(textbox.getBase());
+				this.add(textbox);
 			}
 		} else if (line[0].equals("GUIImageTextBox")) {
 			//Check whether it should be masked or not
@@ -151,7 +151,7 @@ public class GUIPanel {
 						FontUtils.buildGUIFont(line[3] , parseColour(line[4]) , Integer.parseInt(line[5])) , line[6].charAt(0) ,
 						Integer.parseInt(line[7]) , Integer.parseInt(line[8]) , Integer.parseInt(line[9]) , Integer.parseInt(line[10]));
 				//Add the component to the components
-				this.add(textbox.getBase());
+				this.add(textbox);
 			} else {
 				//Create the component and add it to this panel
 				GUIImageTextBox textbox = GUIBuilder.createImageTextBox(
@@ -160,7 +160,7 @@ public class GUIPanel {
 						FontUtils.buildGUIFont(line[3] , parseColour(line[4]) , Integer.parseInt(line[5])) ,
 						Integer.parseInt(line[7]) , Integer.parseInt(line[8]) , Integer.parseInt(line[9]) , Integer.parseInt(line[10]));
 				//Add the component to the components
-				this.add(textbox.getBase());
+				this.add(textbox);
 			}
 		} else if (line[0].equals("GUIRenderableLoadingBar")) {
 			//Create the component and add it to this panel
@@ -188,7 +188,7 @@ public class GUIPanel {
 					Integer.parseInt(line[4]) , Integer.parseInt(line[5]) ,
 					Integer.parseInt(line[6]) , Integer.parseInt(line[7]) , Integer.parseInt(line[8]) , Integer.parseInt(line[9]));
 			//Add the component to the components
-			this.add(checkBox.getBase());
+			this.add(checkBox);
 		} else if (line[0].equals("GUIImageCheckBox")) {
 			//Create the component and add it to this panel
 			GUIImageCheckBox checkBox = GUIBuilder.createImageCheckBox(
@@ -196,7 +196,7 @@ public class GUIPanel {
 					new Image[] { parseImage(line[2] , filePath) , parseImage(line[3] , filePath) , parseImage(line[4] , filePath) } ,
 					Integer.parseInt(line[5]) , Integer.parseInt(line[6]) , Integer.parseInt(line[7]) , Integer.parseInt(line[8]));
 			//Add the component to the components
-			this.add(checkBox.getBase());
+			this.add(checkBox);
 		}
 	}
 	
