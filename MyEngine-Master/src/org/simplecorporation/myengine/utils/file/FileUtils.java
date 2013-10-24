@@ -169,4 +169,14 @@ public class FileUtils {
 		}
 	}
 	
+	/* The method to create a directory and return whether it was successful */
+	public static boolean createDir(String dir) {
+		return new File(asFileString(dir)).mkdir();
+	}
+	
+	/* The method to create directories and return whether it was successful */
+	public static boolean createDirs(String dirs) {
+		return new File(asFileString(dirs)).mkdirs();
+	}
+	
 }
