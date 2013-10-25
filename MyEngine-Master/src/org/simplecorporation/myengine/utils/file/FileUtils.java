@@ -188,14 +188,16 @@ public class FileUtils {
 		//All of the individual files to be copied
 		LinkedList<String> filesToCopy = new LinkedList<String>();
 		
+		//All of the individual folder to be created
+		LinkedList<String> foldersToCreate = new LinkedList<String>();
+		
 		//Add all of the files to the list
-		addAllFiles(filePath1 , "" , filesToCopy);
+		addAllFiles(filePath1 , "" , filesToCopy , foldersToCreate);
 		
 		//Make all of the needed directories
-		for (int a = 0; a < filesToCopy.size(); a++) {
+		for (int a = 0; a < foldersToCreate.size(); a++) {
 			//Create the current directory
-			wasSuccessful = createDirs(filePath2 + filesToCopy.get(a).substring(0 ,
-					filesToCopy.get(a).lastIndexOf(new File(asFileString(filesToCopy.get(a))).getName())));
+			wasSuccessful = createDirs(filePath2 + foldersToCreate.get(a));
 		}
 		
 		//Try and copy all of the files
@@ -209,7 +211,7 @@ public class FileUtils {
 	}
 	
 	/* The method to add all of the file paths in a folder to a linked list */
-	public static void addAllFiles(String originalFolderPath , String folderPath , LinkedList<String> files) {
+	public static void addAllFiles(String originalFolderPath , String folderPath , LinkedList<String> files , LinkedList<String> folders) {
 		//The list of files in the current directory
 		LinkedList<String> filesInCurrentDir = listFiles(originalFolderPath + folderPath);
 		
@@ -219,8 +221,10 @@ public class FileUtils {
 			String filePath = folderPath + "/" + filesInCurrentDir.get(a);
 			//Check if the current file is a directory
 			if (isDirectory(originalFolderPath + "/" + filePath)) {
+				//Add the folder to the folders list
+				folders.add(filePath);
 				//The current file is another directory so recall this method
-				addAllFiles(originalFolderPath , filePath , files);
+				addAllFiles(originalFolderPath , filePath , files , folders);
 			} else {
 				//The current file is a file to be copied so add the current
 				//files's path to the files list
