@@ -87,10 +87,10 @@ public class Settings {
 				Settings.Window.Border = split[1].equals("true");
 			else if (split[0].equals("Window.Size.Width"))
 				//Set the value
-				Settings.Window.Size.Width = Integer.parseInt(split[1]);
+				Settings.Window.Size.Width = Float.parseFloat(split[1]);
 			else if (split[0].equals("Window.Size.Height"))
 				//Set the value
-				Settings.Window.Size.Height = Integer.parseInt(split[1]);
+				Settings.Window.Size.Height = Float.parseFloat(split[1]);
 			else if (split[0].equals("Video.MaxFPS"))
 				//Set the value
 				Settings.Video.MaxFPS = Integer.parseInt(split[1]);
