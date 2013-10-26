@@ -129,6 +129,8 @@ public class Settings {
 		fileText.add("Video.AntiAliasing: " + Settings.Video.AntiAliasing);
 		fileText.add("Audio.SoundEffectVolume: " + Settings.Audio.SoundEffectVolume);
 		fileText.add("Audio.MusicVolument: " + Settings.Audio.MusicVolume);
+		//Save the file
+		FileUtils.write(filePath , fileText);
 	}
 	
 }
