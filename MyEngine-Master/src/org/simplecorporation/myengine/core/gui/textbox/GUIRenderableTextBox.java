@@ -92,7 +92,7 @@ public class GUIRenderableTextBox extends GUITextBox {
 				//Set the rendered text
 				renderedText = this.defaultText;
 				//Set the colour
-				renderColour.a = renderColour.a / 2;
+				//renderColour.a = renderColour.a / 2; THIS LINE STOPPED RENDERING (I DONT KNOW HOW TO FIX)
 			}
 			
 			//Check if the cursor is showing

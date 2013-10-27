@@ -73,4 +73,54 @@ public class Colour {
 		return new Colour(this.r , this.g , this.b , this.a);
 	}
 	
+	/* The get/set methods */
+	
+	public void setColour(Colour colour) {
+		this.setR(colour.getR());
+		this.setG(colour.getG());
+		this.setB(colour.getB());
+		this.setA(colour.getA());
+	}
+	
+	public void setColour(int r , int g , int b) {
+		this.r = r;
+		this.g = g;
+		this.b = b;
+	}
+	
+	public void setColour(int r , int g , int b , int a) {
+		this.r = r / 255;
+		this.g = g / 255;
+		this.b = b / 255;
+		this.a = a / 255;
+	}
+	
+	public void setColour(double r , double g , double b) {
+		this.r = r;
+		this.g = g;
+		this.b = b;
+	}
+	
+	public void setColour(double r , double g , double b , double a) {
+		this.r = r;
+		this.g = g;
+		this.b = b;
+		this.a = a;
+	}
+	
+	public void setR(int r) { this.r = r / 255; }
+	public void setR(double r) { this.r = r; }
+	public void setG(int g) { this.g = g / 255; }
+	public void setG(double g) { this.g = g; }
+	public void setB(int b) { this.b = b / 255; }
+	public void setB(double b) { this.b = b; }
+	public void setA(int a) { this.a = a; }
+	public void setA(double a) { this.a = a / 255; }
+	
+	public double getR() { return this.r; }
+	public double getG() { return this.g; }
+	public double getB() { return this.b; }
+	public double getA() { return this.a; }
+	
+	
 }
