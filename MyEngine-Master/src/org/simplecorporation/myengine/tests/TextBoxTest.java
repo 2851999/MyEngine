@@ -15,7 +15,7 @@ public class TextBoxTest extends Game {
 	
 	public TextBoxTest() {
 		Settings.Window.Title = "TextBox Test";
-		Settings.Video.OpenGL = false;
+		Settings.Video.OpenGL = true;
 		//Create
 		createGame();
 	}

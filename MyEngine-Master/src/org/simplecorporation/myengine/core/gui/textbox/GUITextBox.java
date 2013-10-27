@@ -47,12 +47,6 @@ public abstract class GUITextBox extends GUIComponent {
 	/* Is backspace pressed */
 	public boolean backspace;
 	
-	/* The last time backspace was pressed */
-	public long backspaceLastPressed;
-	
-	/* The time between backspace being pressed */
-	public long timeBetweenBackspace;
-	
 	/* Is another character pressed that is unknown */
 	public boolean unknowncharacter;
 	
@@ -79,8 +73,6 @@ public abstract class GUITextBox extends GUIComponent {
 		this.cursorLastBlink = System.currentTimeMillis();
 		this.timeBetweenBlink = 500;
 		this.backspace = false;
-		this.timeBetweenBackspace = 50;
-		this.backspaceLastPressed = System.currentTimeMillis();
 		this.unknowncharacter = false;
 		this.shift = false;
 		this.alreadyHadShift = false;
@@ -96,15 +88,6 @@ public abstract class GUITextBox extends GUIComponent {
 				//Set the last blink
 				this.cursorLastBlink = System.currentTimeMillis();
 				this.cursorShown = !this.cursorShown;
-			}
-			
-			//Check if backspace was pressed
-			if (this.backspace && System.currentTimeMillis() - this.backspaceLastPressed >= this.timeBetweenBackspace) {
-				//Set the last backspace time
-				this.backspaceLastPressed = System.currentTimeMillis();
-				//Remove the last letter if there is one
-				if (this.text.length() > 0)
-					this.text = this.text.substring(0 , this.text.length() - 1);
 			}
 			
 			//Check and remove any unwanted characters
@@ -156,7 +139,9 @@ public abstract class GUITextBox extends GUIComponent {
 				//Check what key was pressed
 				if (e.keyCode == Keyboard.KEY_BACK) {
 					this.backspace = true;
-					this.backspaceLastPressed = System.currentTimeMillis() - this.timeBetweenBackspace;
+					//Remove the last letter if there is one
+					if (this.text.length() > 0)
+						this.text = this.text.substring(0 , this.text.length() - 1);
 				} else if (e.keyCode == Keyboard.KEY_LSHIFT || e.keyCode == Keyboard.KEY_RSHIFT) {
 					this.shift = true;
 					this.alreadyHadShift = false;
@@ -165,12 +150,66 @@ public abstract class GUITextBox extends GUIComponent {
 				//Check what key was pressed
 				if (e.keyCode == KeyEvent.VK_BACK_SPACE) {
 					this.backspace = true;
-					this.backspaceLastPressed = System.currentTimeMillis() - this.timeBetweenBackspace;
+					//Remove the last letter if there is one
+					if (this.text.length() > 0)
+						this.text = this.text.substring(0 , this.text.length() - 1);
 				}
 			}
 			
 			if (e.keyChar == '\u0000')
 				this.unknowncharacter = true;
+			
+			//Check if using backspace
+			if (! this.backspace) {
+				//Check the rendering mode
+				if (Settings.Video.OpenGL){
+					//Check it wasn't space
+					if (e.keyCode == Keyboard.KEY_SPACE) {
+						//Add a space
+						this.text += " ";
+					} else if (e.keyCode == Keyboard.KEY_RETURN) {
+						
+					} else if (this.shift) {
+						if (! this.alreadyHadShift) {
+							this.alreadyHadShift = true;
+							this.text += e.keyChar;
+						} else {
+							this.alreadyHadShift = false;
+							this.shift = false;
+						}
+					} else if (! this.releasedShiftKey && ! this.unknowncharacter && e.keyCode != Keyboard.KEY_BACK) {
+						//Check if the the character was null
+						if (e.keyChar != ' ' && (e.keyChar != '\u0000')) {
+							//Add the character to the text
+							this.text += e.keyChar;
+							//Set the cursor time
+							this.cursorShown = false;
+							this.cursorLastBlink = System.currentTimeMillis();
+						}
+					} else {
+						this.releasedShiftKey = false;
+					}
+				} else {
+					//Check it wasn't space
+					if (e.keyCode == KeyEvent.VK_SPACE) {
+						//Add a space
+						this.text += " ";
+					} else if (e.keyCode == KeyEvent.VK_ENTER) {
+						
+					} else if (! this.releasedShiftKey && ! this.unknowncharacter && e.keyCode != KeyEvent.VK_BACK_SPACE) {
+						//Check if the the character was null
+						if (e.keyChar != ' ' && (e.keyChar != '\u0000')) {
+							//Add the character to the text
+							this.text += e.keyChar;
+							//Set the cursor time
+							this.cursorShown = false;
+							this.cursorLastBlink = System.currentTimeMillis();
+						}
+					} else {
+						this.releasedShiftKey = false;
+					}
+				}
+			}
 		}
 	}
 	
@@ -201,57 +240,7 @@ public abstract class GUITextBox extends GUIComponent {
 	
 	/* The key typed event */
 	public void onKeyTyped(KeyboardEvent e) {
-		//Check if this is visible and selected
-		if (this.visible && this.selected && ! this.backspace) {
-			//Check what rendering mode is being used
-			if (Settings.Video.OpenGL){
-				//Check it wasn't space
-				if (e.keyCode == Keyboard.KEY_SPACE) {
-					//Add a space
-					this.text += " ";
-				} else if (e.keyCode == Keyboard.KEY_RETURN) {
-					
-				} else if (this.shift) {
-					if (! this.alreadyHadShift) {
-						this.alreadyHadShift = true;
-						this.text += e.keyChar;
-					} else {
-						this.alreadyHadShift = false;
-						this.shift = false;
-					}
-				} else if (! this.releasedShiftKey && this.unknowncharacter && e.keyCode != Keyboard.KEY_BACK) {
-					//Check if the the character was null
-					if (e.keyChar != ' ' && (e.keyChar != '\u0000')) {
-						//Add the character to the text
-						this.text += e.keyChar;
-						//Set the cursor time
-						this.cursorShown = false;
-						this.cursorLastBlink = System.currentTimeMillis();
-					}
-				} else {
-					this.releasedShiftKey = false;
-				}
-			} else {
-				//Check it wasn't space
-				if (e.keyCode == KeyEvent.VK_SPACE) {
-					//Add a space
-					this.text += " ";
-				} else if (e.keyCode == KeyEvent.VK_ENTER) {
-					
-				} else if (! this.releasedShiftKey && ! this.unknowncharacter && e.keyCode != KeyEvent.VK_BACK_SPACE) {
-					//Check if the the character was null
-					if (e.keyChar != ' ' && (e.keyChar != '\u0000')) {
-						//Add the character to the text
-						this.text += e.keyChar;
-						//Set the cursor time
-						this.cursorShown = false;
-						this.cursorLastBlink = System.currentTimeMillis();
-					}
-				} else {
-					this.releasedShiftKey = false;
-				}
-			}
-		}
+		
 	}
 	
 	/* The methods to get / set the variables */
