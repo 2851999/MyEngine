@@ -12,6 +12,7 @@ package org.simplecorporation.myengine.core.gui.button;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.core.audio.clip.AudioClip;
 import org.simplecorporation.myengine.core.gui.GUIComponent;
 import org.simplecorporation.myengine.core.gui.button.event.GUIButtonEvent;
 import org.simplecorporation.myengine.core.gui.button.listener.GUIButtonListener;
@@ -28,6 +29,9 @@ public abstract class GUIButton extends GUIComponent {
 	
 	/* The button listeners */
 	public LinkedList<GUIButtonListener> listeners;
+	
+	/* The sound to be played when the button is clicked */
+	public AudioClip soundEffect;
 	
 	/* The constructor */
 	public GUIButton(String name) {
@@ -57,6 +61,11 @@ public abstract class GUIButton extends GUIComponent {
 		
 		//Check if the button is down
 		if (MouseInput.isButtonDown(0) && this.selected) {
+			//Check if the sound effect is null
+			if (this.soundEffect != null) {
+				if (! this.soundEffect.isPlaying())
+					this.soundEffect.play();
+			}
 			//Set clicked to true
 			this.clicked = true;
 			//Call the event

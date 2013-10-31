@@ -64,9 +64,17 @@ public class AndroidAudio {
 	/* The method to load the audio */
 	public void load(int id) {
 		//Check whether OpenGL is being used
-		if (! Settings.Video.OpenGL) {
+		if (! Settings.Video.OpenGL)
 			this.androidAudioClip = MediaPlayer.create(AndroidStore.gameActivity , id);
-		}
+	}
+	
+	/* The method that returns whether the audio is playing */
+	public boolean isPlaying() {
+		//Check whether OpenGL is being used
+		if (! Settings.Video.OpenGL)
+			return this.androidAudioClip.isPlaying();
+		else
+			return false;
 	}
 	
 }

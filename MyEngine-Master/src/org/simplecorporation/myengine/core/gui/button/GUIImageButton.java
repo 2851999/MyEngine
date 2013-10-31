@@ -67,7 +67,7 @@ public class GUIImageButton extends GUIButton {
 			this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
 					(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
 		else
-			//Not a clue why it can't be the same as OpenGL
+			//Different because there is a problem with Java rendering y=0 not on screen
 			this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
 					(this.position.y + (this.height / 2)) + (this.font.getHeight(this.text) / 4));
 	}

@@ -134,7 +134,7 @@ public class JavaWindow {
 				//Check if the window should have a borders
 				if (frame.isUndecorated() == Settings.Window.Border) {	
 					frame.dispose();
-					frame.setUndecorated(!Settings.Window.Border);
+					frame.setUndecorated(! Settings.Window.Border);
 					frame.setVisible(true);
 				}
 			}
