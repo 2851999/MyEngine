@@ -10,7 +10,7 @@
 
 package org.simplecorporation.myengine.core.gui;
 
-import org.simplecorporation.myengine.core.game.entity.AbstractEntity2D;
+import org.simplecorporation.myengine.core.game2d.entity.AbstractEntity2D;
 import org.simplecorporation.myengine.core.input.Input;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;

@@ -188,7 +188,7 @@ public class FileUtils {
 		//All of the individual files to be copied
 		LinkedList<String> filesToCopy = new LinkedList<String>();
 		
-		//All of the individual folder to be created
+		//All of the individual folders to be created
 		LinkedList<String> foldersToCreate = new LinkedList<String>();
 		
 		//Add all of the files to the list
@@ -206,7 +206,37 @@ public class FileUtils {
 			wasSuccessful = copy(filePath1 + filesToCopy.get(a) , filePath2 + filesToCopy.get(a));
 		}
 		
-		//Return whether they copy went successfully
+		//Return whether the move went successfully
+		return wasSuccessful;
+	}
+	
+	/* The method to copy a directory and all of its contents */
+	public static boolean moveDir(String filePath1 , String filePath2) {
+		//The boolean that represents whether it was successful
+		boolean wasSuccessful = true;
+		
+		//All of the individual files to be moved
+		LinkedList<String> filesToMove = new LinkedList<String>();
+		
+		//All of the individual folders to be created
+		LinkedList<String> foldersToMove = new LinkedList<String>();
+		
+		//Add all of the files to the list
+		addAllFiles(filePath1 , "" , filesToMove , foldersToMove);
+		
+		//Make all of the needed directories
+		for (int a = 0; a < foldersToMove.size(); a++) {
+			//Create the current directory
+			wasSuccessful = createDirs(filePath2 + foldersToMove.get(a));
+		}
+		
+		//Try and move all of the files
+		for (int a = 0; a < filesToMove.size(); a++) {
+			//Move the current file
+			wasSuccessful = move(filePath1 + filesToMove.get(a) , filePath2 + filesToMove.get(a));
+		}
+		
+		//Return whether the move went successfully
 		return wasSuccessful;
 	}
 	
