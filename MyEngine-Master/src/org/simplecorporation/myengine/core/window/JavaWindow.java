@@ -107,8 +107,8 @@ public class JavaWindow {
 	/* The method to set the window to the right settings */
 	public static void updateSettings() {
 		//Check if the window settings are right
-		if (frame.getTitle() != Settings.Window.Title || frame.getWidth() != Settings.Window.Size.Width ||
-				frame.getHeight() != Settings.Window.Size.Height || frame.isUndecorated() != Settings.Window.Fullscreen ||
+		if (frame.getTitle() != Settings.Window.Title || frame.getWidth() - frame.getInsets().left + frame.getInsets().right != Settings.Window.Size.Width ||
+				frame.getHeight() + frame.getInsets().top + frame.getInsets().bottom != Settings.Window.Size.Height || frame.isUndecorated() != Settings.Window.Fullscreen ||
 				frame.isUndecorated() != ! Settings.Window.Border) {
 			//Setup the window
 			frame.setTitle(Settings.Window.Title);
@@ -130,7 +130,7 @@ public class JavaWindow {
 				Settings.Window.Size.Height = frame.getHeight();
 			} else {
 				//Set the screen size
-				frame.setSize((int)Settings.Window.Size.Width , (int)Settings.Window.Size.Height);
+				frame.setSize((int)Settings.Window.Size.Width + frame.getInsets().left + frame.getInsets().right , (int)Settings.Window.Size.Height + frame.getInsets().top + frame.getInsets().bottom);
 				//Check if the window should have a borders
 				if (frame.isUndecorated() == Settings.Window.Border) {	
 					frame.dispose();
@@ -164,7 +164,7 @@ public class JavaWindow {
 	/* The method to update the window graphics */
 	public static void updateGraphics() {
 		//Paint the back buffer to the window
-		frame.getGraphics().drawImage(backBuffer , 0 , 0 , frame);
+		frame.getGraphics().drawImage(backBuffer , frame.getInsets().left , frame.getInsets().top , frame);
 		
 		//Set the last frame
 		lastFrameTime = System.currentTimeMillis();

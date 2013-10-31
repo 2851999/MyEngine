@@ -65,13 +65,8 @@ public class GUIRenderableButton extends GUIButton {
 		BasicRenderer.setColour(current);
 		BasicRenderer.renderFilledRectangle(this.position.x , this.position.y , this.width , this.height);
 		//Render the font
-		if (Settings.Video.OpenGL)
-			this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
-					(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
-		else
-			//Different because there is a problem with Java rendering y=0 not on screen
-			this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
-					(this.position.y + (this.height / 2)) + (this.font.getHeight(this.text) / 4));
+		this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
+				(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
 	}
 	
 }

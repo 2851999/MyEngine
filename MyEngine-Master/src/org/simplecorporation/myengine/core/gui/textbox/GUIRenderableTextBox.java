@@ -13,7 +13,6 @@ package org.simplecorporation.myengine.core.gui.textbox;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.settings.Settings;
 
 public class GUIRenderableTextBox extends GUITextBox {
 	
@@ -115,13 +114,8 @@ public class GUIRenderableTextBox extends GUITextBox {
 				this.font.javaGUIFont.colour = renderColour;
 			
 			//Render the text
-			if (Settings.Video.OpenGL)
-				this.font.render(renderText , this.position.x + 4 ,
-						(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
-			else
-				//Not a clue why it can't be the same as OpenGL
-				this.font.render(renderText , this.position.x + 4 ,
-						(this.position.y + (this.height / 2)) + (this.font.getHeight(this.text) / 4));
+			this.font.render(renderText , this.position.x + 4 ,
+					(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
 		}
 	}
 	

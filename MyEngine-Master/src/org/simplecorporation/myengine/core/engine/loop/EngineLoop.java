@@ -16,6 +16,7 @@ import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.core.window.Window;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.font.FontUtils;
+import org.simplecorporation.myengine.utils.system.SystemInfo;
 
 public abstract class EngineLoop {
 	
@@ -94,6 +95,8 @@ public abstract class EngineLoop {
 			if (Settings.Debugging.ShowInfo) {
 				//Render some information using the default font
 				this.font.render("DEBUGGING" , 0 , 0);
+				this.font.render("FPS: " + getFPS() , 0 , 12);
+				this.font.render("Memory Usage: " + ((SystemInfo.getMaxMemory() / (1024 * 1024)) - (SystemInfo.getFreeMemory() / (1024 * 1024))) , 0 , 24);
 			}
 			
 			//Update the window

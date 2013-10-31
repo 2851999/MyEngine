@@ -16,7 +16,6 @@ import org.simplecorporation.myengine.core.gui.button.listener.GUIButtonListener
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
-import org.simplecorporation.myengine.settings.Settings;
 
 public class GUIImageButton extends GUIButton {
 	
@@ -63,13 +62,8 @@ public class GUIImageButton extends GUIButton {
 		//Render the image
 		BasicRenderer.renderImage(current , this.position.x , this.position.y , this.width , this.height);
 		//Render the font
-		if (Settings.Video.OpenGL)
-			this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
-					(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
-		else
-			//Different because there is a problem with Java rendering y=0 not on screen
-			this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
-					(this.position.y + (this.height / 2)) + (this.font.getHeight(this.text) / 4));
+		this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
+				(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
 	}
 	
 }
