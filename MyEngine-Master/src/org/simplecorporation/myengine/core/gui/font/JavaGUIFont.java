@@ -50,6 +50,8 @@ public class JavaGUIFont {
 	public void render(String text , double x , double y) {
 		//Check what rendering mode to use
 		if (! Settings.Android && Settings.Video.OpenGL) {
+			//Set the colour
+			BasicRenderer.setColour(this.colour);
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
 			//Render the text
 			ttfFont.drawString((float)x , (float)y , text , new Color((float)this.colour.r , (float)this.colour.g , (float)this.colour.b , (float)this.colour.a));

@@ -102,6 +102,8 @@ public class Image {
 		try {
 			url = this.getClass().getResource(filePath);
 		} catch (Exception e) {
+			//Log a message
+			Logger.log(new Log("Image getURL()" , "Exception when loading the image " + filePath , LogType.ERROR));
 			e.printStackTrace();
 		}
 		return url;
@@ -113,6 +115,8 @@ public class Image {
 		try {
 			stream = this.getClass().getResourceAsStream(filePath);
 		} catch (Exception e) {
+			//Log a message
+			Logger.log(new Log("Image getURLInputStream()" , "Exception when loading the image " + filePath , LogType.ERROR));
 			e.printStackTrace();
 		}
 		return stream;

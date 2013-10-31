@@ -70,7 +70,7 @@ public class PropertiesFile {
 		//The property's value
 		String propertyValue = "";
 		//Set the property's value
-		propertyValue = this.fileText.get(this.getPropertyLine(propertyName)).split(propertyName + ": ")[0];
+		propertyValue = this.fileText.get(this.getPropertyLine(propertyName)).split(propertyName + ": ")[1];
 		//Return the property's value
 		return propertyValue;
 	}

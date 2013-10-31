@@ -12,15 +12,39 @@ package org.simplecorporation.myengine.core.gui.checkbox;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.core.gui.GUIComponent;
 import org.simplecorporation.myengine.core.gui.button.event.GUICheckBoxEvent;
 import org.simplecorporation.myengine.core.gui.button.listener.GUICheckBoxListener;
 import org.simplecorporation.myengine.core.input.MouseInput;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
+import org.simplecorporation.myengine.core.input.event.TouchEvent;
 
-public abstract class JavaGUICheckBox extends GUICheckBoxBase {
+public abstract class GUICheckBox extends GUIComponent {
+	
+	/* Is the button selected */
+	public boolean selected;
+	
+	/* Is the button clicked */
+	public boolean clicked;
+	
+	/* Is this checked */
+	public boolean checked;
+	
+	/* The last time clicked */
+	public long lastTimeClicked;
+	
+	/* The wait time for being clicked */
+	public long clickedWait;
+	
+	/* The size of the check */
+	public double checkWidth;
+	public double checkHeight;
+	
+	/* The button listeners */
+	public LinkedList<GUICheckBoxListener> listeners;
 	
 	/* The constructor */
-	public JavaGUICheckBox(String name) {
+	public GUICheckBox(String name) {
 		//Call the super constructor
 		super(name);
 		//Set selected, clicked and checked to false
@@ -91,5 +115,60 @@ public abstract class JavaGUICheckBox extends GUICheckBoxBase {
 			//Return false
 			return false;
 	}
+	
+	/* The method that returns whether the button is clicked */
+	public boolean isClicked() {
+		//Check whether the button is visible
+		if (this.visible) {
+			//Check if the button has been clicked
+			if (this.clicked) {
+				//Set clicked to false then return true
+				this.clicked = false;
+				return true;
+			} else {
+				//Return false
+				return false;
+			}
+		} else
+			//Return false
+			return false;
+	}
+	
+	/* The method that returns whether the button is checked */
+	public boolean isChecked() {
+		//Return the value
+		return this.checked;
+	}
+	
+	/* The method to add a listener to the button */
+	public void addListener(GUICheckBoxListener listener) {
+		//Add the listener to the linked list
+		this.listeners.add(listener);
+	}
+	
+	/* The onTouch event */
+	public void onTouch(TouchEvent e) {
+		//Check if this button was clicked
+		if (this.visible) {
+			if (e.getEvent() == TouchEvent.EVENT_DOWN) {
+				if (this.getAndroidBounds().contains((int)e.x , (int)e.y)) {
+					//Check if the wait is over
+					if (System.currentTimeMillis() - this.lastTimeClicked >= this.clickedWait) {
+						//Set the last time
+						this.lastTimeClicked = System.currentTimeMillis();
+						//Set clicked to true
+						this.clicked = true;
+						//Set toggle checked
+						this.checked = ! this.checked;
+						//Call the event
+						for (int a = 0; a < this.listeners.size(); a++) {
+							this.listeners.get(a).checkBoxToggled(new GUICheckBoxEvent(this.name , this.checked));
+						}
+					}
+				}
+			}
+		}
+	}
+
 	
 }

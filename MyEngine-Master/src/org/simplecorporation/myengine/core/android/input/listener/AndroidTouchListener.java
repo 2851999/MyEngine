@@ -14,6 +14,6 @@ import android.view.MotionEvent;
 
 public interface AndroidTouchListener {
 	
-	public void onTouch(MotionEvent event);
+	public void onTouch(MotionEvent e);
 	
 }

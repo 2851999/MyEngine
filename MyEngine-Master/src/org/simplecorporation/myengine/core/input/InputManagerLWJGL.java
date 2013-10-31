@@ -82,6 +82,8 @@ public class InputManagerLWJGL {
 	
 	/* The method to check the keyboard */
 	public static void checkKeyboard() {
+		//Enable repeat events (To allow for holding down keys etc.)
+		Keyboard.enableRepeatEvents(true);
 		//Check for an event
 		while (Keyboard.next()) {
 			if (Keyboard.getEventKeyState()) {

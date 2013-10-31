@@ -21,13 +21,13 @@ public class CheckBoxButtonTest extends Game {
 	
 	public void gameCreated() {
 		checkBox = new GUIRenderableCheckBox("CheckBox" , Colour.WHITE , Colour.BLUE);
-		checkBox.getBase().visible = true;
-		checkBox.getBase().position.x = 100;
-		checkBox.getBase().position.y = 100;
-		checkBox.getBase().width = 20;
-		checkBox.getBase().height = 20;
-		checkBox.getBase().checkWidth = 10;
-		checkBox.getBase().checkHeight = 10;
+		checkBox.visible = true;
+		checkBox.position.x = 100;
+		checkBox.position.y = 100;
+		checkBox.width = 20;
+		checkBox.height = 20;
+		checkBox.checkWidth = 10;
+		checkBox.checkHeight = 10;
 	}
 	
 	public void gameUpdate() {

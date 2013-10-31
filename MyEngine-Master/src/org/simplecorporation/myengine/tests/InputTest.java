@@ -6,6 +6,7 @@ import org.simplecorporation.myengine.core.input.Input;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
+import org.simplecorporation.myengine.core.input.event.TouchEvent;
 import org.simplecorporation.myengine.core.input.listener.InputListener;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
@@ -99,6 +100,12 @@ public class InputTest extends EngineLoop implements InputListener {
 	@Override
 	public void onKeyTyped(KeyboardEvent e) {
 		System.out.println("KeyTyped " + e.keyChar + " " + e.keyCode);
+	}
+
+	@Override
+	public void onTouch(TouchEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

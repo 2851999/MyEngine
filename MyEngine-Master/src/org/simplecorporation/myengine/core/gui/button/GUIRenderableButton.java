@@ -10,76 +10,68 @@
 
 package org.simplecorporation.myengine.core.gui.button;
 
+import java.util.LinkedList;
+
 import org.simplecorporation.myengine.core.gui.button.listener.GUIButtonListener;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
+import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.settings.Settings;
 
-public class GUIRenderableButton {
+public class GUIRenderableButton extends GUIButton {
 	
-	/* The java GUIRenderableButton */
-	public JavaGUIRenderableButton javaGUIRenderableButton;
+	/* The text */
+	public String text;
 	
-	/* The android GUIRenderableButton */
-	public AndroidGUIRenderableButton androidGUIRenderableButton;
+	/* The colours */
+	public Colour[] colours;
+	
+	/* The font */
+	public GUIFont font;
 	
 	/* The constructor */
 	public GUIRenderableButton(String name , String text , Colour[] colours , GUIFont font) {
-		//Create the right GUIImageCheckBox
-		if (! Settings.Android)
-			this.javaGUIRenderableButton = new JavaGUIRenderableButton(name , text , colours , font);
-		else if (Settings.Android)
-			this.androidGUIRenderableButton = new AndroidGUIRenderableButton(name , text , colours , font);
+		//Call the super constructor
+		super(name);
+		//Assign the text
+		this.text = text;
+		//Assign the colours
+		this.colours = colours;
+		//Assign the font
+		this.font = font;
+		//Set selected and clicked to false
+		this.selected = false;
+		this.clicked = false;
+		//Create the linked list
+		this.listeners = new LinkedList<GUIButtonListener>();
 	}
 	
-	/* The update method */
-	public void update() {
-		//Update the right GUIImageTextBox
-		if (! Settings.Android)
-			this.javaGUIRenderableButton.update();
-		else if (Settings.Android)
-			this.androidGUIRenderableButton.update();
-	}
-	
-	/* The render method */
-	public void render() {
-		//Render the right GUIImageTextBox
-		if (! Settings.Android)
-			this.javaGUIRenderableButton.render();
-		else if (Settings.Android)
-			this.androidGUIRenderableButton.render();
-	}
-	
-	/* The method to get the base */
-	public GUIButtonBase getBase() {
-		if (! Settings.Android)
-			return this.javaGUIRenderableButton;
-		else if (Settings.Android)
-			return this.androidGUIRenderableButton;
+	/* The method to render the button */
+	protected void renderComponent() {
+		//The current image
+		Colour current = this.colours[0];
+		//Render the right colour
+		if (! this.selected && ! this.clicked)
+			current = this.colours[0];
+		else if (this.selected && this.colours.length > 1 && ! Settings.Android)
+			current = this.colours[1];
+		else if (this.clicked && this.colours.length > 2)
+			current = this.colours[2];
+		//Buttons on android can't be selected so for android colour 2 in
+		//the list is shown when the button is clicked
+		else if (this.clicked && Settings.Android && colours.length > 1)
+			current = this.colours[1];
+		//Render the rectangle
+		BasicRenderer.setColour(current);
+		BasicRenderer.renderFilledRectangle(this.position.x , this.position.y , this.width , this.height);
+		//Render the font
+		if (Settings.Video.OpenGL)
+			this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
+					(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
 		else
-			return null;
+			//Not a clue why it can't be the same as OpenGL
+			this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
+					(this.position.y + (this.height / 2)) + (this.font.getHeight(this.text) / 4));
 	}
-	
-	/* Methods to set and return things in the base */
-	public void setX(double x) { this.getBase().position.x = x; }
-	public void setY(double y) { this.getBase().position.y = y; }
-	public void setWidth(double width) { this.getBase().width = width; }
-	public void setHeight(double height) { this.getBase().height = height; }
-	public void setVisible(boolean visible) { this.getBase().visible = visible; }
-	
-	public double getX() { return this.getBase().position.x; }
-	public double getY() { return this.getBase().position.y; }
-	public double getWidth() { return this.getBase().width; }
-	public double getHeight() { return this.getBase().height; }
-	public String getName() { return this.getBase().name; }
-	public boolean isVisible() { return this.getBase().visible; }
-	
-	//Base specific
-	public void setSelected(boolean selected) { this.getBase().selected = selected; }
-	public void setClicked(boolean clicked) { this.getBase().clicked = clicked; }
-	public void addListener(GUIButtonListener listener) { this.getBase().addListener(listener); }
-	
-	public boolean isSelected() { return this.getBase().selected; }
-	public boolean isClicked() { return this.getBase().isClicked(); }
 	
 }

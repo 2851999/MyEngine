@@ -1,7 +1,7 @@
 package org.simplecorporation.myengine.tests;
 
 import org.simplecorporation.myengine.core.game.Game;
-import org.simplecorporation.myengine.core.game.entity.AnimatedImageEntity2D;
+import org.simplecorporation.myengine.core.game2d.entity.AnimatedImageEntity2D;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;

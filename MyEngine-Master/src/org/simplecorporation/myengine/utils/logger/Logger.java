@@ -15,6 +15,7 @@ import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
 import org.simplecorporation.myengine.settings.Settings;
+import org.simplecorporation.myengine.utils.file.FileUtils;
 
 public class Logger {
 	
@@ -132,6 +133,31 @@ public class Logger {
 			android.util.Log.d("MyEngine" , message);
 		else if (! Settings.Android)
 			System.out.println(message);
+	}
+	
+	/* The method to save the logs */
+	public static void saveLogs(String filePath) {
+		FileUtils.write(filePath , logs);
+	}
+	
+	/* The method to save the debug logs */
+	public static void saveDebugLogs(String filePath) {
+		FileUtils.write(filePath , debugLogs);
+	}
+	
+	/* The method to save the information logs */
+	public static void saveInformationLogs(String filePath) {
+		FileUtils.write(filePath , informationLogs);
+	}
+	
+	/* The method to save the warning logs */
+	public static void saveWarningLogs(String filePath) {
+		FileUtils.write(filePath , warningLogs);
+	}
+	
+	/* The method to save the error logs */
+	public static void saveErrorLogs(String filePath) {
+		FileUtils.write(filePath , errorLogs);
 	}
 	
 }

@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
+import org.simplecorporation.myengine.core.input.event.TouchEvent;
 import org.simplecorporation.myengine.core.input.listener.InputListener;
 
 public class Input {
@@ -81,6 +82,14 @@ public class Input {
 		//Call all the listeners
 		for (int a = 0; a < inputListeners.size(); a++) {
 			inputListeners.get(a).onKeyTyped(e);
+		}
+	}
+	
+	/* The method to call the on touch method */
+	public static void callOnTouch(TouchEvent e) {
+		//Call all of the listeners
+		for (int a = 0; a < inputListeners.size(); a++) {
+			inputListeners.get(a).onTouch(e);
 		}
 	}
 	

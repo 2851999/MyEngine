@@ -31,11 +31,11 @@ public class BitmapFontTest extends Game {
 		font.gridWidth = 16;
 		font.gridHeight = 16;
 		button = new GUIRenderableButton("Button" , "Hello" , new Colour[] { Colour.WHITE , Colour.BLUE , Colour.ORANGE } , new GUIFont(font));
-		button.getBase().visible = true;
-		button.getBase().position.x = 200;
-		button.getBase().position.y = 200;
-		button.getBase().width = 100;
-		button.getBase().height = 30;
+		button.visible = true;
+		button.position.x = 200;
+		button.position.y = 200;
+		button.width = 100;
+		button.height = 30;
 	}
 	
 	public void gameUpdate() {

@@ -17,7 +17,10 @@ import org.simplecorporation.myengine.utils.file.FileUtils;
 public class Settings {
 	
 	/* The version of the engine goes up 1 every development build */
-	public static final String EngineVersion = "V1.0.3.9";
+	public static final String EngineVersion = "V1.0.4.0";
+	
+	/* The type of build this version of the engine is*/
+	public static final String EngineBuild = "Experimental";
 	
 	/* Is using android */
 	public static boolean Android = false;
@@ -84,10 +87,10 @@ public class Settings {
 				Settings.Window.Border = split[1].equals("true");
 			else if (split[0].equals("Window.Size.Width"))
 				//Set the value
-				Settings.Window.Size.Width = Integer.parseInt(split[1]);
+				Settings.Window.Size.Width = Float.parseFloat(split[1]);
 			else if (split[0].equals("Window.Size.Height"))
 				//Set the value
-				Settings.Window.Size.Height = Integer.parseInt(split[1]);
+				Settings.Window.Size.Height = Float.parseFloat(split[1]);
 			else if (split[0].equals("Video.MaxFPS"))
 				//Set the value
 				Settings.Video.MaxFPS = Integer.parseInt(split[1]);
@@ -126,6 +129,8 @@ public class Settings {
 		fileText.add("Video.AntiAliasing: " + Settings.Video.AntiAliasing);
 		fileText.add("Audio.SoundEffectVolume: " + Settings.Audio.SoundEffectVolume);
 		fileText.add("Audio.MusicVolument: " + Settings.Audio.MusicVolume);
+		//Save the file
+		FileUtils.write(filePath , fileText);
 	}
 	
 }
