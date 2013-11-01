@@ -18,7 +18,7 @@ public class ButtonTest extends Game {
 	
 	public ButtonTest() {
 		Settings.Window.Title = "Button Test";
-		Settings.Video.OpenGL = true;
+		Settings.Video.OpenGL = false;
 		Settings.Video.AntiAliasing = true;
 		//Create
 		createGame();
@@ -35,6 +35,7 @@ public class ButtonTest extends Game {
 		button.position.y = 100;
 		button.width = 100;
 		button.height = 30;
+		button.rotationVelocity = 10;
 		
 		button2 = new GUIRenderableButton("Button2" , "Test2" , new Colour[] {
 				Colour.ORANGE ,

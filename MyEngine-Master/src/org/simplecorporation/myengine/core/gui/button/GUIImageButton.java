@@ -60,7 +60,7 @@ public class GUIImageButton extends GUIButton {
 		else if (this.clicked && this.images.length > 2)
 			current = this.images[2];
 		//Render the image
-		BasicRenderer.renderImage(current , this.position.x , this.position.y , this.width , this.height);
+		BasicRenderer.renderImage(current , this.position.x , this.position.y , this.width , this.height , this.rotation);
 		//Render the font
 		this.font.render(this.text , (this.position.x + (this.width) / 2) - (this.font.getWidth(this.text) / 2) ,
 				(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));

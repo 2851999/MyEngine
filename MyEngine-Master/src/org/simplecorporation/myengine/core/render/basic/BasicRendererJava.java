@@ -11,6 +11,7 @@
 package org.simplecorporation.myengine.core.render.basic;
 
 import java.awt.Color;
+import java.awt.geom.AffineTransform;
 
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
@@ -48,10 +49,31 @@ public class BasicRendererJava {
 		JavaWindow.g2d.drawImage(image.getJavaImage() , (int) x , (int) y , JavaWindow.frame);
 	}
 	
+	/* The method to render an image with a rotation */
+	public static void renderImage(Image image , double x , double y , double rotation) {
+		//Setup the AffineTransform
+		AffineTransform at =  new AffineTransform();
+		at.translate(x , y);
+		at.rotate(rotation);
+		//Render the image
+		JavaWindow.g2d.drawImage(image.getJavaImage() , at , JavaWindow.frame);
+	}
+	
 	/* The method to render an image with a specified width and height */
 	public static void renderImage(Image image , double x , double y , double width , double height) {
 		//Render the image
 		JavaWindow.g2d.drawImage(image.getJavaImage() , (int) x , (int) y , (int) width , (int) height , JavaWindow.frame);
+	}
+	
+	/* The method to render an image with a specified width, height and rotation */
+	public static void renderImage(Image image , double x , double y , double width , double height , double rotation) {
+		//Setup the AffineTransform
+		AffineTransform at =  new AffineTransform();
+		at.translate(x , y);
+		at.rotate(Math.toRadians(rotation) , width / 2 , height / 2);
+		at.scale(width / image.getWidth() , height / image.getHeight());
+		//Render the image
+		JavaWindow.g2d.drawImage(image.getJavaImage() , at , JavaWindow.frame);
 	}
 	
 	/* The method to render an image with a specified x, y, width, height, imageX, imageY, imageWidth, imageHeight */

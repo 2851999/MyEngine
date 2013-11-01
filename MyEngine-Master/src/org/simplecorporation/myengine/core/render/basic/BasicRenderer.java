@@ -101,6 +101,20 @@ public class BasicRenderer {
 			BasicRendererAndroid.renderImage(image , x , y , width , height);
 	}
 	
+	/* The method to render an image with a specified width, height and rotation */
+	public static void renderImage(Image image , double x , double y , double width , double height , double rotation) {
+		//Find out what rendering mode to use
+		if (! Settings.Android && Settings.Video.OpenGL)
+			//Render the image using OpenGL
+			BasicRendererOpenGL.renderImage(image , x , y , width , height , rotation);
+		else if (! Settings.Android && ! Settings.Video.OpenGL)
+			//Render the image using Java
+			BasicRendererJava.renderImage(image , x , y , width , height , rotation);
+		else if (Settings.Android && ! Settings.Video.OpenGL)
+			//Render the image using Android
+			BasicRendererAndroid.renderImage(image , x , y , width , height , rotation);
+	}
+	
 	/* The method to render an image with a specified x, y, width, height, imageX, imageY, imageWidth, imageHeight */
 	public static void renderImage(Image image , double x , double y , double width , double height , double imageX , double imageY ,
 			double imageWidth , double imageHeight) {

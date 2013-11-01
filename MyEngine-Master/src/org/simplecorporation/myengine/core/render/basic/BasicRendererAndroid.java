@@ -64,6 +64,17 @@ public class BasicRendererAndroid {
 		AndroidStore.gameCanvas.drawBitmap(image.getAndroidImage() , matrix , AndroidStore.gamePaint);
 	}
 	
+	/* The method to render an image with a specified width, height and rotation */
+	public static void renderImage(Image image , double x , double y , double width , double height , double rotation) {
+		//Create the matrix
+		Matrix matrix = new Matrix();
+		matrix.setTranslate((float)x , (float)y);
+		matrix.setScale((float)width / (float)image.getWidth() , (float)height / (float)image.getHeight());
+		matrix.setRotate((float)rotation);
+		//Render the image
+		AndroidStore.gameCanvas.drawBitmap(image.getAndroidImage() , matrix , AndroidStore.gamePaint);
+	}
+	
 	/* The method to render an image with a specified x, y, width, height, imageX, imageY, imageWidth, imageHeight */
 	public static void renderImage(Image image , double x , double y , double width , double height , double imageX , double imageY ,
 			double imageWidth , double imageHeight) {

@@ -8,7 +8,7 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.point;
+package org.simplecorporation.myengine.core.game2d.point;
 
 public class Point2D {
 	

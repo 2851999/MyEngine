@@ -51,7 +51,7 @@ public class GUIImageTextBox extends GUITextBox {
 		if (this.visible) {
 			//Render the box
 			BasicRenderer.setColour(Colour.WHITE);
-			BasicRenderer.renderImage(this.image , this.position.x , this.position.y , this.width , this.height);
+			BasicRenderer.renderImage(this.image , this.position.x , this.position.y , this.width , this.height , this.rotation);
 			
 			//The text to be rendered
 			String renderText = this.text;

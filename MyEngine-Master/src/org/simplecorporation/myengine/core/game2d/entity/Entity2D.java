@@ -12,7 +12,7 @@ package org.simplecorporation.myengine.core.game2d.entity;
 
 import java.awt.Rectangle;
 
-import org.simplecorporation.myengine.core.point.Point2D;
+import org.simplecorporation.myengine.core.game2d.point.Point2D;
 
 import android.graphics.Rect;
 
@@ -23,6 +23,12 @@ public class Entity2D {
 	
 	/* The velocity of the entity */
 	public Point2D velocity;
+	
+	/* The rotation of the entity */
+	public double rotation;
+	
+	/* THe velocity of the rotation of the entity */
+	public double  rotationVelocity;
 	
 	/* The width of the entity */
 	public double width;
@@ -35,6 +41,8 @@ public class Entity2D {
 		//Set all of the variables
 		this.position = new Point2D();
 		this.velocity = new Point2D();
+		this.rotation = 0;
+		this.rotationVelocity = 0;
 		this.width = 0;
 		this.height = 0;
 	}
@@ -44,6 +52,19 @@ public class Entity2D {
 		//Set all of the variables
 		this.position = position;
 		this.velocity = new Point2D();
+		this.rotation = 0;
+		this.rotationVelocity = 0;
+		this.width = 0;
+		this.height = 0;
+	}
+	
+	/* The constructor with the position and rotation given */
+	public Entity2D(Point2D position , double rotation) {
+		//Set all of the variables
+		this.position = position;
+		this.velocity = new Point2D();
+		this.rotation = rotation;
+		this.rotationVelocity = 0;
 		this.width = 0;
 		this.height = 0;
 	}
@@ -53,6 +74,8 @@ public class Entity2D {
 		//Set all of the variables
 		this.position = position;
 		this.velocity = velocity;
+		this.rotation = 0;
+		this.rotationVelocity = 0;
 		this.width = 0;
 		this.height = 0;
 	}
@@ -62,6 +85,8 @@ public class Entity2D {
 		//Set all of the variables
 		this.position = position;
 		this.velocity = new Point2D();
+		this.rotation = 0;
+		this.rotationVelocity = 0;
 		this.width = width;
 		this.height = height;
 	}
@@ -71,6 +96,8 @@ public class Entity2D {
 		//Set all of the variables
 		this.position = position;
 		this.velocity = velocity;
+		this.rotation = 0;
+		this.rotationVelocity = 0;
 		this.width = width;
 		this.height = height;
 	}
@@ -79,6 +106,8 @@ public class Entity2D {
 	public void update() {
 		//Add the velocity to the position
 		this.position.add(this.velocity);
+		//Add the rotation velocity to the rotation
+		this.rotation += this.rotationVelocity;
 	}
 	
 	/* The render method */
@@ -99,6 +128,24 @@ public class Entity2D {
 	/* Method to check for a collision between two entity's */
 	public boolean collidesWith(Entity2D other) {
 		return getBounds().intersects(other.getBounds());
+	}
+	
+	/* The method to set the position */
+	public void setPosition(Point2D position) {
+		//Set the position
+		this.position = position;
+	}
+	
+	/* The method to set the position */
+	public void setPosition(double x , double y) {
+		//Set the position
+		this.position = new Point2D(x , y);
+	}
+	
+	/* The method to set the velocity */
+	public void setVelocity(Point2D velocity) {
+		//Set the velocity
+		this.velocity =  velocity;
 	}
 	
 	/* The method to set the x position */
@@ -125,6 +172,18 @@ public class Entity2D {
 		this.velocity.setY(y);
 	}
 	
+	/* The method to set the rotation */
+	public void setRotation(double rotation) {
+		//Set the rotation
+		this.rotation = rotation;
+	}
+	
+	/* The method to set the rotation velocity */
+	public void setRotationVelocity(double rotationVelocity) {
+		//Set the rotation velocity
+		this.rotationVelocity = rotationVelocity;
+	}
+	
 	/* The method to set the width */
 	public void setWidth(double width) {
 		//Set the width
@@ -135,6 +194,18 @@ public class Entity2D {
 	public void setHeight(double height) {
 		//Set the height
 		this.height = height;
+	}
+	
+	/* The method to get the position */
+	public Point2D getPosition() {
+		//Return the position
+		return this.position;
+	}
+	
+	/* The method to get the velocity */
+	public Point2D getVelocity() {
+		//Return the velocity
+		return this.velocity;
 	}
 	
 	/* The method to get the x position */
@@ -159,6 +230,18 @@ public class Entity2D {
 	public double getVelocityY() {
 		//Return the y velocity
 		return this.velocity.getY();
+	}
+	
+	/* THe method to get the rotation */
+	public double getRotation() {
+		//Return the rotation
+		return this.rotation;
+	}
+	
+	/* The method to get the rotation velocity */
+	public double getRotationVelocity() {
+		//Return the rotation velocity
+		return this.rotationVelocity;
 	}
 	
 	/* The method to get the width */
