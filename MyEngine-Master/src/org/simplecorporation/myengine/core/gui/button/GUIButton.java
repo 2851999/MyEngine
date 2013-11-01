@@ -18,6 +18,7 @@ import org.simplecorporation.myengine.core.gui.button.event.GUIButtonEvent;
 import org.simplecorporation.myengine.core.gui.button.listener.GUIButtonListener;
 import org.simplecorporation.myengine.core.input.MouseInput;
 import org.simplecorporation.myengine.core.input.event.TouchEvent;
+import org.simplecorporation.myengine.settings.Settings;
 
 public abstract class GUIButton extends GUIComponent {
 	
@@ -46,35 +47,38 @@ public abstract class GUIButton extends GUIComponent {
 	
 	/* The update method */
 	protected void updateComponent() {
-		//Check whether the button is selected
-		if (this.getBounds().contains(MouseInput.x , MouseInput.y))
-			//Set selected to true
-			this.selected = true;
-		else {
-			//Set selected to false
-			this.selected = false;
-			//Check if the button is clicked
-			if (this.clicked)
+		//Check if using android
+		if (! Settings.Android) {
+			//Check whether the button is selected
+			if (this.getBounds().contains(MouseInput.x , MouseInput.y))
+				//Set selected to true
+				this.selected = true;
+			else {
+				//Set selected to false
+				this.selected = false;
+				//Check if the button is clicked
+				if (this.clicked)
+					//Set clicked to false
+					this.clicked = false;
+			}
+			
+			//Check if the button is down
+			if (MouseInput.isButtonDown(0) && this.selected) {
+				//Check if the sound effect is null
+				if (this.soundEffect != null) {
+					if (! this.soundEffect.isPlaying())
+						this.soundEffect.play();
+				}
+				//Set clicked to true
+				this.clicked = true;
+				//Call the event
+				for (int a = 0; a < this.listeners.size(); a++) {
+					this.listeners.get(a).buttonClicked(new GUIButtonEvent(this.name));
+				}
+			} else
 				//Set clicked to false
 				this.clicked = false;
 		}
-		
-		//Check if the button is down
-		if (MouseInput.isButtonDown(0) && this.selected) {
-			//Check if the sound effect is null
-			if (this.soundEffect != null) {
-				if (! this.soundEffect.isPlaying())
-					this.soundEffect.play();
-			}
-			//Set clicked to true
-			this.clicked = true;
-			//Call the event
-			for (int a = 0; a < this.listeners.size(); a++) {
-				this.listeners.get(a).buttonClicked(new GUIButtonEvent(this.name));
-			}
-		} else
-			//Set clicked to false
-			this.clicked = false;
 	}
 	
 	/* The method that returns whether the button is selected */

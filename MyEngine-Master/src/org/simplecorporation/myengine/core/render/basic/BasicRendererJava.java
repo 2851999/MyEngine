@@ -54,7 +54,7 @@ public class BasicRendererJava {
 		//Setup the AffineTransform
 		AffineTransform at =  new AffineTransform();
 		at.translate(x , y);
-		at.rotate(rotation);
+		at.rotate(Math.toRadians(rotation) , image.getWidth() / 2 , image.getHeight() / 2);
 		//Render the image
 		JavaWindow.g2d.drawImage(image.getJavaImage() , at , JavaWindow.frame);
 	}

@@ -57,7 +57,7 @@ public class GUIImageCheckBox extends GUICheckBox {
 			renderImage = this.images[0];
 		}
 		
-		BasicRenderer.renderImage(renderImage , this.position.x , this.position.y , this.width , this.height);
+		BasicRenderer.renderImage(renderImage , this.position.x , this.position.y , this.width , this.height , this.rotation);
 		
 	}
 	
