@@ -97,6 +97,8 @@ public abstract class EngineLoop {
 				this.font.render("DEBUGGING" , 0 , 0);
 				this.font.render("FPS: " + getFPS() , 0 , 12);
 				this.font.render("Memory Usage: " + ((SystemInfo.getMaxMemory() / (1024 * 1024)) - (SystemInfo.getFreeMemory() / (1024 * 1024))) , 0 , 24);
+				this.font.render("Processors: " + SystemInfo.getAvailableProcessors() , 0 , 36);
+				this.font.render("OpenGL: " + Settings.Video.OpenGL , 0 , 48);
 			}
 			
 			//Update the window

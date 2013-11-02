@@ -17,7 +17,7 @@ import org.simplecorporation.myengine.utils.file.FileUtils;
 public class Settings {
 	
 	/* The version of the engine goes up 1 every development build */
-	public static final String EngineVersion = "V1.0.4.6";
+	public static final String EngineVersion = "V1.0.4.7";
 	
 	/* The type of build this version of the engine is*/
 	public static final String EngineBuild = "Development";
@@ -104,10 +104,10 @@ public class Settings {
 			else if (split[0].equals("Video.VSync"))
 				//Set the value
 				Settings.Video.VSync = split[1].equals("true");
-			else if (split[0].equals("OpenGL"))
+			else if (split[0].equals("Video.OpenGL"))
 				//Set the value
 				Settings.Video.OpenGL = split[1].equals("true");
-			else if (split[0].equals("AntiAliasing"))
+			else if (split[0].equals("Video.AntiAliasing"))
 				//Set the value
 				Settings.Video.AntiAliasing = split[1].equals("true");
 			else if (split[0].equals("Audio.SoundEffectVolume"))
