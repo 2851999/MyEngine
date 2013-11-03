@@ -13,6 +13,7 @@ package org.simplecorporation.myengine.core.input.listener;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
+import org.simplecorporation.myengine.core.input.event.TouchEvent;
 
 public interface InputListener {
 	
@@ -36,5 +37,8 @@ public interface InputListener {
 	
 	/* The key typed event */
 	public void onKeyTyped(KeyboardEvent e);
+	
+	/* The on touch event (Android) */
+	public void onTouch(TouchEvent e);
 	
 }

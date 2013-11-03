@@ -82,4 +82,15 @@ public class AudioClip {
 			this.androidAudio.load(id);
 	}
 	
+	/* The method that returns whether the audio is playing */
+	public boolean isPlaying() {
+		//Check if android is enabled
+		if (! Settings.Android)
+			return this.javaAudio.isPlaying();
+		else if (Settings.Android)
+			return this.androidAudio.isPlaying();
+		else
+			return false;
+	}
+	
 }

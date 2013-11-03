@@ -8,10 +8,10 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.game.entity;
+package org.simplecorporation.myengine.core.game2d.entity;
 
+import org.simplecorporation.myengine.core.game2d.point.Point2D;
 import org.simplecorporation.myengine.core.image.Image;
-import org.simplecorporation.myengine.core.point.Point2D;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 
@@ -91,7 +91,7 @@ public class ImageEntity2D extends AbstractEntity2D {
 		//Set the colour
 		BasicRenderer.setColour(Colour.WHITE);
 		//Render the image
-		BasicRenderer.renderImage(this.image , this.position.x , this.position.y  , this.width , this.height);
+		BasicRenderer.renderImage(this.image , this.position.x , this.position.y  , this.width , this.height , this.rotation);
 	}
 	
 	/* The method to set the image */

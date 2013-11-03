@@ -17,7 +17,10 @@ import org.simplecorporation.myengine.utils.file.FileUtils;
 public class Settings {
 	
 	/* The version of the engine goes up 1 every development build */
-	public static final String EngineVersion = "V1.0.3.9";
+	public static final String EngineVersion = "V1.0.4.9";
+	
+	/* The type of build this version of the engine is*/
+	public static final String EngineBuild = "Development";
 	
 	/* Is using android */
 	public static boolean Android = false;
@@ -61,6 +64,13 @@ public class Settings {
 		public static int MusicVolume = 100;
 	}
 	
+	/* The settings for debugging */
+	public static class Debugging {
+		/* The method that states whether the debug info should be drawn
+		 * on the screen */
+		public static boolean ShowInfo = true;
+	}
+	
 	/* The method to read a configuration file to set all of the settings */
 	public static void readConfig(String filePath) {
 		//Read the file
@@ -84,20 +94,20 @@ public class Settings {
 				Settings.Window.Border = split[1].equals("true");
 			else if (split[0].equals("Window.Size.Width"))
 				//Set the value
-				Settings.Window.Size.Width = Integer.parseInt(split[1]);
+				Settings.Window.Size.Width = Float.parseFloat(split[1]);
 			else if (split[0].equals("Window.Size.Height"))
 				//Set the value
-				Settings.Window.Size.Height = Integer.parseInt(split[1]);
+				Settings.Window.Size.Height = Float.parseFloat(split[1]);
 			else if (split[0].equals("Video.MaxFPS"))
 				//Set the value
 				Settings.Video.MaxFPS = Integer.parseInt(split[1]);
 			else if (split[0].equals("Video.VSync"))
 				//Set the value
 				Settings.Video.VSync = split[1].equals("true");
-			else if (split[0].equals("OpenGL"))
+			else if (split[0].equals("Video.OpenGL"))
 				//Set the value
 				Settings.Video.OpenGL = split[1].equals("true");
-			else if (split[0].equals("AntiAliasing"))
+			else if (split[0].equals("Video.AntiAliasing"))
 				//Set the value
 				Settings.Video.AntiAliasing = split[1].equals("true");
 			else if (split[0].equals("Audio.SoundEffectVolume"))
@@ -126,6 +136,8 @@ public class Settings {
 		fileText.add("Video.AntiAliasing: " + Settings.Video.AntiAliasing);
 		fileText.add("Audio.SoundEffectVolume: " + Settings.Audio.SoundEffectVolume);
 		fileText.add("Audio.MusicVolument: " + Settings.Audio.MusicVolume);
+		//Save the file
+		FileUtils.write(filePath , fileText);
 	}
 	
 }

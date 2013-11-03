@@ -8,11 +8,11 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.game.entity.sprite;
+package org.simplecorporation.myengine.core.game2d.entity.sprite;
 
 import java.util.LinkedList;
 
-import org.simplecorporation.myengine.core.game.entity.ImageEntity2D;
+import org.simplecorporation.myengine.core.game2d.entity.ImageEntity2D;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;

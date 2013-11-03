@@ -14,7 +14,7 @@ public class ScriptTest extends Game {
 	
 	public ScriptTest() {
 		Settings.Window.Title = "Script Test";
-		Settings.Video.OpenGL = false;
+		Settings.Video.OpenGL = true;
 		createGame();
 	}
 	

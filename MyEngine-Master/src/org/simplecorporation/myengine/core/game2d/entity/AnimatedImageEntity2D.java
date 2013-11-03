@@ -8,7 +8,7 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.game.entity;
+package org.simplecorporation.myengine.core.game2d.entity;
 
 import org.simplecorporation.myengine.core.image.Image;
 

@@ -10,6 +10,8 @@
 
 package org.simplecorporation.myengine.core.android;
 
+import org.simplecorporation.myengine.core.input.InputManager;
+
 import android.view.SurfaceHolder;
 
 public class AndroidGameThread extends Thread {
@@ -54,6 +56,8 @@ public class AndroidGameThread extends Thread {
 		while (running) {
 			//Check if the thread is paused
 			if (! this.paused) {
+				//Check the input
+				InputManager.checkInput();
 				//Set the game canvas to null
 				AndroidStore.gameCanvas = null;
 				//Try statement
