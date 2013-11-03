@@ -49,7 +49,7 @@ public class AndroidGUIFont {
 			//Set the typeface
 			AndroidStore.gamePaint.setTypeface(this.typeface);
 			//Render the text
-			AndroidStore.gameCanvas.drawText(text , (float)x , (float)y , AndroidStore.gamePaint);
+			AndroidStore.gameCanvas.drawText(text , (float) x , (float) y + (float) getHeight(text) , AndroidStore.gamePaint);
 		}
 	}
 	

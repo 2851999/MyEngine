@@ -10,13 +10,20 @@
 
 package org.simplecorporation.myengine.core.game;
 
+import java.util.LinkedList;
+
 import org.simplecorporation.myengine.core.input.Input;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
+import org.simplecorporation.myengine.core.input.event.TouchEvent;
 import org.simplecorporation.myengine.core.input.listener.InputListener;
 
 public class Game extends AbstractGame implements InputListener {
+	
+	/* All of the instances of the GameMethods interface */
+	public static LinkedList<GameMethodsInterface> gameMethodsInterfaces = new
+			LinkedList<GameMethodsInterface>();
 	
 	/* The constructor */
 	public Game() {
@@ -29,6 +36,12 @@ public class Game extends AbstractGame implements InputListener {
 		Input.addListener(this);
 		//Create the engine loop
 		create();
+	}
+	
+	/* The method to add a game method interface */
+	public static void addGameMethodsInterface(GameMethodsInterface gameMethodsInterface) {
+		//Add it to the list
+		gameMethodsInterfaces.add(gameMethodsInterface);
 	}
 	
 	/* Game method */
@@ -93,6 +106,11 @@ public class Game extends AbstractGame implements InputListener {
 	
 	/* Input method */
 	public void onKeyTyped(KeyboardEvent e) {
+		
+	}
+	
+	/* Android input method */
+	public void onTouch(TouchEvent e) {
 		
 	}
 	

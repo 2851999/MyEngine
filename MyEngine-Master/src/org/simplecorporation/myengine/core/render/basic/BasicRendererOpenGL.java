@@ -74,7 +74,30 @@ public class BasicRendererOpenGL {
 		glVertex2d(x , y + image.getHeight());
 		glEnd();
 	}
-
+	
+	/* The method to render an image with a rotation */
+	public static void renderImage(Image image , double x , double y , double rotation) {
+		//Rotate the image
+		glPushMatrix();
+		glTranslatef((float) (x + image.getWidth() / 2) , (float) (y + image.getHeight() / 2) , 0f);
+		glRotatef((float)rotation , 0f , 0f , 1f);
+		glTranslatef((float) -(x + image.getWidth() / 2) , (float) -(y + image.getHeight() / 2) , 0f);
+		//Bind the texture
+		image.getOpenGLImage().bind();
+		//Render the image
+		glBegin(GL_QUADS);
+		glTexCoord2d(0 , 0);
+		glVertex2d(x , y);
+		glTexCoord2d(1 , 0);
+		glVertex2d(x + image.getWidth() , y);
+		glTexCoord2d(1 , 1);
+		glVertex2d(x + image.getWidth() , y + image.getHeight());
+		glTexCoord2d(0 , 1);
+		glVertex2d(x , y + image.getHeight());
+		glEnd();
+		glPopMatrix();
+	}
+	
 	/* The method to render an image with a specified width and height */
 	public static void renderImage(Image image , double x , double y , double width , double height) {
 		//Bind the texture
@@ -90,6 +113,29 @@ public class BasicRendererOpenGL {
 		glTexCoord2d(0 , 1);
 		glVertex2d(x , y + height);
 		glEnd();
+	}
+	
+	/* The method to render an image with a specified width, height and rotation */
+	public static void renderImage(Image image , double x , double y , double width , double height , double rotation) {
+		//Rotate the image
+		glPushMatrix();
+		glTranslatef((float) (x + width / 2) , (float) (y + height / 2) , 0f);
+		glRotatef((float)rotation , 0f , 0f , 1f);
+		glTranslatef((float) -(x + width / 2) , (float) -(y + height / 2) , 0f);
+		//Bind the texture
+		image.getOpenGLImage().bind();
+		//Render the image
+		glBegin(GL_QUADS);
+		glTexCoord2d(0 , 0);
+		glVertex2d(x , y);
+		glTexCoord2d(1 , 0);
+		glVertex2d(x + width , y);
+		glTexCoord2d(1 , 1);
+		glVertex2d(x + width , y + height);
+		glTexCoord2d(0 , 1);
+		glVertex2d(x , y + height);
+		glEnd();
+		glPopMatrix();
 	}
 	
 	/* The method to render an image with a specified x, y, width, height, imageX, imageY, imageWidth, imageHeight */

@@ -41,7 +41,7 @@ public class GUIImageLoadingBar extends GUILoadingBar {
 		//Set the colour and render the background
 		BasicRenderer.setColour(Colour.WHITE);
 		BasicRenderer.renderImage(this.backgroundImage , this.position.x , this.position.y ,
-				this.width , this.height);
+				this.width , this.height , this.rotation);
 		
 		//The width the bar should be
 		double barWidth = (this.width / this.loadingStages) * this.currentLoadingStage;

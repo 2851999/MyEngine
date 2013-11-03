@@ -28,10 +28,10 @@ public class GUITextBoxBuilder {
 		GUIRenderableTextBox textBox = new GUIRenderableTextBox(name , backgroundColour , outlineColour , font);
 		
 		//Set the variables in the text box
-		textBox.getBase().position.x = x;
-		textBox.getBase().position.y = y;
-		textBox.getBase().width = width;
-		textBox.getBase().height = height;
+		textBox.position.x = x;
+		textBox.position.y = y;
+		textBox.width = width;
+		textBox.height = height;
 		
 		//Return the text box
 		return textBox;
@@ -44,15 +44,13 @@ public class GUITextBoxBuilder {
 			Colour outlineColour , GUIFont font , char maskCharacter , double x , double y , double width , double height) {
 		
 		//Create the text box
-		GUIRenderableTextBox textBox = new GUIRenderableTextBox(name , backgroundColour , outlineColour , font);
+		GUIRenderableTextBox textBox = new GUIRenderableTextBox(name , backgroundColour , outlineColour , font , maskCharacter);
 		
 		//Set the variables in the text box
-		textBox.getBase().maskCharacter = maskCharacter;
-		textBox.getBase().hideCharacters = true;
-		textBox.getBase().position.x = x;
-		textBox.getBase().position.y = y;
-		textBox.getBase().width = width;
-		textBox.getBase().height = height;
+		textBox.position.x = x;
+		textBox.position.y = y;
+		textBox.width = width;
+		textBox.height = height;
 		
 		//Return the text box
 		return textBox;
@@ -68,10 +66,10 @@ public class GUITextBoxBuilder {
 		GUIImageTextBox textBox = new GUIImageTextBox(name , image , font);
 		
 		//Set the variables in the text box
-		textBox.getBase().position.x = x;
-		textBox.getBase().position.y = y;
-		textBox.getBase().width = width;
-		textBox.getBase().height = height;
+		textBox.position.x = x;
+		textBox.position.y = y;
+		textBox.width = width;
+		textBox.height = height;
 		
 		//Return the text box
 		return textBox;
@@ -87,12 +85,12 @@ public class GUITextBoxBuilder {
 		GUIImageTextBox textBox = new GUIImageTextBox(name , image , font);
 		
 		//Set the variables in the text box
-		textBox.getBase().maskCharacter = maskCharacter;
-		textBox.getBase().hideCharacters = true;
-		textBox.getBase().position.x = x;
-		textBox.getBase().position.y = y;
-		textBox.getBase().width = width;
-		textBox.getBase().height = height;
+		textBox.maskCharacter = maskCharacter;
+		textBox.hideCharacters = true;
+		textBox.position.x = x;
+		textBox.position.y = y;
+		textBox.width = width;
+		textBox.height = height;
 		
 		//Return the text box
 		return textBox;

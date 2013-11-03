@@ -10,11 +10,12 @@
 
 package org.simplecorporation.myengine.core.gui;
 
-import org.simplecorporation.myengine.core.game.entity.AbstractEntity2D;
+import org.simplecorporation.myengine.core.game2d.entity.AbstractEntity2D;
 import org.simplecorporation.myengine.core.input.Input;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
+import org.simplecorporation.myengine.core.input.event.TouchEvent;
 import org.simplecorporation.myengine.core.input.listener.InputListener;
 
 public abstract class GUIComponent extends AbstractEntity2D implements InputListener {
@@ -87,6 +88,11 @@ public abstract class GUIComponent extends AbstractEntity2D implements InputList
 	
 	/* Method inherited from InputListener */
 	public void onKeyTyped(KeyboardEvent e) {
+		
+	}
+	
+	/* Method inherited from InputListener */
+	public void onTouch(TouchEvent e) {
 		
 	}
 	

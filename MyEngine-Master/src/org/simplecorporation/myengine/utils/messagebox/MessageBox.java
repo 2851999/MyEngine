@@ -29,4 +29,9 @@ public class MessageBox {
 		JOptionPane.showMessageDialog(null , message , title , JOptionPane.ERROR_MESSAGE);
 	}
 	
+	/* The method to show a yes/no option and returns whether the answer was yes */
+	public static boolean showYesNoOption(String title , String message) {
+		return JOptionPane.showConfirmDialog(null , message , title , JOptionPane.YES_NO_OPTION) == JOptionPane.OK_OPTION;
+	}
+	
 }

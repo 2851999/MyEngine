@@ -22,12 +22,12 @@ public class TextBoxTest extends Game {
 	
 	public void gameCreated() {
 		textBox = new GUIRenderableTextBox("TextBox" , Colour.WHITE , Colour.GREEN , FontUtils.buildGUIFont("Arial" , Colour.RED , 20f));
-		textBox.getBase().position.x = 100;
-		textBox.getBase().position.y = 100;
-		textBox.getBase().width = 200;
-		textBox.getBase().height = 30;
-		textBox.getBase().defaultText = "This is a text box!";
-		textBox.getBase().visible = true;
+		textBox.position.x = 100;
+		textBox.position.y = 100;
+		textBox.width = 200;
+		textBox.height = 30;
+		textBox.defaultText = "This is a text box!";
+		textBox.visible = true;
 	}
 	
 	public void gameUpdate() {
