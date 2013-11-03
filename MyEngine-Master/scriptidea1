@@ -1,0 +1,9 @@
+#Imports all the classes what start with that
+uses org.simplecorporation.myengine.core.render
+
+method render():
+br set colour red
+br render outline rectangle 10 10 20 20
+br render fill window
+br render fill rectangle 10 10 20 20
+endmethod

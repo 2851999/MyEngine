@@ -22,11 +22,11 @@ public class AndroidInput {
 	public static LinkedList<AndroidTouchListener> androidTouchListeners = new LinkedList<AndroidTouchListener>();
 	
 	/* The method call a touch event */
-	public static void callTouchEvent(MotionEvent event) {
+	public static void callTouchEvent(MotionEvent e) {
 		//For loop
 		for (int a = 0; a < androidTouchListeners.size(); a++) {
 			//Call the event
-			androidTouchListeners.get(a).onTouch(event);
+			androidTouchListeners.get(a).onTouch(e);
 		}
 	}
 	

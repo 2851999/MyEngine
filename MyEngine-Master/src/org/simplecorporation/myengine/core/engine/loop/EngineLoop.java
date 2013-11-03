@@ -10,8 +10,13 @@
 
 package org.simplecorporation.myengine.core.engine.loop;
 
+import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.input.InputManager;
+import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.core.window.Window;
+import org.simplecorporation.myengine.settings.Settings;
+import org.simplecorporation.myengine.utils.font.FontUtils;
+import org.simplecorporation.myengine.utils.system.SystemInfo;
 
 public abstract class EngineLoop {
 	
@@ -45,6 +50,9 @@ public abstract class EngineLoop {
 	/* The current FPS */
 	public long fps;
 	
+	/* The default font */
+	public GUIFont font;
+	
 	/* The default constructor */
 	public EngineLoop() {
 		
@@ -71,9 +79,10 @@ public abstract class EngineLoop {
 		//Set the frame count and FPS
 		this.frameCount = 0;
 		this.fps = 0;
+		//Set the default font (Arial)
+		this.font = FontUtils.buildGUIFont("Arial" , Colour.WHITE , 10);
 		//While the window is open
 		while (! Window.isCloseRequested()) {
-			
 			//Check the input
 			InputManager.checkInput();
 			
@@ -81,6 +90,16 @@ public abstract class EngineLoop {
 			this.engineUpdate();
 			//Render the engine
 			this.engineRender();
+			
+			//Check if the debug info should be drawn
+			if (Settings.Debugging.ShowInfo) {
+				//Render some information using the default font
+				this.font.render("DEBUGGING" , 0 , 0);
+				this.font.render("FPS: " + getFPS() , 0 , 12);
+				this.font.render("Memory Usage: " + ((SystemInfo.getMaxMemory() / (1024 * 1024)) - (SystemInfo.getFreeMemory() / (1024 * 1024))) , 0 , 24);
+				this.font.render("Processors: " + SystemInfo.getAvailableProcessors() , 0 , 36);
+				this.font.render("OpenGL: " + Settings.Video.OpenGL , 0 , 48);
+			}
 			
 			//Update the window
 			Window.update();

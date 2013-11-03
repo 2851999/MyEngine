@@ -34,7 +34,7 @@ public class AndroidSensor implements SensorEventListener {
 		}
 	}
 	
-	/* An Accelerometer method */
+	/* A sensor method */
 	public void onAccuracyChanged(Sensor sensor , int accuracy) {
 		
 	}

@@ -11,87 +11,112 @@
 package org.simplecorporation.myengine.core.gui.textbox;
 
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
+import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.settings.Settings;
 
-public class GUIRenderableTextBox {
+public class GUIRenderableTextBox extends GUITextBox {
 	
-	/* The java GUIRenderableTextBox */
-	public JavaGUIRenderableTextBox javaGUIRenderableTextbox;
+	/* The background colour of the text box */
+	public Colour backgroundColour;
+	
+	/* The outline colour of the text box */
+	public Colour outlineColour;
+	
+	/* The font */
+	public GUIFont font;
 	
 	/* The constructor */
 	public GUIRenderableTextBox(String name , Colour backgroundColour , Colour outlineColour , GUIFont font) {
-		//Create the right GUIImageCheckBox
-		if (! Settings.Android) {
-			this.javaGUIRenderableTextbox = new JavaGUIRenderableTextBox(name , font);
-			this.javaGUIRenderableTextbox.backgroundColour = backgroundColour;
-			this.javaGUIRenderableTextbox.outlineColour = outlineColour;
-		} else if (Settings.Android) {
-			
-		}
+		//Call the super constructor
+		super(name);
+		//Set the colours
+		this.backgroundColour = backgroundColour;
+		this.outlineColour = outlineColour;
+		//Set the font
+		this.font = font;
 	}
 	
 	/* The constructor */
 	public GUIRenderableTextBox(String name , Colour backgroundColour , Colour outlineColour , GUIFont font , char maskCharacter) {
-		//Create the right GUIImageCheckBox
-		if (! Settings.Android) {
-			this.javaGUIRenderableTextbox = new JavaGUIRenderableTextBox(name , font);
-			this.javaGUIRenderableTextbox.backgroundColour = backgroundColour;
-			this.javaGUIRenderableTextbox.outlineColour = outlineColour;
-			this.javaGUIRenderableTextbox.maskCharacter = maskCharacter;
-			this.javaGUIRenderableTextbox.hideCharacters = true;
-		} else if (Settings.Android) {
+		//Call the super constructor
+		super(name);
+		//Set the colours
+		this.backgroundColour = backgroundColour;
+		this.outlineColour = outlineColour;
+		//Set the font
+		this.font = font;
+		//Setup the character masking
+		this.maskCharacter = maskCharacter;
+		this.hideCharacters = true;
+	}
+	
+	/* The method to render the text box */
+	protected void renderComponent() {
+		if (this.visible) {
+			//Render the box
+			BasicRenderer.setColour(this.outlineColour);
+			BasicRenderer.renderFilledRectangle(this.position.x , this.position.y , this.width , this.height);
+			BasicRenderer.setColour(this.backgroundColour);
+			BasicRenderer.renderFilledRectangle(this.position.x + 1 , this.position.y + 1 , this.width - 2 , this.height - 2);
 			
+			//The text to be rendered
+			String renderText = this.text;
+			
+			//The colour of the text
+			Colour renderColour = Colour.WHITE;
+			
+			//Check if the java font is null
+			if (this.font.javaGUIFont != null)
+				//Get the colour
+				renderColour = this.font.javaGUIFont.colour;
+			
+			//Check if the characters are hidden
+			if (this.hideCharacters) {
+				//Set the rendered text to nothing
+				renderText = "";
+				//Loop the text's length
+				for (int a = 0; a < this.text.length(); a++)
+					//Add the masked character
+					renderText += this.maskCharacter;
+			}
+			
+			//Check if the default text should be rendered
+			if (this.text.equals("") && ! this.defaultText.equals("") && ! this.selected) {
+				//Set the rendered text
+				renderText = this.defaultText;
+				//Set the colour
+				//renderColour.a = renderColour.a / 2; THIS LINE STOPPED RENDERING (I DONT KNOW HOW TO FIX)
+			}
+			
+			//Check to see if the text fits in the box
+			if (this.font.getWidth(renderText) > this.width - this.font.fontSize / 2) {
+				//Set the render text
+				int beginIndex = 1;
+				//While the text is too long
+				while (this.font.getWidth(renderText.substring(beginIndex)) > this.width - this.font.fontSize / 2) {
+					//Increase the begin index if possible
+					if (renderText.length() > beginIndex + 1)
+						beginIndex ++;
+				}
+				//Set the text
+				renderText = renderText.substring(beginIndex);
+			}
+			
+			//Check if the cursor is showing
+			if (this.cursorShown) {
+				//Add the cursor
+				renderText += "|";
+			}
+			
+			//Check if the java font  is null
+			if (this.font.javaGUIFont != null)
+				//Set the colour of the font
+				this.font.javaGUIFont.colour = renderColour;
+			
+			//Render the text
+			this.font.render(renderText , this.position.x + 4 ,
+					(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
 		}
 	}
-	
-	/* The update method */
-	public void update() {
-		//Update the right GUIImageTextBox
-		if (! Settings.Android)
-			this.javaGUIRenderableTextbox.update();
-		else if (Settings.Android) {
-			
-		}
-	}
-	
-	/* The render method */
-	public void render() {
-		//Render the right GUIImageTextBox
-		if (! Settings.Android)
-			this.javaGUIRenderableTextbox.render();
-		else if (Settings.Android) {
-			
-		}
-	}
-	
-	/* The method to get the base */
-	public GUITextBoxBase getBase() {
-		if (! Settings.Android)
-			return this.javaGUIRenderableTextbox;
-		else if (Settings.Android)
-			return null;
-		else
-			return null;
-	}
-	
-	/* Methods to set and return things in the base */
-	public void setX(double x) { this.getBase().position.x = x; }
-	public void setY(double y) { this.getBase().position.y = y; }
-	public void setWidth(double width) { this.getBase().width = width; }
-	public void setHeight(double height) { this.getBase().height = height; }
-	public void setVisible(boolean visible) { this.getBase().visible = visible; }
-	
-	public double getX() { return this.getBase().position.x; }
-	public double getY() { return this.getBase().position.y; }
-	public double getWidth() { return this.getBase().width; }
-	public double getHeight() { return this.getBase().height; }
-	public String getName() { return this.getBase().name; }
-	public boolean isVisible() { return this.getBase().visible; }
-	
-	//Base specific
-	public void setSelected(boolean selected) { this.getBase().selected = selected; }
-	
-	public boolean isSelected() { return this.getBase().selected; }
 	
 }

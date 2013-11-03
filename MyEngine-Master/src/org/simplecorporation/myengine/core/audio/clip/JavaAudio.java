@@ -125,4 +125,14 @@ public class JavaAudio {
 		}
 	}
 	
+	/* The method that returns whether the audio is playing */
+	public boolean isPlaying() {
+		//Check whether OpenGL is being used
+		if (! Settings.Video.OpenGL)
+			return this.javaAudioClip.isRunning();
+		else if (Settings.Video.OpenGL)
+			return this.javaOpenALClip.isPlaying();
+		else
+			return false;
+	}
 }

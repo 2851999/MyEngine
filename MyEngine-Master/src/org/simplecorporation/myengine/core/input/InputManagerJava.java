@@ -74,17 +74,23 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , K
 	
 	/* Method for key/mouse listeners */
 	public void mouseMoved(MouseEvent e) {
+		//Get the x and y positions
+		double x = e.getX() - JavaWindow.frame.getInsets().left;
+		double y = e.getY() - JavaWindow.frame.getInsets().top;
 		//Assign the values
 		MouseInput.lastX = MouseInput.x;
 		MouseInput.lastY = MouseInput.y;
-		MouseInput.x = e.getX();
-		MouseInput.y = e.getY();
+		MouseInput.x = x;
+		MouseInput.y = y;
 		//Call the event
 		Input.callMouseMoved(new MouseMotionEvent(MouseInput.x , MouseInput.y , MouseInput.lastX , MouseInput.lastY));
 	}
 	
 	/* Method for key/mouse listeners */
 	public void mouseClicked(MouseEvent e) {
+		//Get the x and y positions
+		double x = e.getX() - JavaWindow.frame.getInsets().left;
+		double y = e.getY() - JavaWindow.frame.getInsets().top;
 		//The id of the button
 		int id = -1;
 		//Check what button it is
@@ -96,7 +102,7 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , K
 			id = 1;
 		
 		//Call a mouse clicked event
-		Input.callMouseClicked(new org.simplecorporation.myengine.core.input.event.MouseEvent(id , e.getX() , e.getY()));
+		Input.callMouseClicked(new org.simplecorporation.myengine.core.input.event.MouseEvent(id , x , y));
 	}
 	
 	/* Method for key/mouse listeners */
@@ -111,6 +117,9 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , K
 	
 	/* Method for key/mouse listeners */
 	public void mousePressed(MouseEvent e) {
+		//Get the x and y positions
+		double x = e.getX() - JavaWindow.frame.getInsets().left;
+		double y = e.getY() - JavaWindow.frame.getInsets().top;
 		//The id of the button
 		int id = -1;
 		//Check what button it is
@@ -130,14 +139,17 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , K
 			MouseInput.isMiddleButtonDown = true;
 		
 		//Call a mouse clicked event
-		Input.callMouseClicked(new org.simplecorporation.myengine.core.input.event.MouseEvent(id , e.getX() , e.getY()));
+		Input.callMouseClicked(new org.simplecorporation.myengine.core.input.event.MouseEvent(id , x , y));
 		
 		//Call a mouse pressed event
-		Input.callMousePressed(new org.simplecorporation.myengine.core.input.event.MouseEvent(e.getButton() , e.getX() , e.getY()));
+		Input.callMousePressed(new org.simplecorporation.myengine.core.input.event.MouseEvent(e.getButton() , x , y));
 	}
 	
 	/* Method for key/mouse listeners */
 	public void mouseReleased(MouseEvent e) {
+		//Get the x and y positions
+		double x = e.getX() + JavaWindow.frame.getInsets().left;
+		double y = e.getY() + JavaWindow.frame.getInsets().top;
 		//The id of the button
 		int id = -1;
 		//Check what button it is
@@ -157,9 +169,9 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , K
 			MouseInput.isMiddleButtonDown = false;
 		
 		//Call a mouse clicked event
-		Input.callMouseClicked(new org.simplecorporation.myengine.core.input.event.MouseEvent(id , e.getX() , e.getY()));
+		Input.callMouseClicked(new org.simplecorporation.myengine.core.input.event.MouseEvent(id , x , y));
 		//Call a mouse released event
-		Input.callMouseReleased(new org.simplecorporation.myengine.core.input.event.MouseEvent(e.getButton() , e.getX() , e.getY()));
+		Input.callMouseReleased(new org.simplecorporation.myengine.core.input.event.MouseEvent(e.getButton() , x , y));
 	}
 	
 }
