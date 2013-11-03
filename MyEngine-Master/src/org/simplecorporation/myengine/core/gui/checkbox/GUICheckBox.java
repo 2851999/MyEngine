@@ -18,6 +18,7 @@ import org.simplecorporation.myengine.core.gui.button.listener.GUICheckBoxListen
 import org.simplecorporation.myengine.core.input.MouseInput;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.input.event.TouchEvent;
+import org.simplecorporation.myengine.settings.Settings;
 
 public abstract class GUICheckBox extends GUIComponent {
 	
@@ -64,25 +65,28 @@ public abstract class GUICheckBox extends GUIComponent {
 	
 	/* The update method */
 	protected void updateComponent() {
-		//Check the mouse and see whether the button is selected
-		if (this.getBounds().contains(MouseInput.x , MouseInput.y))
-			//Set selected to true
-			this.selected = true;
-		else {
-			//Set selected to false
-			this.selected = false;
-			//Check if the button is clicked
-			if (this.clicked)
+		//Check if using android
+		if (! Settings.Android) {
+			//Check the mouse and see whether the button is selected
+			if (this.getBounds().contains(MouseInput.x , MouseInput.y))
+				//Set selected to true
+				this.selected = true;
+			else {
+				//Set selected to false
+				this.selected = false;
+				//Check if the button is clicked
+				if (this.clicked)
+					//Set clicked to false
+					this.clicked = false;
+			}
+			
+			//Check if the button is down
+			if (MouseInput.isButtonDown(0) && this.selected) {
+				
+			} else
 				//Set clicked to false
 				this.clicked = false;
 		}
-		
-		//Check if the button is down
-		if (MouseInput.isButtonDown(0) && this.selected) {
-			
-		} else
-			//Set clicked to false
-			this.clicked = false;
 	}
 	
 	/* The mouse released event */

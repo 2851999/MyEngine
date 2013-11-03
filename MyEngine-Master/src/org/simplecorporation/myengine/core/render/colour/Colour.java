@@ -114,8 +114,8 @@ public class Colour {
 	public void setG(double g) { this.g = g; }
 	public void setB(int b) { this.b = b / 255; }
 	public void setB(double b) { this.b = b; }
-	public void setA(int a) { this.a = a; }
-	public void setA(double a) { this.a = a / 255; }
+	public void setA(int a) { this.a = a / 255; }
+	public void setA(double a) { this.a = a; }
 	
 	public double getR() { return this.r; }
 	public double getG() { return this.g; }

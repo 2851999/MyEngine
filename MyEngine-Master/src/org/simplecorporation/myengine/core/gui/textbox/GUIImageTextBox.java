@@ -14,7 +14,6 @@ import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.settings.Settings;
 
 public class GUIImageTextBox extends GUITextBox {
 	
@@ -52,7 +51,7 @@ public class GUIImageTextBox extends GUITextBox {
 		if (this.visible) {
 			//Render the box
 			BasicRenderer.setColour(Colour.WHITE);
-			BasicRenderer.renderImage(this.image , this.position.x , this.position.y , this.width , this.height);
+			BasicRenderer.renderImage(this.image , this.position.x , this.position.y , this.width , this.height , this.rotation);
 			
 			//The text to be rendered
 			String renderText = this.text;
@@ -109,13 +108,8 @@ public class GUIImageTextBox extends GUITextBox {
 				this.font.javaGUIFont.colour = renderColour;
 			
 			//Render the text
-			if (Settings.Video.OpenGL)
-				this.font.render(renderText , this.position.x + 4 ,
-						(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
-			else
-				//Not a clue why it can't be the same as OpenGL
-				this.font.render(renderText , this.position.x + 4 ,
-						(this.position.y + (this.height / 2)) + (this.font.getHeight(this.text) / 4));
+			this.font.render(renderText , this.position.x + 4 ,
+					(this.position.y + (this.height / 2)) - (this.font.getHeight(this.text) / 2));
 		}
 	}
 	

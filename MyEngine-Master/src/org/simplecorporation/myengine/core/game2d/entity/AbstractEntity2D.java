@@ -13,7 +13,7 @@ package org.simplecorporation.myengine.core.game2d.entity;
 import java.util.LinkedList;
 
 import org.simplecorporation.myengine.core.effect.Effect;
-import org.simplecorporation.myengine.core.point.Point2D;
+import org.simplecorporation.myengine.core.game2d.point.Point2D;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
@@ -73,6 +73,8 @@ public abstract class AbstractEntity2D extends Entity2D {
 	public void update() {
 		//Add the velocity to the position
 		this.position.add(this.velocity);
+		//Add the rotation velocity to the rotation
+		this.rotation += this.rotationVelocity;
 		//Update all of the effects
 		for (int a = 0; a < this.effects.size(); a++) {
 			this.effects.get(a).updateEffect();

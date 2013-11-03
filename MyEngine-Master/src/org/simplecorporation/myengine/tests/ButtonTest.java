@@ -5,8 +5,10 @@ import org.simplecorporation.myengine.core.game.Game;
 import org.simplecorporation.myengine.core.gui.button.GUIImageButton;
 import org.simplecorporation.myengine.core.gui.button.GUIRenderableButton;
 import org.simplecorporation.myengine.core.image.Image;
+import org.simplecorporation.myengine.core.input.MouseInput;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
+import org.simplecorporation.myengine.core.window.Window;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.font.FontUtils;
 import org.simplecorporation.myengine.utils.opengl.OpenGLSetupUtils;
@@ -18,7 +20,7 @@ public class ButtonTest extends Game {
 	
 	public ButtonTest() {
 		Settings.Window.Title = "Button Test";
-		Settings.Video.OpenGL = true;
+		Settings.Video.OpenGL = false;
 		Settings.Video.AntiAliasing = true;
 		//Create
 		createGame();
@@ -35,6 +37,7 @@ public class ButtonTest extends Game {
 		button.position.y = 100;
 		button.width = 100;
 		button.height = 30;
+		button.rotationVelocity = 10;
 		
 		button2 = new GUIRenderableButton("Button2" , "Test2" , new Colour[] {
 				Colour.ORANGE ,
@@ -55,6 +58,12 @@ public class ButtonTest extends Game {
 		button2.update();
 		if (button.isClicked() || button2.isClicked()) {
 			System.out.println("CLICKED");
+			Window.close();
+			MouseInput.isLeftButtonDown = false;
+			MouseInput.x = 0;
+			MouseInput.y = 0;
+			Settings.Video.OpenGL = ! Settings.Video.OpenGL;
+			createGame();
 		}
 	}
 	

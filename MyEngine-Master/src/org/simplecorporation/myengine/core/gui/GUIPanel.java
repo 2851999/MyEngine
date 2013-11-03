@@ -35,6 +35,9 @@ public class GUIPanel {
 	/* The name of the panel */
 	public String name;
 	
+	/* The boolean that states whether this panel showing */
+	public boolean showing;
+	
 	/* The components in the GUI */
 	public LinkedList<GUIComponent> components;
 	
@@ -42,6 +45,8 @@ public class GUIPanel {
 	public GUIPanel(String name) {
 		//Assign the name
 		this.name = name;
+		//Set showing to false
+		this.showing = false;
 		//Create the linked list
 		this.components = new LinkedList<GUIComponent>();
 	}
@@ -62,6 +67,8 @@ public class GUIPanel {
 	
 	/* The method to show the GUI */
 	public void showPanel() {
+		//Set showing to true
+		this.showing = true;
 		//Set all of the components to show
 		for (int a = 0; a < this.components.size(); a++)
 			this.components.get(a).visible = true;
@@ -69,6 +76,8 @@ public class GUIPanel {
 	
 	/* The method to hide the GUI */
 	public void hidePanel() {
+		//Set showing to false
+		this.showing = false;
 		//Set all of the components to hide
 		for (int a = 0; a < this.components.size(); a++)
 			this.components.get(a).visible = false;

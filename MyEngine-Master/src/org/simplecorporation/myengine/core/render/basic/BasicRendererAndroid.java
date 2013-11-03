@@ -54,12 +54,33 @@ public class BasicRendererAndroid {
 		AndroidStore.gameCanvas.drawBitmap(image.getAndroidImage() , (float)x , (float)y , AndroidStore.gamePaint);
 	}
 	
+	/* The method to render an image with a rotation */
+	public static void renderImage(Image image , double x , double y , double rotation) {
+		//Create the matrix
+		Matrix matrix = new Matrix();
+		matrix.setTranslate((float) x , (float) y);
+		matrix.postRotate((float) rotation , (float) image.getWidth() / 2 , (float) image.getHeight() / 2);
+		//Render the image
+		AndroidStore.gameCanvas.drawBitmap(image.getAndroidImage() , matrix , AndroidStore.gamePaint);
+	}
+	
 	/* The method to render an image with a specified width and height */
 	public static void renderImage(Image image , double x , double y , double width , double height) {
 		//Create the matrix
 		Matrix matrix = new Matrix();
-		matrix.setTranslate((float)x , (float)y);
-		matrix.setScale((float)width / (float)image.getWidth() , (float)height / (float)image.getHeight());
+		matrix.setTranslate((float) x , (float) y);
+		matrix.setScale((float) width / (float) image.getWidth() , (float) height / (float) image.getHeight());
+		//Render the image
+		AndroidStore.gameCanvas.drawBitmap(image.getAndroidImage() , matrix , AndroidStore.gamePaint);
+	}
+	
+	/* The method to render an image with a specified width, height and rotation */
+	public static void renderImage(Image image , double x , double y , double width , double height , double rotation) {
+		//Create the matrix
+		Matrix matrix = new Matrix();
+		matrix.preTranslate((float) x , (float) y);
+		matrix.preRotate((float) rotation , (float) width / 2 , (float) height / 2);
+		matrix.preScale((float) width / (float) image.getWidth() , (float) height / (float) image.getHeight());
 		//Render the image
 		AndroidStore.gameCanvas.drawBitmap(image.getAndroidImage() , matrix , AndroidStore.gamePaint);
 	}
