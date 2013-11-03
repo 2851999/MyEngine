@@ -76,6 +76,9 @@ public class BitmapFont {
 	public double getWidth(String text) {
 		//The width of the text
 		double width = 0;
+		//Calculate the cell's size and set it
+		this.cellWidth = this.image.getWidth() / this.gridWidth;
+		this.cellHeight = this.image.getHeight() / this.gridHeight;
 		//Set the width to the cellSize times the number of letters
 		width = (text.length() *  (((this.cellWidth / this.cellHeight) * this.fontSize) / 1.5));
 		return width;

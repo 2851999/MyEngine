@@ -38,6 +38,12 @@ public class Game extends AbstractGame implements InputListener {
 		create();
 	}
 	
+	/* The method to add a game method interface */
+	public static void addGameMethodsInterface(GameMethodsInterface gameMethodsInterface) {
+		//Add it to the list
+		gameMethodsInterfaces.add(gameMethodsInterface);
+	}
+	
 	/* Game method */
 	public void gameCreated() {
 		

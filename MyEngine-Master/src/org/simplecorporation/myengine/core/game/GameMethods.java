@@ -15,7 +15,7 @@ public class GameMethods implements GameMethodsInterface {
 	/* The constructor */
 	public GameMethods() {
 		//Add the GameMethods interface
-		Game.gameMethodsInterfaces.add(this);
+		Game.addGameMethodsInterface(this);
 	}
 	
 	/* An implemented method */
