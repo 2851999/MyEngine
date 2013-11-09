@@ -11,12 +11,14 @@
 package org.simplecorporation.myengine.core.input;
 
 import org.simplecorporation.myengine.core.android.input.AndroidInput;
+import org.simplecorporation.myengine.core.android.input.listener.AndroidGestureListener;
 import org.simplecorporation.myengine.core.android.input.listener.AndroidTouchListener;
+import org.simplecorporation.myengine.core.input.event.ScrollEvent;
 import org.simplecorporation.myengine.core.input.event.TouchEvent;
 
 import android.view.MotionEvent;
 
-public class InputManagerAndroid implements AndroidTouchListener {
+public class InputManagerAndroid extends AndroidGestureListener implements AndroidTouchListener {
 	
 	/* The method to check the input */
 	public void checkInput() {
@@ -55,6 +57,13 @@ public class InputManagerAndroid implements AndroidTouchListener {
 		MouseInput.lastY = MouseInput.y;
 		MouseInput.x = e.getX();
 		MouseInput.y = e.getY();
+	}
+	
+	/* Gesture event method */
+	public boolean onScroll(MotionEvent e1 , MotionEvent e2 , float distanceX , float distanceY) {
+		//Call a scroll event
+		Input.callOnScroll(new ScrollEvent(distanceX , distanceY));
+		return true;
 	}
 	
 }

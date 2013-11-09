@@ -10,6 +10,7 @@
 
 package org.simplecorporation.myengine.core.gui.builder;
 
+import org.simplecorporation.myengine.core.gui.button.GUIButton;
 import org.simplecorporation.myengine.core.gui.button.GUIImageButton;
 import org.simplecorporation.myengine.core.gui.button.GUIRenderableButton;
 import org.simplecorporation.myengine.core.gui.checkbox.GUIImageCheckBox;
@@ -17,6 +18,8 @@ import org.simplecorporation.myengine.core.gui.checkbox.GUIRenderableCheckBox;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.gui.loadingbar.GUIImageLoadingBar;
 import org.simplecorporation.myengine.core.gui.loadingbar.GUIRenderableLoadingBar;
+import org.simplecorporation.myengine.core.gui.slider.GUIImageSlider;
+import org.simplecorporation.myengine.core.gui.slider.GUIRenderableSlider;
 import org.simplecorporation.myengine.core.gui.textbox.GUIImageTextBox;
 import org.simplecorporation.myengine.core.gui.textbox.GUIRenderableTextBox;
 import org.simplecorporation.myengine.core.image.Image;
@@ -154,6 +157,36 @@ public class GUIBuilder {
 	public static GUIImageTextBox createImageTextBox(String name , Image image ,
 			GUIFont font , char maskCharacter , double x , double y , double width , double height) {
 		return GUITextBoxBuilder.createImageTextBox(name, image, font, maskCharacter, x, y, width, height);
+	}
+	
+	/* The method to create an image slider given
+	   its name, slider image, slider button, slider direction, position, width and height */
+	public static GUIImageSlider createImageSlider(String name , Image sliderImage , GUIButton sliderButton ,
+			int sliderDirection , double x , double y , double width , double height) {
+		return GUISliderBuilder.createImageSlider(name, sliderImage, sliderButton, sliderDirection, x, y, width, height);
+	}
+	
+	/* The method to create an image slider given
+	   its name, slider image, slider button, slider direction, slider button width
+	   slider button height , position, width and height */
+	public static GUIImageSlider createImageSlider(String name , Image sliderImage , GUIButton sliderButton ,
+			int sliderDirection , double buttonWidth , double buttonHeight , double x , double y , double width , double height) {
+		return GUISliderBuilder.createImageSlider(name, sliderImage, sliderButton, sliderDirection, buttonWidth, buttonHeight, x, y, width, height);
+	}
+	
+	/* The method to create a renderable slider given
+	   its name, slider colour, slider button, slider direction, position, width and height */
+	public static GUIRenderableSlider createRenderableSlider(String name , Colour sliderColour , GUIButton sliderButton ,
+			int sliderDirection , double x , double y , double width , double height) {
+		return GUISliderBuilder.createRenderableSlider(name, sliderColour, sliderButton, sliderDirection, x, y, width, height);
+	}
+	
+	/* The method to create a renderable slider given
+	   its name, slider colour, slider button, slider direction, slider button width
+	   slider button height , position, width and height */
+	public static GUIRenderableSlider createRendeableSlider(String name , Colour sliderColour , GUIButton sliderButton ,
+			int sliderDirection , double buttonWidth , double buttonHeight , double x , double y , double width , double height) {
+		return GUISliderBuilder.createRendeableSlider(name, sliderColour, sliderButton, sliderDirection, buttonWidth, buttonHeight, x, y, width, height);
 	}
 	
 }
