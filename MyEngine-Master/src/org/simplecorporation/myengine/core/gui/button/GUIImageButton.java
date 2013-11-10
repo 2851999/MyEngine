@@ -42,7 +42,7 @@ public class GUIImageButton extends GUIButton {
 		this.width = images[0].getWidth();
 		this.height = images[0].getHeight();
 		//Set selected and clicked to false
-		this.selected = false;
+		this.buttonSelected = false;
 		this.clicked = false;
 		//Create the linked list
 		this.listeners = new LinkedList<GUIButtonListener>();
@@ -53,9 +53,9 @@ public class GUIImageButton extends GUIButton {
 		//The current image
 		Image current = null;
 		//Render the right image
-		if (! this.selected && ! this.clicked)
+		if (! this.buttonSelected && ! this.clicked)
 			current = this.images[0];
-		else if (this.selected && this.images.length > 1)
+		else if (this.buttonSelected && this.images.length > 1)
 			current = this.images[1];
 		else if (this.clicked && this.images.length > 2)
 			current = this.images[2];

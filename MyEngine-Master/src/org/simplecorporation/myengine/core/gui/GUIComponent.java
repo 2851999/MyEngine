@@ -27,6 +27,9 @@ public abstract class GUIComponent extends AbstractEntity2D implements InputList
 	/* The boolean that represents whether the component is visible */
 	public boolean visible;
 	
+	/* The boolean that represents whether the component is selected */
+	public boolean selected;
+	
 	/* The abstract methods */
 	protected abstract void updateComponent();
 	protected abstract void renderComponent();
@@ -37,6 +40,8 @@ public abstract class GUIComponent extends AbstractEntity2D implements InputList
 		this.name = name;
 		//Set visible to false
 		this.visible = false;
+		//Set selected to false
+		this.selected = false;
 		//Add the listener
 		Input.addListener(this);
 	}
