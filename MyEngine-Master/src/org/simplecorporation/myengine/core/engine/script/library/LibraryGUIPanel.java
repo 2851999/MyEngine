@@ -68,10 +68,10 @@ public class LibraryGUIPanel extends AbstractLibrary {
 			this.guiPanel.hidePanel();
 		} else if (splitLine[1].equals("update")) {
 			//Update the panel
-			this.guiPanel.updatePanel();
+			this.guiPanel.update();
 		} else if (splitLine[1].equals("render")) {
 			//Render the panel
-			this.guiPanel.renderPanel();
+			this.guiPanel.render();
 		}
 	}
 	

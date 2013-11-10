@@ -24,51 +24,73 @@ import org.simplecorporation.myengine.core.gui.textbox.GUIImageTextBox;
 import org.simplecorporation.myengine.core.gui.textbox.GUIRenderableTextBox;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
+import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.file.FileUtils;
 import org.simplecorporation.myengine.utils.font.FontUtils;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
-public class GUIPanel {
-	
-	/* The name of the panel */
-	public String name;
-	
-	/* The boolean that states whether this panel showing */
-	public boolean showing;
+public class GUIPanel extends GUIComponent {
 	
 	/* The components in the GUI */
 	public LinkedList<GUIComponent> components;
 	
 	/* The constructor */
 	public GUIPanel(String name) {
-		//Assign the name
-		this.name = name;
-		//Set showing to false
-		this.showing = false;
+		//Call the super constructor
+		super(name);
 		//Create the linked list
 		this.components = new LinkedList<GUIComponent>();
+		//Set the default width and height
+		this.width = Settings.Window.Size.Width;
+		this.height = Settings.Window.Size.Height;
 	}
 	
 	/* The method to update the GUI */
-	public void updatePanel() {
+	public void updateComponent() {
 		//Update all of the components
-		for (int a = 0; a < this.components.size(); a++)
-			this.components.get(a).update();
+		for (int a = 0; a < this.components.size(); a++) {
+			//Get the component
+			GUIComponent component = this.components.get(a);
+			//Make sure the component is completely visible in this panel
+			if (component.position.x > this.position.x && component.position.x + component.width < this.position.x + this.height &&
+					component.position.y > this.position.y && component.position.y + component.height < this.position.y + this.height) {
+				//Make sure the component is shown
+				component.visible = true;
+				//Update the component
+				component.update();
+			} else {
+				//Make sure the component is hidden
+				component.visible = false;
+			}
+		}
 	}
 	
 	/* The method to render the GUI */
-	public void renderPanel() {
+	public void renderComponent() {
 		//Render all of the components
-		for (int a = 0; a < this.components.size(); a++)
-			this.components.get(a).render();
+		for (int a = 0; a < this.components.size(); a++) {
+			//Get the component
+			GUIComponent component = this.components.get(a);
+			//Make sure the component is completely visible in this panel
+			if (component.position.x > this.position.x && component.position.x + component.width < this.position.x + this.height &&
+					component.position.y > this.position.y && component.position.y + component.height < this.position.y + this.height) {
+				//Make sure the component is shown
+				component.visible = true;
+				//Render the component
+				component.render();
+			} else {
+				//Make sure the component is hidden
+				component.visible = false;
+			}
+		}
 	}
 	
 	/* The method to show the GUI */
 	public void showPanel() {
 		//Set showing to true
-		this.showing = true;
+		this.visible = true;
 		//Set all of the components to show
 		for (int a = 0; a < this.components.size(); a++)
 			this.components.get(a).visible = true;
@@ -77,7 +99,7 @@ public class GUIPanel {
 	/* The method to hide the GUI */
 	public void hidePanel() {
 		//Set showing to false
-		this.showing = false;
+		this.visible = false;
 		//Set all of the components to hide
 		for (int a = 0; a < this.components.size(); a++)
 			this.components.get(a).visible = false;

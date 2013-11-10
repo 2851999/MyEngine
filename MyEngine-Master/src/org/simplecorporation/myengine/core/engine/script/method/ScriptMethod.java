@@ -183,7 +183,7 @@ public class ScriptMethod {
 		} catch (NumberFormatException e) {
 			isDouble = false;
 		}
-		//Retrun the value
+		//Return the value
 		return isDouble;
 	}
 	
