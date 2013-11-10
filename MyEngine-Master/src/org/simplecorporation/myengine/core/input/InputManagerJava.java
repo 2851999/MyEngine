@@ -187,8 +187,8 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , M
 	
 	/* Method for mouse wheel */
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		//Call a scroll event
-		Input.callOnScroll(new ScrollEvent(e.getScrollAmount() , e.getScrollAmount()));
+		//Call a scroll event (* to make sure it is negative when going towards user)
+		Input.callOnScroll(new ScrollEvent(e.getScrollAmount() * e.getWheelRotation() , e.getScrollAmount() * e.getWheelRotation()));
 	}
 	
 }

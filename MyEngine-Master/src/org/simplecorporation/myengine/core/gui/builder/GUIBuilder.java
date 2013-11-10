@@ -18,6 +18,8 @@ import org.simplecorporation.myengine.core.gui.checkbox.GUIRenderableCheckBox;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.gui.loadingbar.GUIImageLoadingBar;
 import org.simplecorporation.myengine.core.gui.loadingbar.GUIRenderableLoadingBar;
+import org.simplecorporation.myengine.core.gui.scrollbar.GUIImageScrollBar;
+import org.simplecorporation.myengine.core.gui.scrollbar.GUIRenderableScrollBar;
 import org.simplecorporation.myengine.core.gui.slider.GUIImageSlider;
 import org.simplecorporation.myengine.core.gui.slider.GUIRenderableSlider;
 import org.simplecorporation.myengine.core.gui.textbox.GUIImageTextBox;
@@ -187,6 +189,36 @@ public class GUIBuilder {
 	public static GUIRenderableSlider createRendeableSlider(String name , Colour sliderColour , GUIButton sliderButton ,
 			int sliderDirection , double buttonWidth , double buttonHeight , double x , double y , double width , double height) {
 		return GUISliderBuilder.createRendeableSlider(name, sliderColour, sliderButton, sliderDirection, buttonWidth, buttonHeight, x, y, width, height);
+	}
+	
+	/* The method to create an image scroll bar given
+	   its name, scroll bar image, scroll bar button, scroll bar direction, scroll amount , position, width and height */
+	public static GUIImageScrollBar createImageScrollBar(String name , Image scrollBarImage , GUIButton scrollBarButton ,
+			int scrollBarDirection , double scrollAmount , double x , double y , double width , double height) {
+		return GUIScrollBarBuilder.createImageScrollBar(name, scrollBarImage, scrollBarButton, scrollBarDirection, scrollAmount, x, y, width, height);
+	}
+	
+	/* The method to create an image scroll bar given
+	   its name, slider image, slider button, slider direction, scroll amount , slider button width
+	   slider button height , position, width and height */
+	public static GUIImageScrollBar createImageScrollBar(String name , Image scrollBarImage , GUIButton scrollBarButton ,
+			int scrollBarDirection , double scrollAmount , double buttonWidth , double buttonHeight , double x , double y , double width , double height) {
+		return GUIScrollBarBuilder.createImageScrollBar(name, scrollBarImage, scrollBarButton, scrollBarDirection, scrollAmount, buttonWidth, buttonHeight, x, y, width, height);
+	}
+	
+	/* The method to create a renderable scroll bar given
+	   its name, scroll bar colour, scroll bar button, scroll bar direction, scroll amount , position, width and height */
+	public static GUIRenderableScrollBar createRenderableSliderScrollBar(String name , Colour scrollBarColour , GUIButton scrollBarButton ,
+			int scrollBarDirection , double scrollAmount , double x , double y , double width , double height) {
+		return GUIScrollBarBuilder.createRenderableSliderScrollBar(name, scrollBarColour, scrollBarButton, scrollBarDirection, scrollAmount, x, y, width, height);
+	}
+	
+	/* The method to create a renderable scroll bar given
+	   its name, scroll bar colour, scroll bar button, scroll bar direction, scroll amount , scroll bar button width
+	   scroll bar button height , position, width and height */
+	public static GUIRenderableScrollBar createRendeableSliderScrollBar(String name , Colour scrollBarColour , GUIButton scrollBarButton ,
+			int scrollBarDirection , double scrollAmount , double buttonWidth , double buttonHeight , double x , double y , double width , double height) {
+		return GUIScrollBarBuilder.createRendeableSliderScrollBar(name, scrollBarColour, scrollBarButton, scrollBarDirection, scrollAmount, buttonWidth, buttonHeight, x, y, width, height);
 	}
 	
 }

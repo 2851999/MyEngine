@@ -58,12 +58,12 @@ public abstract class GUISlider extends GUIComponent {
 					//Set the slider button's position
 					sliderButton.position.x = MouseInput.x;
 				//Set the slider value
-				this.sliderValue = ((this.position.x + this.width) - this.sliderButton.position.x) / (this.width / 100);
+				this.sliderValue = ((this.sliderButton.position.x - this.position.x) * (this.width / 100));
 			}
 			//Put the slider button into the middle of this slider
 			this.sliderButton.position.y = (this.position.y + (this.height / 2)) - (this.sliderButton.height / 2);
 			//Put the slider into its correct position for the current slider value
-			this.sliderButton.position.x = ((this.position.x + this.width) - ((this.width / 100)) * this.sliderValue);
+			this.sliderButton.position.x = this.position.x + ((this.width / 100) * this.sliderValue);
 		} else if (this.sliderDirection == DIRECTION_VERTICAL) {
 			//Check if the button is clicked
 			if (this.sliderButton.clicked) {

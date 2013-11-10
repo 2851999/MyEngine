@@ -107,6 +107,9 @@ public class GUIPanel extends GUIComponent {
 	
 	/* The method to add a component */
 	public void add(GUIComponent component) {
+		//Set the components position in relation to this panel
+		component.position.x += this.position.x;
+		component.position.y += this.position.y;
 		//Add the component to the linked list
 		this.components.add(component);
 	}
@@ -330,6 +333,27 @@ public class GUIPanel extends GUIComponent {
 			Logger.log(new Log("GUIPanel get()" , "The component with the name " + name + " was not found" , LogType.ERROR));
 		//Return the component
 		return component;
+	}
+	
+	/* The method to set the panel's position */
+	public void setPanelPosition(double x , double y) {
+		//Get the change in the x and y position
+		double changeX = this.position.x - x;
+		double changeY = this.position.y - y;
+		//Move this panel by the correct amount
+		this.movePanel(changeX , changeY);
+	}
+	
+	/* The method to move the panel by a certain amount */
+	public void movePanel(double x , double y) {
+		//Set the panels position
+		this.position.x += x;
+		this.position.y += y;
+		//Move all of the components
+		for (int a = 0; a < this.components.size(); a++) {
+			this.components.get(a).position.x += x;
+			this.components.get(a).position.y += y;
+		}
 	}
 	
 }
