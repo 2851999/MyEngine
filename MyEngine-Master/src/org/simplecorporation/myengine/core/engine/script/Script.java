@@ -12,79 +12,46 @@ package org.simplecorporation.myengine.core.engine.script;
 
 import java.util.LinkedList;
 
-import org.simplecorporation.myengine.core.engine.script.file.ScriptFile;
-import org.simplecorporation.myengine.core.engine.script.library.AbstractLibrary;
-import org.simplecorporation.myengine.core.engine.script.library.LibraryDefault;
-import org.simplecorporation.myengine.core.engine.script.method.ScriptMethod;
-import org.simplecorporation.myengine.core.engine.script.parser.ScriptParser;
-import org.simplecorporation.myengine.core.engine.script.variable.ScriptVariable;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
-
 public class Script {
 	
-	/* The script file */
-	public ScriptFile scriptFile;
+	/* The modules in this script */
+	public LinkedList<ScriptModule> scriptModules;
 	
-	/* The imported libraries */
-	public LinkedList<AbstractLibrary> importedLibraries;
-	
-	/* The methods */
-	public LinkedList<ScriptMethod> scriptMethods;
-	
-	/* The parser */
-	public ScriptParser scriptParser;
-	
-	/* The default library */
-	public LibraryDefault defaultLibrary;
-	
-	/* The local variables */
-	public LinkedList<ScriptVariable> publicVariables;
-	
-	/* The constructor of the script */
-	public Script(String filePath) {
-		//Create the script file
-		this.scriptFile = new ScriptFile(filePath);
-		//Read the script file
-		this.scriptFile.read();
-		//Create the script parser
-		this.scriptParser = new ScriptParser(scriptFile);
+	/* The constructor */
+	public Script(String scriptFile) {
+		//Add all of the libraries
+		ScriptLibraries.addAllLibraries();
+		//Create the script modules linked list
+		this.scriptModules = new LinkedList<ScriptModule>();
+		//Get the main script module
+		scriptModules.add(new ScriptModule(this , new ScriptFile(scriptFile)));
 	}
 	
-	/* The method to parse the script */
-	public void parse() {
-		//Parse the imported libraries
-		this.importedLibraries = this.scriptParser.parseImportedLibraries();
-		//Parse the methods
-		this.scriptMethods = this.scriptParser.parseMethods(this.importedLibraries);
-		//Parse the public variables
-		this.publicVariables = this.scriptParser.parsePublicVariables();
-		//Create the default library
-		this.defaultLibrary = new LibraryDefault();
-	}
-	
-	/* The method to call a certain method */
-	public void callMethod(String methodName) { 
-		//The method
-		ScriptMethod method = null;
-		//Loop through all of the methods
-		for (int a = 0; a < this.scriptMethods.size(); a++) {
-			//Check the method name and see whether it matches
-			if (this.scriptMethods.get(a).methodName.equals(methodName)) {
-				//Set the method
-				method = this.scriptMethods.get(a);
-				//Exit the loop
-				break;
+	/* The constructor */
+	public Script(String scriptDirectory , String mainModule) {
+		//Add all of the libraries
+		ScriptLibraries.addAllLibraries();
+		//Create the script modules linked list
+		this.scriptModules = new LinkedList<ScriptModule>();
+		//The location of the main class
+		String mainModulePath = scriptDirectory;
+		//Check that it is in a package
+		if (mainModule.contains(".")) {
+			//Split the main class into its individual packages
+			String[] packages = mainModule.split(".");
+			//Look at every package
+			for (int a = 0; a < packages.length; a++) {
+				//Add the current package onto the main module path
+				mainModulePath += "/" + packages[a];
 			}
+		} else {
+			//Set the main module path 
+			mainModulePath = scriptDirectory + "/" + mainModule;
 		}
-		//Check that the method was found
-		if (method == null)
-			//Log a message
-			Logger.log(new Log("Script callMethod()" , "The method " + methodName + " was not found" , LogType.ERROR));
-		
-		//Call the method
-		method.callMethod(this , this.defaultLibrary , this.publicVariables);
+		//Get the main script module
+		scriptModules.add(new ScriptModule(this , new ScriptFile(mainModulePath + ".sl")));
+		//Run the main method in the main script module
+		scriptModules.getLast().getMethodByName("main").run();
 	}
 	
 }

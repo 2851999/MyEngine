@@ -155,7 +155,7 @@ public abstract class GUICheckBox extends GUIComponent {
 		//Check if this button was clicked
 		if (this.visible) {
 			if (e.getEvent() == TouchEvent.EVENT_DOWN) {
-				if (this.getAndroidBounds().contains((int)e.x , (int)e.y)) {
+				if (this.getBounds().contains(e.x , e.y)) {
 					//Check if the wait is over
 					if (System.currentTimeMillis() - this.lastTimeClicked >= this.clickedWait) {
 						//Set the last time

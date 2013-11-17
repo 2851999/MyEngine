@@ -10,11 +10,8 @@
 
 package org.simplecorporation.myengine.core.game2d.entity;
 
-import java.awt.Rectangle;
-
 import org.simplecorporation.myengine.core.game2d.point.Point2D;
-
-import android.graphics.Rect;
+import org.simplecorporation.myengine.core.rectangle.Rectangle;
 
 public class Entity2D {
 	
@@ -117,12 +114,7 @@ public class Entity2D {
 	
 	/* Method that returns the bounds as a rectangle */
 	public Rectangle getBounds() {
-		return new Rectangle((int) this.position.x , (int) this.position.y , (int) this.width , (int) this.height);
-	}
-	
-	/* Method that returns the bounds as a rectangle for android */
-	public Rect getAndroidBounds() {
-		return new Rect((int)this.position.x , (int)this.position.y , (int)this.position.x + (int)this.width , (int)this.position.y + (int)height);
+		return new Rectangle(this.position.x , this.position.y , this.width , this.height);
 	}
 	
 	/* Method to check for a collision between two entity's */

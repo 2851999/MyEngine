@@ -115,7 +115,7 @@ public abstract class GUIButton extends GUIComponent {
 		//Check if this button was clicked
 		if (this.visible) {
 			if (e.getEvent() == TouchEvent.EVENT_DOWN) {
-				if (this.getAndroidBounds().contains((int)e.x , (int)e.y)) {
+				if (this.getBounds().contains((int)e.x , (int)e.y)) {
 					//Set clicked to true
 					this.clicked = true;
 					//Call the event
