@@ -45,7 +45,7 @@ public class Rectangle {
 	/* The method to check whether a point is contained within the rectangle */
 	public boolean contains(double x , double y) {
 		//Return whether the coordinates are contained within this rectangle
-		return x > this.x && y > this.y && x < this.x + this.width && y < this.y + this.height;
+		return (x > this.x && y > this.y && x < this.x + this.width && y < this.y + this.height);
 	}
 	
 	/* The method to check whether another rectangle intersects this rectangle */

@@ -28,6 +28,9 @@ public class ScriptModule {
 	/* The script syntax (PASS TO SCRIPTCLASS WHEN MAKING A CLASS) */
 	public ScriptSyntax syntax;
 	
+	/* The package of the module */
+	public String packageName;
+	
 	/* The classes within this module (ScriptFile) */
 	public LinkedList<ScriptClass> classes;
 	
@@ -69,13 +72,16 @@ public class ScriptModule {
 			if (this.file.fileText.get(count).startsWith(this.syntax.SYNTAX_KEY_WORD_IMPORT))
 				//Locate and add the current library
 				this.importedLibraries.add(ScriptLibraries.getLibraryByPackage(this.file.fileText.get(count).split(" ")[1]).getInstance());
+			else if (this.file.fileText.get(count).startsWith(this.syntax.SYNTAX_KEY_WORD_PACKAGE))
+				//Set the package name
+				this.packageName = this.file.fileText.get(count).split(" ")[1];
 			//Add 1 to the count
 			count ++;
 		}
-		//Create an instance of the parser
-		ScriptParser parser = new ScriptParser();
+		//Set the package name
+		this.packageName = "";
 		//Parse the classes
-		this.classes = parser.parseClasses(this.file.fileText , syntax , this);
+		this.classes = ScriptParser.parseClasses(this.file.fileText , syntax , this);
 	}
 	
 	/* The method to get a class from its name */
@@ -119,6 +125,12 @@ public class ScriptModule {
 					" was not found in the module " + new File(this.file.filePath).getName() , LogType.ERROR));
 		//Return the script class
 		return scriptMethod;
+	}
+	
+	/* The method that returns the module name */
+	public String getName() {
+		//Return the name of the file (Also remove the file extension)
+		return new File(this.file.filePath).getName().split(".")[0];
 	}
 	
 }

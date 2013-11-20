@@ -26,6 +26,7 @@ public class ScriptSyntax {
 	public static final String DEFAULT_SYNTAX_KEY_WORD_END_METHOD = "endmethod";
 	public static final String DEFAULT_SYNTAX_KEY_WORD_CLASS = "class";
 	public static final String DEFAULT_SYNTAX_KEY_WORD_END_CLASS = "endclass";
+	public static final String DEFAULT_SYNTAX_KEY_WORD_PACKAGE = "package";
 	
 	public static final String DEFAULT_SYNTAX_KEY_WORD_VARIABLE_DECLARATION = "var";
 	public static final String DEFAULT_SYNTAX_KEY_WORD_VARIABLE_REFERNCE = "$";
@@ -42,6 +43,7 @@ public class ScriptSyntax {
 	public String SYNTAX_KEY_WORD_END_METHOD;
 	public String SYNTAX_KEY_WORD_CLASS;
 	public String SYNTAX_KEY_WORD_END_CLASS;
+	public String SYNTAX_KEY_WORD_PACKAGE;
 	
 	public String SYNTAX_KEY_WORD_VARIABLE_DECLARATION;
 	public String SYNTAX_KEY_WORD_VARIABLE_REFERNCE;
@@ -60,6 +62,7 @@ public class ScriptSyntax {
 		this.SYNTAX_KEY_WORD_END_METHOD = DEFAULT_SYNTAX_KEY_WORD_END_METHOD;
 		this.SYNTAX_KEY_WORD_CLASS = DEFAULT_SYNTAX_KEY_WORD_CLASS;
 		this.SYNTAX_KEY_WORD_END_CLASS = DEFAULT_SYNTAX_KEY_WORD_END_CLASS;
+		this.SYNTAX_KEY_WORD_PACKAGE = DEFAULT_SYNTAX_KEY_WORD_PACKAGE;
 		
 		this.SYNTAX_KEY_WORD_VARIABLE_DECLARATION = DEFAULT_SYNTAX_KEY_WORD_VARIABLE_DECLARATION;
 		this.SYNTAX_KEY_WORD_VARIABLE_REFERNCE = DEFAULT_SYNTAX_KEY_WORD_VARIABLE_REFERNCE;
@@ -83,6 +86,7 @@ public class ScriptSyntax {
 		this.SYNTAX_KEY_WORD_END_METHOD = propertiesFile.getProperty("SYNTAX_KEY_WORD_END_METHOD");
 		this.SYNTAX_KEY_WORD_CLASS = propertiesFile.getProperty("SYNTAX_KEY_WORD_CLASS");
 		this.SYNTAX_KEY_WORD_END_CLASS = propertiesFile.getProperty("SYNTAX_KEY_WORD_END_CLASS");
+		this.SYNTAX_KEY_WORD_PACKAGE = propertiesFile.getProperty("SYNATX_KEY_WORD_PACKAGE");
 		
 		this.SYNTAX_KEY_WORD_VARIABLE_DECLARATION = propertiesFile.getProperty("SYNTAX_KEY_WORD_VARIABLE_DECLARATION");
 	}
