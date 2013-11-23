@@ -13,6 +13,7 @@ package org.simplecorporation.myengine.core.gui;
 import java.io.File;
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.core.game2d.point.Point2D;
 import org.simplecorporation.myengine.core.gui.builder.GUIBuilder;
 import org.simplecorporation.myengine.core.gui.button.GUIImageButton;
 import org.simplecorporation.myengine.core.gui.button.GUIRenderableButton;
@@ -31,58 +32,85 @@ import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
-public class GUIPanel extends GUIComponent {
+public class GUIPanel {
+	
+	/* The name of the panel */
+	public String name;
+	
+	/* The position of this panel */
+	public Point2D position;
+	
+	/* The width of the panel */
+	public double width;
+	
+	/* The height of the panel */
+	public double height;
+	
+	/* Is this panel showing */
+	public boolean showing;
 	
 	/* The components in the GUI */
 	public LinkedList<GUIComponent> components;
 	
 	/* The constructor */
 	public GUIPanel(String name) {
-		//Call the super constructor
-		super(name);
+		//Set the name
+		this.name = name;
 		//Create the linked list
 		this.components = new LinkedList<GUIComponent>();
+		//Create the position
+		this.position = new Point2D();
+		this.position.x = 0;
+		this.position.y = 0;
 		//Set the default width and height
 		this.width = Settings.Window.Size.Width;
 		this.height = Settings.Window.Size.Height;
+		//Set showing to false
+		this.showing = false;
 	}
 	
 	/* The method to update the GUI */
-	public void updateComponent() {
-		//Update all of the components
-		for (int a = 0; a < this.components.size(); a++) {
-			//Get the component
-			GUIComponent component = this.components.get(a);
-			//Make sure the component is completely visible in this panel
-			if (component.position.x > this.position.x && component.position.x + component.width < this.position.x + this.height &&
-					component.position.y > this.position.y && component.position.y + component.height < this.position.y + this.height) {
-				//Make sure the component is shown
-				component.visible = true;
-				//Update the component
-				component.update();
-			} else {
-				//Make sure the component is hidden
-				component.visible = false;
-			}
+	public void update() {
+		//Check that this panel is showing
+		if (this.showing) {
+			//Update all of the components
+			for (int a = 0; a < this.components.size(); a++) {
+				//Get the component
+				GUIComponent component = this.components.get(a);
+				//Make sure the component is completely visible in this panel
+				if (component.position.x >= this.position.x && component.position.x + component.width <= this.position.x + this.width &&
+						component.position.y >= this.position.y && component.position.y + component.height <= this.position.y + this.height) {
+					//Make sure the component is shown
+					component.visible = true;
+					//Update the component
+					component.update();
+				} else {
+					//Make sure the component is hidden
+					component.visible = false;
+				}
+			}	
 		}
 	}
 	
 	/* The method to render the GUI */
-	public void renderComponent() {
-		//Render all of the components
-		for (int a = 0; a < this.components.size(); a++) {
-			//Get the component
-			GUIComponent component = this.components.get(a);
-			//Make sure the component is completely visible in this panel
-			if (component.position.x > this.position.x && component.position.x + component.width < this.position.x + this.height &&
-					component.position.y > this.position.y && component.position.y + component.height < this.position.y + this.height) {
-				//Make sure the component is shown
-				component.visible = true;
-				//Render the component
-				component.render();
-			} else {
-				//Make sure the component is hidden
-				component.visible = false;
+	public void render() {
+		//Check that this panel is showing
+		if (this.showing) {
+			//Render all of the components
+			for (int a = 0; a < this.components.size(); a++) {
+				//Get the component
+				GUIComponent component = this.components.get(a);
+				//Make sure the component is completely visible in this panel
+				if (component.position.x >= this.position.x && component.position.x + component.width <= this.position.x + this.width &&
+						component.position.y >= this.position.y && component.position.y + component.height <= this.position.y + this.height) {
+					//Make sure the component is shown
+					component.visible = true;
+					//Render the component
+					component.render();
+				} else {
+					//Make sure the component is hidden
+					component.visible = false;
+				}
 			}
 		}
 	}
@@ -90,7 +118,7 @@ public class GUIPanel extends GUIComponent {
 	/* The method to show the GUI */
 	public void showPanel() {
 		//Set showing to true
-		this.visible = true;
+		this.showing = true;
 		//Set all of the components to show
 		for (int a = 0; a < this.components.size(); a++)
 			this.components.get(a).visible = true;
@@ -99,7 +127,7 @@ public class GUIPanel extends GUIComponent {
 	/* The method to hide the GUI */
 	public void hidePanel() {
 		//Set showing to false
-		this.visible = false;
+		this.showing = false;
 		//Set all of the components to hide
 		for (int a = 0; a < this.components.size(); a++)
 			this.components.get(a).visible = false;
