@@ -12,10 +12,9 @@ package org.simplecorporation.myengine.core.engine.script;
 
 import java.util.LinkedList;
 
-import org.simplecorporation.myengine.core.engine.script.library.LibrarySystem;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
+import org.simplecorporation.myengine.core.engine.script.library.game.LibraryGame;
+import org.simplecorporation.myengine.core.engine.script.library.game.LibrarySettings;
+import org.simplecorporation.myengine.core.engine.script.library.system.LibrarySystem;
 
 public class ScriptLibraries {
 	
@@ -26,6 +25,8 @@ public class ScriptLibraries {
 	public static void addAllLibraries() {
 		//Add all of the libraries
 		libraries.add(new LibrarySystem());
+		libraries.add(new LibraryGame());
+		libraries.add(new LibrarySettings());
 	}
 	
 	/* The method to get a library by its package */
@@ -38,12 +39,6 @@ public class ScriptLibraries {
 			if (libraries.get(a).libraryPackage.startsWith(libraryPackage))
 				//Assign the script library
 				scriptLibrary = libraries.get(a);
-		}
-		//Check if the script library was found
-		if (scriptLibrary == null) {
-			//Log an error
-			Logger.log(new Log(ScriptConsole.ScriptingLanguageVersion , "getLibraryByPackage() The library with the package" +
-					libraryPackage + " was not found" , LogType.ERROR));
 		}
 		//Return the script library
 		return scriptLibrary;

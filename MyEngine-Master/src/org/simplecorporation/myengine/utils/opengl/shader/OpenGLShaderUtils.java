@@ -20,7 +20,7 @@ import org.simplecorporation.myengine.utils.logger.Logger;
 public class OpenGLShaderUtils {
 	
 	/* The method to create a shader */
-	public static int createShader(String shaderFile , int shaderType) {
+	public static int createShader(String shaderFile , int shaderType , boolean inFolder) {
 		//The shader
 		int shader = 0;
 		//Try and catch statement
@@ -35,7 +35,7 @@ public class OpenGLShaderUtils {
 				return 0;
 			}
 			//Load the shader file
-			ARBShaderObjects.glShaderSourceARB(shader , ArrayUtils.toStringArray(FileUtils.read(shaderFile)));
+			ARBShaderObjects.glShaderSourceARB(shader , ArrayUtils.toStringArray(FileUtils.read(shaderFile , inFolder)));
 			//Compile the shader
 			ARBShaderObjects.glCompileShaderARB(shader);
 		} catch (Exception e) {

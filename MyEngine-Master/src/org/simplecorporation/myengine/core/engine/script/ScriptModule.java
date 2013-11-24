@@ -13,6 +13,7 @@ package org.simplecorporation.myengine.core.engine.script;
 import java.io.File;
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.utils.file.FileUtils;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
@@ -38,8 +39,9 @@ public class ScriptModule {
 	public LinkedList<ScriptLibrary> importedLibraries;
 	
 	/* The constructor */
-	public ScriptModule(Script script , ScriptFile file) {
+	public ScriptModule(Script script , ScriptFile file , boolean inFolder , String scriptDirectory) {
 		//Assign the variables
+		this.script = script;
 		this.file = file;
 		//Create the classes list
 		this.classes = new LinkedList<ScriptClass>();
@@ -61,25 +63,67 @@ public class ScriptModule {
 			//The syntax file path
 			String syntaxFilePath = this.file.filePath.replace(new File(this.file.filePath).getName() , this.file.fileText.get(0).split(": ")[1]);
 			//Set the syntax
-			this.syntax.setSyntax(syntaxFilePath);
+			this.syntax.setSyntax(syntaxFilePath , true);
 		}
 		//Current count in the code
 		int count = 0;
+		//Set the package name
+		this.packageName = "";
 		//While loop (Run until inside class)
 		while (! this.file.fileText.get(count).startsWith(this.syntax.SYNTAX_KEY_WORD_PUBLIC) &&
 				! this.file.fileText.get(count).startsWith(this.syntax.SYNTAX_KEY_WORD_PRIVATE)) {
 			//Check if the current line starts with the import keyword
-			if (this.file.fileText.get(count).startsWith(this.syntax.SYNTAX_KEY_WORD_IMPORT))
-				//Locate and add the current library
-				this.importedLibraries.add(ScriptLibraries.getLibraryByPackage(this.file.fileText.get(count).split(" ")[1]).getInstance());
-			else if (this.file.fileText.get(count).startsWith(this.syntax.SYNTAX_KEY_WORD_PACKAGE))
+			if (this.file.fileText.get(count).startsWith(this.syntax.SYNTAX_KEY_WORD_IMPORT)) {
+				//The imported library
+				ScriptLibrary library = null;
+				//Locate and set the library
+				library = ScriptLibraries.getLibraryByPackage(this.file.fileText.get(count).split(" ")[1]);
+				//Check if the library was found
+				if (library == null) {
+					//Check the package has been set
+					if (packageName != null && ! packageName.equals("")) {
+						//Get the location of the new module to add
+						String newModuleLocation = FileUtils.asFileString(scriptDirectory);
+						//Split the package by the .'s
+						String[] split = this.file.fileText.get(count).split(" ")[1].split("\\.");
+						//Add on to the module location
+						for (int a = 0; a < split.length; a++) {
+							newModuleLocation += "\\" + split[a];
+						}
+						//Check if the location exists
+						if (! FileUtils.doesExist(newModuleLocation + ".sl")) {
+							//Make sure inFolder is false
+							inFolder = false;
+							//Set the location of the new module to add
+							newModuleLocation = "/scriptfiles";
+							//Split the package by the .'s
+							split = this.file.fileText.get(count).split(" ")[1].split("\\.");
+							//Add on to the module location
+							for (int a = 0; a < split.length; a++) {
+								newModuleLocation += "\\" + split[a];
+							}
+						}
+						//Add a new module to the modules
+						script.scriptModules.add(new ScriptModule(script , new ScriptFile(newModuleLocation + ".sl" , inFolder) , inFolder , scriptDirectory));
+						//Check whether the script module was added correctly
+						if (script.scriptModules.getLast() == null)
+							//Log an error
+							Logger.log(new Log(ScriptConsole.ScriptingLanguageVersion , "ScriptModule The library/module with the package " +
+									newModuleLocation + ".sl was not found" , LogType.ERROR));
+					} else {
+						//Log an error
+						Logger.log(new Log(ScriptConsole.ScriptingLanguageVersion , "ScriptModule package must be set before any imports" , LogType.ERROR));
+					}
+				} else {
+					//Add a new instance of the library
+					this.importedLibraries.add(library.getInstance());
+				}
+		} else if (this.file.fileText.get(count).startsWith(this.syntax.SYNTAX_KEY_WORD_PACKAGE))
 				//Set the package name
 				this.packageName = this.file.fileText.get(count).split(" ")[1];
 			//Add 1 to the count
 			count ++;
 		}
-		//Set the package name
-		this.packageName = "";
 		//Parse the classes
 		this.classes = ScriptParser.parseClasses(this.file.fileText , syntax , this);
 	}

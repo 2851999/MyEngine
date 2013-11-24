@@ -118,7 +118,7 @@ public class ScriptParser {
 			if (classCode.get(a).startsWith(syntax.SYNTAX_KEY_WORD_PUBLIC + " " + syntax.SYNTAX_KEY_WORD_METHOD) ||
 					classCode.get(a).startsWith(syntax.SYNTAX_KEY_WORD_PRIVATE + " " + syntax.SYNTAX_KEY_WORD_METHOD)) {
 				//The method name
-				String methodName = classCode.get(a).split(" ")[2].substring(0 , classCode.get(a).split(" ")[2].indexOf('('));
+				String methodName = classCode.get(a).split(" ")[2];
 				//The visibility of the method
 				ScriptObject.Visibility methodVisibility = ScriptObject.Visibility.PRIVATE;
 				//Check the visibility of the method
@@ -140,7 +140,7 @@ public class ScriptParser {
 					a++;
 				}
 				//Add a new method
-				methods.add(new ScriptMethod(methodName , methodVisibility , scriptClass , classCode));
+				methods.add(new ScriptMethod(methodName , methodVisibility , scriptClass , methodCode));
 			}
 		}
 		//Return the linked list

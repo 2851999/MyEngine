@@ -143,9 +143,9 @@ public class GUIPanel {
 	}
 	
 	/* The method to add components using a file */
-	public void parseFile(String filePath) {
+	public void parseFile(String filePath , boolean inFolder) {
 		//Read the file
-		LinkedList<String> fileText = FileUtils.read(filePath);
+		LinkedList<String> fileText = FileUtils.read(filePath , inFolder);
 		//Go through each line
 		for (int a = 0; a < fileText.size(); a++) {
 			//Parse the current line

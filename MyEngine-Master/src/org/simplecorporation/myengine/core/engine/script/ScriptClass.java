@@ -56,7 +56,7 @@ public class ScriptClass extends ScriptObject {
 		//Look at all of the methods
 		for (int a = 0; a < this.methods.size(); a++) {
 			//Check if the current method has the correct name
-			if (this.methods.get(a).name.equals(name))
+			if (this.methods.get(a).name.equals(name.substring(0 , name.indexOf("(")) + "()") && this.methods.get(a).arguments.length == name.substring(name.indexOf("(") , name.length() - 1).split(",").length)
 				//Assign the method
 				method = this.methods.get(a);
 		}

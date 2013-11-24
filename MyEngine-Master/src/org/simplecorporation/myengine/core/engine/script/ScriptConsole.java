@@ -1,4 +1,3 @@
-package org.simplecorporation.myengine.core.engine.script;
 /***********************************************
  * SIMPLE CORPORATION
  * 
@@ -9,13 +8,14 @@ package org.simplecorporation.myengine.core.engine.script;
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
+package org.simplecorporation.myengine.core.engine.script;
 
 import java.util.Scanner;
 
 public class ScriptConsole {
 	
 	/* The current version of the Scripting Language */
-	public static final String ScriptingLanguageVersion = "ScriptingLanguage 1 (Build 1)";
+	public static final String ScriptingLanguageVersion = "ScriptingLanguage 1 (Build 3)";
 	
 	/* The constructor */
 	public ScriptConsole() {
@@ -53,7 +53,7 @@ public class ScriptConsole {
 				//Check the number of commands
 				if (commands.length == 3) {
 					//Create a new script file
-					new Script(commands[1] , commands[2]);
+					new Script(commands[1] , commands[2] , true);
 				}
 			} else if (! input.equalsIgnoreCase("exit")) {
 				//Notify the user the command doesn't exist

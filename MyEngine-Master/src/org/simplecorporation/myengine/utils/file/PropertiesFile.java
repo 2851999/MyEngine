@@ -17,6 +17,9 @@ public class PropertiesFile {
 	/* The file name */
 	public String filePath;
 	
+	/* Is the file in a folder */
+	public boolean inFolder;
+	
 	/* The text in the file */
 	public LinkedList<String> fileText;
 	
@@ -24,26 +27,28 @@ public class PropertiesFile {
 	public PropertiesFile() {
 		//Assign the values
 		this.filePath = "";
+		this.inFolder = true;
 		this.fileText = new LinkedList<String>();
 	}
 	
 	/* The constructor with the file name given */
-	public PropertiesFile(String filePath) {
+	public PropertiesFile(String filePath , boolean inFolder) {
 		//Assign the values
 		this.filePath = filePath;
+		this.inFolder = inFolder;
 		this.fileText = new LinkedList<String>();
 	}
 	
 	/* The method to read the file assuming the filePath has been set */
 	public void read() {
 		//Assign the file text
-		this.fileText = FileUtils.read(this.filePath);
+		this.fileText = FileUtils.read(this.filePath , this.inFolder);
 	}
 	
 	/* The method to read the file given its path */
-	public void read(String filePath) {
+	public void read(String filePath , boolean inFolder) {
 		//Assign the file text
-		this.fileText = FileUtils.read(filePath);
+		this.fileText = FileUtils.read(filePath , inFolder);
 	}
 	
 	

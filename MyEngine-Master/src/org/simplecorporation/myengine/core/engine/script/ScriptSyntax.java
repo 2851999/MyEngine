@@ -69,9 +69,9 @@ public class ScriptSyntax {
 	}
 	
 	/* The method to set the syntax */
-	public void setSyntax(String filePath) {
+	public void setSyntax(String filePath , boolean inFolder) {
 		//Create the properties file
-		PropertiesFile propertiesFile = new PropertiesFile(filePath);
+		PropertiesFile propertiesFile = new PropertiesFile(filePath , inFolder);
 		//Read the properties file
 		propertiesFile.read();
 		//Set the syntax
@@ -89,6 +89,7 @@ public class ScriptSyntax {
 		this.SYNTAX_KEY_WORD_PACKAGE = propertiesFile.getProperty("SYNATX_KEY_WORD_PACKAGE");
 		
 		this.SYNTAX_KEY_WORD_VARIABLE_DECLARATION = propertiesFile.getProperty("SYNTAX_KEY_WORD_VARIABLE_DECLARATION");
+		this.SYNTAX_KEY_WORD_VARIABLE_REFERNCE = propertiesFile.getProperty("SYNTAX_KEY_WORD_VARIABLE_REFERNCE");
 	}
 	
 }
