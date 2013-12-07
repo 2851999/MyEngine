@@ -10,7 +10,7 @@
 
 package org.simplecorporation.myengine.core.game2d.entity;
 
-import org.simplecorporation.myengine.core.game2d.point.Point2D;
+import org.simplecorporation.myengine.core.game2d.vector.Vector2D;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
@@ -38,7 +38,7 @@ public class ImageEntity2D extends AbstractEntity2D {
 	}
 	
 	/* The constructor with the image and position given */
-	public ImageEntity2D(Image image , Point2D position) {
+	public ImageEntity2D(Image image , Vector2D position) {
 		//Call the super constructor
 		super(position);
 		//Assign the image
@@ -49,7 +49,7 @@ public class ImageEntity2D extends AbstractEntity2D {
 	}
 	
 	/* The constructor with the image and position and velocity given */
-	public ImageEntity2D(Image image , Point2D position , Point2D velocity) {
+	public ImageEntity2D(Image image , Vector2D position , Vector2D velocity) {
 		//Call the super constructor
 		super(position , velocity);
 		//Assign the image
@@ -60,7 +60,7 @@ public class ImageEntity2D extends AbstractEntity2D {
 	}
 	
 	/* The constructor with the image and position and width and height given */
-	public ImageEntity2D(Image image , Point2D position , double width , double height) {
+	public ImageEntity2D(Image image , Vector2D position , double width , double height) {
 		//Call the super constructor
 		super(position , width , height);
 		//Assign the image
@@ -71,7 +71,7 @@ public class ImageEntity2D extends AbstractEntity2D {
 	}
 	
 	/* The constructor with the image and position and velocity and width and height given */
-	public ImageEntity2D(Image image , Point2D position , Point2D velocity , double width , double height) {
+	public ImageEntity2D(Image image , Vector2D position , Vector2D velocity , double width , double height) {
 		//Call the super constructor
 		super(position , velocity , width , height);
 		//Assign the image

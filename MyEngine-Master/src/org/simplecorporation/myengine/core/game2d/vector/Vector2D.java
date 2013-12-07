@@ -8,9 +8,9 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.game2d.point;
+package org.simplecorporation.myengine.core.game2d.vector;
 
-public class Point2D {
+public class Vector2D {
 	
 	/* The x value */
 	public double x;
@@ -19,51 +19,51 @@ public class Point2D {
 	public double y;
 	
 	/* The constructor */
-	public Point2D() {
+	public Vector2D() {
 		//Set the x and y values to 0
 		this.x = 0;
 		this.y = 0;
 	}
 	
 	/* The constructor with the x and y values given */
-	public Point2D(double x , double y) {
+	public Vector2D(double x , double y) {
 		//Assign the x and y values
 		this.x = x;
 		this.y = y;
 	}
 	
-	/* The method that adds a point to this point */
-	public void add(Point2D other) {
+	/* The method that adds a point to this vector */
+	public void add(Vector2D other) {
 		//Add the two values
 		this.x += other.x;
 		this.y += other.y;
 	}
 	
-	/* The method that minus's a point from this point */
-	public void minus(Point2D other) {
+	/* The method that minus's a point from this vector */
+	public void minus(Vector2D other) {
 		//Minus the two values
 		this.x -= other.x;
 		this.y -= other.y;
 	}
 	
-	/* The method that multiply's this point using another point */
-	public void multiply(Point2D other) {
+	/* The method that multiply's this point using another vector */
+	public void multiply(Vector2D other) {
 		//Multiply the two values
 		this.x *= other.x;
 		this.y *= other.y;
 	}
 	
-	/* The method that divides this point using another point */
-	public void divide(Point2D other) {
+	/* The method that divides this point using another vector */
+	public void divide(Vector2D other) {
 		//Divide the two values
 		this.x /= other.x;
 		this.y /= other.y;
 	}
 	
-	/* The method to clone this Point2D */
-	public Point2D clone() {
+	/* The method to clone this Vector2D */
+	public Vector2D clone() {
 		//Return a clone
-		return new Point2D(x , y);
+		return new Vector2D(x , y);
 	}
 	
 	/* The method to set the x value */

@@ -31,14 +31,14 @@ public class GUI {
 	public void updateGUI() {
 		//Update all of the panels
 		for (int a = 0; a < this.panels.size(); a++)
-			this.panels.get(a).update();
+			this.panels.get(a).updatePanel();
 	}
 	
 	/* The method to render the GUI */
 	public void renderGUI() {
 		//Render all of the panels
 		for (int a = 0; a < this.panels.size(); a++)
-			this.panels.get(a).render();
+			this.panels.get(a).renderPanel();
 	}
 	
 	/* The method to show the GUI */

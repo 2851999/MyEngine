@@ -33,6 +33,9 @@ public abstract class Effect {
 	/* The abstract method to stop the effect */
 	public abstract void stopEffect();
 	
+	/* The abstract method to reset the effect */
+	public abstract void resetEffect();
+	
 	/* The constructor of an effect */
 	public Effect(String name , String description , int id) {
 		//Assign the variables

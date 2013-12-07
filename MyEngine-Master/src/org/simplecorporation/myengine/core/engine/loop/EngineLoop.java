@@ -60,8 +60,11 @@ public abstract class EngineLoop {
 	
 	/* The create method */
 	public void create() {
-		//Create the window
-		Window.create();
+		//Check if this is on android
+		if (! Settings.Android) {
+			//Create the window
+			Window.create();
+		}
 		//Create the input
 		InputManager.create();
 		//Call the engineCreated event
@@ -101,8 +104,11 @@ public abstract class EngineLoop {
 				this.font.render("OpenGL: " + Settings.Video.OpenGL , 0 , 48);
 			}
 			
-			//Update the window
-			Window.update();
+			//Check if this is on android
+			if (! Settings.Android) {
+				//Update the window
+				Window.update();
+			}
 			
 			//Set the last frame
 			this.lastFrameTime = getTime();
@@ -119,12 +125,18 @@ public abstract class EngineLoop {
 		this.engineStopped();
 		//Destroy the input
 		InputManager.destroy();
-		//Close the window
-		Window.close();
+		//Check if on android
+		if (! Settings.Android) {
+			//Close the window
+			Window.close();
+		}
 		//Call the engineClosing method
 		this.engineClosing();
-		//Exit the program
-		System.exit(0);
+		//Check if on android
+		if (! Settings.Android) {
+			//Exit the program
+			System.exit(0);
+		}
 	}
 	
 	/* Method to get the current system time */

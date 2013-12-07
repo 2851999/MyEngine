@@ -10,8 +10,9 @@
 
 package org.simplecorporation.myengine.utils.opengl.shader;
 
-import org.lwjgl.opengl.ARBShaderObjects;
-import org.simplecorporation.myengine.utils.array.ArrayUtils;
+import java.util.LinkedList;
+
+import org.lwjgl.opengl.GL20;
 import org.simplecorporation.myengine.utils.file.FileUtils;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
@@ -26,7 +27,7 @@ public class OpenGLShaderUtils {
 		//Try and catch statement
 		try {
 			//Create the shader
-			shader = ARBShaderObjects.glCreateShaderObjectARB(shaderType);
+			shader = GL20.glCreateShader(shaderType);
 			//Check the shader was created
 			if (shader == 0) {
 				//Log an error
@@ -34,11 +35,21 @@ public class OpenGLShaderUtils {
 				//Return 0
 				return 0;
 			}
+			//Read the file
+			LinkedList<String> shaderFileText = FileUtils.read(shaderFile , inFolder);
+			//The shader source
+			StringBuilder shaderSource = new StringBuilder();
+			//Look at all of the shader file text
+			for (int a = 0; a < shaderFileText.size(); a++) {
+				//Add onto the shader source
+				shaderSource.append(shaderFileText.get(a)).append("\n");
+			}
 			//Load the shader file
-			ARBShaderObjects.glShaderSourceARB(shader , ArrayUtils.toStringArray(FileUtils.read(shaderFile , inFolder)));
+			GL20.glShaderSource(shader , shaderSource);
 			//Compile the shader
-			ARBShaderObjects.glCompileShaderARB(shader);
+			GL20.glCompileShader(shader);
 		} catch (Exception e) {
+			e.printStackTrace();
 			//Log an error
 			Logger.log(new Log("MyEngine OpenGLShaderUtils createShader()" , "Error when creating shader with the file " + shaderFile , LogType.ERROR));
 		}

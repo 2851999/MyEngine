@@ -13,7 +13,7 @@ package org.simplecorporation.myengine.core.gui;
 import java.io.File;
 import java.util.LinkedList;
 
-import org.simplecorporation.myengine.core.game2d.point.Point2D;
+import org.simplecorporation.myengine.core.game2d.vector.Vector2D;
 import org.simplecorporation.myengine.core.gui.builder.GUIBuilder;
 import org.simplecorporation.myengine.core.gui.button.GUIImageButton;
 import org.simplecorporation.myengine.core.gui.button.GUIRenderableButton;
@@ -38,7 +38,7 @@ public class GUIPanel {
 	public String name;
 	
 	/* The position of this panel */
-	public Point2D position;
+	public Vector2D position;
 	
 	/* The width of the panel */
 	public double width;
@@ -59,7 +59,7 @@ public class GUIPanel {
 		//Create the linked list
 		this.components = new LinkedList<GUIComponent>();
 		//Create the position
-		this.position = new Point2D();
+		this.position = new Vector2D();
 		this.position.x = 0;
 		this.position.y = 0;
 		//Set the default width and height
@@ -69,8 +69,8 @@ public class GUIPanel {
 		this.showing = false;
 	}
 	
-	/* The method to update the GUI */
-	public void update() {
+	/* The method to update the GUIPanel */
+	public void updatePanel() {
 		//Check that this panel is showing
 		if (this.showing) {
 			//Update all of the components
@@ -92,8 +92,8 @@ public class GUIPanel {
 		}
 	}
 	
-	/* The method to render the GUI */
-	public void render() {
+	/* The method to render the GUIPanel */
+	public void renderPanel() {
 		//Check that this panel is showing
 		if (this.showing) {
 			//Render all of the components

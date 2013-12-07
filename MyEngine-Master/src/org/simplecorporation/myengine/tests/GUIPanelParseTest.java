@@ -29,7 +29,7 @@ public class GUIPanelParseTest extends Game {
 	}
 	
 	public void gameUpdate() {
-		panel.update();
+		panel.updatePanel();
 	}
 	
 	public void gameRender() {
@@ -42,7 +42,7 @@ public class GUIPanelParseTest extends Game {
 		BasicRenderer.setColour(Colour.BLACK);
 		BasicRenderer.renderFilledRectangle(0 , 0 , 640 , 480);
 		BasicRenderer.setColour(Colour.WHITE);
-		panel.render();
+		panel.renderPanel();
 	}
 	
 	public static void main(String[] args) {

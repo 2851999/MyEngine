@@ -171,11 +171,14 @@ public class FileUtils {
 			FileWriter fileWriter = new FileWriter(asFileString(filePath));
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			
-			//Write the first line
-			bufferedWriter.write(fileText.get(0));
-			for (int a = 1; a < fileText.size(); a++) {
-				bufferedWriter.newLine();
-				bufferedWriter.write(fileText.get(a));
+			//Make sure there is text to save (Prevents IndexOutOfBoundsException)
+			if (fileText.size() > 0) {
+				//Write the first line
+				bufferedWriter.write(fileText.get(0));
+				for (int a = 1; a < fileText.size(); a++) {
+					bufferedWriter.newLine();
+					bufferedWriter.write(fileText.get(a));
+				}
 			}
 			
 			//Close the objects

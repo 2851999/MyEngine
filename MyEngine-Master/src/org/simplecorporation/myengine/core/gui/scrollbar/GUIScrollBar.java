@@ -45,10 +45,10 @@ public abstract class GUIScrollBar extends GUISlider {
 				//Check which direction to scroll
 				if (e.distancey > 0)
 					//Change the slider value
-					this.sliderValue += this.scrollAmount;
+					this.sliderValue -= this.scrollAmount;
 				else if (e.distancey < 0)
 					//Change the slider value
-					this.sliderValue -= this.scrollAmount;
+					this.sliderValue += this.scrollAmount;
 				
 				//Check the slider value
 				if (this.sliderValue < 0)
@@ -57,14 +57,14 @@ public abstract class GUIScrollBar extends GUISlider {
 				else if (this.sliderValue > 100)
 					//Set the slider value
 					this.sliderValue = 100;
-			} else if (this.sliderDirection == GUISlider.DIRECTION_HORIZONTAL && this.shift && !Settings.Android) {
+			} else if (this.sliderDirection == GUISlider.DIRECTION_HORIZONTAL && this.shift && ! Settings.Android) {
 				//Check which direction to scroll
 				if (e.distancey > 0)
 					//Change the slider value
-					this.sliderValue += this.scrollAmount;
+					this.sliderValue -= this.scrollAmount;
 				else if (e.distancey < 0)
 					//Change the slider value
-					this.sliderValue -= this.scrollAmount;
+					this.sliderValue += this.scrollAmount;
 				
 				//Check the slider value
 				if (this.sliderValue < 0)
