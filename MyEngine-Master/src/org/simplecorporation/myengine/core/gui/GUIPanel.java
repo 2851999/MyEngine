@@ -25,6 +25,9 @@ import org.simplecorporation.myengine.core.gui.textbox.GUIImageTextBox;
 import org.simplecorporation.myengine.core.gui.textbox.GUIRenderableTextBox;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
+import org.simplecorporation.myengine.core.window.Window;
+import org.simplecorporation.myengine.core.window.WindowListener;
+import org.simplecorporation.myengine.core.window.WindowSizeChangedEvent;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.file.FileUtils;
 import org.simplecorporation.myengine.utils.font.FontUtils;
@@ -32,7 +35,7 @@ import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
-public class GUIPanel {
+public class GUIPanel implements WindowListener {
 	
 	/* The name of the panel */
 	public String name;
@@ -67,6 +70,8 @@ public class GUIPanel {
 		this.height = Settings.Window.Size.Height;
 		//Set showing to false
 		this.showing = false;
+		//Add this window listener
+		Window.addListener(this);
 	}
 	
 	/* The method to update the GUIPanel */
@@ -382,6 +387,13 @@ public class GUIPanel {
 			this.components.get(a).position.x += x;
 			this.components.get(a).position.y += y;
 		}
+	}
+	
+	/* The method called when the window size is changed */
+	public void windowSizeChanged(WindowSizeChangedEvent e) {
+		//Increase this panels width/height
+		this.width += e.changeWidth;
+		this.height += e.changeHeight;
 	}
 	
 }

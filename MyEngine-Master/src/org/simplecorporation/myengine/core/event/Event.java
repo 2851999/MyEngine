@@ -8,7 +8,7 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.input.event;
+package org.simplecorporation.myengine.core.event;
 
 public class Event {
 	
