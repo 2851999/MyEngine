@@ -69,7 +69,7 @@ public class GUIWindow extends GUIPanel implements GUIButtonListener {
 		//Check the mouse position
 		if (MouseInput.isLeftButtonDown) {
 			//Check if the top bar is selected
-			if (new Rectangle(this.position.x , this.position.y , this.width , this.height).contains(MouseInput.x , MouseInput.y)) {
+			if (new Rectangle(this.position.x , this.position.y , this.width , this.topBarHeight).contains(MouseInput.x , MouseInput.y)) {
 				//Check if the mouse has moved
 				if (MouseInput.x != MouseInput.lastX || MouseInput.y != MouseInput.lastY) {
 					//Move the window

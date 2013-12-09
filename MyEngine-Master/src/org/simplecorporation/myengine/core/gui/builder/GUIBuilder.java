@@ -140,14 +140,6 @@ public class GUIBuilder {
 	/* The method to create an image text box given its
 	   name, image, font, x and y position,
 	   width and height */
-	public static GUIImageTextBox createRenderableTextBox(String name , Image image ,
-			GUIFont font , double x , double y , double width , double height) {
-		return GUITextBoxBuilder.createImageTextBox(name, image, font, x, y, width, height);
-	}
-	
-	/* The method to create an image text box given its
-	   name, image, font, x and y position,
-	   width and height */
 	public static GUIImageTextBox createImageTextBox(String name , Image image ,
 			GUIFont font , double x , double y , double width , double height) {
 		return GUITextBoxBuilder.createImageTextBox(name, image, font, x, y, width, height);

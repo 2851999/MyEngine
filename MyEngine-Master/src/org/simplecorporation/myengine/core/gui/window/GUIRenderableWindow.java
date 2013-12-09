@@ -39,6 +39,7 @@ public class GUIRenderableWindow extends GUIWindow {
 			//Render the window
 			BasicRenderer.setColour(this.windowColour);
 			BasicRenderer.renderFilledRectangle(this.position.x , this.position.y , this.width , this.height);
+			//Make sure the top bar is visible
 			BasicRenderer.setColour(this.topBarColour);
 			BasicRenderer.renderFilledRectangle(this.position.x , this.position.y , this.width , this.topBarHeight);
 			//Render the window title
