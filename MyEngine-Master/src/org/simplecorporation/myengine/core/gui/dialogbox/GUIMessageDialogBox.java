@@ -23,6 +23,9 @@ public class GUIMessageDialogBox implements GUIButtonListener {
 	/* The GUIWindow */
 	public GUIWindow window;
 	
+	/* The buttons in the window */
+	public GUIButton okButton;
+	
 	/* The constructor */
 	public GUIMessageDialogBox(String name , String text , GUIFont font , GUIWindow window , GUIButton okButton) {
 		//Assign the variables
@@ -39,6 +42,8 @@ public class GUIMessageDialogBox implements GUIButtonListener {
 		textArea.position.x = 0;
 		textArea.position.y = this.window.topBarHeight + 2;
 		this.window.add(textArea);
+		//Set the button
+		this.okButton = okButton;
 	}
 	
 	/* The method to update the dialog box */

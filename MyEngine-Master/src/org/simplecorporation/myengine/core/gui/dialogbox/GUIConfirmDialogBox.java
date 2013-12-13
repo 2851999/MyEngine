@@ -30,6 +30,10 @@ public class GUIConfirmDialogBox implements GUIButtonListener {
 	/* The GUIWindow */
 	public GUIWindow window;
 	
+	/* The buttons in the window */
+	public GUIButton confirmButton;
+	public GUIButton cancelButton;
+	
 	/* The constructor */
 	public GUIConfirmDialogBox(String name , String text , GUIFont font , GUIWindow window , GUIButton confirmButton , GUIButton cancelButton) {
 		//Assign the variables
@@ -53,6 +57,9 @@ public class GUIConfirmDialogBox implements GUIButtonListener {
 		this.window.add(textArea);
 		//Set the result to 0
 		this.result = 0;
+		//Set the buttons
+		this.confirmButton = confirmButton;
+		this.cancelButton = cancelButton;
 	}
 	
 	/* The method to update the dialog box */

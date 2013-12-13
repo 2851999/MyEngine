@@ -34,6 +34,10 @@ public class GUIInputDialogBox implements GUIButtonListener {
 	/* The GUIWindow */
 	public GUIWindow window;
 	
+	/* The buttons in the window */
+	public GUIButton confirmButton;
+	public GUIButton cancelButton;
+	
 	/* The constructor */
 	public GUIInputDialogBox(String name , String text , GUIFont font , GUIWindow window , GUIButton confirmButton , GUIButton cancelButton , GUITextBox textBox) {
 		//Assign the variables
@@ -64,6 +68,9 @@ public class GUIInputDialogBox implements GUIButtonListener {
 		this.result = 0;
 		//Set the result text
 		this.resultText = "";
+		//Set the buttons
+		this.confirmButton = confirmButton;
+		this.cancelButton = cancelButton;
 	}
 	
 	/* The method to update the dialog box */

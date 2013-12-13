@@ -371,8 +371,8 @@ public class GUIPanel implements WindowListener {
 	/* The method to set the panel's position */
 	public void setPanelPosition(double x , double y) {
 		//Get the change in the x and y position
-		double changeX = this.position.x - x;
-		double changeY = this.position.y - y;
+		double changeX = x - this.position.x;
+		double changeY = y - this.position.y;
 		//Move this panel by the correct amount
 		this.movePanel(changeX , changeY);
 	}
