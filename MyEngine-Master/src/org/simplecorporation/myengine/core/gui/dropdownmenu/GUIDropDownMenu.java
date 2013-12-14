@@ -58,6 +58,10 @@ public class GUIDropDownMenu extends GUIComponent implements GUIButtonListener {
 		//Update the menu button if it is set
 		if (this.menuButton != null)
 			this.menuButton.update();
+		//Check if the menu is open
+		if (this.menuOpen)
+			//Make sure the menu button is selected
+			this.menuButton.buttonSelected = true;
 		//The y position
 		double y = this.position.y + this.menuButton.height;
 		//Go through all of the buttons
