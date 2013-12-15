@@ -27,9 +27,14 @@ import org.simplecorporation.myengine.utils.messagebox.MessageBox;
 
 public class OpenGLWindow {
 	
+	/* Has the window been created */
+	public static boolean windowCreated;
+	
 	/* The method to create the window */
 	public static void create() {
 		try {
+			//Set window created to false
+			windowCreated = false;
 			//Set the attributes of the window
 			Display.setTitle("MyEngine Window");
 			Display.setDisplayMode(new DisplayMode(640 , 480));
@@ -41,6 +46,8 @@ public class OpenGLWindow {
 			updateSettings();
 			//Create the display
 			Display.create();
+			//Set windowCreated to true
+			windowCreated = true;
 		} catch (LWJGLException e) {
 			//Log a message
 			//Display an error message box
@@ -104,7 +111,7 @@ public class OpenGLWindow {
 		//Check if the screen size has changed
 		if (windowWidth != Display.getWidth() || windowHeight != Display.getHeight()) {
 			//Make sure the display has been created
-			if (Display.isActive()) {
+			if (windowCreated && Display.isActive()) {
 				//Make sure OpenGL changes its resolution
 				GL11.glScissor(0 , 0 , Display.getWidth() , Display.getHeight());
 				GL11.glViewport(0 , 0 , Display.getWidth() , Display.getHeight());

@@ -19,9 +19,6 @@ import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 
 public class GUIImageButton extends GUIButton {
 	
-	/* The text */
-	public String text;
-	
 	/* The images */
 	public Image[] images;
 	

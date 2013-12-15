@@ -10,6 +10,7 @@
 
 package org.simplecorporation.myengine.core.engine.loop;
 
+import org.simplecorporation.myengine.core.game.GameValues;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.input.InputManager;
 import org.simplecorporation.myengine.core.render.colour.Colour;
@@ -64,9 +65,9 @@ public abstract class EngineLoop {
 		if (! Settings.Android) {
 			//Create the window
 			Window.create();
+			//Create the input
+			InputManager.create();
 		}
-		//Create the input
-		InputManager.create();
 		//Call the engineCreated event
 		this.engineCreated();
 		//Start the engine loop
@@ -84,59 +85,66 @@ public abstract class EngineLoop {
 		this.fps = 0;
 		//Set the default font (Arial)
 		this.font = FontUtils.buildGUIFont("Arial" , Colour.WHITE , 10);
-		//While the window is open
-		while (! Window.isCloseRequested()) {
-			//Check the input
-			InputManager.checkInput();
-			
-			//Update the engine
-			this.engineUpdate();
-			//Render the engine
-			this.engineRender();
-			
-			//Check if the debug info should be drawn
-			if (Settings.Debugging.ShowInfo) {
-				//Render some information using the default font
-				this.font.render("DEBUGGING" , 0 , 0);
-				this.font.render("FPS: " + getFPS() , 0 , 12);
-				this.font.render("Memory Usage: " + ((SystemInfo.getMaxMemory() / (1024 * 1024)) - (SystemInfo.getFreeMemory() / (1024 * 1024))) , 0 , 24);
-				this.font.render("Processors: " + SystemInfo.getAvailableProcessors() , 0 , 36);
-				this.font.render("OpenGL: " + Settings.Video.OpenGL , 0 , 48);
-			}
-			
-			//Check if this is on android
-			if (! Settings.Android) {
-				//Update the window
-				Window.update();
-			}
-			
-			//Set the last frame
-			this.lastFrameTime = getTime();
-			
-			//Check the FPS
-			frameCount ++;
-			if (getTime() - this.lastFPSSecond >= 1000) {
-				this.fps = this.frameCount;
-				this.frameCount = 0;
-				this.lastFPSSecond = getTime();
-			}
-		}
-		//Call the engineStopped method
-		this.engineStopped();
-		//Destroy the input
-		InputManager.destroy();
-		//Check if on android
+		//Check if using android
 		if (! Settings.Android) {
+			//While the window is open
+			while (! Window.isCloseRequested()) {
+				//Run a cycle of the loop
+				this.tick();
+			}
+			//Call the engineStopped method
+			this.engineStopped();
+			//Destroy the input
+			InputManager.destroy();
 			//Close the window
 			Window.close();
-		}
-		//Call the engineClosing method
-		this.engineClosing();
-		//Check if on android
-		if (! Settings.Android) {
+			//Call the engineClosing method
+			this.engineClosing();
 			//Exit the program
 			System.exit(0);
 		}
+	}
+	
+	/* Method called in the main loop */
+	public void tick() {
+		//Check the input
+		InputManager.checkInput();
+		
+		//Update the engine
+		this.engineUpdate();
+		//Render the engine
+		this.engineRender();
+		
+		//Check if the debug info should be drawn
+		if (Settings.Debugging.ShowInfo) {
+			//Render some information using the default font
+			this.font.render("DEBUGGING" , 0 , 0);
+			this.font.render("FPS: " + getFPS() , 0 , 12);
+			this.font.render("Memory Usage: " + ((SystemInfo.getMaxMemory() / (1024 * 1024)) - (SystemInfo.getFreeMemory() / (1024 * 1024))) , 0 , 24);
+			this.font.render("Processors: " + SystemInfo.getAvailableProcessors() , 0 , 36);
+			this.font.render("OpenGL: " + Settings.Video.OpenGL , 0 , 48);
+		}
+		
+		//Check if this is on android
+		if (! Settings.Android) {
+			//Update the window
+			Window.update();
+		}
+		
+		//Set the last frame
+		this.lastFrameTime = getTime();
+		
+		//Check the FPS
+		frameCount ++;
+		if (getTime() - this.lastFPSSecond >= 1000) {
+			this.fps = this.frameCount;
+			this.frameCount = 0;
+			this.lastFPSSecond = getTime();
+		}
+		
+		//Set the current FPS and Delta values in the GameValues class
+		GameValues.CURRENT_FPS = this.getFPS();
+		GameValues.CURRENT_DELTA = this.getDelta();
 	}
 	
 	/* Method to get the current system time */

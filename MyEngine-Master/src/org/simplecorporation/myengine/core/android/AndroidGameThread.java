@@ -54,7 +54,7 @@ public class AndroidGameThread extends Thread {
 	/* The run method */
 	public void run() {
 		//Start the game
-		this.androidGame.gameStarted();
+		this.androidGame.create();
 		//Run while the variable running is true
 		while (running) {
 			//Check if the thread is paused
@@ -68,10 +68,8 @@ public class AndroidGameThread extends Thread {
 					//Set the game canvas
 					AndroidStore.gameCanvas = this.surfaceHolder.lockCanvas();
 					synchronized (this.surfaceHolder) {
-						//Update the game
-						this.androidGame.gameUpdate();
-						//Render the game
-						this.androidGame.gameRender();
+						//Update/Render the game
+						this.androidGame.tick();
 					}
 				} finally {
 					//Check that the canvas isn't null

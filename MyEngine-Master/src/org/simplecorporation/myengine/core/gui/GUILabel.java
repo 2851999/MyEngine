@@ -27,6 +27,7 @@ public class GUILabel extends GUIComponent {
 		//Assign the variables
 		this.text = text;
 		this.font = font;
+		this.width = this.font.getWidth(this.text);
 	}
 	
 	/* The update method */

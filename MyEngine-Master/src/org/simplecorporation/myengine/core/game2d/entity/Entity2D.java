@@ -10,6 +10,7 @@
 
 package org.simplecorporation.myengine.core.game2d.entity;
 
+import org.simplecorporation.myengine.core.game.GameValues;
 import org.simplecorporation.myengine.core.game2d.vector.Vector2D;
 import org.simplecorporation.myengine.core.rectangle.Rectangle;
 
@@ -101,10 +102,13 @@ public class Entity2D {
 	
 	/* The update method */
 	public void update() {
+		//The velocity values
+		double velx = this.velocity.x * GameValues.CURRENT_DELTA;
+		double vely = this.velocity.y * GameValues.CURRENT_DELTA;
 		//Add the velocity to the position
-		this.position.add(this.velocity);
+		this.position.add(new Vector2D(velx , vely));
 		//Add the rotation velocity to the rotation
-		this.rotation += this.rotationVelocity;
+		this.rotation += this.rotationVelocity * GameValues.CURRENT_DELTA;
 	}
 	
 	/* The render method */

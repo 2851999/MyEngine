@@ -17,6 +17,7 @@ import org.simplecorporation.myengine.core.gui.button.listener.GUIButtonListener
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.input.MouseInput;
 import org.simplecorporation.myengine.core.rectangle.Rectangle;
+import org.simplecorporation.myengine.core.window.WindowSizeChangedEvent;
 
 public class GUIWindow extends GUIPanel implements GUIButtonListener {
 	
@@ -91,6 +92,11 @@ public class GUIWindow extends GUIPanel implements GUIButtonListener {
 			//Hide this panel
 			this.hidePanel();
 		}
+	}
+	
+	/* The method called when the window's size is changed */
+	public void windowSizeChanged(WindowSizeChangedEvent e) {
+		
 	}
 	
 }

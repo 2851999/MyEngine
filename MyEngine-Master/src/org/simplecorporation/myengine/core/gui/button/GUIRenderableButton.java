@@ -20,9 +20,6 @@ import org.simplecorporation.myengine.settings.Settings;
 
 public class GUIRenderableButton extends GUIButton {
 	
-	/* The text */
-	public String text;
-	
 	/* The colours */
 	public Colour[] colours;
 	

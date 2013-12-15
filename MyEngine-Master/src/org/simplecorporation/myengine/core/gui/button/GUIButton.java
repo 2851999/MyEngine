@@ -34,6 +34,9 @@ public abstract class GUIButton extends GUIComponent {
 	/* The sound to be played when the button is clicked */
 	public AudioClip soundEffect;
 	
+	/* The text in the button */
+	public String text;
+	
 	/* The constructor */
 	public GUIButton(String name) {
 		//Call the super constructor
