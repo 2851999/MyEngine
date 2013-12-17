@@ -16,6 +16,7 @@ import org.lwjgl.input.Mouse;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
+import org.simplecorporation.myengine.core.input.event.ScrollEvent;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
@@ -78,6 +79,12 @@ public class InputManagerLWJGL {
 			Input.callMouseMoved(new MouseMotionEvent(MouseInput.x , MouseInput.y ,
 					MouseInput.lastX , MouseInput.lastY));
 		}
+		
+		//Check the scroll wheel
+		int dWheel = Mouse.getDWheel();
+		if (dWheel != 0)
+			//Call a scroll event
+			Input.callOnScroll(new ScrollEvent(dWheel , dWheel));
 	}
 	
 	/* The method to check the keyboard */

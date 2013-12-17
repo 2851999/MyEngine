@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
+import org.simplecorporation.myengine.core.input.event.ScrollEvent;
 import org.simplecorporation.myengine.core.input.event.TouchEvent;
 import org.simplecorporation.myengine.core.input.listener.InputListener;
 
@@ -82,6 +83,14 @@ public class Input {
 		//Call all the listeners
 		for (int a = 0; a < inputListeners.size(); a++) {
 			inputListeners.get(a).onKeyTyped(e);
+		}
+	}
+	
+	/* The method to call the on scroll method */
+	public static void callOnScroll(ScrollEvent e) {
+		//Call all of the listeners
+		for (int a = 0; a < inputListeners.size(); a++) {
+			inputListeners.get(a).onScroll(e);
 		}
 	}
 	

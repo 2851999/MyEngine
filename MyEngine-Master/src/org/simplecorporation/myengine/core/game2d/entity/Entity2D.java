@@ -10,19 +10,17 @@
 
 package org.simplecorporation.myengine.core.game2d.entity;
 
-import java.awt.Rectangle;
-
-import org.simplecorporation.myengine.core.game2d.point.Point2D;
-
-import android.graphics.Rect;
+import org.simplecorporation.myengine.core.game.GameValues;
+import org.simplecorporation.myengine.core.game2d.vector.Vector2D;
+import org.simplecorporation.myengine.core.rectangle.Rectangle;
 
 public class Entity2D {
 	
 	/* The position of the entity */
-	public Point2D position;
+	public Vector2D position;
 	
 	/* The velocity of the entity */
-	public Point2D velocity;
+	public Vector2D velocity;
 	
 	/* The rotation of the entity */
 	public double rotation;
@@ -39,8 +37,8 @@ public class Entity2D {
 	/* The constructor */
 	public Entity2D() {
 		//Set all of the variables
-		this.position = new Point2D();
-		this.velocity = new Point2D();
+		this.position = new Vector2D();
+		this.velocity = new Vector2D();
 		this.rotation = 0;
 		this.rotationVelocity = 0;
 		this.width = 0;
@@ -48,10 +46,10 @@ public class Entity2D {
 	}
 	
 	/* The constructor with the position given */
-	public Entity2D(Point2D position) {
+	public Entity2D(Vector2D position) {
 		//Set all of the variables
 		this.position = position;
-		this.velocity = new Point2D();
+		this.velocity = new Vector2D();
 		this.rotation = 0;
 		this.rotationVelocity = 0;
 		this.width = 0;
@@ -59,10 +57,10 @@ public class Entity2D {
 	}
 	
 	/* The constructor with the position and rotation given */
-	public Entity2D(Point2D position , double rotation) {
+	public Entity2D(Vector2D position , double rotation) {
 		//Set all of the variables
 		this.position = position;
-		this.velocity = new Point2D();
+		this.velocity = new Vector2D();
 		this.rotation = rotation;
 		this.rotationVelocity = 0;
 		this.width = 0;
@@ -70,7 +68,7 @@ public class Entity2D {
 	}
 	
 	/* The constructor with the position and velocity given */
-	public Entity2D(Point2D position , Point2D velocity) {
+	public Entity2D(Vector2D position , Vector2D velocity) {
 		//Set all of the variables
 		this.position = position;
 		this.velocity = velocity;
@@ -81,10 +79,10 @@ public class Entity2D {
 	}
 	
 	/* The constructor with the position and width and height given */
-	public Entity2D(Point2D position , double width , double height) {
+	public Entity2D(Vector2D position , double width , double height) {
 		//Set all of the variables
 		this.position = position;
-		this.velocity = new Point2D();
+		this.velocity = new Vector2D();
 		this.rotation = 0;
 		this.rotationVelocity = 0;
 		this.width = width;
@@ -92,7 +90,7 @@ public class Entity2D {
 	}
 	
 	/* The constructor with the position and velocity and width and height given */
-	public Entity2D(Point2D position , Point2D velocity , double width , double height) {
+	public Entity2D(Vector2D position , Vector2D velocity , double width , double height) {
 		//Set all of the variables
 		this.position = position;
 		this.velocity = velocity;
@@ -104,10 +102,13 @@ public class Entity2D {
 	
 	/* The update method */
 	public void update() {
+		//The velocity values
+		double velx = this.velocity.x * GameValues.CURRENT_DELTA;
+		double vely = this.velocity.y * GameValues.CURRENT_DELTA;
 		//Add the velocity to the position
-		this.position.add(this.velocity);
+		this.position.add(new Vector2D(velx , vely));
 		//Add the rotation velocity to the rotation
-		this.rotation += this.rotationVelocity;
+		this.rotation += this.rotationVelocity * GameValues.CURRENT_DELTA;
 	}
 	
 	/* The render method */
@@ -117,12 +118,7 @@ public class Entity2D {
 	
 	/* Method that returns the bounds as a rectangle */
 	public Rectangle getBounds() {
-		return new Rectangle((int) this.position.x , (int) this.position.y , (int) this.width , (int) this.height);
-	}
-	
-	/* Method that returns the bounds as a rectangle for android */
-	public Rect getAndroidBounds() {
-		return new Rect((int)this.position.x , (int)this.position.y , (int)this.position.x + (int)this.width , (int)this.position.y + (int)height);
+		return new Rectangle(this.position.x , this.position.y , this.width , this.height);
 	}
 	
 	/* Method to check for a collision between two entity's */
@@ -131,7 +127,7 @@ public class Entity2D {
 	}
 	
 	/* The method to set the position */
-	public void setPosition(Point2D position) {
+	public void setPosition(Vector2D position) {
 		//Set the position
 		this.position = position;
 	}
@@ -139,11 +135,11 @@ public class Entity2D {
 	/* The method to set the position */
 	public void setPosition(double x , double y) {
 		//Set the position
-		this.position = new Point2D(x , y);
+		this.position = new Vector2D(x , y);
 	}
 	
 	/* The method to set the velocity */
-	public void setVelocity(Point2D velocity) {
+	public void setVelocity(Vector2D velocity) {
 		//Set the velocity
 		this.velocity =  velocity;
 	}
@@ -197,13 +193,13 @@ public class Entity2D {
 	}
 	
 	/* The method to get the position */
-	public Point2D getPosition() {
+	public Vector2D getPosition() {
 		//Return the position
 		return this.position;
 	}
 	
 	/* The method to get the velocity */
-	public Point2D getVelocity() {
+	public Vector2D getVelocity() {
 		//Return the velocity
 		return this.velocity;
 	}

@@ -10,7 +10,7 @@
 
 package org.simplecorporation.myengine.core.gui.button.event;
 
-import org.simplecorporation.myengine.core.input.event.Event;
+import org.simplecorporation.myengine.core.event.Event;
 
 public class GUICheckBoxEvent extends Event {
 	

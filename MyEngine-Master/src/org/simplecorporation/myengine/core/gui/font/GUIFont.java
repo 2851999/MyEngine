@@ -104,5 +104,4 @@ public class GUIFont {
 			return 0;
 	}
 	
-	
 }

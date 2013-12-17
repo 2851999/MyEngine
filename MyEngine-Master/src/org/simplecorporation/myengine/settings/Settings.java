@@ -17,10 +17,10 @@ import org.simplecorporation.myengine.utils.file.FileUtils;
 public class Settings {
 	
 	/* The version of the engine goes up 1 every development build */
-	public static final String EngineVersion = "V1.0.4.8";
+	public static final String EngineVersion = "V1.0.5.0";
 	
 	/* The type of build this version of the engine is*/
-	public static final String EngineBuild = "Development";
+	public static final String EngineBuild = "Experimental";
 	
 	/* Is using android */
 	public static boolean Android = false;
@@ -72,9 +72,9 @@ public class Settings {
 	}
 	
 	/* The method to read a configuration file to set all of the settings */
-	public static void readConfig(String filePath) {
+	public static void readConfig(String filePath , boolean inFolder) {
 		//Read the file
-		LinkedList<String> fileText = FileUtils.read(filePath);
+		LinkedList<String> fileText = FileUtils.read(filePath , inFolder);
 		//Look at each string in the list
 		for (int a = 0; a < fileText.size(); a++) {
 			//Split the current line into its setting and value

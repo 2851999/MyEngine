@@ -13,6 +13,7 @@ package org.simplecorporation.myengine.core.gui;
 import java.io.File;
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.core.game2d.vector.Vector2D;
 import org.simplecorporation.myengine.core.gui.builder.GUIBuilder;
 import org.simplecorporation.myengine.core.gui.button.GUIImageButton;
 import org.simplecorporation.myengine.core.gui.button.GUIRenderableButton;
@@ -24,18 +25,31 @@ import org.simplecorporation.myengine.core.gui.textbox.GUIImageTextBox;
 import org.simplecorporation.myengine.core.gui.textbox.GUIRenderableTextBox;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
+import org.simplecorporation.myengine.core.window.Window;
+import org.simplecorporation.myengine.core.window.WindowListener;
+import org.simplecorporation.myengine.core.window.WindowSizeChangedEvent;
+import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.file.FileUtils;
 import org.simplecorporation.myengine.utils.font.FontUtils;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
-public class GUIPanel {
+public class GUIPanel implements WindowListener {
 	
 	/* The name of the panel */
 	public String name;
 	
-	/* The boolean that states whether this panel showing */
+	/* The position of this panel */
+	public Vector2D position;
+	
+	/* The width of the panel */
+	public double width;
+	
+	/* The height of the panel */
+	public double height;
+	
+	/* Is this panel showing */
 	public boolean showing;
 	
 	/* The components in the GUI */
@@ -43,26 +57,67 @@ public class GUIPanel {
 	
 	/* The constructor */
 	public GUIPanel(String name) {
-		//Assign the name
+		//Set the name
 		this.name = name;
-		//Set showing to false
-		this.showing = false;
 		//Create the linked list
 		this.components = new LinkedList<GUIComponent>();
+		//Create the position
+		this.position = new Vector2D();
+		this.position.x = 0;
+		this.position.y = 0;
+		//Set the default width and height
+		this.width = Settings.Window.Size.Width;
+		this.height = Settings.Window.Size.Height;
+		//Set showing to false
+		this.showing = false;
+		//Add this window listener
+		Window.addListener(this);
 	}
 	
-	/* The method to update the GUI */
+	/* The method to update the GUIPanel */
 	public void updatePanel() {
-		//Update all of the components
-		for (int a = 0; a < this.components.size(); a++)
-			this.components.get(a).update();
+		//Check that this panel is showing
+		if (this.showing) {
+			//Update all of the components
+			for (int a = 0; a < this.components.size(); a++) {
+				//Get the component
+				GUIComponent component = this.components.get(a);
+				//Make sure the component is completely visible in this panel
+				if (component.position.x >= this.position.x && component.position.x + component.width <= this.position.x + this.width &&
+						component.position.y >= this.position.y && component.position.y + component.height <= this.position.y + this.height) {
+					//Make sure the component is shown
+					component.visible = true;
+					//Update the component
+					component.update();
+				} else {
+					//Make sure the component is hidden
+					component.visible = false;
+				}
+			}	
+		}
 	}
 	
-	/* The method to render the GUI */
+	/* The method to render the GUIPanel */
 	public void renderPanel() {
-		//Render all of the components
-		for (int a = 0; a < this.components.size(); a++)
-			this.components.get(a).render();
+		//Check that this panel is showing
+		if (this.showing) {
+			//Render all of the components
+			for (int a = 0; a < this.components.size(); a++) {
+				//Get the component
+				GUIComponent component = this.components.get(a);
+				//Make sure the component is completely visible in this panel
+				if (component.position.x >= this.position.x && component.position.x + component.width <= this.position.x + this.width &&
+						component.position.y >= this.position.y && component.position.y + component.height <= this.position.y + this.height) {
+					//Make sure the component is shown
+					component.visible = true;
+					//Render the component
+					component.render();
+				} else {
+					//Make sure the component is hidden
+					component.visible = false;
+				}
+			}
+		}
 	}
 	
 	/* The method to show the GUI */
@@ -85,14 +140,17 @@ public class GUIPanel {
 	
 	/* The method to add a component */
 	public void add(GUIComponent component) {
+		//Set the components position in relation to this panel
+		component.position.x += this.position.x;
+		component.position.y += this.position.y;
 		//Add the component to the linked list
 		this.components.add(component);
 	}
 	
 	/* The method to add components using a file */
-	public void parseFile(String filePath) {
+	public void parseFile(String filePath , boolean inFolder) {
 		//Read the file
-		LinkedList<String> fileText = FileUtils.read(filePath);
+		LinkedList<String> fileText = FileUtils.read(filePath , inFolder);
 		//Go through each line
 		for (int a = 0; a < fileText.size(); a++) {
 			//Parse the current line
@@ -308,6 +366,34 @@ public class GUIPanel {
 			Logger.log(new Log("GUIPanel get()" , "The component with the name " + name + " was not found" , LogType.ERROR));
 		//Return the component
 		return component;
+	}
+	
+	/* The method to set the panel's position */
+	public void setPanelPosition(double x , double y) {
+		//Get the change in the x and y position
+		double changeX = x - this.position.x;
+		double changeY = y - this.position.y;
+		//Move this panel by the correct amount
+		this.movePanel(changeX , changeY);
+	}
+	
+	/* The method to move the panel by a certain amount */
+	public void movePanel(double x , double y) {
+		//Set the panels position
+		this.position.x += x;
+		this.position.y += y;
+		//Move all of the components
+		for (int a = 0; a < this.components.size(); a++) {
+			this.components.get(a).position.x += x;
+			this.components.get(a).position.y += y;
+		}
+	}
+	
+	/* The method called when the window size is changed */
+	public void windowSizeChanged(WindowSizeChangedEvent e) {
+		//Increase this panels width/height
+		this.width += e.changeWidth;
+		this.height += e.changeHeight;
 	}
 	
 }

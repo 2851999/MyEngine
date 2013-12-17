@@ -24,7 +24,7 @@ public class GUIPanelParseTest extends Game {
 	public void gameCreated() {
 		String PATH = "";
 		panel = new GUIPanel("TestPanel");
-		panel.parseFile(PATH + "GUI.txt");
+		panel.parseFile(PATH + "GUI.txt" , true);
 		panel.showPanel();
 	}
 	

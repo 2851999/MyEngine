@@ -23,7 +23,7 @@ public class GUITextDisplayArea extends GUIComponent {
 	/* The font */
 	private GUIFont font;
 	
-	public GUITextDisplayArea(String name , LinkedList<String> textToDisplay , GUIFont font , int width) {
+	public GUITextDisplayArea(String name , LinkedList<String> textToDisplay , GUIFont font , double width) {
 		//Call the super constructor
 		super(name);
 		//Assign the variables

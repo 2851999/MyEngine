@@ -15,12 +15,15 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
+import org.simplecorporation.myengine.core.input.event.ScrollEvent;
 import org.simplecorporation.myengine.core.window.JavaWindow;
 
-public class InputManagerJava implements MouseListener , MouseMotionListener , KeyListener {
+public class InputManagerJava implements MouseListener , MouseMotionListener , MouseWheelListener , KeyListener {
 	
 	/* The method to check the input */
 	public void checkInput() {
@@ -38,6 +41,7 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , K
 		//Add the input listeners
 		JavaWindow.frame.addMouseListener(this);
 		JavaWindow.frame.addMouseMotionListener(this);
+		JavaWindow.frame.addMouseWheelListener(this);
 		JavaWindow.frame.addKeyListener(this);
 	}
 	
@@ -69,7 +73,14 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , K
 	
 	/* Method for key/mouse listeners */
 	public void mouseDragged(MouseEvent e) {
-		
+		//Get the x and y positions
+		double x = e.getX() - JavaWindow.frame.getInsets().left;
+		double y = e.getY() - JavaWindow.frame.getInsets().top;
+		//Assign the values
+		MouseInput.lastX = MouseInput.x;
+		MouseInput.lastY = MouseInput.y;
+		MouseInput.x = x;
+		MouseInput.y = y;
 	}
 	
 	/* Method for key/mouse listeners */
@@ -172,6 +183,12 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , K
 		Input.callMouseClicked(new org.simplecorporation.myengine.core.input.event.MouseEvent(id , x , y));
 		//Call a mouse released event
 		Input.callMouseReleased(new org.simplecorporation.myengine.core.input.event.MouseEvent(e.getButton() , x , y));
+	}
+	
+	/* Method for mouse wheel */
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		//Call a scroll event (* to make sure it is negative when going towards user)
+		Input.callOnScroll(new ScrollEvent(e.getScrollAmount() * e.getWheelRotation() , e.getScrollAmount() * e.getWheelRotation()));
 	}
 	
 }

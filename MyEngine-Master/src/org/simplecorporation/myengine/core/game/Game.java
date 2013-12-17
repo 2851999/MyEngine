@@ -16,6 +16,7 @@ import org.simplecorporation.myengine.core.input.Input;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
+import org.simplecorporation.myengine.core.input.event.ScrollEvent;
 import org.simplecorporation.myengine.core.input.event.TouchEvent;
 import org.simplecorporation.myengine.core.input.listener.InputListener;
 
@@ -106,6 +107,11 @@ public class Game extends AbstractGame implements InputListener {
 	
 	/* Input method */
 	public void onKeyTyped(KeyboardEvent e) {
+		
+	}
+	
+	/* Input method */
+	public void onScroll(ScrollEvent e) {
 		
 	}
 	

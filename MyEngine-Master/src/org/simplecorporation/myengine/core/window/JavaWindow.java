@@ -106,6 +106,9 @@ public class JavaWindow {
 	
 	/* The method to set the window to the right settings */
 	public static void updateSettings() {
+		//The current screen size
+		float windowWidth = frame.getWidth();
+		float windowHeight = frame.getHeight();
 		//Check if the window settings are right
 		if (frame.getTitle() != Settings.Window.Title || frame.getWidth() - frame.getInsets().left + frame.getInsets().right != Settings.Window.Size.Width ||
 				frame.getHeight() + frame.getInsets().top + frame.getInsets().bottom != Settings.Window.Size.Height || frame.isUndecorated() != Settings.Window.Fullscreen ||
@@ -158,6 +161,11 @@ public class JavaWindow {
 			else
 				//Set the wait time
 				waitTime = 1000 / maxFPS;
+		}
+		//Check if the screen size has changed
+		if (windowWidth != frame.getWidth() || windowHeight != frame.getHeight()) {
+			//Call an event
+			Window.callWindowSizeChangedEvent(new WindowSizeChangedEvent(windowWidth , windowHeight , frame.getWidth() , frame.getHeight()));
 		}
 	}
 	

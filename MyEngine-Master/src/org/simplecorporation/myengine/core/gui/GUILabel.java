@@ -1,5 +1,3 @@
-package org.simplecorporation.myengine.core.gui;
-
 /***********************************************
  * SIMPLE CORPORATION
  * 
@@ -9,6 +7,8 @@ package org.simplecorporation.myengine.core.gui;
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
+
+package org.simplecorporation.myengine.core.gui;
 
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 
@@ -27,6 +27,7 @@ public class GUILabel extends GUIComponent {
 		//Assign the variables
 		this.text = text;
 		this.font = font;
+		this.width = this.font.getWidth(this.text);
 	}
 	
 	/* The update method */

@@ -10,6 +10,8 @@
 
 package org.simplecorporation.myengine.core.input.event;
 
+import org.simplecorporation.myengine.core.event.Event;
+
 public class KeyboardEvent extends Event {
 	
 	/* The name of the event */

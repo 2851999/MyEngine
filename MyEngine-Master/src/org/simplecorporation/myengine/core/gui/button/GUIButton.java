@@ -23,7 +23,7 @@ import org.simplecorporation.myengine.settings.Settings;
 public abstract class GUIButton extends GUIComponent {
 	
 	/* Is the button selected */
-	public boolean selected;
+	public boolean buttonSelected;
 	
 	/* Is the button clicked */
 	public boolean clicked;
@@ -34,12 +34,15 @@ public abstract class GUIButton extends GUIComponent {
 	/* The sound to be played when the button is clicked */
 	public AudioClip soundEffect;
 	
+	/* The text in the button */
+	public String text;
+	
 	/* The constructor */
 	public GUIButton(String name) {
 		//Call the super constructor
 		super(name);
 		//Set selected and clicked to false
-		this.selected = false;
+		this.buttonSelected = false;
 		this.clicked = false;
 		//Create the linked list
 		this.listeners = new LinkedList<GUIButtonListener>();
@@ -52,10 +55,10 @@ public abstract class GUIButton extends GUIComponent {
 			//Check whether the button is selected
 			if (this.getBounds().contains(MouseInput.x , MouseInput.y))
 				//Set selected to true
-				this.selected = true;
+				this.buttonSelected = true;
 			else {
 				//Set selected to false
-				this.selected = false;
+				this.buttonSelected = false;
 				//Check if the button is clicked
 				if (this.clicked)
 					//Set clicked to false
@@ -63,7 +66,7 @@ public abstract class GUIButton extends GUIComponent {
 			}
 			
 			//Check if the button is down
-			if (MouseInput.isButtonDown(0) && this.selected) {
+			if (MouseInput.isButtonDown(0) && this.buttonSelected) {
 				//Check if the sound effect is null
 				if (this.soundEffect != null) {
 					if (! this.soundEffect.isPlaying())
@@ -82,11 +85,11 @@ public abstract class GUIButton extends GUIComponent {
 	}
 	
 	/* The method that returns whether the button is selected */
-	public boolean isSelected() {
+	public boolean isButtonSelected() {
 		//Check whether the button is visible
 		if (this.visible)
 			//Return the value
-			return this.selected;
+			return this.buttonSelected;
 		else
 			//Return false
 			return false;
@@ -115,7 +118,7 @@ public abstract class GUIButton extends GUIComponent {
 		//Check if this button was clicked
 		if (this.visible) {
 			if (e.getEvent() == TouchEvent.EVENT_DOWN) {
-				if (this.getAndroidBounds().contains((int)e.x , (int)e.y)) {
+				if (this.getBounds().contains((int)e.x , (int)e.y)) {
 					//Set clicked to true
 					this.clicked = true;
 					//Call the event

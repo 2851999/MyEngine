@@ -10,6 +10,7 @@
 
 package org.simplecorporation.myengine.core.android;
 
+import org.simplecorporation.myengine.core.game.Game;
 import org.simplecorporation.myengine.core.input.InputManager;
 
 import android.view.SurfaceHolder;
@@ -26,10 +27,10 @@ public class AndroidGameThread extends Thread {
 	public SurfaceHolder surfaceHolder;
 	
 	/* The android game */
-	public AndroidGame androidGame;
+	public Game androidGame;
 	
 	/* The constructor */
-	public AndroidGameThread(SurfaceHolder surfaceHolder , AndroidGame androidGame) {
+	public AndroidGameThread(SurfaceHolder surfaceHolder , Game androidGame) {
 		//Set running to false
 		this.running = false;
 		//Set paused to false
@@ -52,6 +53,8 @@ public class AndroidGameThread extends Thread {
 	
 	/* The run method */
 	public void run() {
+		//Start the game
+		this.androidGame.create();
 		//Run while the variable running is true
 		while (running) {
 			//Check if the thread is paused
@@ -65,10 +68,8 @@ public class AndroidGameThread extends Thread {
 					//Set the game canvas
 					AndroidStore.gameCanvas = this.surfaceHolder.lockCanvas();
 					synchronized (this.surfaceHolder) {
-						//Update the game
-						this.androidGame.gameUpdate();
-						//Render the game
-						this.androidGame.gameRender();
+						//Update/Render the game
+						this.androidGame.tick();
 					}
 				} finally {
 					//Check that the canvas isn't null

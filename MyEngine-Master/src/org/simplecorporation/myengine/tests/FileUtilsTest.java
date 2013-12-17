@@ -1,5 +1,7 @@
 package org.simplecorporation.myengine.tests;
 
+import java.util.LinkedList;
+
 import org.lwjgl.opengl.GL11;
 import org.simplecorporation.myengine.core.engine.loop.EngineLoop;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
@@ -20,6 +22,10 @@ public class FileUtilsTest extends EngineLoop {
 
 	@Override
 	public void engineCreated() {
+		LinkedList<String> text = FileUtils.read("/NOTES", false);
+		for (int a = 0; a < text.size(); a++) {
+			System.out.println(text.get(a));
+		}
 		Runnable runnable = new Runnable() {
 			public void run() {
 				FileUtils.copyDir("PATH" , "PATH");
