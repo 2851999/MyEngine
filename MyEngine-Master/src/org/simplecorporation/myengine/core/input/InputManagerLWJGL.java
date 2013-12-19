@@ -94,10 +94,18 @@ public class InputManagerLWJGL {
 		//Check for an event
 		while (Keyboard.next()) {
 			if (Keyboard.getEventKeyState()) {
+				//Get the correct key code
+				int keyCode = KeyboardInput.convertKeyCode(Keyboard.getEventKey());
+				//Call the key event
+				KeyboardInput.onKeyPressed(new KeyboardEvent(Keyboard.getEventCharacter() , keyCode));
 				//Call a keyboard event
-				Input.callKeyPressed(new KeyboardEvent(Keyboard.getEventCharacter() , Keyboard.getEventKey()));
-				KeyboardInput.lastKeyboardEvent = new KeyboardEvent(Keyboard.getEventCharacter() , Keyboard.getEventKey());
+				Input.callKeyPressed(new KeyboardEvent(Keyboard.getEventCharacter() , keyCode));
+				KeyboardInput.lastKeyboardEvent = new KeyboardEvent(Keyboard.getEventCharacter() , keyCode);
 			} else {
+				//Get the correct key code
+				int keyCode = KeyboardInput.convertKeyCode(Keyboard.getEventKey());
+				//Call the key event
+				KeyboardInput.onKeyReleased(new KeyboardEvent(Keyboard.getEventCharacter() , keyCode));
 				//Call a keyboard event
 				Input.callKeyTyped(KeyboardInput.lastKeyboardEvent);
 				Input.callKeyReleased(KeyboardInput.lastKeyboardEvent);
