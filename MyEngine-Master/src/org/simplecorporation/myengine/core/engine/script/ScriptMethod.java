@@ -49,7 +49,8 @@ public class ScriptMethod extends ScriptObject {
 		this.localVariables = new LinkedList<ScriptVariable>();
 		//Add the argument variables
 		for (int a = 0; a < this.arguments.length; a++) {
-			if (! this.arguments[a].equals("")) {
+			//Make sure the argument exists then make sure it is a variable and not another type of object
+			if (! this.arguments[a].equals("") && this.arguments[a].startsWith(this.scriptClass.scriptModule.syntax.SYNTAX_KEY_WORD_VARIABLE_REFERNCE)) {
 				//The script variable
 				ScriptVariable variable = new ScriptVariable(this.arguments[a].replace(this.scriptClass.scriptModule.syntax.SYNTAX_KEY_WORD_VARIABLE_REFERNCE , "") , ScriptObject.Visibility.PRIVATE);
 				//Set the value

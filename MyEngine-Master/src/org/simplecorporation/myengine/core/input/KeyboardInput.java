@@ -152,6 +152,8 @@ public class KeyboardInput {
 	public static int KEY_DOWN_CODE = 119;
 	public static int KEY_LEFT_CODE = 120;
 	public static int KEY_RIGHT_CODE = 121;
+	public static int KEY_LSHIFT_CODE = 122;
+	public static int KEY_RSHIFT_CODE = 123;
 	
 	/* ALL OF THE KEYS ON THE KEYBOARD */
 	
@@ -285,6 +287,8 @@ public class KeyboardInput {
 	public static boolean KEY_DOWN = false;
 	public static boolean KEY_LEFT = false;
 	public static boolean KEY_RIGHT = false;
+	public static boolean KEY_LSHIFT = false;
+	public static boolean KEY_RSHIFT = false;
 	
 	/* The method that returns whether a key is pressed based
 	 * on its key code */
@@ -532,6 +536,10 @@ public class KeyboardInput {
 			return KEY_LEFT;
 		else if (keyCode == KEY_RIGHT_CODE)
 			return KEY_RIGHT;
+		else if (keyCode == KEY_LSHIFT_CODE)
+			return KEY_LSHIFT;
+		else if (keyCode == KEY_RSHIFT_CODE)
+			return KEY_RSHIFT;
 		else
 			return false;
 	}
@@ -758,6 +766,10 @@ public class KeyboardInput {
 				return KEY_LEFT_CODE;
 			else if (keyCode == KeyEvent.VK_RIGHT)
 				return KEY_RIGHT_CODE;
+			else if (keyCode == KeyEvent.VK_SHIFT)
+				return KEY_LSHIFT_CODE;
+			else if (keyCode == KeyEvent.VK_SHIFT)
+				return KEY_RSHIFT_CODE;
 			else
 				return 0;
 		} else if (! Settings.Android && Settings.Video.OpenGL) {
@@ -995,6 +1007,10 @@ public class KeyboardInput {
 				return KEY_LEFT_CODE;
 			else if (keyCode == org.lwjgl.input.Keyboard.KEY_RIGHT)
 				return KEY_RIGHT_CODE;
+			else if (keyCode == org.lwjgl.input.Keyboard.KEY_LSHIFT)
+				return KEY_LSHIFT_CODE;
+			else if (keyCode == org.lwjgl.input.Keyboard.KEY_RSHIFT)
+				return KEY_RSHIFT_CODE;
 			else
 				return 0;
 		} else
@@ -1217,6 +1233,10 @@ public class KeyboardInput {
 			KEY_LEFT = keyDown;
 		else if (keyCode == KEY_RIGHT_CODE)
 			KEY_RIGHT = keyDown;
+		else if (keyCode == KEY_LSHIFT_CODE)
+			KEY_LSHIFT = keyDown;
+		else if (keyCode == KEY_RSHIFT_CODE)
+			KEY_RSHIFT = keyDown;
 	}
 	
 	/* The method called when a key is pressed */

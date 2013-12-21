@@ -37,13 +37,27 @@ public class ScriptClass extends ScriptObject {
 		this.methods = new LinkedList<ScriptMethod>();
 		//Parse all of the methods
 		this.methods = ScriptParser.parseMethods(code , this.scriptModule.syntax , this);
+		//The inMethod boolean
+		boolean inMethod = false;
 		//Create any variables
 		for (int a = 0; a < code.size(); a++) {
 			//Split the current line
 			String[] split = code.get(a).split(" ");
+			//Check if the split has at least one value
+			if (split.length > 0) {
+				//Check if the first split is the method key word
+				if (split[0].equals(this.scriptModule.syntax.SYNTAX_KEY_WORD_METHOD))
+					//Set inMethod to true
+					inMethod = true;
+				else if (split.length > 1) {
+					if (split[1].equals(this.scriptModule.syntax.SYNTAX_KEY_WORD_METHOD))
+						//Set inMethod to true
+						inMethod = true;
+				}
+			}
 			//Check if the current line is defining a variable
-			if ((split.length > 0 && split[0].equals(this.scriptModule.syntax.SYNTAX_KEY_WORD_VARIABLE_DECLARATION)) ||
-					(split.length > 1 && split[1].equals(this.scriptModule.syntax.SYNTAX_KEY_WORD_VARIABLE_DECLARATION)))
+			if (((split.length > 0 && split[0].equals(this.scriptModule.syntax.SYNTAX_KEY_WORD_VARIABLE_DECLARATION)) ||
+					(split.length > 1 && split[1].equals(this.scriptModule.syntax.SYNTAX_KEY_WORD_VARIABLE_DECLARATION))) && ! inMethod)
 				//Interpret the variable
 				ScriptParser.parseVariable(split , this.publicVariables , this.scriptModule.syntax , false);
 		}

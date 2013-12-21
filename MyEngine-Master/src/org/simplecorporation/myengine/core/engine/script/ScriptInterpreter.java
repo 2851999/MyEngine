@@ -80,37 +80,66 @@ public class ScriptInterpreter {
 				}
 				//Check if found
 				if (! found) {
-					//Split up the line using '.'
-					String[] moduleSplit = line.split("\\.");
-					//Check if the first line is a class in a module that has been imported
-					ScriptClass scriptClass2 = null;
-					scriptClass2 = script.getClassByName(moduleSplit[0]);
-					//Check if the class was found
-					if (scriptClass != null && scriptClass.visibility == ScriptObject.Visibility.PUBLIC) {
-						//Get the method
-						ScriptMethod scriptMethod2 = null;
-						//Call the correct method in the class
-						scriptMethod2 = scriptClass2.getMethodByName(moduleSplit[1]);
-						//Check if the method was found
-						if (scriptMethod2 != null && scriptMethod2.visibility == ScriptObject.Visibility.PUBLIC) {
-							//The arguments
-							String[] argumentSplit = moduleSplit[1].substring(moduleSplit[1].indexOf("(") + 1 , moduleSplit[1].length() - 1).split(",");
-							//Look at each argument
-							for (int a = 0; a < argumentSplit.length; a++) {
-								//Check if the current argument is a variable
-								if (argumentSplit[a].startsWith(scriptModule.syntax.SYNTAX_KEY_WORD_VARIABLE_REFERNCE))
-									//Replace the current argument with the correct value
-									argumentSplit[a] = this.getVariable(argumentSplit[a].substring(1) , scriptMethod.localVariables , scriptClass.publicVariables).value;
-							}
-							//Run the script method
-							scriptMethod2.run(argumentSplit);
-							//Set found to true
-							found = true;
-						}
-					}
+					//Run the correct method
+					found = runMethod(line, script, scriptModule, scriptClass, scriptMethod, variables, inMethod);
 				}
 			}
 		}
+	}
+	
+	/* The method called to run a method */
+	public boolean runMethod(String line , Script script , ScriptModule scriptModule , ScriptClass scriptClass , ScriptMethod scriptMethod ,
+			LinkedList<ScriptVariable> variables , boolean inMethod) {
+		//Check if the line contains an internal method name
+		///Look at all of the methods in the current class
+		for (int a = 0; a < scriptClass.methods.size(); a++) {
+			ScriptMethod scriptMethod2;
+			//Check if the current method has the same name
+			if ((scriptMethod2 = scriptClass.getMethodByName(line)) != null) {
+				//The arguments
+				String[] argumentSplit = line.substring(line.indexOf("(") + 1 , line.length() - 1).split(",");
+				//Look at each argument
+				for (int b = 0; b < argumentSplit.length; b++) {
+					//Check if the current argument is a variable
+					if (argumentSplit[b].startsWith(scriptModule.syntax.SYNTAX_KEY_WORD_VARIABLE_REFERNCE))
+						//Replace the current argument with the correct value
+						argumentSplit[b] = this.getVariable(argumentSplit[b].substring(1) , scriptMethod.localVariables , scriptClass.publicVariables).value;
+				}
+				//Run the script method
+				scriptMethod2.run(argumentSplit);
+				//Return true
+				return true;
+			}
+		}
+		//Split up the line using '.'
+		String[] moduleSplit = line.split("\\.");
+		//Check if the first line is a class in a module that has been imported
+		ScriptClass scriptClass2 = null;
+		scriptClass2 = script.getClassByName(moduleSplit[0]);
+		//Check if the class was found
+		if (scriptClass != null && scriptClass.visibility == ScriptObject.Visibility.PUBLIC) {
+			//Get the method
+			ScriptMethod scriptMethod2 = null;
+			//Call the correct method in the class
+			scriptMethod2 = scriptClass2.getMethodByName(moduleSplit[1]);
+			//Check if the method was found
+			if (scriptMethod2 != null && scriptMethod2.visibility == ScriptObject.Visibility.PUBLIC) {
+				//The arguments
+				String[] argumentSplit = moduleSplit[1].substring(moduleSplit[1].indexOf("(") + 1 , moduleSplit[1].length() - 1).split(",");
+				//Look at each argument
+				for (int a = 0; a < argumentSplit.length; a++) {
+					//Check if the current argument is a variable
+					if (argumentSplit[a].startsWith(scriptModule.syntax.SYNTAX_KEY_WORD_VARIABLE_REFERNCE))
+						//Replace the current argument with the correct value
+						argumentSplit[a] = this.getVariable(argumentSplit[a].substring(1) , scriptMethod.localVariables , scriptClass.publicVariables).value;
+				}
+				//Run the script method
+				scriptMethod2.run(argumentSplit);
+				//Return true
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/* The method that makes an operation (=, +, -, /, *) */

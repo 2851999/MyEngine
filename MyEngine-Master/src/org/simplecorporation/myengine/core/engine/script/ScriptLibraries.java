@@ -12,6 +12,7 @@ package org.simplecorporation.myengine.core.engine.script;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.core.engine.script.library.game.LibraryBasicRenderer;
 import org.simplecorporation.myengine.core.engine.script.library.game.LibraryGame;
 import org.simplecorporation.myengine.core.engine.script.library.game.LibrarySettings;
 import org.simplecorporation.myengine.core.engine.script.library.system.LibrarySystem;
@@ -27,6 +28,7 @@ public class ScriptLibraries {
 		libraries.add(new LibrarySystem());
 		libraries.add(new LibraryGame());
 		libraries.add(new LibrarySettings());
+		libraries.add(new LibraryBasicRenderer());
 	}
 	
 	/* The method to get a library by its package */
