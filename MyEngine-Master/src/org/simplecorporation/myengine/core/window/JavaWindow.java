@@ -197,7 +197,11 @@ public class JavaWindow {
 		
 		//Make the system wait
 		try {
-			Thread.sleep(waitTime);
+			//Make sure the wait time isn't 0 or less
+			if (waitTime <= 0)
+				Thread.sleep(0);
+			else
+				Thread.sleep(waitTime);
 		} catch (InterruptedException e) {
 			//Log a message
 			Logger.log(new Log("JavaWindow updateGraphics()" , "InterruptedException" , LogType.ERROR));

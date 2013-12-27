@@ -18,13 +18,13 @@ public class TileMap2D {
 	public Tile2D[][] tiles;
 	
 	/* The tile size */
-	public int tileSize;
+	public double tileSize;
 	
 	/* The starting y position */
-	public int startY;
+	public double startY;
 	
 	/* The constructor */
-	public TileMap2D(Tile2D[][] tiles, int tileSize , int startY) {
+	public TileMap2D(Tile2D[][] tiles, double tileSize , double startY) {
 		//Assign the variables
 		this.tiles = tiles;
 		this.tileSize = tileSize;
@@ -88,17 +88,20 @@ public class TileMap2D {
 	/* The method used to reset every tiles positions */
 	public void resetTilePositions() {
 		//The x and y position
-		int x = 0;
-		int y = startY;
+		double x = 0;
+		double y = startY;
 		//Look at every tile in the 2D array
 		for (int a = 0; a < this.tiles.length; a++) {
 			for (int b = 0; b < this.tiles[a].length; b++) {
-				//Set the x and y position of the current tile
-				this.tiles[a][b].position.x = x;
-				this.tiles[a][b].position.y = y;
-				//Set the width and height of the current tile
-				this.tiles[a][b].width = tileSize;
-				this.tiles[a][b].height = tileSize;
+				//Make sure the current tile isn't equal to null
+				if (this.tiles[a][b] != null) {
+					//Set the x and y position of the current tile
+					this.tiles[a][b].position.x = x;
+					this.tiles[a][b].position.y = y;
+					//Set the width and height of the current tile
+					this.tiles[a][b].width = tileSize;
+					this.tiles[a][b].height = tileSize;
+				}
 				//Increment the current x position by the tile size
 				x += tileSize;
 			}
@@ -119,10 +122,10 @@ public class TileMap2D {
 		//Set the correct temporary y position
 		tempy = (int) (y - startY);
 		//Calculate the column/row
-		int column = (tempx / this.tileSize) + 1;
-		int row = (tempy / this.tileSize);
+		int column = (tempx / (int) this.tileSize) + 1;
+		int row = (tempy / (int) this.tileSize);
 		//Avoid an index out of bounds exception
-		if (row < this.tiles.length && row >= 0 && column < this.tiles[0].length && column >= 0) {
+		if (row < this.tiles.length && row >= 0 && column < this.tiles[0].length && column >= 0 && this.tiles[row][column] != null) {
 			//Check the tile type of the left most tile
 			blocked = this.tiles[row][column].type == Type.SOLID;
 		}
@@ -140,10 +143,10 @@ public class TileMap2D {
 		//Set the correct temporary y position
 		tempy = (int) (y - startY);
 		//Calculate the column/row
-		int column = (tempx / this.tileSize) - 1;
-		int row = (tempy / this.tileSize);
+		int column = (tempx / (int) this.tileSize) - 1;
+		int row = (tempy / (int) this.tileSize);
 		//Avoid an index out of bounds exception
-		if (row < this.tiles.length && row >= 0 && column < this.tiles[0].length && column >= 0) {
+		if (row < this.tiles.length && row >= 0 && column < this.tiles[0].length && column >= 0 && this.tiles[row][column] != null) {
 			//Check the tile type of the left most tile
 			blocked = this.tiles[row][column].type == Type.SOLID;
 		}
@@ -161,10 +164,10 @@ public class TileMap2D {
 		//Set the correct temporary y position
 		tempy = (int) (y - startY);
 		//Calculate the column/row
-		int column = (tempx / this.tileSize);
-		int row = (tempy / this.tileSize) - 1;
+		int column = (tempx / (int) this.tileSize);
+		int row = (tempy / (int) this.tileSize) - 1;
 		//Avoid an index out of bounds exception
-		if (row < this.tiles.length && row >= 0 && column < this.tiles[0].length && column >= 0) {
+		if (row < this.tiles.length && row >= 0 && column < this.tiles[0].length && column >= 0 && this.tiles[row][column] != null) {
 			//Check the tile type of the left most tile
 			blocked = this.tiles[row][column].type == Type.SOLID;
 		}
@@ -182,10 +185,10 @@ public class TileMap2D {
 		//Set the correct temporary y position
 		tempy = (int) (y - startY);
 		//Calculate the column/row
-		int column = (tempx / this.tileSize);
-		int row = (tempy / this.tileSize) + 1;
+		int column = (tempx / (int) this.tileSize);
+		int row = (tempy / (int) this.tileSize) + 1;
 		//Avoid an index out of bounds exception
-		if (row < this.tiles.length && row >= 0 && column < this.tiles[0].length && column >= 0) {
+		if (row < this.tiles.length && row >= 0 && column < this.tiles[0].length && column >= 0 && this.tiles[row][column] != null) {
 			//Check the tile type of the left most tile
 			blocked = this.tiles[row][column].type == Type.SOLID;
 		}
