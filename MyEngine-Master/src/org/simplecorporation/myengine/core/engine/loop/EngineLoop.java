@@ -51,6 +51,9 @@ public abstract class EngineLoop {
 	/* The current FPS */
 	public long fps;
 	
+	/* The current delta */
+	public double delta;
+	
 	/* The default font */
 	public GUIFont font;
 	
@@ -83,6 +86,8 @@ public abstract class EngineLoop {
 		//Set the frame count and FPS
 		this.frameCount = 0;
 		this.fps = 0;
+		//Set the delta
+		this.delta = 0;
 		//Set the default font (Arial)
 		this.font = FontUtils.buildGUIFont("Arial" , Colour.WHITE , 10);
 		//Check if using android
@@ -131,6 +136,12 @@ public abstract class EngineLoop {
 			Window.update();
 		}
 		
+		//Work out the delta
+		//The current time
+		long currentTime = this.getTime();
+		//Work out the delta
+		this.delta = (double)currentTime - (double)this.lastFrameTime;
+		
 		//Set the last frame
 		this.lastFrameTime = getTime();
 		
@@ -154,10 +165,6 @@ public abstract class EngineLoop {
 	
 	/* The method to get the delta */
 	public double getDelta() {
-		//The current time
-		long currentTime = this.getTime();
-		//Work out the delta
-		double delta = (double)currentTime - (double)this.lastFrameTime;
 		//Return the delta
 		return delta;
 	}

@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class ScriptConsole {
 	
 	/* The current version of the Scripting Language */
-	public static final String ScriptingLanguageVersion = "ScriptingLanguage 1 (Build 3)";
+	public static final String ScriptingLanguageVersion = "ScriptingLanguage 1 (Build 4)";
 	
 	/* The constructor */
 	public ScriptConsole() {

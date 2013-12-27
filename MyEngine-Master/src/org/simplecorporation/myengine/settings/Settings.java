@@ -17,7 +17,7 @@ import org.simplecorporation.myengine.utils.file.FileUtils;
 public class Settings {
 	
 	/* The version of the engine goes up 1 every development build */
-	public static final String EngineVersion = "V1.0.5.0";
+	public static final String EngineVersion = "V1.0.5.1";
 	
 	/* The type of build this version of the engine is*/
 	public static final String EngineBuild = "Development";
@@ -113,7 +113,7 @@ public class Settings {
 			else if (split[0].equals("Audio.SoundEffectVolume"))
 				//Set the value
 				Settings.Audio.SoundEffectVolume = Integer.parseInt(split[1]);
-			else if (split[1].equals("Audio.MusicVolume"))
+			else if (split[0].equals("Audio.MusicVolume"))
 				//Set the value
 				Settings.Audio.MusicVolume = Integer.parseInt(split[1]);
 		}
@@ -135,7 +135,7 @@ public class Settings {
 		fileText.add("Video.OpenGL: " + Settings.Video.OpenGL);
 		fileText.add("Video.AntiAliasing: " + Settings.Video.AntiAliasing);
 		fileText.add("Audio.SoundEffectVolume: " + Settings.Audio.SoundEffectVolume);
-		fileText.add("Audio.MusicVolument: " + Settings.Audio.MusicVolume);
+		fileText.add("Audio.MusicVolume: " + Settings.Audio.MusicVolume);
 		//Save the file
 		FileUtils.write(filePath , fileText);
 	}

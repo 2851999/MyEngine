@@ -48,15 +48,15 @@ public abstract class GUISlider extends GUIComponent {
 			//Check if the button is clicked
 			if (this.sliderButton.clicked) {
 				//Check the mouse position
-				if (MouseInput.x < this.position.x)
+				if (this.sliderButton.position.x < this.position.x)
 					//Set the slider button's position
 					sliderButton.position.x = this.position.x;
-				else if (MouseInput.x > this.position.x + this.width)
+				else if (this.sliderButton.position.x > this.position.x + this.width)
 					//Set the slider button's position
 					sliderButton.position.x = this.position.x + this.width;
 				else
 					//Set the slider button's position
-					sliderButton.position.x = MouseInput.x;
+					sliderButton.position.x = MouseInput.x - sliderButton.width / 2;
 				//Set the slider value
 				this.sliderValue = ((this.sliderButton.position.x - this.position.x) * (this.width / 100));
 			}
@@ -68,15 +68,15 @@ public abstract class GUISlider extends GUIComponent {
 			//Check if the button is clicked
 			if (this.sliderButton.clicked) {
 				//Check the mouse position
-				if (MouseInput.y < this.position.y)
+				if (this.sliderButton.position.y < this.position.y)
 					//Set the slider button's position
-					sliderButton.position.y = this.position.y;
-				else if (MouseInput.y > this.position.y + this.height)
+					this.sliderButton.position.y = this.position.y;
+				else if (this.sliderButton.position.y > this.position.y + this.height)
 					//Set the slider button's position
-					sliderButton.position.y = this.position.y + this.height;
+					this.sliderButton.position.y = this.position.y + this.height;
 				else
 					//Set the slider button's position
-					sliderButton.position.y = MouseInput.y;
+					this.sliderButton.position.y = MouseInput.y - sliderButton.height / 2;
 				//Set the slider value
 				this.sliderValue = ((this.position.y + this.height) - this.sliderButton.position.y) / (this.height / 100);
 			}
@@ -85,6 +85,13 @@ public abstract class GUISlider extends GUIComponent {
 			//Put the slider into its correct position for the current slider value
 			this.sliderButton.position.y = ((this.position.y + this.height) - ((this.height / 100)) * this.sliderValue);
 		}
+		//Make sure the slider value is not < 0 or > 100
+		if (this.sliderValue < 0)
+			//Set the slider value to 0
+			this.sliderValue = 0;
+		else if (this.sliderValue > 100)
+			//Set the slider value to 100
+			this.sliderValue = 100;
 		//Update the slider button
 		this.sliderButton.update();
 	}

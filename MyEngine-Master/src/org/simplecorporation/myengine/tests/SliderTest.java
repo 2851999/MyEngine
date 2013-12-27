@@ -18,7 +18,7 @@ public class SliderTest extends Game {
 	
 	public SliderTest() {
 		Settings.Window.Title = "Slider Test";
-		Settings.Video.OpenGL = true;
+		Settings.Video.OpenGL = false;
 		Settings.Video.AntiAliasing = true;
 		//Create
 		createGame();
