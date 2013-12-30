@@ -3,7 +3,7 @@
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -136,7 +136,6 @@ public abstract class EngineLoop {
 			Window.update();
 		}
 		
-		//Work out the delta
 		//The current time
 		long currentTime = this.getTime();
 		//Work out the delta

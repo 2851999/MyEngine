@@ -3,7 +3,7 @@
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -72,7 +72,7 @@ public abstract class AbstractEntity2D extends Entity2D {
 	/* The update method */
 	public void update() {
 		//Add the velocity to the position
-		this.position.add(this.velocity);
+		this.position = this.position.add(this.velocity);
 		//Add the rotation velocity to the rotation
 		this.rotation += this.rotationVelocity;
 		//Update all of the effects

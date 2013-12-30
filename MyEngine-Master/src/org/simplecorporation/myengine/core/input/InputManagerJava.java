@@ -3,7 +3,7 @@
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -107,6 +107,7 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , M
 	
 	/* Method for key/mouse listeners */
 	public void mouseClicked(MouseEvent e) {
+		/*
 		//Get the x and y positions
 		double x = e.getX() - JavaWindow.frame.getInsets().left;
 		double y = e.getY() - JavaWindow.frame.getInsets().top;
@@ -122,6 +123,7 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , M
 		
 		//Call a mouse clicked event
 		Input.callMouseClicked(new org.simplecorporation.myengine.core.input.event.MouseEvent(id , x , y));
+		*/
 	}
 	
 	/* Method for key/mouse listeners */
@@ -157,9 +159,6 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , M
 		else if (id == 2)
 			MouseInput.isMiddleButtonDown = true;
 		
-		//Call a mouse clicked event
-		Input.callMouseClicked(new org.simplecorporation.myengine.core.input.event.MouseEvent(id , x , y));
-		
 		//Call a mouse pressed event
 		Input.callMousePressed(new org.simplecorporation.myengine.core.input.event.MouseEvent(e.getButton() , x , y));
 	}
@@ -167,8 +166,8 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , M
 	/* Method for key/mouse listeners */
 	public void mouseReleased(MouseEvent e) {
 		//Get the x and y positions
-		double x = e.getX() + JavaWindow.frame.getInsets().left;
-		double y = e.getY() + JavaWindow.frame.getInsets().top;
+		double x = e.getX() - JavaWindow.frame.getInsets().left;
+		double y = e.getY() - JavaWindow.frame.getInsets().top;
 		//The id of the button
 		int id = -1;
 		//Check what button it is
@@ -189,6 +188,7 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , M
 		
 		//Call a mouse clicked event
 		Input.callMouseClicked(new org.simplecorporation.myengine.core.input.event.MouseEvent(id , x , y));
+		
 		//Call a mouse released event
 		Input.callMouseReleased(new org.simplecorporation.myengine.core.input.event.MouseEvent(e.getButton() , x , y));
 	}

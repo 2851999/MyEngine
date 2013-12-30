@@ -3,7 +3,7 @@
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -106,7 +106,7 @@ public class Entity2D {
 		double velx = this.velocity.x * GameValues.CURRENT_DELTA;
 		double vely = this.velocity.y * GameValues.CURRENT_DELTA;
 		//Add the velocity to the position
-		this.position.add(new Vector2D(velx , vely));
+		this.position = this.position.add(new Vector2D(velx , vely));
 		//Add the rotation velocity to the rotation
 		this.rotation += this.rotationVelocity * GameValues.CURRENT_DELTA;
 	}

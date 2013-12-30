@@ -3,7 +3,7 @@
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -17,7 +17,7 @@ import org.simplecorporation.myengine.utils.file.FileUtils;
 public class Settings {
 	
 	/* The version of the engine goes up 1 every development build */
-	public static final String EngineVersion = "V1.0.5.0";
+	public static final String EngineVersion = "V1.0.5.1";
 	
 	/* The type of build this version of the engine is*/
 	public static final String EngineBuild = "Experimental";
