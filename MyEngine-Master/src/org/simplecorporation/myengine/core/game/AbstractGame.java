@@ -28,8 +28,8 @@ public abstract class AbstractGame extends EngineLoop {
 		//Call the method for the game
 		this.gameCreated();
 		//Call all of the instances of GameMethods interfaces
-		for (int a = 0; a < Game.gameMethodsInterfaces.size(); a++)
-			Game.gameMethodsInterfaces.get(a).gameCreated();
+		for (int a = 0; a < BaseGame.gameMethodsInterfaces.size(); a++)
+			BaseGame.gameMethodsInterfaces.get(a).gameCreated();
 	}
 	
 	/* Method from engine loop */
@@ -37,8 +37,8 @@ public abstract class AbstractGame extends EngineLoop {
 		//Call the method for the game
 		this.gameStarted();
 		//Call all of the instances of GameMethods interfaces
-		for (int a = 0; a < Game.gameMethodsInterfaces.size(); a++)
-			Game.gameMethodsInterfaces.get(a).gameStarted();
+		for (int a = 0; a < BaseGame.gameMethodsInterfaces.size(); a++)
+			BaseGame.gameMethodsInterfaces.get(a).gameStarted();
 	}
 	
 	/* Method from engine loop */
@@ -46,8 +46,8 @@ public abstract class AbstractGame extends EngineLoop {
 		//Call the method for the game
 		this.gameUpdate();
 		//Call all of the instances of GameMethods interfaces
-		for (int a = 0; a < Game.gameMethodsInterfaces.size(); a++)
-			Game.gameMethodsInterfaces.get(a).gameUpdate();
+		for (int a = 0; a < BaseGame.gameMethodsInterfaces.size(); a++)
+			BaseGame.gameMethodsInterfaces.get(a).gameUpdate();
 	}
 	
 	/* Method from engine loop */
@@ -55,8 +55,8 @@ public abstract class AbstractGame extends EngineLoop {
 		//Call the method for the game
 		this.gameRender();
 		//Call all of the instances of GameMethods interfaces
-		for (int a = 0; a < Game.gameMethodsInterfaces.size(); a++)
-			Game.gameMethodsInterfaces.get(a).gameRender();
+		for (int a = 0; a < BaseGame.gameMethodsInterfaces.size(); a++)
+			BaseGame.gameMethodsInterfaces.get(a).gameRender();
 	}
 	
 	/* Method from engine loop */
@@ -64,8 +64,8 @@ public abstract class AbstractGame extends EngineLoop {
 		//Call the method for the game
 		this.gameStopped();
 		//Call all of the instances of GameMethods interfaces
-		for (int a = 0; a < Game.gameMethodsInterfaces.size(); a++)
-			Game.gameMethodsInterfaces.get(a).gameStopped();
+		for (int a = 0; a < BaseGame.gameMethodsInterfaces.size(); a++)
+			BaseGame.gameMethodsInterfaces.get(a).gameStopped();
 	}
 	
 	/* Method from engine loop */
@@ -73,8 +73,8 @@ public abstract class AbstractGame extends EngineLoop {
 		//Call the method for the game
 		this.gameClosing();
 		//Call all of the instances of GameMethods interfaces
-		for (int a = 0; a < Game.gameMethodsInterfaces.size(); a++)
-			Game.gameMethodsInterfaces.get(a).gameClosing();
+		for (int a = 0; a < BaseGame.gameMethodsInterfaces.size(); a++)
+			BaseGame.gameMethodsInterfaces.get(a).gameClosing();
 	}
 	
 }

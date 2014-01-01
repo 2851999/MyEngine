@@ -1,14 +1,14 @@
 package org.simplecorporation.myengine.tests;
 
 import org.lwjgl.opengl.GL11;
-import org.simplecorporation.myengine.core.game.Game;
+import org.simplecorporation.myengine.core.game.BaseGame;
 import org.simplecorporation.myengine.core.gui.checkbox.GUIRenderableCheckBox;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.opengl.OpenGLSetupUtils;
 
-public class CheckBoxButtonTest extends Game {
+public class CheckBoxButtonTest extends BaseGame {
 	
 	public GUIRenderableCheckBox checkBox;
 	
