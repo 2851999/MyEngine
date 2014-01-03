@@ -19,7 +19,6 @@ public class AppletTest extends BaseGame {
 	}
 	
 	public static void main(String[] args) {
-		System.setProperty("javax.net.ssl.trustStore", "/keystore.jks");
 		new AppletTest();
 	}
 	
