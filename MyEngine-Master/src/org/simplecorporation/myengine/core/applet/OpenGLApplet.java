@@ -10,6 +10,7 @@
 
 package org.simplecorporation.myengine.core.applet;
 
+import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -42,6 +43,7 @@ public class OpenGLApplet {
 		//Create the Applet
 		applet = new java.applet.Applet();
 		//Set the attributes of the frame
+		applet.setLayout(new BorderLayout());
 		applet.setSize(640 , 480);
 		applet.setVisible(true);
 		
