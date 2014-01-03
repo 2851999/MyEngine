@@ -25,6 +25,9 @@ public class Settings {
 	/* Is using android */
 	public static boolean Android = false;
 	
+	/* Is an applet */
+	public static boolean Applet = false;
+	
 	/* The window settings */
 	public static class Window {
 		/* The title of the window */

@@ -8,11 +8,12 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.window;
+package org.simplecorporation.myengine.core.applet;
 
+import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.Toolkit;
-import java.nio.ByteBuffer;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
@@ -25,16 +26,28 @@ import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 import org.simplecorporation.myengine.utils.messagebox.MessageBox;
 
-public class OpenGLWindow {
+public class OpenGLApplet {
 	
-	/* Has the window been created */
-	public static boolean windowCreated;
+	/* The applet instance */
+	public static java.applet.Applet applet;
 	
-	/* The method to create the window */
+	/* The canvas in the applet */
+	public static Canvas displayParent;
+	
+	/* Has the applet been created */
+	public static boolean appletCreated;
+	
+	/* The method to create the applet */
 	public static void create() {
+		//Create the Applet
+		applet = new java.applet.Applet();
+		//Set the attributes of the frame
+		applet.setSize(640 , 480);
+		applet.setVisible(true);
+		
 		try {
 			//Set window created to false
-			windowCreated = false;
+			appletCreated = false;
 			//Set the attributes of the window
 			Display.setTitle("MyEngine Window");
 			Display.setDisplayMode(new DisplayMode(640 , 480));
@@ -46,8 +59,16 @@ public class OpenGLWindow {
 			updateSettings();
 			//Create the display
 			Display.create();
+			//Set the settings for the parent display
+			displayParent = new Canvas();
+			displayParent.setSize(applet.getWidth(), applet.getHeight());
+			applet.add(displayParent);
+			displayParent.setFocusable(true);
+			displayParent.requestFocus();
+			displayParent.setIgnoreRepaint(true);
+			applet.setVisible(true);
 			//Set windowCreated to true
-			windowCreated = true;
+			appletCreated = true;
 		} catch (LWJGLException e) {
 			//Log a message
 			//Display an error message box
@@ -57,19 +78,21 @@ public class OpenGLWindow {
 		}
 	}
 	
-	/* The method to close the window */
+	/* The method to close the applet */
 	public static void close() {
 		//Close the window
-		Display.destroy();
+		applet.setVisible(false);
+		//Set frame to nothing
+		applet = null;
 	}
 	
-	/* The method to set the window to the right settings */
+	/* The method to set the applet to the right settings */
 	public static void updateSettings() {
-		//The current screen size
-		float windowWidth = Display.getWidth();
-		float windowHeight = Display.getHeight();
+		//The current applet size
+		float appletWidth = Display.getWidth();
+		float appletHeight = Display.getHeight();
 		try {
-			//Check if the window settings are right
+			//Check if the display settings are right
 			if (Display.getTitle() != Settings.Window.Title || (Display.getWidth() != Settings.Window.Size.Width ||
 					Display.getHeight() != Settings.Window.Size.Height && Display.isFullscreen() != Settings.Window.Fullscreen) || Display.isFullscreen() != Settings.Window.Fullscreen) {
 				//Setup the window
@@ -103,15 +126,15 @@ public class OpenGLWindow {
 			}
 		} catch (LWJGLException e) {
 			//Log a message
-			Logger.log(new Log("OpenGLWindow updateSettings()" , "LWJGL Exception" , LogType.ERROR));
+			Logger.log(new Log("OpenGLApplet updateSettings()" , "LWJGL Exception" , LogType.ERROR));
 			//Display an error message box
-			MessageBox.showErrorMessage("LWJGL Exception" , "Error in OpenGLWindow updateSettings()");
+			MessageBox.showErrorMessage("LWJGL Exception" , "Error in OpenGLApplet updateSettings()");
 			e.printStackTrace();
 		}
-		//Check if the screen size has changed
-		if (windowWidth != Display.getWidth() || windowHeight != Display.getHeight()) {
+		//Check if the display size has changed
+		if (appletWidth != Display.getWidth() || appletHeight != Display.getHeight()) {
 			//Make sure the display has been created
-			if (windowCreated && Display.isActive()) {
+			if (appletCreated && Display.isActive()) {
 				//Make sure OpenGL changes its resolution
 				GL11.glScissor(0 , 0 , Display.getWidth() , Display.getHeight());
 				GL11.glViewport(0 , 0 , Display.getWidth() , Display.getHeight());
@@ -119,12 +142,10 @@ public class OpenGLWindow {
 			//Set the settings
 			Settings.Window.Size.Width = Display.getWidth();
 			Settings.Window.Size.Height = Display.getHeight();
-			//Call an event
-			Window.callWindowSizeChangedEvent(new WindowSizeChangedEvent(windowWidth , windowHeight , Settings.Window.Size.Width , Settings.Window.Size.Height));
 		}
 	}
 	
-	/* The method to update the window graphics */
+	/* The method to update the applet graphics */
 	public static void updateGraphics() {
 		//Update the display and sync it
 		Display.update();
@@ -133,7 +154,7 @@ public class OpenGLWindow {
 	
 	/* The methods used to get a display mode for fullscreen */
 	public static DisplayMode getFullscreenDisplayMode(int width , int height) {
- 
+		 
 		try {
 			DisplayMode targetDisplayMode = null;
 			DisplayMode[] modes = Display.getAvailableDisplayModes();
@@ -175,7 +196,8 @@ public class OpenGLWindow {
 	
 	/* The method to set the cursor image */
 	public static void setCursor(Image image , int pointX , int pointY , String cursorName) {
-		//NOT FINISHED YET
+		//Set the cursor
+		applet.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(image.getJavaImage() , new Point(pointX , pointY) , cursorName));
 	}
 	
 	/* The method to centre the window */
@@ -183,24 +205,12 @@ public class OpenGLWindow {
 		//Get the screen size
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		//Centre the window by setting its location
-		Display.setLocation((int)(screenSize.width / 2) - (int)(Settings.Window.Size.Width / 2) , (int)(screenSize.height / 2) - (int)(Settings.Window.Size.Height / 2));
-	}
-	
-	/* The method to set the window icon */
-	public static void setIcon(Image[] images) {
-		ByteBuffer buffer1 = ByteBuffer.wrap(images[0].getOpenGLImage().getTextureData());
-		ByteBuffer buffer2 = ByteBuffer.wrap(images[1].getOpenGLImage().getTextureData());
-		Display.setIcon(new ByteBuffer[] { buffer1 , buffer2 });
+		applet.setLocation((int)(screenSize.width / 2) - (int)(Settings.Window.Size.Width / 2) , (int)(screenSize.height / 2) - (int)(Settings.Window.Size.Height / 2));
 	}
 	
 	/* Is the window still visible */
 	public static boolean isVisible() {
-		return Display.isVisible();
-	}
-	
-	/* Is a close requested */
-	public static boolean isCloseRequested() {
-		return Display.isCloseRequested();
+		return applet.isVisible();
 	}
 	
 }

@@ -16,6 +16,7 @@ import java.awt.FontMetrics;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
+import org.simplecorporation.myengine.core.render.RenderVariablesJava;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.core.window.JavaWindow;
@@ -60,11 +61,11 @@ public class JavaGUIFont {
 			//Set the colour
 			BasicRenderer.setColour(this.colour);
 			//Set the font
-			JavaWindow.g2d.setFont(this.font.deriveFont((float)fontSize));
+			RenderVariablesJava.g2d.setFont(this.font.deriveFont((float)fontSize));
 			//Get offset value
-			double yOffset = JavaWindow.g2d.getFontMetrics(font.deriveFont((float) fontSize)).getAscent();
+			double yOffset = RenderVariablesJava.g2d.getFontMetrics(font.deriveFont((float) fontSize)).getAscent();
 			//Render the text
-			JavaWindow.g2d.drawString(text , (float) x , (float) (y + yOffset));
+			RenderVariablesJava.g2d.drawString(text , (float) x , (float) (y + yOffset));
 		}
 	}
 	
@@ -73,7 +74,7 @@ public class JavaGUIFont {
 		if (! Settings.Android && Settings.Video.OpenGL) {
 			return ttfFont.getWidth(text);
 		} else if (! Settings.Android && ! Settings.Video.OpenGL) {
-			FontMetrics metrics = JavaWindow.g2d.getFontMetrics(font.deriveFont((float) fontSize));
+			FontMetrics metrics = RenderVariablesJava.g2d.getFontMetrics(font.deriveFont((float) fontSize));
 			return metrics.getStringBounds(text , JavaWindow.g2d).getWidth();
 		} else
 			return 0;
@@ -84,7 +85,7 @@ public class JavaGUIFont {
 		if (! Settings.Android && Settings.Video.OpenGL) {
 			return ttfFont.getHeight(text);
 		} else if (! Settings.Android && ! Settings.Video.OpenGL) {
-			FontMetrics metrics = JavaWindow.g2d.getFontMetrics(font.deriveFont((float) fontSize));
+			FontMetrics metrics = RenderVariablesJava.g2d.getFontMetrics(font.deriveFont((float) fontSize));
 			return metrics.getStringBounds(text , JavaWindow.g2d).getHeight();
 		} else
 			return 0;

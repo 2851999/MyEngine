@@ -90,7 +90,7 @@ public class Window {
 	}
 	
 	/* Is the window still visible */
-	public static boolean isVisble() {
+	public static boolean isVisible() {
 		//Check what window is being used
 		if (! Settings.Android && Settings.Video.OpenGL)
 			//Return whether the OpenGL window is visible

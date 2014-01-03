@@ -21,6 +21,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 import org.simplecorporation.myengine.core.image.Image;
+import org.simplecorporation.myengine.core.render.RenderVariablesJava;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
@@ -148,6 +149,9 @@ public class JavaWindow {
 			//Create the back buffer and the graphics 2D objects
 			backBuffer = new BufferedImage(frame.getWidth() , frame.getHeight() , BufferedImage.TYPE_INT_RGB);
 			g2d = backBuffer.createGraphics();
+			RenderVariablesJava.g2d = g2d;
+			RenderVariablesJava.backBuffer = backBuffer;
+			RenderVariablesJava.container = frame;
 		}
 		
 		//Check if the max FPS has changed since it was last set

@@ -21,6 +21,7 @@ import java.awt.event.MouseWheelListener;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
 import org.simplecorporation.myengine.core.input.event.ScrollEvent;
+import org.simplecorporation.myengine.core.render.RenderVariablesJava;
 import org.simplecorporation.myengine.core.window.JavaWindow;
 
 public class InputManagerJava implements MouseListener , MouseMotionListener , MouseWheelListener , KeyListener {
@@ -39,10 +40,10 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , M
 	/* The method to setup the keyboard and mouse */
 	public void create() {
 		//Add the input listeners
-		JavaWindow.frame.addMouseListener(this);
-		JavaWindow.frame.addMouseMotionListener(this);
-		JavaWindow.frame.addMouseWheelListener(this);
-		JavaWindow.frame.addKeyListener(this);
+		RenderVariablesJava.container.addMouseListener(this);
+		RenderVariablesJava.container.addMouseMotionListener(this);
+		RenderVariablesJava.container.addMouseWheelListener(this);
+		RenderVariablesJava.container.addKeyListener(this);
 	}
 	
 	/* The method to destroy the keyboard and mouse */
