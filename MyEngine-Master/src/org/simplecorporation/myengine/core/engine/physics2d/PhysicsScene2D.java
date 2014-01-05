@@ -12,8 +12,6 @@ package org.simplecorporation.myengine.core.engine.physics2d;
 
 import java.util.LinkedList;
 
-import org.simplecorporation.myengine.core.engine.physics2d.PhysicsObject2D.Type;
-
 public class PhysicsScene2D {
 	
 	/* The physics objects in this scene */
@@ -47,35 +45,10 @@ public class PhysicsScene2D {
 				if (a != b) {
 					//Get the second object
 					PhysicsObject2D objectB = this.physicsObjects.get(b);
-					//Check the object types
-					if (objectA.type == Type.AABB && objectB.type == Type.AABB) {
-						//Check for a collision
-						if (this.collisionDetector.checkAABBvsAABB(objectA, objectB))
-							//Resolve the collision
-							this.collisionResolver.resolveCollision(this.collisionDetector.manifold);
-					} else if (objectA.type == Type.Circle && objectB.type == Type.Circle) {
-						//Check for a collision
-						if (this.collisionDetector.checkCirclevsCircle(objectA, objectB))
-							//Resolve the collision
-							this.collisionResolver.resolveCollision(this.collisionDetector.manifold);
-					} else if ((objectA.type == Type.Circle && objectB.type == Type.AABB) || (objectA.type == Type.AABB || objectB.type == Type.Circle)) {
-						//The AABB object
-						PhysicsObject2D box = null;
-						//The circle object
-						PhysicsObject2D circle = null;
-						//Check which one is the circle
-						if (objectA.type == Type.Circle) {
-							circle = objectA;
-							box = objectB;
-						} else if (objectB.type == Type.Circle) {
-							circle = objectB;
-							box = objectA;
-						}
-						//Check for a collision
-						if (this.collisionDetector.checkAABBvsCircle(box, circle))
-							//Resolve the collision
-							this.collisionResolver.resolveCollision(this.collisionDetector.manifold);
-					}
+					//Check for a collision
+					if (this.collisionDetector.checkCollision(objectA, objectB))
+						//Resolve the collisions
+						this.collisionResolver.resolveCollision(this.collisionDetector.manifold);
 				}
 			}
 		}
@@ -94,6 +67,18 @@ public class PhysicsScene2D {
 	public void add(PhysicsObject2D physicsObject2D) {
 		//Add the physics object to the objects in this scene
 		this.physicsObjects.add(physicsObject2D);
+	}
+	
+	/* The method used to clear this scene */
+	public void clear() {
+		//Clear this scene
+		this.physicsObjects.clear();
+	}
+	
+	/* The method used to get the objects in this scene */
+	public LinkedList<PhysicsObject2D> getObjects() {
+		//Return the physics objects linked list
+		return this.physicsObjects;
 	}
 	
 }

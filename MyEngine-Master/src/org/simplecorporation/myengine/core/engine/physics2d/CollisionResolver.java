@@ -34,8 +34,12 @@ public class CollisionResolver {
 			j /= 1 / manifold.objectA.mass + 1 / manifold.objectB.mass;
 			//Apply impulse
 			Vector2D impulse = manifold.normal.multiply(j);
-			manifold.objectA.entity.velocity = manifold.objectA.entity.velocity.minus(impulse.multiply(manifold.objectA.inverseMass));
-			manifold.objectB.entity.velocity = manifold.objectB.entity.velocity.add(impulse.multiply(manifold.objectB.inverseMass));
+			//Check that object A can move
+			if (manifold.objectA.canMove)
+				manifold.objectA.entity.velocity = manifold.objectA.entity.velocity.minus(impulse.multiply(manifold.objectA.inverseMass));
+			//Check that object B can move
+			if (manifold.objectB.canMove)
+				manifold.objectB.entity.velocity = manifold.objectB.entity.velocity.add(impulse.multiply(manifold.objectB.inverseMass));
 			//Apply positional correction (May not be needed)
 			//this.positionalCorrection(manifold);
 		}
@@ -50,10 +54,14 @@ public class CollisionResolver {
 		//The penetration threshold (Stops objects moving rapidly when on top of each other)
 		double slop = 0.01;
 		//The correction amount
-		Vector2D correction = manifold.n.multiply(Math.max(manifold.penetrationDistance - slop, 0.0f) / (manifold.objectA.inverseMass + manifold.objectB.inverseMass) * percent);
+		Vector2D correction = manifold.n.asDirection().multiply(Math.max(manifold.penetrationDistance - slop, 0.0f) / (manifold.objectA.inverseMass + manifold.objectB.inverseMass) * percent);
 		//Apply the correction
-		manifold.objectA.entity.position = manifold.objectA.entity.position.minus(correction.multiply(manifold.objectA.inverseMass));
-		manifold.objectB.entity.position = manifold.objectB.entity.position.add(correction.multiply(manifold.objectB.inverseMass));
+		//Check that object A can move
+		if (manifold.objectA.canMove)
+			manifold.objectA.entity.position = manifold.objectA.entity.position.minus(correction.multiply(manifold.objectA.inverseMass));
+		//Check that object B can move
+		if (manifold.objectB.canMove)
+			manifold.objectB.entity.position = manifold.objectB.entity.position.add(correction.multiply(manifold.objectB.inverseMass));
 	}
 	
 }

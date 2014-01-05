@@ -18,24 +18,41 @@ import org.simplecorporation.myengine.core.input.event.TouchEvent;
 
 import android.view.MotionEvent;
 
+/**
+ * The InputManagerAndroid <code>class</code> is used to manage input on
+ * Android
+ */
 public class InputManagerAndroid extends AndroidGestureListener implements AndroidTouchListener {
 	
+	/**
+	 * This method checks for input
+	 */
 	/* The method to check the input */
 	public void checkInput() {
 		
 	}
 	
+	/**
+	 * This method creates and sets up input to receive future input events
+	 */
 	/* The method to setup the input */
 	public void create() {
 		//Add this listener to the other listeners
 		AndroidInput.androidTouchListeners.add(this);
 	}
 	
+	/**
+	 * This method destroys the input
+	 */
 	/* The method to destroy the keyboard and mouse */
 	public void destroy() {
 		
 	}
 	
+	/**
+	 * This method is called when a touch event has occurred
+	 * @param e A motion event
+	 */
 	/* The onTouch method called when an event has occurred */
 	public void onTouch(MotionEvent e) {
 		//Get the event number
@@ -59,6 +76,13 @@ public class InputManagerAndroid extends AndroidGestureListener implements Andro
 		MouseInput.y = e.getY();
 	}
 	
+	/**
+	 * This method is called when a mouse dragged event has occurred
+	 * @param e1 The first motion event
+	 * @param e2 The second motion event
+	 * @param distanceX The scroll distance along the x axis
+	 * @param distanceY The scroll distance along the y axis
+	 */
 	/* Gesture event method */
 	public boolean onScroll(MotionEvent e1 , MotionEvent e2 , float distanceX , float distanceY) {
 		//Call a scroll event

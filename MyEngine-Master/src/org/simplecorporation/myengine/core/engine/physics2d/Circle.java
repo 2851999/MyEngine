@@ -8,7 +8,6 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-
 package org.simplecorporation.myengine.core.engine.physics2d;
 
 import org.simplecorporation.myengine.core.game2d.vector.Vector2D;

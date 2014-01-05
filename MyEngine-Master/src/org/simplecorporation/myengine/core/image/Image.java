@@ -40,12 +40,23 @@ import android.graphics.BitmapFactory;
  */
 public class Image {
 	
+	/**
+	 * An instance of the image used on PC without OpenGL
+	 */
 	/* The image object for Java */
 	private java.awt.Image javaImage;
 	
+	/**
+	 * An instance of the image used on PC with OpenGL
+	 * (Texture from Slick2D)
+	 */
 	/* The image object for OpenGL */
 	private Texture openGLImage;
 	
+	/**
+	 * An instance of the image used on Android without
+	 * OpenGL (Android Bitmap)
+	 */
 	/* The image object for Android */
 	private Bitmap androidImage;
 	

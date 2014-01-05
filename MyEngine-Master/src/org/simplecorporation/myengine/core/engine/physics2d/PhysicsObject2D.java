@@ -30,6 +30,9 @@ public class PhysicsObject2D extends PhysicsObjectValues2D {
 	/* Is this object affected by gravity */
 	public boolean affectedByGravity;
 	
+	/* Is this object affected by collisions */
+	public boolean affectedByCollisions;
+	
 	/* The entity for this object */
 	public Entity2D entity;
 	
@@ -39,23 +42,32 @@ public class PhysicsObject2D extends PhysicsObjectValues2D {
 		this.type = type;
 		this.entity = entity;
 		this.setMass(mass);
+		
+		this.canMove = true;
+		this.affectedByGravity = true;
+		this.affectedByCollisions = true;
 	}
 	
 	/* The method used to update the physics
 	 * of this object */
 	public void update(PhysicsScene2D scene) {
-		//Add onto the velocity based on the acceleration of this
-		//object (acceleration = change in velocity / time) the answer
-		//is in m/s^2 so to change time into seconds times it by the
-		//time between each frame
-		this.entity.velocity.x += this.acceleration.x * GameValues.CURRENT_DELTA;
-		this.entity.velocity.y += this.acceleration.y * GameValues.CURRENT_DELTA;
+		//Make sure this object can move
+		if (this.canMove) {
+			//Add onto the velocity based on the acceleration of this
+			//object (acceleration = change in velocity / time) the answer
+			//is in m/s^2 so to change time into seconds times it by the
+			//time between each frame
+			this.entity.velocity.x += this.acceleration.x * GameValues.CURRENT_DELTA;
+			this.entity.velocity.y += this.acceleration.y * GameValues.CURRENT_DELTA;
+		}
 		
 		//Update any other things (Inherited by other objects)
 		this.updateAdditional(scene);
 		
-		//Update this entity
-		this.entity.update();
+		//Make sure this object can move
+		if (this.canMove)
+			//Update this entity
+			this.entity.update();
 	}
 	
 	/* The method used by other objects to update additional physics */

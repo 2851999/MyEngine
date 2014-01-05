@@ -10,6 +10,7 @@
 
 package org.simplecorporation.myengine.core.engine.physics2d;
 
+import org.simplecorporation.myengine.core.engine.physics2d.PhysicsObject2D.Type;
 import org.simplecorporation.myengine.core.game2d.vector.Vector2D;
 
 
@@ -22,6 +23,38 @@ public class CollisionDetector {
 	public CollisionDetector() {
 		//Create the manifold
 		this.manifold = new Manifold();
+	}
+	
+	/* The method called to check a collision between two physics objects */
+	public boolean checkCollision(PhysicsObject2D objectA, PhysicsObject2D objectB) {
+		//Make sure both objects are affected by collisions
+		if (objectA.affectedByCollisions && objectB.affectedByCollisions) {
+			//Check the object types
+			if (objectA.type == Type.AABB && objectB.type == Type.AABB) {
+				//Check for a collision
+				return this.checkAABBvsAABB(objectA, objectB);
+			} else if (objectA.type == Type.Circle && objectB.type == Type.Circle) {
+				//Check for a collision
+				return this.checkCirclevsCircle(objectA, objectB);
+			} else if ((objectA.type == Type.Circle && objectB.type == Type.AABB) || (objectA.type == Type.AABB || objectB.type == Type.Circle)) {
+				//The AABB object
+				PhysicsObject2D box = null;
+				//The circle object
+				PhysicsObject2D circle = null;
+				//Check which one is the circle
+				if (objectA.type == Type.Circle) {
+					circle = objectA;
+					box = objectB;
+				} else if (objectB.type == Type.Circle) {
+					circle = objectB;
+					box = objectA;
+				}
+				//Check for a collision
+				return this.checkAABBvsCircle(box, circle);
+			}
+		}
+		//Return false because one/both of the objects are not affected by collisions
+		return false;
 	}
 	
 	/* The method used to check a collision between two AABB's using SAT */
@@ -154,7 +187,7 @@ public class CollisionDetector {
 		//The closest point on A to centre of B
 		//MUST WORK OUT VALUE OF N HERE AS WELL OTHERWISE INSIDE ALWAYS EQUAL TO 2
 		Vector2D closest = new Vector2D(b.entity.position.x + b.entity.width / 2, b.entity.position.y + b.entity.height / 2)
-		.minus(new Vector2D(a.entity.position.x + a.entity.width / 2, a.entity.position.y + a.entity.height / 2));
+						.minus(new Vector2D(a.entity.position.x + a.entity.width / 2, a.entity.position.y + a.entity.height / 2));
 		//Calculate half extents along each axis
 		double xExtent = (box.max.x - box.min.x) / 2;
 		double yExtent = (box.max.y - box.min.y) / 2;
@@ -165,7 +198,6 @@ public class CollisionDetector {
 		boolean inside = false;
 		//Circle is inside the AABB, so clamp the circles centre to the closest edge
 		if ((n.x == closest.x) && (n.y == closest.y)) {
-			System.out.println(1331);
 			//Set inside to true
 			inside = true;
 			//Find closest axis

@@ -13,6 +13,6 @@ package org.simplecorporation.myengine.core.engine.physics2d;
 public class PhysicsEngine {
 	
 	/* The version of this physics engine */
-	public static final String version = "Physics Engine 1 Build 1";
+	public static final String version = "Physics Engine 1 Build 2";
 	
 }

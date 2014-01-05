@@ -16,16 +16,42 @@ import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
+/**
+ * The ImageStore is a <code>class</code> made up of static fields and
+ * methods that can load and store image packs
+ * to be used at a later date. When using Java2D (OpenGL = false)
+ * there is a rendering flash when rendering an image for the
+ * first time, this class can help prevent that issue.
+ * {@link org.simplecorporation.myengine.core.image.ImagePack ImagePack}
+ * stores image packs that can all be loaded at the
+ * same time.
+ * 
+ * @see ImagePack
+ */
 public class ImageStore {
 	
+	/**
+	 * A <code>LinkedList</code> containing all of the
+	 * {@link org.simplecorporation.myengine.core.image.ImagePack ImagePack}'s
+	 * in the ImageStore
+	 */
 	/* The image packs */
 	private static LinkedList<ImagePack> imagePacks = new LinkedList<ImagePack>();
 	
+	/**
+	 * A method used to add an ImagePack to the ImageStore.
+	 * @param imagePack The ImagePack to be added
+	 * @see ImagePack
+	 */
 	/* The method to add an image pack */
 	public static void add(ImagePack imagePack) {
 		imagePacks.add(imagePack);
 	}
 	
+	/**
+	 * A method used to load all of the images in the ImageStore's
+	 * ImagePacks's LinkedList
+	 */
 	/* The method to load all of the image packs */
 	public static void load() {
 		for (int a = 0; a < imagePacks.size(); a++) {
@@ -33,6 +59,12 @@ public class ImageStore {
 		}
 	}
 	
+	/**
+	 * A method that is used to get an ImagePack from the ImageStore's
+	 * LinkedList of ImagePack's using the ImagePack's name
+	 * @param name A String value representing the ImagePack's name
+	 * @return The ImagePack (If found otherwise, null)
+	 */
 	/* The method that returns an image pack given its name */
 	public static ImagePack getPackByName(String name) {
 		//The image pack
@@ -55,6 +87,12 @@ public class ImageStore {
 		return imagePack;
 	}
 	
+	/**
+	 * A method that is used to get an ImagePack from the ImageStore's
+	 * LinkedList of ImagePack's using the ImagePack's id
+	 * @param name An integer value representing the ImagePack's id
+	 * @return The ImagePack (If found otherwise, null)
+	 */
 	/* The method that returns an image pack given its id */
 	public static ImagePack getPackById(int id) {
 		//The image pack

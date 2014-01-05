@@ -24,19 +24,32 @@ import org.simplecorporation.myengine.core.input.event.ScrollEvent;
 import org.simplecorporation.myengine.core.render.RenderVariablesJava;
 import org.simplecorporation.myengine.core.window.JavaWindow;
 
+/**
+ * The InputManagerjava <code>class</code> is used to manage input on PC
+ * using pure Java
+ */
 public class InputManagerJava implements MouseListener , MouseMotionListener , MouseWheelListener , KeyListener {
 	
+	/**
+	 * This method checks for input
+	 */
 	/* The method to check the input */
 	public void checkInput() {
 		//Check the mouse
 		checkMouse();
 	}
 	
+	/**
+	 * This method checks for input for the Mosue
+	 */
 	/* The method to check the mouse */
 	public void checkMouse() {
 		
 	}
 	
+	/**
+	 * This method creates and sets up input to receive future input events
+	 */
 	/* The method to setup the keyboard and mouse */
 	public void create() {
 		//Add the input listeners
@@ -46,11 +59,54 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , M
 		RenderVariablesJava.container.addKeyListener(this);
 	}
 	
+	/**
+	 * This method destroys the input
+	 */
 	/* The method to destroy the keyboard and mouse */
 	public void destroy() {
 		
 	}
 	
+	/**
+	 * This method is called when a key pressed event has occurred
+	 * @param e The KeyEvent
+	 */
+	/**
+	 * This method is called when a key released event has occurred
+	 * @param e The KeyEvent
+	 */
+	/**
+	 * This method is called when a key typed event has occurred
+	 * @param e The KeyEvent
+	 */
+	/**
+	 * This method is called when a mouse dragged event has occurred
+	 * @param e The MouseEvent
+	 */
+	/**
+	 * This method is called when a mouse moved event has occurred
+	 * @param e The MouseEvent
+	 */
+	/**
+	 * This method is called when a mouse clicked event has occurred
+	 * @param e The MouseEvent
+	 */
+	/**
+	 * This method is called when a mouse entered event has occurred
+	 * @param e The MouseEvent
+	 */
+	/**
+	 * This method is called when a mouse exited event has occurred
+	 * @param e The MouseEvent
+	 */
+	/**
+	 * This method is called when a mouse pressed event has occurred
+	 * @param e The MouseEvent
+	 */
+	/**
+	 * This method is called when a mouse released event has occurred
+	 * @param e The MouseEvent
+	 */
 	/* Method for key/mouse listeners */
 	public void keyPressed(KeyEvent e) {
 		//Get the correct key code
@@ -194,6 +250,10 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , M
 		Input.callMouseReleased(new org.simplecorporation.myengine.core.input.event.MouseEvent(e.getButton() , x , y));
 	}
 	
+	/**
+	 * This method is called when a mouse wheel moved event has occurred
+	 * @param e The MouseWheelEvent
+	 */
 	/* Method for mouse wheel */
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		//Call a scroll event (* to make sure it is negative when going towards user)
