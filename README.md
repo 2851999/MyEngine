@@ -1,4 +1,4 @@
 MyEngine
 ========
 
-LWJGL Java game engine
+Java2D/Android/LWJGL game engine
