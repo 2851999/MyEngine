@@ -22,9 +22,15 @@ import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
 
+/**
+ * The InputManagerLWJGL <code>class</code> is used to manage input for LWJGL
+ */
 public class InputManagerLWJGL {
 	
 	/* The method to check the input */
+	/**
+	 * This method checks for input
+	 */
 	public static void checkInput() {
 		//Check the mouse
 		checkMouse();
@@ -33,6 +39,9 @@ public class InputManagerLWJGL {
 	}
 	
 	/* The method to check the mouse */
+	/**
+	 * This method checks for input for the mouse
+	 */
 	public static void checkMouse() {
 		//Check if a mouse button is down
 		
@@ -87,7 +96,11 @@ public class InputManagerLWJGL {
 			Input.callOnScroll(new ScrollEvent(dWheel , dWheel));
 	}
 	
+	
 	/* The method to check the keyboard */
+	/**
+	 * This method checks for input for the keyboard
+	 */
 	public static void checkKeyboard() {
 		//Enable repeat events (To allow for holding down keys etc.)
 		Keyboard.enableRepeatEvents(true);
@@ -113,6 +126,9 @@ public class InputManagerLWJGL {
 		}
 	}
 	
+	/**
+	 * This method creates and sets up input to receive future input events
+	 */
 	/* The method to setup the keyboard and mouse */
 	public static void create() {
 		try {
@@ -126,6 +142,9 @@ public class InputManagerLWJGL {
 		}
 	}
 	
+	/**
+	 * This method destroys the input
+	 */
 	/* The method to destroy the keyboard and mouse */
 	public static void destroy() {
 		//Destroy the keyboard and mouse

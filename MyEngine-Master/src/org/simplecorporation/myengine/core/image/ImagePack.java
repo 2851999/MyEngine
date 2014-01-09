@@ -25,42 +25,42 @@ import org.simplecorporation.myengine.utils.logger.Logger;
  */
 public class ImagePack {
 	
+	/* The name of the image pack */
 	/**
 	 * The name of the <code>ImagePack</code>
 	 */
-	/* The name of the image pack */
 	private String packName;
 	
+	/* Id of the image pack */
 	/**
 	 * The id of the <code>ImagePack</code>
 	 */
-	/* Id of the image pack */
 	private int packId;
 	
+	/* The images in the image pack */
 	/**
 	 * A <code>LinkedList</code> containing all of the images in the
 	 * <code>ImagePack</code>
 	 * 
 	 * @see Image
-	 */
-	/* The images in the image pack */
+	 * 	 */
 	private LinkedList<Image> images;
 	
+	/* The image names in the image pack */
 	/**
 	 * A <code>LinkedList</code> containing all of the images names in
 	 * the <code>ImagePack</code>
 	 */
-	/* The image names in the image pack */
 	private LinkedList<String> imageNames;
 	
-	
+	/* The image id in the image pack */
 	/**
 	 * A <code>LinkedList</code> containing all of the images id's in
 	 * the <code>ImagePack</code>
 	 */
-	/* The image id in the image pack */
 	private LinkedList<Integer> imageIds;
 	
+	/* The constructor of an image pack */
 	/**
 	 * Constructor for <code>ImagePack</code>
 	 * @param packName A <code>String</code> used to identify the
@@ -68,7 +68,6 @@ public class ImagePack {
 	 * @param packId   An integer used to identity the
 	 *                 ImagePack
 	 */
-	/* The constructor of an image pack */
 	public ImagePack(String packName , int packId) {
 		//Assign the variables
 		this.packName = packName;
@@ -78,19 +77,20 @@ public class ImagePack {
 		this.imageIds = new LinkedList<Integer>();
 	}
 	
+	/* The method to add an image to the images */
 	/**
 	 * This method adds an Image to the ImagePack.
 	 * @param name  A <code>String</code> used to identify the given Image
 	 * @param id    An integer used to identify the given Image
 	 * @param image The Image to add to this ImagePack
 	 */
-	/* The method to add an image to the images */
 	public void add(String name , int id , Image image) {
 		this.imageNames.add(name);
 		this.imageIds.add(id);
 		this.images.add(image);
 	}
 	
+	/* The method to get an image given its name */
 	/**
 	 * This method returns an Image in this ImagePack using the name
 	 * of the image.
@@ -98,7 +98,6 @@ public class ImagePack {
 	 * @return An Image
 	 * @see Image
 	 */
-	/* The method to get an image given its name */
 	public Image getImageByName(String name) {
 		//The image
 		Image image = null;
@@ -120,6 +119,7 @@ public class ImagePack {
 		return image;
 	}
 	
+	/* The method to get an image given its id */
 	/**
 	 * This method returns an Image in this ImagePack using the id
 	 * of the image.
@@ -127,7 +127,6 @@ public class ImagePack {
 	 * @return An Image
 	 * @see Image
 	 */
-	/* The method to get an image given its id */
 	public Image getImageById(int id) {
 		//The image
 		Image image = null;
@@ -149,13 +148,13 @@ public class ImagePack {
 		return image;
 	}
 	
+	/* The method to load all the images */
 	/**
 	 * This method is used to load all of the Image's in this ImagePack
 	 * When using Java2D (OpenGL = false) there is a rendering flash
 	 * when rendering an image for the first time, this method can help
 	 * prevent that issue.
 	 */
-	/* The method to load all the images */
 	public void load() {
 		//Render all of the images once
 		for (int a = 0; a < this.images.size(); a++) {
@@ -164,20 +163,20 @@ public class ImagePack {
 		}
 	}
 	
+	/* The method to get the pack name */
 	/**
 	 * This method returns the ImagePack's name
 	 * @return A <code>String</code> value of this ImagePack's name
 	 */
-	/* The method to get the pack name */
 	public String getPackName() {
 		return this.packName;
 	}
 	
+	/* The method to get the pack id */
 	/**
 	 * This method returns the ImagePack's id
 	 * @return A integer value of this ImagePack's id
 	 */
-	/* The method to get the pack id */
 	public int getPackId() {
 		return this.packId;
 	}

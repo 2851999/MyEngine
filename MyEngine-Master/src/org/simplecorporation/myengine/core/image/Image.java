@@ -40,26 +40,27 @@ import android.graphics.BitmapFactory;
  */
 public class Image {
 	
+	/* The image object for Java */
 	/**
 	 * An instance of the image used on PC without OpenGL
 	 */
-	/* The image object for Java */
 	private java.awt.Image javaImage;
 	
+	/* The image object for OpenGL */
 	/**
 	 * An instance of the image used on PC with OpenGL
 	 * (Texture from Slick2D)
 	 */
-	/* The image object for OpenGL */
 	private Texture openGLImage;
 	
+	/* The image object for Android */
 	/**
 	 * An instance of the image used on Android without
 	 * OpenGL (Android Bitmap)
 	 */
-	/* The image object for Android */
 	private Bitmap androidImage;
 	
+	/* The default constructor */
 	/**
 	 * The default constructor for <code>Image</code>
 	 * It doesn't do anything. In order to load an image you must use
@@ -67,11 +68,11 @@ public class Image {
 	 * unless you are developing for android, in which case, you should use
 	 * {@link #load(int id)}
 	 */
-	/* The default constructor */
 	public Image() {
 		
 	}
 	
+	/* The constructor with the file path and format specified */
 	/**
 	 * The constructor which will load the image automatically.
 	 * This constructor should only be used when loading an image on
@@ -86,12 +87,12 @@ public class Image {
 	 *                 as the main class
 	 * @see load(String filePath , String format , boolean inFolder)
 	 */
-	/* The constructor with the file path and format specified */
 	public Image(String filePath , String format , boolean inFolder) {
 		//Load the image
 		load(filePath , format , inFolder);
 	}
 	
+	/* The constructor for android */
 	/**
 	 * The constructor which will load the image automatically.
 	 * This constructor should on be used when loading an image on Android
@@ -99,12 +100,12 @@ public class Image {
 	 *                image on Android. e.g. R.drawable.myimage
 	 * @see load(int id)
 	 */
-	/* The constructor for android */
 	public Image(int id) {
 		//Load the image
 		load(id);
 	}
 	
+	/* The method to load the image */
 	/** This method is used to load an image on a PC.
 	 * 
 	 * @param filePath This is a string representing the path to the
@@ -116,7 +117,6 @@ public class Image {
 	 *                 be assumed to be inside a .jar, or in the same path
 	 *                 as the main class
 	 */
-	/* The method to load the image */
 	public void load(String filePath , String format , boolean inFolder) {
 		//Check what rendering mode is being used
 		if (! Settings.Android && Settings.Video.OpenGL) {
@@ -148,18 +148,19 @@ public class Image {
 		}
 	}
 	
+	/* The method to load an image for android */
 	/**
 	 * This method is used to load an image on Android.
 	 * 
 	 * @param id      This is an integer value that is used to locate the
 	 *                image on Android. e.g. R.drawable.myimage
 	 */
-	/* The method to load an image for android */
 	public void load(int id) {
 		//Set the image
 		this.androidImage = BitmapFactory.decodeResource(AndroidStore.gameResources , id);
 	}
 	
+	/* The method to get the URL of the image */
 	/**
 	 * This method is used to turn a string into a URL, it is used when
 	 * loading an image.
@@ -168,7 +169,6 @@ public class Image {
 	 *                 image file, this includes its extension
 	 * @return This method return a URL, created using the String
 	 */
-	/* The method to get the URL of the image */
 	public URL getURL(String filePath) {
 		URL url = null;
 		try {
@@ -181,13 +181,13 @@ public class Image {
 		return url;
 	}
 	
+	/* The method to get the URL input stream of the image */
 	/**
 	 * The method used to get an InputStream using a certain file path
 	 * @param filePath This is a string that is used to create the
 	 *                 InputStream
 	 * @return         The input stream created using the file path
 	 */
-	/* The method to get the URL input stream of the image */
 	public InputStream getURLInputStream(String filePath) {
 		InputStream stream = null;
 		try {
@@ -200,42 +200,42 @@ public class Image {
 		return stream;
 	}
 	
+	/* Returns the Java image */
 	/**
 	 * Returns the Java Image
 	 * @return Image
 	 */
-	/* Returns the Java image */
 	public java.awt.Image getJavaImage() {
 		//Return the image
 		return this.javaImage;
 	}
 	
+	/* Returns the OpenGL image */
 	/**
 	 * Returns the OpenGL image (Texture)
 	 * @return Texture
 	 */
-	/* Returns the OpenGL image */
 	public Texture getOpenGLImage() {
 		//Return the image
 		return this.openGLImage;
 	}
 	
+	/* Returns the android image */
 	/**
 	 * Returns the Android image (Bitmap)
 	 * @return Bitmap
 	 */
-	/* Returns the android image */
 	public Bitmap getAndroidImage() {
 		//Return the image
 		return this.androidImage;
 	}
 	
+	/* The method that returns the width of the image */
 	/**
 	 * Checks what image should have been created then returns the
 	 * width of that image
 	 * @return Integer representing the width of the image
 	 */
-	/* The method that returns the width of the image */
 	public int getWidth() {
 		//Return the right image's width
 		if (Settings.Video.OpenGL)
@@ -248,12 +248,12 @@ public class Image {
 			return 0;
 	}
 	
+	/* The method that returns the height of the image */
 	/**
 	 * Checks what image should have been created then returns the
 	 * height of that image
 	 * @return Integer representing the height of the image
 	 */
-	/* The method that returns the height of the image */
 	public int getHeight() {
 		//Return the right image's height
 		if (Settings.Video.OpenGL)

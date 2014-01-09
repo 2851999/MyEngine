@@ -18,23 +18,23 @@ import org.simplecorporation.myengine.settings.Settings;
  */
 public class InputManager {
 	
+	/* The android input */
 	/**
 	 * A static instance of the Android InputManager
 	 */
-	/* The android input */
 	private static InputManagerAndroid inputManagerAndroid;
 	
+	/* The java input */
 	/**
 	 * A static instance of the Java (PC) InputManager
 	 */
-	/* The java input */
 	private static InputManagerJava inputManagerJava;
 	
+	/* The method to check the input */
 	/**
 	 * A method used to check the input using the appropriate
 	 * input manager
 	 */
-	/* The method to check the input */
 	public static void checkInput() {
 		//Check what rendering mode is being used
 		if (! Settings.Android && Settings.Video.OpenGL)
@@ -45,11 +45,11 @@ public class InputManager {
 			inputManagerAndroid.checkInput();
 	}
 	
+	/* The method to setup the keyboard and mouse */
 	/**
 	 * A method used to create the input manager instances and
 	 * setup to be ready for receiving input
 	 */
-	/* The method to setup the keyboard and mouse */
 	public static void create() {
 		//Check what rendering mode is being used
 		if (! Settings.Android && Settings.Video.OpenGL)
@@ -63,10 +63,10 @@ public class InputManager {
 		}
 	}
 	
+	/* The method to destroy the keyboard and mouse */
 	/**
 	 * A method used to destroy the input
 	 */
-	/* The method to destroy the keyboard and mouse */
 	public static void destroy() {
 		//Check what rendering mode is being used
 		if (! Settings.Android && Settings.Video.OpenGL)

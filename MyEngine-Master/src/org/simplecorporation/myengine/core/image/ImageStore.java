@@ -30,42 +30,42 @@ import org.simplecorporation.myengine.utils.logger.Logger;
  */
 public class ImageStore {
 	
+	/* The image packs */
 	/**
 	 * A <code>LinkedList</code> containing all of the
 	 * {@link org.simplecorporation.myengine.core.image.ImagePack ImagePack}'s
 	 * in the ImageStore
 	 */
-	/* The image packs */
 	private static LinkedList<ImagePack> imagePacks = new LinkedList<ImagePack>();
 	
+	/* The method to add an image pack */
 	/**
 	 * A method used to add an ImagePack to the ImageStore.
 	 * @param imagePack The ImagePack to be added
 	 * @see ImagePack
 	 */
-	/* The method to add an image pack */
 	public static void add(ImagePack imagePack) {
 		imagePacks.add(imagePack);
 	}
 	
+	/* The method to load all of the image packs */
 	/**
 	 * A method used to load all of the images in the ImageStore's
 	 * ImagePacks's LinkedList
 	 */
-	/* The method to load all of the image packs */
 	public static void load() {
 		for (int a = 0; a < imagePacks.size(); a++) {
 			imagePacks.get(a).load();
 		}
 	}
 	
+	/* The method that returns an image pack given its name */
 	/**
 	 * A method that is used to get an ImagePack from the ImageStore's
 	 * LinkedList of ImagePack's using the ImagePack's name
 	 * @param name A String value representing the ImagePack's name
 	 * @return The ImagePack (If found otherwise, null)
 	 */
-	/* The method that returns an image pack given its name */
 	public static ImagePack getPackByName(String name) {
 		//The image pack
 		ImagePack imagePack = null;
@@ -87,13 +87,13 @@ public class ImageStore {
 		return imagePack;
 	}
 	
+	/* The method that returns an image pack given its id */
 	/**
 	 * A method that is used to get an ImagePack from the ImageStore's
 	 * LinkedList of ImagePack's using the ImagePack's id
 	 * @param name An integer value representing the ImagePack's id
 	 * @return The ImagePack (If found otherwise, null)
 	 */
-	/* The method that returns an image pack given its id */
 	public static ImagePack getPackById(int id) {
 		//The image pack
 		ImagePack imagePack = null;

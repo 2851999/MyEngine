@@ -30,27 +30,27 @@ import org.simplecorporation.myengine.core.window.JavaWindow;
  */
 public class InputManagerJava implements MouseListener , MouseMotionListener , MouseWheelListener , KeyListener {
 	
+	/* The method to check the input */
 	/**
 	 * This method checks for input
 	 */
-	/* The method to check the input */
 	public void checkInput() {
 		//Check the mouse
 		checkMouse();
 	}
 	
-	/**
-	 * This method checks for input for the Mosue
-	 */
 	/* The method to check the mouse */
+	/**
+	 * This method checks for input for the mouse
+	 */
 	public void checkMouse() {
 		
 	}
 	
+	/* The method to setup the keyboard and mouse */
 	/**
 	 * This method creates and sets up input to receive future input events
 	 */
-	/* The method to setup the keyboard and mouse */
 	public void create() {
 		//Add the input listeners
 		RenderVariablesJava.container.addMouseListener(this);
@@ -59,55 +59,19 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , M
 		RenderVariablesJava.container.addKeyListener(this);
 	}
 	
+	/* The method to destroy the keyboard and mouse */
 	/**
 	 * This method destroys the input
 	 */
-	/* The method to destroy the keyboard and mouse */
 	public void destroy() {
 		
 	}
 	
+	/* Method for key/mouse listeners */
 	/**
 	 * This method is called when a key pressed event has occurred
 	 * @param e The KeyEvent
 	 */
-	/**
-	 * This method is called when a key released event has occurred
-	 * @param e The KeyEvent
-	 */
-	/**
-	 * This method is called when a key typed event has occurred
-	 * @param e The KeyEvent
-	 */
-	/**
-	 * This method is called when a mouse dragged event has occurred
-	 * @param e The MouseEvent
-	 */
-	/**
-	 * This method is called when a mouse moved event has occurred
-	 * @param e The MouseEvent
-	 */
-	/**
-	 * This method is called when a mouse clicked event has occurred
-	 * @param e The MouseEvent
-	 */
-	/**
-	 * This method is called when a mouse entered event has occurred
-	 * @param e The MouseEvent
-	 */
-	/**
-	 * This method is called when a mouse exited event has occurred
-	 * @param e The MouseEvent
-	 */
-	/**
-	 * This method is called when a mouse pressed event has occurred
-	 * @param e The MouseEvent
-	 */
-	/**
-	 * This method is called when a mouse released event has occurred
-	 * @param e The MouseEvent
-	 */
-	/* Method for key/mouse listeners */
 	public void keyPressed(KeyEvent e) {
 		//Get the correct key code
 		int keyCode = KeyboardInput.convertKeyCode(e.getKeyCode());
@@ -120,6 +84,10 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , M
 	}
 	
 	/* Method for key/mouse listeners */
+	/**
+	 * This method is called when a key released event has occurred
+	 * @param e The KeyEvent
+	 */
 	public void keyReleased(KeyEvent e) {
 		//Get the correct key code
 		int keyCode = KeyboardInput.convertKeyCode(e.getKeyCode());
@@ -132,11 +100,19 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , M
 	}
 	
 	/* Method for key/mouse listeners */
+	/**
+	 * This method is called when a key typed event has occurred
+	 * @param e The KeyEvent
+	 */
 	public void keyTyped(KeyEvent e) {
 		
 	}
 	
 	/* Method for key/mouse listeners */
+	/**
+	 * This method is called when a mouse dragged event has occurred
+	 * @param e The MouseEvent
+	 */
 	public void mouseDragged(MouseEvent e) {
 		//Get the x and y positions
 		double x = e.getX() - JavaWindow.frame.getInsets().left;
@@ -149,6 +125,10 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , M
 	}
 	
 	/* Method for key/mouse listeners */
+	/**
+	 * This method is called when a mouse moved event has occurred
+	 * @param e The MouseEvent
+	 */
 	public void mouseMoved(MouseEvent e) {
 		//Get the x and y positions
 		double x = e.getX() - JavaWindow.frame.getInsets().left;
@@ -163,6 +143,10 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , M
 	}
 	
 	/* Method for key/mouse listeners */
+	/**
+	 * This method is called when a mouse clicked event has occurred
+	 * @param e The MouseEvent
+	 */
 	public void mouseClicked(MouseEvent e) {
 		/*
 		//Get the x and y positions
@@ -184,16 +168,28 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , M
 	}
 	
 	/* Method for key/mouse listeners */
+	/**
+	 * This method is called when a mouse entered event has occurred
+	 * @param e The MouseEvent
+	 */
 	public void mouseEntered(MouseEvent e) {
 		
 	}
 	
 	/* Method for key/mouse listeners */
+	/**
+	 * This method is called when a mouse exited event has occurred
+	 * @param e The MouseEvent
+	 */
 	public void mouseExited(MouseEvent e) {
 		
 	}
 	
 	/* Method for key/mouse listeners */
+	/**
+	 * This method is called when a mouse pressed event has occurred
+	 * @param e The MouseEvent
+	 */
 	public void mousePressed(MouseEvent e) {
 		//Get the x and y positions
 		double x = e.getX() - JavaWindow.frame.getInsets().left;
@@ -221,6 +217,10 @@ public class InputManagerJava implements MouseListener , MouseMotionListener , M
 	}
 	
 	/* Method for key/mouse listeners */
+	/**
+	 * This method is called when a mouse released event has occurred
+	 * @param e The MouseEvent
+	 */
 	public void mouseReleased(MouseEvent e) {
 		//Get the x and y positions
 		double x = e.getX() - JavaWindow.frame.getInsets().left;
