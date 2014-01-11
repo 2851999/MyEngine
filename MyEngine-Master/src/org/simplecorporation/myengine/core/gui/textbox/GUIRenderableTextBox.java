@@ -104,8 +104,10 @@ public class GUIRenderableTextBox extends GUITextBox {
 			
 			//Check if the cursor is showing
 			if (this.cursorShown) {
-				//Add the cursor
-				renderText += "|";
+				//Set the cursor colour
+				BasicRenderer.setColour(this.cursorColour);
+				//Render the cursor's rectangle
+				BasicRenderer.renderFilledRectangle(this.position.x + this.font.getWidth(this.text) + 4, this.position.y + 2, 2, this.height - 4);
 			}
 			
 			//Check if the java font  is null
