@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -12,7 +12,7 @@ package org.simplecorporation.myengine.core.engine.script.library.game;
 
 import org.simplecorporation.myengine.core.engine.script.ScriptClass;
 import org.simplecorporation.myengine.core.engine.script.ScriptLibrary;
-import org.simplecorporation.myengine.core.game.Game;
+import org.simplecorporation.myengine.core.game.BaseGame;
 
 public class LibraryGame extends ScriptLibrary {
 	
@@ -32,7 +32,7 @@ public class LibraryGame extends ScriptLibrary {
 	public static final String LIBRARY_SHORT_REFERENCE = "Game";
 	
 	/* An instance of the game */
-	public Game game;
+	public BaseGame game;
 	
 	/* The constructor */
 	public LibraryGame() {
@@ -47,7 +47,7 @@ public class LibraryGame extends ScriptLibrary {
 		//Check the second split
 		if (split[1].equals("create")) {
 			//Create a new instance of the game
-			this.game = new Game();
+			this.game = new BaseGame();
 			this.game.createGame();
 		}
 	}

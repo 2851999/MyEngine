@@ -1,7 +1,7 @@
 package org.simplecorporation.myengine.tests;
 
 import org.lwjgl.opengl.GL11;
-import org.simplecorporation.myengine.core.game.Game;
+import org.simplecorporation.myengine.core.game.BaseGame;
 import org.simplecorporation.myengine.core.gui.button.GUIRenderableButton;
 import org.simplecorporation.myengine.core.gui.slider.GUIRenderableSlider;
 import org.simplecorporation.myengine.core.gui.slider.GUISlider;
@@ -11,7 +11,7 @@ import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.font.FontUtils;
 import org.simplecorporation.myengine.utils.opengl.OpenGLSetupUtils;
 
-public class SliderTest extends Game {
+public class SliderTest extends BaseGame {
 	
 	public GUIRenderableSlider verticalslider;
 	public GUIRenderableSlider horizontalslider;

@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -12,112 +12,57 @@ package org.simplecorporation.myengine.core.game;
 
 import java.util.LinkedList;
 
-import org.simplecorporation.myengine.core.input.Input;
-import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
-import org.simplecorporation.myengine.core.input.event.MouseEvent;
-import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
-import org.simplecorporation.myengine.core.input.event.ScrollEvent;
-import org.simplecorporation.myengine.core.input.event.TouchEvent;
-import org.simplecorporation.myengine.core.input.listener.InputListener;
+import org.simplecorporation.myengine.core.audio.clip.AudioStore;
+import org.simplecorporation.myengine.core.gui.font.FontStore;
+import org.simplecorporation.myengine.core.image.ImageStore;
 
-public class Game extends AbstractGame implements InputListener {
+public class Game extends BaseGame {
 	
-	/* All of the instances of the GameMethods interface */
-	public static LinkedList<GameMethodsInterface> gameMethodsInterfaces = new
-			LinkedList<GameMethodsInterface>();
+	/* The image resource packs */
+	public LinkedList<GameImageResourcePack> imageResourcePacks;
+	
+	/* The audio resource packs */
+	public LinkedList<GameAudioResourcePack> audioResourcePacks;
 	
 	/* The constructor */
 	public Game() {
+		//Create the linked lists
+		this.imageResourcePacks = new LinkedList<GameImageResourcePack>();
+		this.audioResourcePacks = new LinkedList<GameAudioResourcePack>();
 		
-	}
-	
-	/* The method to create the game */
-	public void createGame() {
-		//Add this input listener
-		Input.addListener(this);
-		//Create the engine loop
-		create();
-	}
-	
-	/* The method to add a game method interface */
-	public static void addGameMethodsInterface(GameMethodsInterface gameMethodsInterface) {
-		//Add it to the list
-		gameMethodsInterfaces.add(gameMethodsInterface);
-	}
-	
-	/* Game method */
-	public void gameCreated() {
+		////////////////LOAD THE GAME////////////////
 		
+		//Look at all of the image resource packs
+		for (int a = 0; a < this.imageResourcePacks.size(); a++) {
+			//Add the resource pack to the image store
+			ImageStore.add(this.imageResourcePacks.get(a).getImagePack(a));
+		}
+		
+		//Look at all of the audio resource packs
+		for (int a = 0; a < this.audioResourcePacks.size(); a++) {
+			//Add the audio pack to the image store
+			AudioStore.add(this.audioResourcePacks.get(a).getAudioPack(a));
+		}
+		
+		
+		//Load the fonts and images
+		FontStore.load();
+		ImageStore.load();
+		
+		//Create the game
+		this.createGame();
 	}
 	
-	/* Game method */
-	public void gameStarted() {
-		
+	/* The method used to add an image resource pack */
+	public void addResourcePack(GameImageResourcePack resourcePack) {
+		//Add the pack to the correct list
+		this.imageResourcePacks.addLast(resourcePack);
 	}
 	
-	/* Game method */
-	public void gameUpdate() {
-		
-	}
-	
-	/* Game method */
-	public void gameRender() {
-		
-	}
-	
-	/* Game method */
-	public void gameStopped() {
-		
-	}
-	
-	/* Game method */
-	public void gameClosing() {
-		
-	}
-	
-	/* Input method */
-	public void onMousePressed(MouseEvent e) {
-		
-	}
-	
-	/* Input method */
-	public void onMouseReleased(MouseEvent e) {
-		
-	}
-	
-	/* Input method */
-	public void onMouseClicked(MouseEvent e) {
-		
-	}
-	
-	/* Input method */
-	public void onMouseMoved(MouseMotionEvent e) {
-		
-	}
-	
-	/* Input method */
-	public void onKeyPressed(KeyboardEvent e) {
-		
-	}
-	
-	/* Input method */
-	public void onKeyReleased(KeyboardEvent e) {
-		
-	}
-	
-	/* Input method */
-	public void onKeyTyped(KeyboardEvent e) {
-		
-	}
-	
-	/* Input method */
-	public void onScroll(ScrollEvent e) {
-		
-	}
-	
-	/* Android input method */
-	public void onTouch(TouchEvent e) {
-		
+	/* The method used to add an audio resource pack */
+	public void addResourcePack(GameAudioResourcePack resourcePack) {
+		//Add the pack to the correct list
+		this.audioResourcePacks.add(resourcePack);
 	}
 	
 }

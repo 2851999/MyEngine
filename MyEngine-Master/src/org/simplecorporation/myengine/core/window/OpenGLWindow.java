@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -131,6 +131,7 @@ public class OpenGLWindow {
 		Display.sync(Settings.Video.MaxFPS);
 	}
 	
+	/* The methods used to get a display mode for fullscreen */
 	public static DisplayMode getFullscreenDisplayMode(int width , int height) {
  
 		try {

@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -17,13 +17,16 @@ import org.simplecorporation.myengine.utils.file.FileUtils;
 public class Settings {
 	
 	/* The version of the engine goes up 1 every development build */
-	public static final String EngineVersion = "V1.0.5.1";
+	public static final String EngineVersion = "V1.0.5.2";
 	
 	/* The type of build this version of the engine is*/
 	public static final String EngineBuild = "Development";
 	
 	/* Is using android */
 	public static boolean Android = false;
+	
+	/* Is an applet */
+	public static boolean Applet = false;
 	
 	/* The window settings */
 	public static class Window {

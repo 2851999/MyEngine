@@ -1,16 +1,16 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
 package org.simplecorporation.myengine.core.android;
 
-import org.simplecorporation.myengine.core.game.Game;
+import org.simplecorporation.myengine.core.game.BaseGame;
 import org.simplecorporation.myengine.core.input.InputManager;
 
 import android.view.SurfaceHolder;
@@ -27,10 +27,10 @@ public class AndroidGameThread extends Thread {
 	public SurfaceHolder surfaceHolder;
 	
 	/* The android game */
-	public Game androidGame;
+	public BaseGame androidGame;
 	
 	/* The constructor */
-	public AndroidGameThread(SurfaceHolder surfaceHolder , Game androidGame) {
+	public AndroidGameThread(SurfaceHolder surfaceHolder , BaseGame androidGame) {
 		//Set running to false
 		this.running = false;
 		//Set paused to false

@@ -1,15 +1,16 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
 package org.simplecorporation.myengine.core.engine.loop;
 
+import org.simplecorporation.myengine.core.applet.Applet;
 import org.simplecorporation.myengine.core.game.GameValues;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.input.InputManager;
@@ -65,9 +66,14 @@ public abstract class EngineLoop {
 	/* The create method */
 	public void create() {
 		//Check if this is on android
-		if (! Settings.Android) {
+		if (! Settings.Android && ! Settings.Applet) {
 			//Create the window
 			Window.create();
+			//Create the input
+			InputManager.create();
+		} else if (! Settings.Android && Settings.Applet) {
+			//Create the applet
+			Applet.create();
 			//Create the input
 			InputManager.create();
 		}
@@ -91,7 +97,7 @@ public abstract class EngineLoop {
 		//Set the default font (Arial)
 		this.font = FontUtils.buildGUIFont("Arial" , Colour.WHITE , 10);
 		//Check if using android
-		if (! Settings.Android) {
+		if (! Settings.Android && ! Settings.Applet) {
 			//While the window is open
 			while (! Window.isCloseRequested()) {
 				//Run a cycle of the loop
@@ -107,6 +113,15 @@ public abstract class EngineLoop {
 			this.engineClosing();
 			//Exit the program
 			System.exit(0);
+		} else if (! Settings.Android && Settings.Applet) {
+			//While the applet is open
+			while (! Applet.isCloseRequested()) {
+				//Run a cycle of the loop
+				this.tick();
+			}
+			//When the browser closes, no time to save or anything
+			//so don't bother calling any of the methods mentioned
+			//above
 		}
 	}
 	
@@ -130,13 +145,14 @@ public abstract class EngineLoop {
 			this.font.render("OpenGL: " + Settings.Video.OpenGL , 0 , 48);
 		}
 		
-		//Check if this is on android
-		if (! Settings.Android) {
+		//Check if this is on android or an applet
+		if (! Settings.Android && ! Settings.Applet)
 			//Update the window
 			Window.update();
-		}
+		else if (! Settings.Android && Settings.Applet)
+			//Update the applet
+			Applet.update();
 		
-		//Work out the delta
 		//The current time
 		long currentTime = this.getTime();
 		//Work out the delta

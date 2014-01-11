@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -15,9 +15,18 @@ import java.awt.event.KeyEvent;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.settings.Settings;
 
+/**
+ * The KeyboardInput <code>class</code> that contains all of the key codes
+ * for the keyboard used by MyEngine when calling events and also holds boolean
+ * values for each key that can be statically accessed which are equal to true
+ * when that key is currently pressed (Down).
+ */
 public class KeyboardInput {
 	
 	/* The last keyboard event */
+	/**
+	 * The last keyboard event that has occurred
+	 */
 	public static KeyboardEvent lastKeyboardEvent;
 	
 	/* ALL OF THE KEYS ON THE KEYBOARD (CODES) */
@@ -292,6 +301,11 @@ public class KeyboardInput {
 	
 	/* The method that returns whether a key is pressed based
 	 * on its key code */
+	/**
+	 * This method can be used to check if a specific key is currently pressed
+	 * @param keyCode The key code of the key to check (Key code from this class)
+	 * @return A boolean value stating whether that key is currently pressed (Down)
+	 */
 	public static boolean isKeyDown(int keyCode) {
 		//Check the key code then return the boolean value
 		if (keyCode == KEY_0_CODE)
@@ -546,6 +560,17 @@ public class KeyboardInput {
 	
 	/* The method to convert a certain key code into a key
 	 * code found here */
+	/**
+	 * This method checks the current settings and then converts a key code
+	 * from a format into the format used by MyEngine as defined in this class.
+	 * If OpenGL is equal to false, it will use KeyEvent key codes and then
+	 * convert them into the MyEngine format however, if OpenGL is equal to
+	 * true it will convert the keyCode assuming it is a code from the Keyboard
+	 * class in LWJGL.
+	 * @param keyCode An integer value representing the key code to convert
+	 * @return An integer value representing the MyEngine key code taken from
+	 *         this class.
+	 */
 	public static int convertKeyCode(int keyCode) {
 		if (! Settings.Android && ! Settings.Video.OpenGL) {
 			//Java2D
@@ -1018,6 +1043,14 @@ public class KeyboardInput {
 	}
 	
 	/* The method used to set a certain key's boolean value */
+	/**
+	 * This method uses a keyCode taken from this class and a boolean value
+	 * representing whether that key should be 'down' and sets the appropriate value
+	 * for that specific key.
+	 * @param keyCode An integer value representing the key code in MyEngine format
+	 *                taken from this class
+	 * @param keyDown A boolean value representing whether that key should be 'down'
+	 */
 	public static void setKeyDown(int keyCode, boolean keyDown) {
 		if (keyCode == KEY_0_CODE)
 			KEY_0 = keyDown;
@@ -1240,12 +1273,22 @@ public class KeyboardInput {
 	}
 	
 	/* The method called when a key is pressed */
+	/**
+	 * This method is called automatically when a key is pressed
+	 * and sets the appropriate value for that key
+	 * @param event The keyboard event
+	 */
 	public static void onKeyPressed(KeyboardEvent event) {
 		//Set the key down value
 		setKeyDown(event.keyCode, true);
 	}
 	
 	/* The method called when a key is released */
+	/**
+	 * This method is called automatically when a key is released
+	 * and sets the appropriate value for that key
+	 * @param event The keyboard event
+	 */
 	public static void onKeyReleased(KeyboardEvent event) {
 		//Set the key down value
 		setKeyDown(event.keyCode, false);

@@ -1,7 +1,7 @@
 package org.simplecorporation.myengine.tests;
 
 import org.lwjgl.opengl.GL11;
-import org.simplecorporation.myengine.core.game.Game;
+import org.simplecorporation.myengine.core.game.BaseGame;
 import org.simplecorporation.myengine.core.gui.textbox.GUIRenderableTextBox;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
@@ -9,7 +9,7 @@ import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.font.FontUtils;
 import org.simplecorporation.myengine.utils.opengl.OpenGLSetupUtils;
 
-public class TextBoxTest extends Game {
+public class TextBoxTest extends BaseGame {
 	
 	public GUIRenderableTextBox textBox;
 	
