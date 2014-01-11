@@ -1,19 +1,24 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
 package org.simplecorporation.myengine.core.window;
 
+import java.util.LinkedList;
+
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.settings.Settings;
 
 public class Window {
+	
+	/* All of the window listeners */
+	public static LinkedList<WindowListener> windowListeners = new LinkedList<WindowListener>();
 	
 	/* The method to create the window */
 	public static void create() {
@@ -85,7 +90,7 @@ public class Window {
 	}
 	
 	/* Is the window still visible */
-	public static boolean isVisble() {
+	public static boolean isVisible() {
 		//Check what window is being used
 		if (! Settings.Android && Settings.Video.OpenGL)
 			//Return whether the OpenGL window is visible
@@ -108,6 +113,21 @@ public class Window {
 			return JavaWindow.isCloseRequested();
 		else
 			return false;
+	}
+	
+	/* The method to add a window listener */
+	public static void addListener(WindowListener windowListener) {
+		//Add the window listener to the window listener linked list
+		windowListeners.add(windowListener);
+	}
+	
+	/* The method to call a window size changed event */
+	public static void callWindowSizeChangedEvent(WindowSizeChangedEvent e) {
+		//Look at every listener
+		for (int a = 0; a < windowListeners.size(); a++) {
+			//Call the event
+			windowListeners.get(a).windowSizeChanged(e);
+		}
 	}
 	
 }

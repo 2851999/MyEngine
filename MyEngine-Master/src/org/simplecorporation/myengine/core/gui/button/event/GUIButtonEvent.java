@@ -1,16 +1,16 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
 package org.simplecorporation.myengine.core.gui.button.event;
 
-import org.simplecorporation.myengine.core.input.event.Event;
+import org.simplecorporation.myengine.core.event.Event;
 
 public class GUIButtonEvent extends Event {
 	

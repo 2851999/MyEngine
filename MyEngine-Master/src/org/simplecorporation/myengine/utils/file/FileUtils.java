@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -17,6 +17,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.LinkedList;
@@ -101,41 +102,58 @@ public class FileUtils {
 	}
 	
 	/* The method that reads a file */
-	public static LinkedList<String> read(String filePath) {
+	public static LinkedList<String> read(String filePath , boolean inFolder) {
 		//The file text
 		LinkedList<String> fileText = new LinkedList<String>();
-		//Check whether the file exists
-		if (doesExist(filePath)) {
-			//Check whether the file is a file
-			if (isFile(filePath)) {
-				//Check whether the file can be read
-				if (canRead(filePath)) {
-					//Read the file and set the text in the linked list
-					try {
-						FileReader fileReader = new FileReader(asFileString(filePath));
-						BufferedReader bufferedReader = new BufferedReader(fileReader);
-						String line = "";
-						while ((line = bufferedReader.readLine()) != null) {
-							fileText.add(line);
+		//Check if it is in a folder
+		if (inFolder) {
+			//Check whether the file exists
+			if (doesExist(filePath)) {
+				//Check whether the file is a file
+				if (isFile(filePath)) {
+					//Check whether the file can be read
+					if (canRead(filePath)) {
+						//Read the file and set the text in the linked list
+						try {
+							FileReader fileReader = new FileReader(asFileString(filePath));
+							BufferedReader bufferedReader = new BufferedReader(fileReader);
+							String line = "";
+							while ((line = bufferedReader.readLine()) != null) {
+								fileText.add(line);
+							}
+							bufferedReader.close();
+							fileReader.close();
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
 						}
-						bufferedReader.close();
-						fileReader.close();
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
+					} else {
+						//Log a message
+						Logger.log(new Log("FileUtils read()" , "File cant be read " + filePath , LogType.ERROR));
 					}
 				} else {
 					//Log a message
-					Logger.log(new Log("FileUtils read()" , "File cant be read " + filePath , LogType.ERROR));
+					Logger.log(new Log("FileUtils read()" , "File not a file " + filePath , LogType.ERROR));
 				}
 			} else {
 				//Log a message
-				Logger.log(new Log("FileUtils read()" , "File not a file " + filePath , LogType.ERROR));
+				Logger.log(new Log("FileUtils read()" , "File not found " + filePath , LogType.ERROR));
 			}
 		} else {
-			//Log a message
-			Logger.log(new Log("FileUtils read()" , "File not found " + filePath , LogType.ERROR));
+			//Read the file and set the text in the linked list
+			try {
+				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(FileUtils.class.getResourceAsStream(filePath)));
+				String line = "";
+				while ((line = bufferedReader.readLine()) != null) {
+					fileText.add(line);
+				}
+				bufferedReader.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		//Return the file text
 		return fileText;
@@ -153,11 +171,14 @@ public class FileUtils {
 			FileWriter fileWriter = new FileWriter(asFileString(filePath));
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 			
-			//Write the first line
-			bufferedWriter.write(fileText.get(0));
-			for (int a = 1; a < fileText.size(); a++) {
-				bufferedWriter.newLine();
-				bufferedWriter.write(fileText.get(a));
+			//Make sure there is text to save (Prevents IndexOutOfBoundsException)
+			if (fileText.size() > 0) {
+				//Write the first line
+				bufferedWriter.write(fileText.get(0));
+				for (int a = 1; a < fileText.size(); a++) {
+					bufferedWriter.newLine();
+					bufferedWriter.write(fileText.get(a));
+				}
 			}
 			
 			//Close the objects

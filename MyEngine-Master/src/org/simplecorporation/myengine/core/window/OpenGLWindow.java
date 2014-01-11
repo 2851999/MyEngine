@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -17,6 +17,7 @@ import java.nio.ByteBuffer;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.GL11;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.logger.Log;
@@ -26,9 +27,14 @@ import org.simplecorporation.myengine.utils.messagebox.MessageBox;
 
 public class OpenGLWindow {
 	
+	/* Has the window been created */
+	public static boolean windowCreated;
+	
 	/* The method to create the window */
 	public static void create() {
 		try {
+			//Set window created to false
+			windowCreated = false;
 			//Set the attributes of the window
 			Display.setTitle("MyEngine Window");
 			Display.setDisplayMode(new DisplayMode(640 , 480));
@@ -40,6 +46,8 @@ public class OpenGLWindow {
 			updateSettings();
 			//Create the display
 			Display.create();
+			//Set windowCreated to true
+			windowCreated = true;
 		} catch (LWJGLException e) {
 			//Log a message
 			//Display an error message box
@@ -57,10 +65,13 @@ public class OpenGLWindow {
 	
 	/* The method to set the window to the right settings */
 	public static void updateSettings() {
+		//The current screen size
+		float windowWidth = Display.getWidth();
+		float windowHeight = Display.getHeight();
 		try {
 			//Check if the window settings are right
-			if (Display.getTitle() != Settings.Window.Title || Display.getWidth() != Settings.Window.Size.Width ||
-					Display.getHeight() != Settings.Window.Size.Height || Display.isFullscreen() != Settings.Window.Fullscreen) {
+			if (Display.getTitle() != Settings.Window.Title || (Display.getWidth() != Settings.Window.Size.Width ||
+					Display.getHeight() != Settings.Window.Size.Height && Display.isFullscreen() != Settings.Window.Fullscreen) || Display.isFullscreen() != Settings.Window.Fullscreen) {
 				//Setup the window
 				Display.setTitle(Settings.Window.Title);
 				//Check if the window should be full screen
@@ -97,6 +108,20 @@ public class OpenGLWindow {
 			MessageBox.showErrorMessage("LWJGL Exception" , "Error in OpenGLWindow updateSettings()");
 			e.printStackTrace();
 		}
+		//Check if the screen size has changed
+		if (windowWidth != Display.getWidth() || windowHeight != Display.getHeight()) {
+			//Make sure the display has been created
+			if (windowCreated && Display.isActive()) {
+				//Make sure OpenGL changes its resolution
+				GL11.glScissor(0 , 0 , Display.getWidth() , Display.getHeight());
+				GL11.glViewport(0 , 0 , Display.getWidth() , Display.getHeight());
+			}
+			//Set the settings
+			Settings.Window.Size.Width = Display.getWidth();
+			Settings.Window.Size.Height = Display.getHeight();
+			//Call an event
+			Window.callWindowSizeChangedEvent(new WindowSizeChangedEvent(windowWidth , windowHeight , Settings.Window.Size.Width , Settings.Window.Size.Height));
+		}
 	}
 	
 	/* The method to update the window graphics */
@@ -106,6 +131,7 @@ public class OpenGLWindow {
 		Display.sync(Settings.Video.MaxFPS);
 	}
 	
+	/* The methods used to get a display mode for fullscreen */
 	public static DisplayMode getFullscreenDisplayMode(int width , int height) {
  
 		try {

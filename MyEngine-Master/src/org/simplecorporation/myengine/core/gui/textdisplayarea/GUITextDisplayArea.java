@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -23,7 +23,7 @@ public class GUITextDisplayArea extends GUIComponent {
 	/* The font */
 	private GUIFont font;
 	
-	public GUITextDisplayArea(String name , LinkedList<String> textToDisplay , GUIFont font , int width) {
+	public GUITextDisplayArea(String name , LinkedList<String> textToDisplay , GUIFont font , double width) {
 		//Call the super constructor
 		super(name);
 		//Assign the variables
@@ -51,27 +51,32 @@ public class GUITextDisplayArea extends GUIComponent {
 	
 	/* The method to setup word wrap */
 	public void wordWrap(LinkedList<String> textToDisplay) {
+		//Create the text linked list
 		text = new LinkedList<String>();
+		//Add an empty line to the text linked list
+		this.text.add("");
 		//The current line of the new text
-		int currentLine = -1;
+		int currentLine = 0;
 		for (int a = 0; a < textToDisplay.size(); a++) {
-			//Add one
-			currentLine ++;
-			//Split up the current line of text into words
-			String[] line = textToDisplay.get(a).split(" ");
-			//Add a new line
-			text.add("");
-			//Loop for the current line's words
-			for (int b = 0; b < line.length; b++) {
-				//Check if the line needs wrapping
-				if ((font.getWidth(text.get(currentLine) + " " + line[b]) > width)) {
-					//Add one
-					currentLine ++;
-					//Add a new line with the next word
-					text.add(" " + line[b]);
+			//Split the current line
+			String[] split = textToDisplay.get(a).split(" ");
+			//Look at every word in the split
+			for (int b = 0; b < split.length; b++) {
+				//The next line's text
+				String nextLineText = text.get(currentLine);
+				//Check if the line doesn't contain any words
+				if (! nextLineText.equals(""))
+					//Add a space to the next line's text
+					nextLineText += " ";
+				//Check the length of the current with the next word added
+				if (font.getWidth(nextLineText + split[b]) < this.width) {
+					//Add the word onto the current line
+					text.set(currentLine, nextLineText + split[b]);
 				} else {
-					//Extend the current line with the next word
-					text.set(currentLine , text.get(currentLine) + " " + line[b]);
+					//Add a new line to the text linked list
+					this.text.add(split[b]);
+					//Add 1 to the current line
+					currentLine++;
 				}
 			}
 		}

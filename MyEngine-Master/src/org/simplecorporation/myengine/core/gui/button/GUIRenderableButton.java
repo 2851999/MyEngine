@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -19,9 +19,6 @@ import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.settings.Settings;
 
 public class GUIRenderableButton extends GUIButton {
-	
-	/* The text */
-	public String text;
 	
 	/* The colours */
 	public Colour[] colours;
@@ -40,7 +37,7 @@ public class GUIRenderableButton extends GUIButton {
 		//Assign the font
 		this.font = font;
 		//Set selected and clicked to false
-		this.selected = false;
+		this.buttonSelected = false;
 		this.clicked = false;
 		//Create the linked list
 		this.listeners = new LinkedList<GUIButtonListener>();
@@ -51,11 +48,11 @@ public class GUIRenderableButton extends GUIButton {
 		//The current image
 		Colour current = this.colours[0];
 		//Render the right colour
-		if (! this.selected && ! this.clicked)
+		if (! this.buttonSelected && ! this.clicked)
 			current = this.colours[0];
-		else if (this.selected && this.colours.length > 1 && ! Settings.Android)
+		else if (this.buttonSelected && this.colours.length > 1 && ! Settings.Android)
 			current = this.colours[1];
-		else if (this.clicked && this.colours.length > 2)
+		else if (this.buttonSelected && this.colours.length > 2)
 			current = this.colours[2];
 		//Buttons on android can't be selected so for android colour 2 in
 		//the list is shown when the button is clicked

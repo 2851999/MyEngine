@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -41,17 +41,17 @@ public class GUIImageCheckBox extends GUICheckBox {
 		Image renderImage = null;
 		
 		//Check what image should be used then set it
-		if (this.checked && this.selected && this.images.length == 4) {
+		if (this.checked && this.buttonSelected && this.images.length == 4) {
 			renderImage = this.images[3];
-		} else if (this.checked && ! this.selected && this.images.length == 4) {
+		} else if (this.checked && ! this.buttonSelected && this.images.length == 4) {
 			renderImage = this.images[2];
-		} else if (this.selected && this.images.length == 4) {
+		} else if (this.buttonSelected && this.images.length == 4) {
 			renderImage = this.images[1];
 		} else if (this.checked && this.images.length == 2) {
 			renderImage = this.images[1];
 		} else if (this.checked && this.images.length == 3) {
 			renderImage = this.images[2];
-		} else if (this.selected && this.images.length == 3) {
+		} else if (this.buttonSelected && this.images.length == 3) {
 			renderImage = this.images[1];
 		} else {
 			renderImage = this.images[0];

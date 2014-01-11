@@ -1,14 +1,14 @@
 package org.simplecorporation.myengine.tests;
 
 import org.lwjgl.opengl.GL11;
-import org.simplecorporation.myengine.core.game.Game;
+import org.simplecorporation.myengine.core.game.BaseGame;
 import org.simplecorporation.myengine.core.gui.GUIPanel;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.opengl.OpenGLSetupUtils;
 
-public class GUIPanelParseTest extends Game {
+public class GUIPanelParseTest extends BaseGame {
 	
 	public GUIPanel panel;
 	
@@ -24,7 +24,7 @@ public class GUIPanelParseTest extends Game {
 	public void gameCreated() {
 		String PATH = "";
 		panel = new GUIPanel("TestPanel");
-		panel.parseFile(PATH + "GUI.txt");
+		panel.parseFile(PATH + "GUI.txt" , true);
 		panel.showPanel();
 	}
 	

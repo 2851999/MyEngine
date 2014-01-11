@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -23,7 +23,7 @@ import org.simplecorporation.myengine.settings.Settings;
 public abstract class GUICheckBox extends GUIComponent {
 	
 	/* Is the button selected */
-	public boolean selected;
+	public boolean buttonSelected;
 	
 	/* Is the button clicked */
 	public boolean clicked;
@@ -49,7 +49,7 @@ public abstract class GUICheckBox extends GUIComponent {
 		//Call the super constructor
 		super(name);
 		//Set selected, clicked and checked to false
-		this.selected = false;
+		this.buttonSelected = false;
 		this.clicked = false;
 		this.checked = false;
 		
@@ -70,10 +70,10 @@ public abstract class GUICheckBox extends GUIComponent {
 			//Check the mouse and see whether the button is selected
 			if (this.getBounds().contains(MouseInput.x , MouseInput.y))
 				//Set selected to true
-				this.selected = true;
+				this.buttonSelected = true;
 			else {
 				//Set selected to false
-				this.selected = false;
+				this.buttonSelected = false;
 				//Check if the button is clicked
 				if (this.clicked)
 					//Set clicked to false
@@ -81,7 +81,7 @@ public abstract class GUICheckBox extends GUIComponent {
 			}
 			
 			//Check if the button is down
-			if (MouseInput.isButtonDown(0) && this.selected) {
+			if (MouseInput.isButtonDown(0) && this.buttonSelected) {
 				
 			} else
 				//Set clicked to false
@@ -92,7 +92,7 @@ public abstract class GUICheckBox extends GUIComponent {
 	/* The mouse released event */
 	public void onMouseReleased(MouseEvent e) {
 		//Check that this is visible and selected
-		if (this.visible && this.selected) {
+		if (this.visible && this.buttonSelected) {
 			//Check if the wait is over
 			if (System.currentTimeMillis() - this.lastTimeClicked >= this.clickedWait) {
 				//Set the last time
@@ -114,7 +114,7 @@ public abstract class GUICheckBox extends GUIComponent {
 		//Check whether the button is visible
 		if (this.visible)
 			//Return the value
-			return this.selected;
+			return this.buttonSelected;
 		else
 			//Return false
 			return false;
@@ -155,7 +155,7 @@ public abstract class GUICheckBox extends GUIComponent {
 		//Check if this button was clicked
 		if (this.visible) {
 			if (e.getEvent() == TouchEvent.EVENT_DOWN) {
-				if (this.getAndroidBounds().contains((int)e.x , (int)e.y)) {
+				if (this.getBounds().contains(e.x , e.y)) {
 					//Check if the wait is over
 					if (System.currentTimeMillis() - this.lastTimeClicked >= this.clickedWait) {
 						//Set the last time

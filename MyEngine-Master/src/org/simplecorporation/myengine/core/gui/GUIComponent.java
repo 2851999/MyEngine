@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -15,6 +15,7 @@ import org.simplecorporation.myengine.core.input.Input;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
+import org.simplecorporation.myengine.core.input.event.ScrollEvent;
 import org.simplecorporation.myengine.core.input.event.TouchEvent;
 import org.simplecorporation.myengine.core.input.listener.InputListener;
 
@@ -26,6 +27,9 @@ public abstract class GUIComponent extends AbstractEntity2D implements InputList
 	/* The boolean that represents whether the component is visible */
 	public boolean visible;
 	
+	/* The boolean that represents whether the component is selected */
+	public boolean selected;
+	
 	/* The abstract methods */
 	protected abstract void updateComponent();
 	protected abstract void renderComponent();
@@ -36,6 +40,8 @@ public abstract class GUIComponent extends AbstractEntity2D implements InputList
 		this.name = name;
 		//Set visible to false
 		this.visible = false;
+		//Set selected to false
+		this.selected = false;
 		//Add the listener
 		Input.addListener(this);
 	}
@@ -88,6 +94,11 @@ public abstract class GUIComponent extends AbstractEntity2D implements InputList
 	
 	/* Method inherited from InputListener */
 	public void onKeyTyped(KeyboardEvent e) {
+		
+	}
+	
+	/* Method inherited from InputListener */
+	public void onScroll(ScrollEvent e) {
 		
 	}
 	

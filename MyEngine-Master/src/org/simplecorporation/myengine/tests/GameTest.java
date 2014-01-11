@@ -10,10 +10,7 @@ import org.simplecorporation.myengine.settings.Settings;
 public class GameTest extends Game {
 	
 	public GameTest() {
-		Settings.Window.Title = "Game Test";
-		Settings.Video.OpenGL = false;
-		//Create
-		createGame();
+		
 	}
 	
 	public void gameRender() {
@@ -32,6 +29,8 @@ public class GameTest extends Game {
 	}
 	
 	public static void main(String[] args) {
+		Settings.Window.Title = "Game Test";
+		Settings.Video.OpenGL = false;
 		new GameTest();
 	}
 	
