@@ -12,10 +12,9 @@ package org.simplecorporation.myengine.core.engine.script;
 
 import java.util.Scanner;
 
+import org.simplecorporation.myengine.settings.Settings;
+
 public class ScriptConsole {
-	
-	/* The current version of the Scripting Language */
-	public static final String ScriptingLanguageVersion = "ScriptingLanguage 1 (Build 4)";
 	
 	/* The constructor */
 	public ScriptConsole() {
@@ -46,7 +45,7 @@ public class ScriptConsole {
 				System.out.println("--------------------------------------------------------------------------------");
 			} else if (input.equalsIgnoreCase("info")) {
 				//Display information
-				System.out.println(ScriptingLanguageVersion);
+				System.out.println("MyEngine " + Settings.EngineVersion);
 			} else if (input.toLowerCase().startsWith("run")) {
 				//Split the commands
 				String[] commands = input.split(" ");

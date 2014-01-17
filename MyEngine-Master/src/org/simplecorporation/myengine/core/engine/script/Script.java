@@ -12,6 +12,7 @@ package org.simplecorporation.myengine.core.engine.script;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
@@ -90,7 +91,7 @@ public class Script {
 		//Check whether the class was found
 		if (scriptClass == null)
 			//Log an error
-			Logger.log(new Log(ScriptConsole.ScriptingLanguageVersion , "Script: The class with the name " + name + " was not found" , LogType.ERROR));
+			Logger.log(new Log("MyEngine " + Settings.EngineVersion , "Script: The class with the name " + name + " was not found" , LogType.ERROR));
 		//Return the script class
 		return scriptClass;
 	}
@@ -109,7 +110,7 @@ public class Script {
 		//Check whether the module was found
 		if (scriptModule == null)
 			//Log an error
-			Logger.log(new Log(ScriptConsole.ScriptingLanguageVersion , "Script: The module with the name " + name + " was not found" , LogType.ERROR));
+			Logger.log(new Log("MyEngine " + Settings.EngineVersion , "Script: The module with the name " + name + " was not found" , LogType.ERROR));
 		//Return the script module
 		return scriptModule;
 	}
@@ -128,7 +129,7 @@ public class Script {
 		//Check whether the module was found
 		if (scriptModule == null)
 			//Log an error
-			Logger.log(new Log(ScriptConsole.ScriptingLanguageVersion , "Script: The module with the package " + packageName + " was not found" , LogType.ERROR));
+			Logger.log(new Log("MyEngine " + Settings.EngineVersion , "Script: The module with the package " + packageName + " was not found" , LogType.ERROR));
 		//Return the script module
 		return scriptModule;
 	}

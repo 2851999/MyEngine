@@ -12,6 +12,7 @@ package org.simplecorporation.myengine.core.engine.script;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
@@ -77,7 +78,7 @@ public class ScriptClass extends ScriptObject {
 		//Check whether the method was found
 		if (scriptModule == null)
 			//Log an error
-			Logger.log(new Log(ScriptConsole.ScriptingLanguageVersion , "ScriptClass: The method with the name " + name + " was not found" , LogType.ERROR));
+			Logger.log(new Log("MyEngine " + Settings.EngineVersion , "ScriptClass: The method with the name " + name + " was not found" , LogType.ERROR));
 		//Return the method
 		return method;
 	}
