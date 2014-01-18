@@ -19,7 +19,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
-public class BasicRendererAndroid {
+public class BasicRenderer2DAndroid {
 	
 	/* The method to set the colour */
 	public static void setColour(Colour colour) {
