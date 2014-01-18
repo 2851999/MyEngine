@@ -12,6 +12,7 @@ package org.simplecorporation.myengine.core.engine.script;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
 import org.simplecorporation.myengine.utils.logger.Logger;
@@ -195,7 +196,7 @@ public class ScriptInterpreter {
 		//Check whether the script variable equals null
 		if (scriptVariable == null) {
 			//Log an error
-			Logger.log(new Log(ScriptConsole.ScriptingLanguageVersion , "ScriptParser getVariable() The variable with the name " + variableName + " was not found" , LogType.ERROR));
+			Logger.log(new Log("MyEngine " + Settings.EngineVersion , "ScriptParser getVariable() The variable with the name " + variableName + " was not found" , LogType.ERROR));
 		}
 		//Return the script variable
 		return scriptVariable;
@@ -218,7 +219,7 @@ public class ScriptInterpreter {
 			string = string.substring(1 , string.length() - 1);
 		} else {
 			//Log an error
-			Logger.log(new Log(ScriptConsole.ScriptingLanguageVersion , "The split " + split[start] + " is not part of a string" , LogType.ERROR));
+			Logger.log(new Log("MyEngine " + Settings.EngineVersion , "The split " + split[start] + " is not part of a string" , LogType.ERROR));
 		}
 		//Return the string
 		return string;
