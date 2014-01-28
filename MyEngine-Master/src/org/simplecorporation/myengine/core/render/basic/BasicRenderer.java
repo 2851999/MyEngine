@@ -52,24 +52,36 @@ public class BasicRenderer {
 	public static void renderImage(Image image , double x , double y) {
 		//Render the 2D image
 		BasicRenderer2D.renderImage(image , x , y);
+		//Check to see whether to render the box around the image
+		if (Settings.Debugging.ShowImageBoxes)
+			BasicRenderer2D.renderRectangle(x, y, image.getWidth(), image.getHeight());
 	}
 	
 	/* The method to render an image with a rotation */
 	public static void renderImage(Image image , double x , double y , double rotation) {
 		//Render the 2D image
 		BasicRenderer2D.renderImage(image , x , y , rotation);
+		//Check to see whether to render the box around the image
+		if (Settings.Debugging.ShowImageBoxes)
+			BasicRenderer2D.renderRectangle(x, y, image.getWidth(), image.getHeight());
 	}
 	
 	/* The method to render an image with a specified width and height */
 	public static void renderImage(Image image , double x , double y , double width , double height) {
 		//Render the 2D image
 		BasicRenderer2D.renderImage(image , x , y , width , height);
+		//Check to see whether to render the box around the image
+		if (Settings.Debugging.ShowImageBoxes)
+			BasicRenderer2D.renderRectangle(x, y, width, height);
 	}
 	
 	/* The method to render an image with a specified width, height and rotation */
 	public static void renderImage(Image image , double x , double y , double width , double height , double rotation) {
 			//Render the 2D image
 			BasicRenderer2D.renderImage(image , x , y , width , height , rotation);
+			//Check to see whether to render the box around the image
+			if (Settings.Debugging.ShowImageBoxes)
+				BasicRenderer2D.renderRectangle(x, y, width, height);
 	}
 	
 	/* The method to render an image with a specified x, y, width, height, imageX, imageY, imageWidth, imageHeight */
@@ -77,6 +89,9 @@ public class BasicRenderer {
 			double imageWidth , double imageHeight) {
 		//Render the 2D image
 		BasicRenderer2D.renderImage(image , x , y , width , height , imageX , imageY , imageWidth , imageHeight);
+		//Check to see whether to render the box around the image
+		if (Settings.Debugging.ShowImageBoxes)
+			BasicRenderer2D.renderRectangle(x, y, width, height);
 	}
 	
 }

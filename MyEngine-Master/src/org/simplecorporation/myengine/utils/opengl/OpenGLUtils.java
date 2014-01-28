@@ -18,9 +18,17 @@ public class OpenGLUtils {
 	/* The method to clear the colour buffer */
 	public static void clearColourBuffer() {
 		//Make sure OpenGL is enabled
-		if (! Settings.Android && Settings.Video.OpenGL) {
+		if (! Settings.Android && Settings.Video.OpenGL)
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-		}
+	}
+	
+	/* The method to get the OpenGL version */
+	public static String getVersion() {
+		//Make sure OpenGL is enabled
+		if (! Settings.Android && Settings.Video.OpenGL)
+			return GL11.glGetString(GL11.GL_VERSION);
+		else
+			return "";
 	}
 	
 }

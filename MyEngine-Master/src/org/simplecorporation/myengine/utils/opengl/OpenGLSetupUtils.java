@@ -25,6 +25,7 @@ public class OpenGLSetupUtils {
 			GL11.glOrtho(0 , Settings.Window.Size.Width , Settings.Window.Size.Height ,
 					0 , znear , zfar);
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
+			GL11.glLoadIdentity();
 		}
 	}
 	
@@ -37,6 +38,7 @@ public class OpenGLSetupUtils {
 			GLU.gluPerspective(fov , Settings.Window.Size.Width / Settings.Window.Size.Height ,
 					znear , zfar);
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
+			GL11.glLoadIdentity();
 		}
 	}
 	
