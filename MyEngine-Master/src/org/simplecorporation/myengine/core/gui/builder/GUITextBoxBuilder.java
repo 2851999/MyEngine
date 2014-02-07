@@ -41,7 +41,7 @@ public class GUITextBoxBuilder {
 	   name, background colour, outline colour, font, mask character, x and y position,
 	   width and height */
 	public static GUIRenderableTextBox createRenderableTextBox(String name , Colour backgroundColour ,
-			Colour outlineColour , GUIFont font , char maskCharacter , double x , double y , double width , double height) {
+			Colour outlineColour , GUIFont font , String maskCharacter , double x , double y , double width , double height) {
 		
 		//Create the text box
 		GUIRenderableTextBox textBox = new GUIRenderableTextBox(name , backgroundColour , outlineColour , font , maskCharacter);
@@ -79,7 +79,7 @@ public class GUITextBoxBuilder {
 	   name, image, font, mask character, x and y position,
 	   width and height */
 	public static GUIImageTextBox createImageTextBox(String name , Image image ,
-			GUIFont font , char maskCharacter , double x , double y , double width , double height) {
+			GUIFont font , String maskCharacter , double x , double y , double width , double height) {
 		
 		//Create the text box
 		GUIImageTextBox textBox = new GUIImageTextBox(name , image , font);

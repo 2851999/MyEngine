@@ -194,7 +194,7 @@ public class GUIPanel implements WindowListener {
 				GUIRenderableTextBox textbox = GUIBuilder.createRenderableTextBox(
 						line[1].replace('_' , ' ') ,
 						parseColour(line[2]) , parseColour(line[3]) ,
-						FontUtils.buildGUIFont(line[4] , parseColour(line[5]) , Integer.parseInt(line[6])) , line[7].charAt(0) ,
+						FontUtils.buildGUIFont(line[4] , parseColour(line[5]) , Integer.parseInt(line[6])) , line[7] ,
 						Integer.parseInt(line[8]) , Integer.parseInt(line[9]) , Integer.parseInt(line[10]) , Integer.parseInt(line[11]));
 				//Add the component to the components
 				this.add(textbox);
@@ -215,7 +215,7 @@ public class GUIPanel implements WindowListener {
 				GUIImageTextBox textbox = GUIBuilder.createImageTextBox(
 						line[1].replace('_' , ' ') ,
 						parseImage(line[2] , filePath) ,
-						FontUtils.buildGUIFont(line[3] , parseColour(line[4]) , Integer.parseInt(line[5])) , line[6].charAt(0) ,
+						FontUtils.buildGUIFont(line[3] , parseColour(line[4]) , Integer.parseInt(line[5])) , line[6] ,
 						Integer.parseInt(line[7]) , Integer.parseInt(line[8]) , Integer.parseInt(line[9]) , Integer.parseInt(line[10]));
 				//Add the component to the components
 				this.add(textbox);

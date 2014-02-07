@@ -1,6 +1,7 @@
 package org.simplecorporation.myengine.tests;
 
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
 import org.simplecorporation.myengine.core.game.BaseGame;
 import org.simplecorporation.myengine.core.game.GameValues;
 import org.simplecorporation.myengine.core.game3d.camera.Camera;
@@ -63,8 +64,10 @@ public class Rectangle3DTest extends BaseGame {
 		
 		OpenGLSetupUtils.setupPerspective(60, 1, 1000);
 		OpenGLUtils.clearColourBuffer();
+		//Must use depth testing to stop strange rendering
+		GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		this.camera.useView();
-		//BasicRenderer.setColour(Colour.BLUE);
 		this.texture.getOpenGLImage().bind();
 		DisplayList.render(this.draw);
 	}
