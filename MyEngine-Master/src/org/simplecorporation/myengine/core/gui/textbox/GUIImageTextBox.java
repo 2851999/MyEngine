@@ -29,7 +29,7 @@ public class GUIImageTextBox extends GUITextBox {
 	}
 	
 	/* The constructor */
-	public GUIImageTextBox(String name , Image image , GUIFont font , char maskCharacter) {
+	public GUIImageTextBox(String name , Image image , GUIFont font , String maskCharacter) {
 		//Call the super constructor
 		super(name, font);
 		//Set the image
@@ -56,13 +56,8 @@ public class GUIImageTextBox extends GUITextBox {
 				//Get the colour
 				renderColour = this.font.javaGUIFont.colour;
 			
-			//Check if the cursor is showing
-			if (this.cursorShown) {
-				//Set the cursor colour
-				BasicRenderer.setColour(this.cursorColour);
-				//Render the cursor's rectangle
-				BasicRenderer.renderFilledRectangle(this.cursorX, this.position.y + 2, 2, this.height - 4);
-			}
+			//Render the cursor
+			this.renderCursor();
 			
 			//Check if the java font  is null
 			if (this.font.javaGUIFont != null)

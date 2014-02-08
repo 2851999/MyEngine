@@ -18,6 +18,11 @@ import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.core.window.Window;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.font.FontUtils;
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
+import org.simplecorporation.myengine.utils.logger.Logger;
+import org.simplecorporation.myengine.utils.opengl.OpenGLSetupUtils;
+import org.simplecorporation.myengine.utils.opengl.OpenGLUtils;
 import org.simplecorporation.myengine.utils.system.SystemInfo;
 
 public abstract class EngineLoop {
@@ -77,6 +82,10 @@ public abstract class EngineLoop {
 			//Create the input
 			InputManager.create();
 		}
+		//Check if not on Android and using OpenGL
+		if (! Settings.Android && Settings.Video.OpenGL)
+			//Log the OpenGL version
+			Logger.log(new Log("MyEngine", "OpenGL V" + OpenGLUtils.getVersion(), LogType.INFORMATION));
 		//Call the engineCreated event
 		this.engineCreated();
 		//Start the engine loop
@@ -135,8 +144,13 @@ public abstract class EngineLoop {
 		//Render the engine
 		this.engineRender();
 		
+		//Make sure OpenGL is in an orthographic view
+		OpenGLSetupUtils.setupOrtho(-1, 1);
+		
 		//Check if the debug info should be drawn
 		if (Settings.Debugging.ShowInfo) {
+			//Setup the remove alpha to allow the rendering of text when using OpenGL
+			OpenGLSetupUtils.setupRemoveAlpha();
 			//Render some information using the default font
 			this.font.render("DEBUGGING" , 0 , 0);
 			this.font.render("FPS: " + getFPS() , 0 , 12);

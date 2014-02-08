@@ -25,6 +25,7 @@ public class OpenGLSetupUtils {
 			GL11.glOrtho(0 , Settings.Window.Size.Width , Settings.Window.Size.Height ,
 					0 , znear , zfar);
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
+			GL11.glLoadIdentity();
 		}
 	}
 	
@@ -37,6 +38,7 @@ public class OpenGLSetupUtils {
 			GLU.gluPerspective(fov , Settings.Window.Size.Width / Settings.Window.Size.Height ,
 					znear , zfar);
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
+			GL11.glLoadIdentity();
 		}
 	}
 	
@@ -47,6 +49,13 @@ public class OpenGLSetupUtils {
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA , GL11.GL_ONE_MINUS_SRC_ALPHA);
 		}
+	}
+	
+	/* The method used to setup depth testing */
+	public static void setupDepthTest() {
+		//Make sure OpenGL is enabled
+		if (! Settings.Android && Settings.Video.OpenGL)
+			GL11.glEnable(GL11.GL_DEPTH_TEST);
 	}
 	
 }

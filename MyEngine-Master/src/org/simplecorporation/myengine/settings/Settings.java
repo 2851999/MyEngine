@@ -17,10 +17,10 @@ import org.simplecorporation.myengine.utils.file.FileUtils;
 public class Settings {
 	
 	/* The version of the engine goes up 1 every development build */
-	public static final String EngineVersion = "V1.0.5.3";
+	public static final String EngineVersion = "V1.0.5.4";
 	
 	/* The type of build this version of the engine is*/
-	public static final String EngineBuild = "Experimental";
+	public static final String EngineBuild = "Development";
 	
 	/* Is using android */
 	public static boolean Android = false;
@@ -69,9 +69,11 @@ public class Settings {
 	
 	/* The settings for debugging */
 	public static class Debugging {
-		/* The method that states whether the debug info should be drawn
+		/* The variable that states whether the debug info should be drawn
 		 * on the screen */
 		public static boolean ShowInfo = true;
+		/* The variable that states whether to render boxes around images */
+		public static boolean ShowImageBoxes = true;
 	}
 	
 	/* The method to read a configuration file to set all of the settings */
