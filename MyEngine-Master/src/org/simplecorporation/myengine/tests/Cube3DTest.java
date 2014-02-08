@@ -16,15 +16,15 @@ import org.simplecorporation.myengine.utils.opengl.DisplayList;
 import org.simplecorporation.myengine.utils.opengl.OpenGLSetupUtils;
 import org.simplecorporation.myengine.utils.opengl.OpenGLUtils;
 
-public class Rectangle3DTest extends BaseGame {
+public class Cube3DTest extends BaseGame {
 	
 	public Camera camera;
 	public Image texture;
 	public boolean changeCursorPos;
 	public int draw;
 	
-	public Rectangle3DTest() {
-		Settings.Window.Title = "Rectangle 3D Test";
+	public Cube3DTest() {
+		Settings.Window.Title = "Cube 3D Test";
 		Settings.Video.OpenGL = true;
 		Settings.Video.VSync = false;
 		Settings.Video.MaxFPS = 0;
@@ -37,7 +37,7 @@ public class Rectangle3DTest extends BaseGame {
 		this.camera = new Camera();
 		this.draw = DisplayList.generate();
 		BasicRenderer.setColour(Colour.WHITE);
-		BasicRenderer3DOpenGL.renderImage(this.texture, new Vector3D(0,0,-2), 1, 1);
+		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(0, 0, -5), 1, 1, 1);
 		DisplayList.end();
 	}
 	
@@ -85,7 +85,7 @@ public class Rectangle3DTest extends BaseGame {
 	}
 	
 	public static void main(String[] args) {
-		new Rectangle3DTest();
+		new Cube3DTest();
 	}
 	
 }

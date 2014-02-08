@@ -51,4 +51,11 @@ public class OpenGLSetupUtils {
 		}
 	}
 	
+	/* The method used to setup depth testing */
+	public static void setupDepthTest() {
+		//Make sure OpenGL is enabled
+		if (! Settings.Android && Settings.Video.OpenGL)
+			GL11.glEnable(GL11.GL_DEPTH_TEST);
+	}
+	
 }

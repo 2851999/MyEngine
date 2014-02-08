@@ -78,7 +78,7 @@ public abstract class GUITextBox extends GUIComponent {
 			//Check the cursor place
 			if (this.cursorPlace > this.renderText.length() && this.renderText.length() != 0) {
 				//Set the cursor place
-				this.cursorPlace = this.renderText.length();
+				this.cursorPlace = this.renderText.length() + 1;
 			}
 		}
 	}
@@ -131,9 +131,9 @@ public abstract class GUITextBox extends GUIComponent {
 			//The start view index
 			int startViewIndex = this.visibleTextStartIndex;
 			//The front of the text
-			String front = this.text.substring(0, this.visibleTextStartIndex + (this.cursorPlace - 1));
+			String front = this.text.substring(0, this.visibleTextStartIndex + (this.cursorPlace));
 			//The end of the text
-			String end = this.text.substring(this.visibleTextStartIndex + (this.cursorPlace - 1), this.text.length());
+			String end = this.text.substring(this.visibleTextStartIndex + (this.cursorPlace), this.text.length());
 			//Set the new text
 			this.text = front + e.keyChar + end;
 			//Remove any unwanted characters

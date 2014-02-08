@@ -10,12 +10,7 @@
 
 package org.simplecorporation.myengine.core.render.basic;
 
-import static org.lwjgl.opengl.GL11.GL_LINES;
-import static org.lwjgl.opengl.GL11.GL_QUADS;
-import static org.lwjgl.opengl.GL11.glBegin;
-import static org.lwjgl.opengl.GL11.glEnd;
-import static org.lwjgl.opengl.GL11.glTexCoord2d;
-import static org.lwjgl.opengl.GL11.glVertex3d;
+import static org.lwjgl.opengl.GL11.*;
 
 import org.simplecorporation.myengine.core.game3d.vector.Vector3D;
 import org.simplecorporation.myengine.core.image.Image;
@@ -130,6 +125,27 @@ public class BasicRenderer3DOpenGL {
 		glEnd();
 	}
 	
+	/* The method used to render a textured 3D cube given its textures, position, width, height and depth */
+	public static void renderTexturedCube(Image[] images, Vector3D position, double width, double height, double depth) {
+		//Render the 3D cube
+		glBegin(GL_QUADS);
+		
+		images[0].getOpenGLImage().bind();
+		renderTexturedCubeTop(position, width, height, depth);
+		images[1].getOpenGLImage().bind();
+		renderTexturedCubeBottom(position, width, height, depth);
+		images[2].getOpenGLImage().bind();
+		renderTexturedCubeFront(position, width, height, depth);
+		images[3].getOpenGLImage().bind();
+		renderTexturedCubeBack(position, width, height, depth);
+		images[4].getOpenGLImage().bind();
+		renderTexturedCubeLeft(position, width, height, depth);
+		images[5].getOpenGLImage().bind();
+		renderTexturedCubeRight(position, width, height, depth);
+		
+		glEnd();
+	}
+	
 	/* The method used to render a side of a cube */
 	private static void renderCubeTop(Vector3D position, double width, double height, double depth) {
 		glVertex3d(position.x, position.y + height, position.z);
@@ -204,35 +220,35 @@ public class BasicRenderer3DOpenGL {
 	
 	/* The method used to render a side of a cube */
 	private static void renderTexturedCubeFront(Vector3D position, double width, double height, double depth) {
-		glTexCoord2d(0, 0);
-		glVertex3d(position.x, position.y, position.z + depth);
-		glTexCoord2d(1, 0);
-		glVertex3d(position.x + width, position.y, position.z + depth);
-		glTexCoord2d(1, 1);
-		glVertex3d(position.x + width, position.y + height, position.z + depth);
 		glTexCoord2d(0, 1);
+		glVertex3d(position.x, position.y, position.z + depth);
+		glTexCoord2d(1, 1);
+		glVertex3d(position.x + width, position.y, position.z + depth);
+		glTexCoord2d(1, 0);
+		glVertex3d(position.x + width, position.y + height, position.z + depth);
+		glTexCoord2d(0, 0);
 		glVertex3d(position.x, position.y + height, position.z + depth);
 	}
 	
 	/* The method used to render a side of a cube */
 	private static void renderTexturedCubeBack(Vector3D position, double width, double height, double depth) {
-		glTexCoord2d(0, 0);
-		glVertex3d(position.x, position.y, position.z);
-		glTexCoord2d(1, 0);
-		glVertex3d(position.x + width, position.y, position.z);
-		glTexCoord2d(1, 1);
-		glVertex3d(position.x + width, position.y + height, position.z);
 		glTexCoord2d(0, 1);
+		glVertex3d(position.x, position.y, position.z);
+		glTexCoord2d(1, 1);
+		glVertex3d(position.x + width, position.y, position.z);
+		glTexCoord2d(1, 0);
+		glVertex3d(position.x + width, position.y + height, position.z);
+		glTexCoord2d(0, 0);
 		glVertex3d(position.x, position.y + height, position.z);
 	}
 	
 	/* The method used to render a side of a cube */
 	private static void renderTexturedCubeLeft(Vector3D position, double width, double height, double depth) {
-		glTexCoord2d(0, 0);
+		glTexCoord2d(1, 1);
 		glVertex3d(position.x, position.y, position.z);
 		glTexCoord2d(1, 0);
 		glVertex3d(position.x, position.y + height, position.z);
-		glTexCoord2d(1, 1);
+		glTexCoord2d(0, 0);
 		glVertex3d(position.x, position.y + height, position.z + depth);
 		glTexCoord2d(0, 1);
 		glVertex3d(position.x, position.y, position.z + depth);		glTexCoord2d(0, 0);
@@ -240,11 +256,11 @@ public class BasicRenderer3DOpenGL {
 	
 	/* The method used to render a side of a cube */
 	private static void renderTexturedCubeRight(Vector3D position, double width, double height, double depth) {
-		glTexCoord2d(0, 0);
+		glTexCoord2d(1, 1);
 		glVertex3d(position.x + width, position.y, position.z);
 		glTexCoord2d(1, 0);
 		glVertex3d(position.x + width, position.y + height, position.z);
-		glTexCoord2d(1, 1);
+		glTexCoord2d(0, 0);
 		glVertex3d(position.x + width, position.y + height, position.z + depth);
 		glTexCoord2d(0, 1);
 		glVertex3d(position.x + width, position.y, position.z + depth);

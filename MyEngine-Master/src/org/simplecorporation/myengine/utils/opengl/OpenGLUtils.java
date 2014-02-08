@@ -22,6 +22,13 @@ public class OpenGLUtils {
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 	}
 	
+	/* The method used to clear the depth buffer */
+	public static void clearDepthBuffer() {
+		//Make sure OpenGL is enabled
+		if (! Settings.Android && Settings.Video.OpenGL)
+			GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
+	}
+	
 	/* The method to get the OpenGL version */
 	public static String getVersion() {
 		//Make sure OpenGL is enabled
