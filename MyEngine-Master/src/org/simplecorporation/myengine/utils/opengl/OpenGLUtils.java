@@ -29,6 +29,20 @@ public class OpenGLUtils {
 			GL11.glClear(GL11.GL_DEPTH_BUFFER_BIT);
 	}
 	
+	/* The method used to enable texture 2D */
+	public static void enableTexture2D() {
+		//Make sure OpenGL is enabled
+		if (! Settings.Android && Settings.Video.OpenGL)
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+	}
+	
+	/* The method used to disabled texture 2D */
+	public static void disableTexture2D() {
+		//Make sure OpenGL is enabled
+		if (! Settings.Android && Settings.Video.OpenGL)
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+	}
+	
 	/* The method to get the OpenGL version */
 	public static String getVersion() {
 		//Make sure OpenGL is enabled

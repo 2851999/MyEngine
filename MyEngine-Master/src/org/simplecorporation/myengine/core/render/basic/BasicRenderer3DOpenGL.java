@@ -299,4 +299,37 @@ public class BasicRenderer3DOpenGL {
 		renderImage(image, position, new Vector3D(position.x + image.getWidth(), position.y + image.getHeight(), position.z));
 	}
 	
+	/* The method used to render a triangle using its 3 vertices */
+	public static void renderTriangle(Vector3D v1, Vector3D v2, Vector3D v3) {
+		glBegin(GL_LINES);
+		glVertex3d(v1.x, v1.y, v1.z);
+		glVertex3d(v2.x, v2.y, v2.z);
+		glVertex3d(v3.x, v3.y, v3.z);
+		glEnd();
+	}
+	
+	/* The method used to render a filled triangle using its 3 vertices */
+	public static void renderFilledTriangle(Vector3D v1, Vector3D v2, Vector3D v3) {
+		glBegin(GL_TRIANGLES);
+		glVertex3d(v1.x, v1.y, v1.z);
+		glVertex3d(v2.x, v2.y, v2.z);
+		glVertex3d(v3.x, v3.y, v3.z);
+		glEnd();
+	}
+	
+	/* The method used to render a filled triangle using its 3 vertices */
+	public static void renderTexturedTriangle(Image image, Vector3D v1, Vector3D v2, Vector3D v3) {
+		//Bind the image
+		image.getOpenGLImage().bind();
+		//Render the triangle
+		glBegin(GL_TRIANGLES);
+		glTexCoord2d(0, 0);
+		glVertex3d(v1.x, v1.y, v1.z);
+		glTexCoord2d(0, 1);
+		glVertex3d(v2.x, v2.y, v2.z);
+		glTexCoord2d(1, 1);
+		glVertex3d(v3.x, v3.y, v3.z);
+		glEnd();
+	}
+	
 }

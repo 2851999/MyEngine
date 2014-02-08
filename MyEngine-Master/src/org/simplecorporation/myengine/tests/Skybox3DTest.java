@@ -117,10 +117,14 @@ public class Skybox3DTest extends BaseGame {
 		OpenGLSetupUtils.setupDepthTest();
 		OpenGLUtils.clearColourBuffer();
 		OpenGLUtils.clearDepthBuffer();
+		//Colours wont work without disabling TEXTURE_2D
+		OpenGLUtils.disableTexture2D();
 		this.camera.useView();
+		BasicRenderer.setColour(Colour.WHITE);
 		this.texture.getOpenGLImage().bind();
 		this.sky.getOpenGLImage().bind();
 		this.skybox.render(this.camera.position);
+		BasicRenderer3DOpenGL.renderTexturedTriangle(this.texture, new Vector3D(0,1,-2), new Vector3D(0, 0, -2), new Vector3D(-1, 0, -2));
 		DisplayList.render(this.draw);
 	}
 	
