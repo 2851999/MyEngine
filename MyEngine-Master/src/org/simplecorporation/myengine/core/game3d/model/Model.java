@@ -19,61 +19,129 @@ import org.simplecorporation.myengine.core.game3d.vector.Vector3D;
 
 public class Model {
 	
-	/* The vertices in this model */
+	/* The vertices in the model */
 	public List<Vector3D> vertices;
 	
-	/* The normals in this model */
+	/* The normals in the model */
 	public List<Vector3D> normals;
 	
-	/* The faces in this model */
+	/* The texture coordinates */
+	public List<Vector3D> textures;
+	
+	/* The faces in the model */
 	public List<Face> faces;
 	
-	/* The constructor */
+	/* The default constructor */
 	public Model() {
 		//Assign the variables
 		this.vertices = new ArrayList<Vector3D>();
 		this.normals = new ArrayList<Vector3D>();
+		this.textures = new ArrayList<Vector3D>();
 		this.faces = new ArrayList<Face>();
 	}
 	
-	/* The constructor with the vertices, normals and the faces given */
-	public Model(List<Vector3D> vertices, List<Vector3D> normals, List<Face> faces) {
+	/* The constructor with the vertices, normals, texture coordinate and faces given */
+	public Model(List<Vector3D> vertices, List<Vector3D> normals, List<Vector3D> textures, List<Face> faces) {
 		//Assign the variables
 		this.vertices = vertices;
 		this.normals = normals;
+		this.textures = textures;
 		this.faces = faces;
 	}
 	
-	/* The method used to draw this model using OpenGL */
+	/* The method used to render this model */
 	public void render() {
-		//Begin drawing (Triangles)
+		//Start drawing the triangles
 		glBegin(GL_TRIANGLES);
-		//Go through each face
-		for (int a = 0; a < this.faces.size(); a++) {
-			//Get the current face in the list
-			Face face = this.faces.get(a);
-			//The faces hold the indexes of the vertices and normals and
-			//don't hold the values them selves
-			//-1 because the index starts with 0 and not 1
-			Vector3D n1 = this.normals.get((int) face.normal.x - 1);
-			Vector3D n2 = this.normals.get((int) face.normal.y - 1);
-			Vector3D n3 = this.normals.get((int) face.normal.z - 1);
-			//Get the vertices
-			Vector3D v1 = this.vertices.get((int) face.vertex.x - 1);
-			Vector3D v2 = this.vertices.get((int) face.vertex.y - 1);
-			Vector3D v3 = this.vertices.get((int) face.vertex.z - 1);
-			//Call the normal function for future lighting and other
-			//calculations that may require the normal vector
-			//and render each vertex
-			glNormal3d(n1.x, n1.y, n1.z);
-			glVertex3d(v1.x, v1.y, v1.z);
-			glNormal3d(n2.x, n2.y, n2.z);
-			glVertex3d(v2.x, v2.y, v2.z);
-			glNormal3d(n3.x, n3.y, n3.z);
-			glVertex3d(v3.x, v3.y, v3.z);
-		}
-		//End the drawing
+		//Go through each face in the faces list
+		for (int i = 0; i < this.faces.size(); i++)
+			//Render the current face
+			this.renderFace(this.faces.get(i));
+		//Finish drawing the triangles
 		glEnd();
 	}
+	
+	/* The method used to render a face */
+	public void renderFace(Face face) {
+		//Check to see whether the face has a material
+		if (face.material != null) {
+			//Apply the material
+			face.material.apply();
+		}
+		//Render each face vertex
+		renderFaceVertex(face, 1, 0, 0);
+		renderFaceVertex(face, 0, 1, 0);
+		renderFaceVertex(face, 0, 0, 1);
+	}
+	
+	/* The method used to render a vertex */
+	public void renderFaceVertex(Face face, int x, int y, int z) {
+		//Check to see whether the normals for this face exists
+		if (face.normals != null) {
+			//The normals should be used
+			
+			//The normal index
+			int normalIndex = 0;
+			//Check which coordinate should be used
+			if (x == 1 && y == 0 && z == 0)
+				normalIndex = ((int) face.normals.x) - 1;
+			if (x == 0 && y == 1 && z == 0)
+				normalIndex = ((int) face.normals.y) - 1;
+			if (x == 0 && y == 0 && z == 1)
+				normalIndex = ((int) face.normals.z) - 1;
+			//Get the normal
+			Vector3D n = this.normals.get(normalIndex);
+			//Use the normal
+			glNormal3d(n.x, n.y, n.z);
+		}
+		
+		//Check to see whether the texture coordinates for this face exists
+		if (face.textures != null) {
+			//The textures should be used
+			
+			//The texture index
+			int textureIndex = 0;
+			//Check which coordinate should be used
+			if (x == 1 && y == 0 && z == 0)
+				textureIndex = ((int) face.textures.x) - 1;
+			if (x == 0 && y == 1 && z == 0)
+				textureIndex = ((int) face.textures.y) - 1;
+			if (x == 0 && y == 0 && z == 1)
+				textureIndex = ((int) face.textures.z) - 1;
+			//Get the texture
+			Vector3D t = this.textures.get(textureIndex);
+			//Use the texture coordinates
+			glTexCoord3d(t.x, t.y, t.z);
+		}
+		
+		//The vertex index
+		int vertexIndex = 0;
+		//Check which coordinate should be used
+		if (x == 1 && y == 0 && z == 0)
+			vertexIndex = ((int) face.vertices.x) - 1;
+		if (x == 0 && y == 1 && z == 0)
+			vertexIndex = ((int) face.vertices.y) - 1;
+		if (x == 0 && y == 0 && z == 1)
+			vertexIndex = ((int) face.vertices.z) - 1;
+		//Get the vertex
+		Vector3D v = this.vertices.get(vertexIndex);
+		//Render the vertex
+		glVertex3d(v.x, v.y, v.z);
+	}
+	
+	/* The methods used to add a certain value */
+	public void addVertex(Vector3D vertex) { this.vertices.add(vertex); }
+	public void addNormal(Vector3D normal) { this.normals.add(normal); }
+	public void addTexture(Vector3D texture) { this.textures.add(texture); }
+	public void addFace(Face face) { this.faces.add(face); }
+	
+	/* The 'setter' and 'getter' methods */
+	public void setVertices(List<Vector3D> vertices) { this.vertices = vertices; }
+	public void setNormals(List<Vector3D> normals) { this.normals = normals; }
+	public void setTextures(List<Vector3D> textures) { this.textures = textures; }
+	public void setFaces(List<Face> faces) { this.faces = faces; }
+	public List<Vector3D> getVertices() { return this.vertices; }
+	public List<Vector3D> getNormals() { return this.normals; }
+	public List<Vector3D> getTextures() { return this.textures; }
 	
 }

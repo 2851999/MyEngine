@@ -32,7 +32,7 @@ public class OBJModelTest extends BaseGame {
 	public int drawModel;
 	
 	public OBJModelTest() {
-		Settings.Window.Title = "Skybox 3D Test";
+		Settings.Window.Title = "OBJ 3D Model Test";
 		Settings.Window.Fullscreen = false;
 		Settings.Window.Size.Width = 1024;
 		Settings.Window.Size.Height = 600;
@@ -48,7 +48,7 @@ public class OBJModelTest extends BaseGame {
 		this.sky = new Image("C:\\sky.png", "PNG", true);
 		this.camera = new Camera();
 		this.skybox = new Skybox(100, 100, 100, this.sky, this.sky, this.sky, this.sky, this.sky, this.sky);
-		this.model = OBJLoader.loadModel("/randomcharacter.obj", false);
+		this.model = OBJLoader.loadModel("/bunny.obj", false);
 		this.draw = DisplayList.generate();
 		BasicRenderer.setColour(Colour.WHITE);
 		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(0, 0, -5), 1, 1, 1);
