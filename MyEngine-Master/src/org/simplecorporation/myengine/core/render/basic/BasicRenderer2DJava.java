@@ -18,7 +18,7 @@ import org.simplecorporation.myengine.core.render.RenderVariablesJava;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.core.window.JavaWindow;
 
-public class BasicRendererJava {
+public class BasicRenderer2DJava {
 	
 	/* The method to set the colour */
 	public static void setColour(Colour colour) {

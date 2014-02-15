@@ -13,6 +13,7 @@ package org.simplecorporation.myengine.core.engine.script;
 import java.io.File;
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.file.FileUtils;
 import org.simplecorporation.myengine.utils.logger.Log;
 import org.simplecorporation.myengine.utils.logger.LogType;
@@ -108,11 +109,11 @@ public class ScriptModule {
 						//Check whether the script module was added correctly
 						if (script.scriptModules.getLast() == null)
 							//Log an error
-							Logger.log(new Log(ScriptConsole.ScriptingLanguageVersion , "ScriptModule The library/module with the package " +
+							Logger.log(new Log("MyEngine " + Settings.EngineVersion , "ScriptModule The library/module with the package " +
 									newModuleLocation + ".sl was not found" , LogType.ERROR));
 					} else {
 						//Log an error
-						Logger.log(new Log(ScriptConsole.ScriptingLanguageVersion , "ScriptModule package must be set before any imports" , LogType.ERROR));
+						Logger.log(new Log("MyEngine " + Settings.EngineVersion , "ScriptModule package must be set before any imports" , LogType.ERROR));
 					}
 				} else {
 					//Add a new instance of the library
@@ -142,7 +143,7 @@ public class ScriptModule {
 		//Check if the script class was found
 		if (scriptClass == null)
 			//Log an error
-			Logger.log(new Log(ScriptConsole.ScriptingLanguageVersion, "getClassByName() the class " + name +
+			Logger.log(new Log("MyEngine " + Settings.EngineVersion, "getClassByName() the class " + name +
 					" was not found in the module " + new File(this.file.filePath).getName() , LogType.ERROR));
 		//Return the script class
 		return scriptClass;
@@ -165,7 +166,7 @@ public class ScriptModule {
 		//Check if the script class was found
 		if (scriptMethod == null)
 			//Log an error
-			Logger.log(new Log(ScriptConsole.ScriptingLanguageVersion, "getMethodByName() the method " + name +
+			Logger.log(new Log("MyEngine " + Settings.EngineVersion, "getMethodByName() the method " + name +
 					" was not found in the module " + new File(this.file.filePath).getName() , LogType.ERROR));
 		//Return the script class
 		return scriptMethod;

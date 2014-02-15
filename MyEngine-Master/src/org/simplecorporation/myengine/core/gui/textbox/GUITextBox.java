@@ -10,232 +10,147 @@
 
 package org.simplecorporation.myengine.core.gui.textbox;
 
-import java.awt.event.KeyEvent;
-
-import org.lwjgl.input.Keyboard;
 import org.simplecorporation.myengine.core.gui.GUIComponent;
+import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
-import org.simplecorporation.myengine.settings.Settings;
+import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
+import org.simplecorporation.myengine.core.render.colour.Colour;
+import org.simplecorporation.myengine.utils.timer.Timer;
 
 public abstract class GUITextBox extends GUIComponent {
 	
-	/* The text in the box */
-	public String text;
-	
-	/* The text shown if nothing is entered */
-	public String defaultText;
-	
-	/* Is the text box selected */
-	public boolean selected;
-	
-	/* Should the box hide the characters inside */
-	public boolean hideCharacters;
-	
-	/* The char to replace the characters with */
-	public char maskCharacter;
-	
-	/* The boolean which states whether the cursor can be seen */
-	public boolean cursorShown;
-	
-	/* The last blink of the cursor */
-	public long cursorLastBlink;
-	
-	/* The time between blinks */
-	public long timeBetweenBlink;
-	
-	/* Is backspace pressed */
-	public boolean backspace;
-	
-	/* Is another character pressed that is unknown */
-	public boolean unknowncharacter;
-	
-	/* Is shift pressed*/
-	public boolean shift;
-	
-	/* Already had shift event */
-	public boolean alreadyHadShift;
-	
-	/* Is the shift key being released */
-	public boolean releasedShiftKey;
+	/* The variables needed by the text box */
+	public String text;                 //The text in this text box
+	public String defaultText;          //The text displayed when there is no text
+	public String renderText;           //The text that should be rendered
+	public int visibleTextStartIndex;   //The start index of the viewable text
+	public int visibleTextEndIndex;     //The end index of the viewable text
+	public long timeBetweenCursorFlash; //The time between each flash of the cursor
+	public Timer timer;                 //The timer used to check the time before the next cursor flash
+	public boolean cursorShowing;       //Is the cursor showing right now
+	public double cursorWidth;          //The width of the cursor
+	public int cursorPlace;             //The place within the render text the cursor is
+	public Colour cursorColour;         //The colour of the cursor
+	public GUIFont font;                //The font used to render the render text
+	public boolean hideCharacters;      //Should the text be masked
+	public String maskCharacter;       //The character used to mask the text
 	
 	/* The constructor */
-	public GUITextBox(String name) {
+	public GUITextBox(String name, GUIFont font) {
 		//Call the super constructor
 		super(name);
-		//Set the variables
+		//Assign variables
 		this.text = "";
 		this.defaultText = "";
-		this.selected = false;
-		this.hideCharacters = false;
-		this.maskCharacter = '*';
-		this.cursorShown = false;
-		this.cursorLastBlink = System.currentTimeMillis();
-		this.timeBetweenBlink = 500;
-		this.backspace = false;
-		this.unknowncharacter = false;
-		this.shift = false;
-		this.alreadyHadShift = false;
-		this.releasedShiftKey = false;
+		this.renderText = "";
+		this.visibleTextStartIndex = 0;
+		this.visibleTextEndIndex = 0;
+		this.timeBetweenCursorFlash = 550;
+		this.timer = new Timer();
+		this.cursorShowing = true;
+		this.cursorWidth = 2;
+		this.cursorPlace = 0;
+		this.cursorColour = Colour.BLACK;
+		this.font = font;
+		this.hideCharacters = false ;
+		this.maskCharacter = "*";
 	}
 	
 	/* The method to update the text box */
 	protected void updateComponent() {
-		//Check if this is visible and selected
+		//Check to see whether this component is visible
+		if (this.visible) {
+			//Calculate the view index
+			this.calculateViewIndex();
+			//Set the render text
+			this.setRenderText();
+		}
+		//Check to see whether this component is visible and selected
 		if (this.visible && this.selected) {
 			//Check the time
-			if (System.currentTimeMillis() - this.cursorLastBlink >= this.timeBetweenBlink) {
-				//Set the last blink
-				this.cursorLastBlink = System.currentTimeMillis();
-				this.cursorShown = !this.cursorShown;
+			if (this.timer.hasTimePassed(this.timeBetweenCursorFlash)) {
+				//Invert the cursor show boolean
+				this.cursorShowing = ! this.cursorShowing;
+				//Restart the timer
+				this.timer.start();
 			}
-			
-			//Check and remove any unwanted characters
-			for (int a = 0; a < this.text.length(); a++) {
-				if (this.text.charAt(a) == '\u0000' || ! Character.isDefined(this.text.charAt(a))
-						 || Character.isISOControl(this.text.charAt(a))) {
-					//Remove the character
-					String string = this.text;
-					this.text = "";
-					string = new StringBuilder(string).deleteCharAt(a).toString();
-					this.text = string;
-				}
+			//Check the cursor place
+			if (this.cursorPlace > this.renderText.length() && this.renderText.length() != 0) {
+				//Set the cursor place
+				this.cursorPlace = this.renderText.length() + 1;
 			}
-			
-		} else {
-			//Set the cursor shown to false
-			this.cursorShown = false;
 		}
 	}
 	
 	/* The mouse pressed event */
 	public void onMousePressed(MouseEvent e) {
-		//Check if the button is selected and the mouse isn't inside this text box
-		if (this.selected && ! this.getBounds().contains(e.x , e.y))
-			//Set selected to false
-			this.selected = false;
+		//Check to see whether this is selected
+		if (this.selected) {
+			//Check the position of the event
+			if (! this.getBounds().contains(e.x, e.y)) {
+				//Set selected to false
+				this.selected = false;
+				//Calculate the view start/end index
+				this.calculateViewIndex();
+				//Stop and reset the timer
+				this.timer.stop();
+				this.timer.reset();
+			}
+		}
 	}
 	
 	/* The mouse clicked event */
 	public void onMouseClicked(MouseEvent e) {
-		//Check if this is visible and not selected
-		if (this.visible && ! this.selected) {
-			//Check if this text box has been clicked
-			if (this.getBounds().contains(e.x , e.y)) {
+		///Check to see whether this is selected
+		if (! this.selected) {
+			//Check the position of the event
+			if (this.getBounds().contains(e.x, e.y)) {
 				//Set selected to true
 				this.selected = true;
-				//Set the last cursor blink time
-				this.cursorLastBlink = System.currentTimeMillis();
+				//Calculate the view start/end index
+				this.calculateViewIndex();
+				//Set the cursor place
+				this.cursorPlace = this.renderText.length();
+				//Check to make sure the cursor place is more than or equal to 0
+				if (this.cursorPlace <= 0)
+					//Substring error's 0 - 1 = -1, 1 - 1 = 0
+					this.cursorPlace = 1;
+				//Start the timer
+				this.timer.start();
 			}
 		}
 	}
 	
 	/* The key pressed event */
 	public void onKeyPressed(KeyboardEvent e) {
-		//Check if this is visible and selected
+		//Make sure this object is visible and selected
 		if (this.visible && this.selected) {
-			//Check what rendering mode is being used
-			if (Settings.Video.OpenGL) {
-				//Check what key was pressed
-				if (e.keyCode == Keyboard.KEY_BACK) {
-					this.backspace = true;
-					//Remove the last letter if there is one
-					if (this.text.length() > 0)
-						this.text = this.text.substring(0 , this.text.length() - 1);
-				} else if (e.keyCode == Keyboard.KEY_LSHIFT || e.keyCode == Keyboard.KEY_RSHIFT) {
-					this.shift = true;
-					this.alreadyHadShift = false;
-				}
-			} else {
-				//Check what key was pressed
-				if (e.keyCode == KeyEvent.VK_BACK_SPACE) {
-					this.backspace = true;
-					//Remove the last letter if there is one
-					if (this.text.length() > 0)
-						this.text = this.text.substring(0 , this.text.length() - 1);
-				}
-			}
-			
-			if (e.keyChar == '\u0000')
-				this.unknowncharacter = true;
-			
-			//Check if using backspace
-			if (! this.backspace) {
-				//Check the rendering mode
-				if (Settings.Video.OpenGL){
-					//Check it wasn't space
-					if (e.keyCode == Keyboard.KEY_SPACE) {
-						//Add a space
-						this.text += " ";
-					} else if (e.keyCode == Keyboard.KEY_RETURN) {
-						
-					} else if (this.shift) {
-						if (! this.alreadyHadShift) {
-							this.alreadyHadShift = true;
-							this.text += e.keyChar;
-						} else {
-							this.alreadyHadShift = false;
-							this.shift = false;
-						}
-					} else if (! this.releasedShiftKey && ! this.unknowncharacter && e.keyCode != Keyboard.KEY_BACK) {
-						//Check if the the character was null
-						if (e.keyChar != ' ' && (e.keyChar != '\u0000')) {
-							//Add the character to the text
-							this.text += e.keyChar;
-							//Set the cursor time
-							this.cursorShown = false;
-							this.cursorLastBlink = System.currentTimeMillis();
-						}
-					} else {
-						this.releasedShiftKey = false;
-					}
-				} else {
-					//Check it wasn't space
-					if (e.keyCode == KeyEvent.VK_SPACE) {
-						//Add a space
-						this.text += " ";
-					} else if (e.keyCode == KeyEvent.VK_ENTER) {
-						
-					} else if (! this.releasedShiftKey && ! this.unknowncharacter && e.keyCode != KeyEvent.VK_BACK_SPACE) {
-						//Check if the the character was null
-						if (e.keyChar != ' ' && (e.keyChar != '\u0000')) {
-							//Add the character to the text
-							this.text += e.keyChar;
-							//Set the cursor time
-							this.cursorShown = false;
-							this.cursorLastBlink = System.currentTimeMillis();
-						}
-					} else {
-						this.releasedShiftKey = false;
-					}
-				}
+			//The length of the current string
+			int oldLength = this.text.length();
+			//The start view index
+			int startViewIndex = this.visibleTextStartIndex;
+			//The front of the text
+			String front = this.text.substring(0, this.visibleTextStartIndex + (this.cursorPlace));
+			//The end of the text
+			String end = this.text.substring(this.visibleTextStartIndex + (this.cursorPlace), this.text.length());
+			//Set the new text
+			this.text = front + e.keyChar + end;
+			//Remove any unwanted characters
+			this.removeUnwantedCharacters();
+			//Calculate the view index (Causes a glitch)
+			//this.calculateViewIndex();
+			//Check to see whether the length has decreased
+			if (this.text.length() > oldLength && startViewIndex == this.visibleTextStartIndex) {
+				//Add 1 to the cursor place
+				this.cursorPlace += 1;
 			}
 		}
 	}
 	
 	/* The key released event */
 	public void onKeyReleased(KeyboardEvent e) {
-		//Check if this is visible and selected
-		if (this.visible && this.selected) {
-			//Check what rendering mode is being used
-			if (Settings.Video.OpenGL) {
-				//Check what key was pressed
-				if (e.keyCode == Keyboard.KEY_BACK) {
-					this.backspace = false;
-				} else if (e.keyCode == Keyboard.KEY_LSHIFT || e.keyCode == Keyboard.KEY_RSHIFT) {
-					this.releasedShiftKey = true;
-					this.shift = false;
-					this.alreadyHadShift = false;
-				}
-			} else {
-				//Check what key was pressed
-				if (e.keyCode == KeyEvent.VK_BACK_SPACE) {
-					this.backspace = false;
-				} else if (e.keyCode == KeyEvent.VK_SHIFT) {
-					this.releasedShiftKey = true;
-				}
-			}
-		}
+		
 	}
 	
 	/* The key typed event */
@@ -243,20 +158,95 @@ public abstract class GUITextBox extends GUIComponent {
 		
 	}
 	
-	/* The methods to get / set the variables */
-	public void setText(String text) { this.text = text; }
-	public String getText() { return this.text; }
+	/* The method used to calculate the start and end of the view
+	 * index for the end of the render text */
+	public void calculateViewIndex() {
+		//Check to see whether there is any text
+		if (this.text.equals("") && ! this.selected) {
+			//Set the start and the end index
+			this.visibleTextStartIndex = 0;
+			this.visibleTextEndIndex = this.defaultText.length() - 1;
+		} else {
+			//Set the start and the end index
+			this.visibleTextStartIndex = 0;
+			this.visibleTextEndIndex = this.text.length() - 1;
+			//Set the render text
+			this.setRenderText();
+			//Continue the loop until the length of the substring is right
+			while (this.font.getWidth(this.renderText) >= this.width - 2) {
+				//Add 1 to the start index
+				this.visibleTextStartIndex++;
+				//Set the render text
+				this.setRenderText();
+			}
+		}
+	}
 	
-	public void setDefaultText(String defaultText) { this.defaultText = defaultText; }
-	public String getDefaultText() { return this.defaultText; }
+	/* The method used to set the render text */
+	public void setRenderText() {
+		//Check to see whether there is text in the box
+		if (this.text.equals("") && ! this.selected)
+			//Set the render text
+			this.renderText = this.defaultText;
+		else {
+			//Set the render text
+			this.renderText = this.text;
+			//Check if the characters should be hidden
+			if (this.hideCharacters) {
+				//Set the rendered text to nothing
+				String newText = "";
+				//Loop the text's length
+				for (int a = 0; a < this.renderText.length(); a++)
+					//Add the masked character
+					newText += this.maskCharacter;
+				//Set the render text
+				this.renderText = newText;
+			}
+		}
+		//Set the render text using the visible text start/end indexes
+		this.renderText = this.renderText.substring(this.visibleTextStartIndex, this.visibleTextEndIndex);
+	}
 	
-	public void setSelected(boolean selected) { this.selected = selected; }
-	public boolean isSelected() { return this.selected; }
+	/* The method used to render the cursor if needed */
+	public void renderCursor() {
+		//Check to see whether the cursor should be rendered
+		if (this.visible && this.selected && this.cursorShowing) {
+			//Set the colour to black
+			BasicRenderer.setColour(this.cursorColour);
+			//Render the cursor
+			BasicRenderer.renderFilledRectangle(this.position.x + this.font.getWidth(this.renderText.substring(0, this.cursorPlace - 1)) + 4, this.position.y + 2, cursorWidth, this.height - 4);
+		}
+	}
 	
-	public void hideCharacters(boolean hideCharacters) { this.hideCharacters = hideCharacters; }
-	public boolean areCharactersHidden() { return this.hideCharacters; }
+	/* The method used to remove any unwanted null characters in the text */
+	public void removeUnwantedCharacters() {
+		//Check and remove any unwanted characters
+		for (int a = 0; a < this.text.length(); a++) {
+			if (this.text.charAt(a) == '\u0000' || ! Character.isDefined(this.text.charAt(a))
+					 || Character.isISOControl(this.text.charAt(a))) {
+				//Remove the character
+				String string = this.text;
+				this.text = "";
+				string = new StringBuilder(string).deleteCharAt(a).toString();
+				this.text = string;
+			}
+		}
+	}
 	
-	public void setMaskCharacter(char maskCharacter) { this.maskCharacter = maskCharacter; }
-	public char getMaskCharacter() { return this.maskCharacter; }
+	/* The method used to set the text in this text box */
+	public void setText(String text) {
+		//Assign the text
+		this.text = text;
+		//Calculate the view index
+		this.calculateViewIndex();
+	}
+	
+	/* The method used to set the default text in this box */
+	public void setDefaultText(String defaultText) {
+		//Assign the text
+		this.defaultText = defaultText;
+		//Calculate the view index
+		this.calculateViewIndex();
+	}
 	
 }

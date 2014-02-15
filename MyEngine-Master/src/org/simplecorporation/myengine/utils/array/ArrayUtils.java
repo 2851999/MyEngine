@@ -10,9 +10,24 @@
 
 package org.simplecorporation.myengine.utils.array;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class ArrayUtils {
+	
+	/* The method to turn a list into a string array */
+	public static String[] toStringArray(List<String> list) {
+		//Create the string array
+		String[] stringArray = new String[list.size()];
+		
+		//Set all of the lines
+		for (int a = 0; a < stringArray.length; a++)
+			stringArray[0] = list.get(a);
+		
+		//Return the array
+		return stringArray;
+	}
 	
 	/* The method to turn a linked list into a string array */
 	public static String[] toStringArray(LinkedList<String> linkedList) {
@@ -25,6 +40,19 @@ public class ArrayUtils {
 		
 		//Return the array
 		return stringArray;
+	}
+	
+	/* The method to turn a string array into a list */
+	public static List<String> toStringList(String[] stringArray) {
+		//Create the list
+		List<String> stringList = new ArrayList<String>();
+		
+		//Add all of the lines
+		for (int a = 0; a < stringArray.length; a++)
+			stringList.add(stringArray[a]);
+		
+		//Return the linked list
+		return stringList;
 	}
 	
 	/* The method to turn a string array into a linked list */

@@ -15,7 +15,7 @@ import static org.lwjgl.opengl.GL11.*;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 
-public class BasicRendererOpenGL {
+public class BasicRenderer2DOpenGL {
 
 	/* The method to set the colour */
 	public static void setColour(Colour colour) {

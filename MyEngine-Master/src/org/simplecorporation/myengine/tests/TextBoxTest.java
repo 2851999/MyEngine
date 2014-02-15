@@ -26,7 +26,8 @@ public class TextBoxTest extends BaseGame {
 		textBox.position.y = 100;
 		textBox.width = 200;
 		textBox.height = 30;
-		textBox.defaultText = "This is a text box!";
+		textBox.setDefaultText("This is a text box!");
+		textBox.setText("e");
 		textBox.visible = true;
 	}
 	
