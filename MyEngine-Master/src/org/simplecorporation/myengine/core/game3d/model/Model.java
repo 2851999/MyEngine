@@ -31,6 +31,9 @@ public class Model {
 	/* The faces in the model */
 	public List<Face> faces;
 	
+	/* The materials in the model */
+	public List<Material> materials;
+	
 	/* The default constructor */
 	public Model() {
 		//Assign the variables
@@ -38,15 +41,17 @@ public class Model {
 		this.normals = new ArrayList<Vector3D>();
 		this.textures = new ArrayList<Vector3D>();
 		this.faces = new ArrayList<Face>();
+		this.materials = new ArrayList<Material>();
 	}
 	
 	/* The constructor with the vertices, normals, texture coordinate and faces given */
-	public Model(List<Vector3D> vertices, List<Vector3D> normals, List<Vector3D> textures, List<Face> faces) {
+	public Model(List<Vector3D> vertices, List<Vector3D> normals, List<Vector3D> textures, List<Face> faces, List<Material> materials) {
 		//Assign the variables
 		this.vertices = vertices;
 		this.normals = normals;
 		this.textures = textures;
 		this.faces = faces;
+		this.materials = materials;
 	}
 	
 	/* The method used to render this model */
@@ -129,19 +134,41 @@ public class Model {
 		glVertex3d(v.x, v.y, v.z);
 	}
 	
+	/* The method used to get a material using its name */
+	public Material getMaterial(String name) {
+		//The material
+		Material material = null;
+		//Go through the list
+		loop: for (int a = 0; a < this.materials.size(); a++) {
+			//Check the name of the current material in the list
+			if (this.materials.get(a).name.equals(name)) {
+				//Set the material
+				material = this.materials.get(a);
+				//Break out of the loop
+				break loop;
+			}
+		}
+		//Return the material
+		return material;
+	}
+	
 	/* The methods used to add a certain value */
 	public void addVertex(Vector3D vertex) { this.vertices.add(vertex); }
 	public void addNormal(Vector3D normal) { this.normals.add(normal); }
 	public void addTexture(Vector3D texture) { this.textures.add(texture); }
 	public void addFace(Face face) { this.faces.add(face); }
+	public void addMaterial(Material material) { this.materials.add(material); }
 	
 	/* The 'setter' and 'getter' methods */
 	public void setVertices(List<Vector3D> vertices) { this.vertices = vertices; }
 	public void setNormals(List<Vector3D> normals) { this.normals = normals; }
 	public void setTextures(List<Vector3D> textures) { this.textures = textures; }
 	public void setFaces(List<Face> faces) { this.faces = faces; }
+	public void setMaterials(List<Material> materials) { this.materials = materials; }
 	public List<Vector3D> getVertices() { return this.vertices; }
 	public List<Vector3D> getNormals() { return this.normals; }
 	public List<Vector3D> getTextures() { return this.textures; }
+	public List<Face> getFaces() { return this.faces; }
+	public List<Material> getMaterials() { return this.materials; }
 	
 }

@@ -11,6 +11,7 @@
 package org.simplecorporation.myengine.core.game3d.model;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -45,21 +46,38 @@ public class OBJLoader {
 			
 			//The current line
 			String line = "";
+			//The current material
+			Material currentMaterial = null;
 			//Go through the file text
 			while ((line = bufferedReader.readLine()) != null) {
 				//Check the start of the current line
 				if (line.startsWith("v "))
 					//Add a vertex to the model
-					model.addVertex(getVectorValue(line));
+					model.addVertex(ModelParserUtils.getVectorValue(line));
 				else if (line.startsWith("vn "))
 					//Add a normal to the model
-					model.addNormal(getVectorValue(line));
+					model.addNormal(ModelParserUtils.getVectorValue(line));
 				else if (line.startsWith("vt "))
 					//Add a texture to the model
-					model.addTexture(getVectorValue(line));
+					model.addTexture(ModelParserUtils.getVectorValue(line));
 				else if (line.startsWith("f "))
 					//Add a face to the model
-					model.addFace(getFace(line));
+					model.addFace(getFace(line, currentMaterial));
+				else if (line.startsWith("mtllib ")) {
+					//Split up the line
+					String[] split = line.split(" ");
+					//Get the this object's file name
+					String fileName = new File(FileUtils.asFileString(filePath)).getName();
+					//Get the file path of the material file
+					String materialFilePath = filePath.replace(fileName, split[1]);
+					//Load the material
+					model.materials = MaterialLoader.loadMaterialFile(materialFilePath, inFolder, model.materials);
+				} else if (line.startsWith("usemtl ")) {
+					//Split up the line
+					String[] split = line.split(" ");
+					//Set the current material
+					currentMaterial = model.getMaterial(split[1]);
+				}
 			}
 			
 			//Close the buffer
@@ -79,22 +97,8 @@ public class OBJLoader {
 		return model;
 	}
 	
-	/* The method used to get the vector value of a line */
-	public static Vector3D getVectorValue(String line) {
-		//Split up the line using a space
-		String[] split = line.split(" ");
-		//Get the vector values
-		double vectorX = getValue(split[1]);
-		double vectorY = getValue(split[2]);
-		double vectorZ = getValue(split[3]);
-		//Create the vector
-		Vector3D vector = new Vector3D(vectorX, vectorY, vectorZ);
-		//Return the vector
-		return vector;
-	}
-	
 	/* The method used to get a face from a line */
-	public static Face getFace(String line) {
+	public static Face getFace(String line, Material currentMaterial) {
 		//Split up the line using a space 1//2 1//2 1//2
 		String[] split = line.split(" ");
 		
@@ -142,7 +146,7 @@ public class OBJLoader {
 			textures = new Vector3D(textureX, textureY, textureZ);
 		
 		//Create the face
-		Face face = new Face(vertices, normals, textures, null);
+		Face face = new Face(vertices, normals, textures, currentMaterial);
 		//Return the face
 		return face;
 	}
@@ -162,7 +166,7 @@ public class OBJLoader {
 			values[1] = getValue(split[1]);
 			values[2] = 0;
 		} else if (facePart.contains("/")) {
-			//FORMAT V/VT OR V/VN/VT
+			//FORMAT V/VT OR V/VT/VN
 			
 			//Split up the face part using a "/"
 			String[] split = facePart.split("/");
@@ -179,8 +183,8 @@ public class OBJLoader {
 				
 				//Set the vertex, normal and the texture
 				values[0] = getValue(split[0]);
-				values[1] = getValue(split[1]);
-				values[2] = getValue(split[2]);
+				values[1] = getValue(split[2]);
+				values[2] = getValue(split[1]);
 			}
 		} else {
 			//FORMAT = V

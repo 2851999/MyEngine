@@ -43,6 +43,20 @@ public class OpenGLUtils {
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 	}
 	
+	/* The method used to enable wire frame mode */
+	public static void enableWireframeMode() {
+		//Make sure OpenGL is enabled
+		if (! Settings.Android && Settings.Video.OpenGL)
+			GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
+	}
+	
+	/* The method used to disable wire frame mode */
+	public static void disableWireframeMode() {
+		//Make sure OpenGL is enabled
+		if (! Settings.Android && Settings.Video.OpenGL)
+			GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
+	}
+	
 	/* The method to get the OpenGL version */
 	public static String getVersion() {
 		//Make sure OpenGL is enabled

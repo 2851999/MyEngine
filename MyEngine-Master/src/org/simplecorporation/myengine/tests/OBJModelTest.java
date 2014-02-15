@@ -1,19 +1,17 @@
 package org.simplecorporation.myengine.tests;
 
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
 import org.simplecorporation.myengine.core.game.BaseGame;
 import org.simplecorporation.myengine.core.game.GameValues;
 import org.simplecorporation.myengine.core.game3d.camera.Camera;
 import org.simplecorporation.myengine.core.game3d.camera.skybox.Skybox;
 import org.simplecorporation.myengine.core.game3d.model.Model;
 import org.simplecorporation.myengine.core.game3d.model.OBJLoader;
-import org.simplecorporation.myengine.core.game3d.vector.Vector3D;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.input.KeyboardInput;
+import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
-import org.simplecorporation.myengine.core.render.basic.BasicRenderer3DOpenGL;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.opengl.DisplayList;
@@ -27,9 +25,9 @@ public class OBJModelTest extends BaseGame {
 	public Image sky;
 	public Skybox skybox;
 	public boolean changeCursorPos;
-	public int draw;
 	public Model model;
 	public int drawModel;
+	public boolean wireframeMode;
 	
 	public OBJModelTest() {
 		Settings.Window.Title = "OBJ 3D Model Test";
@@ -40,6 +38,7 @@ public class OBJModelTest extends BaseGame {
 		Settings.Video.VSync = false;
 		Settings.Video.MaxFPS = 0;
 		this.changeCursorPos = false;
+		this.wireframeMode = false;
 		createGame();
 	}
 	
@@ -48,56 +47,7 @@ public class OBJModelTest extends BaseGame {
 		this.sky = new Image("C:\\sky.png", "PNG", true);
 		this.camera = new Camera();
 		this.skybox = new Skybox(100, 100, 100, this.sky, this.sky, this.sky, this.sky, this.sky, this.sky);
-		this.model = OBJLoader.loadModel("/bunny.obj", false);
-		this.draw = DisplayList.generate();
-		BasicRenderer.setColour(Colour.WHITE);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(0, 0, -5), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(new Image("C:\\computinghwkplatform32.png", "PNG", true), new Vector3D(0, 0, -7), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(0, 0, -9), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(0, 0, -11), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(0, 0, -13), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(0, 2, -5), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(0, 2, -7), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(0, 2, -9), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(0, 2, -11), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(0, 2, -13), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(0, -2, -5), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(0, -2, -7), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(0, -2, -9), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(0, -2, -11), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(0, -2, -13), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(2, 0, -5), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(2, 0, -7), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(2, 0, -9), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(2, 0, -11), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(2, 0, -13), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(2, 2, -5), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(2, 2, -7), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(2, 2, -9), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(2, 2, -11), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(2, 2, -13), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(2, -2, -5), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(2, -2, -7), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(2, -2, -9), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(2, -2, -11), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(2, -2, -13), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(-2, 0, -5), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(-2, 0, -7), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(-2, 0, -9), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(-2, 0, -11), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(-2, 0, -13), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(-2, 2, -5), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(-2, 2, -7), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(-2, 2, -9), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(-2, 2, -11), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(-2, 2, -13), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(-2, -2, -5), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(-2, -2, -7), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(-2, -2, -9), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(-2, -2, -11), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderTexturedCube(this.texture, new Vector3D(-2, -2, -13), 1, 1, 1);
-		BasicRenderer3DOpenGL.renderImage(this.texture, new Vector3D(0,0,-2), 1, 1);
-		DisplayList.end();
+		this.model = OBJLoader.loadModel("/texturedmonkeyface.obj", false);
 		this.drawModel = DisplayList.generate();
 		this.model.render();
 		DisplayList.end();
@@ -130,17 +80,16 @@ public class OBJModelTest extends BaseGame {
 		OpenGLUtils.disableTexture2D();
 		this.camera.useView();
 		BasicRenderer.setColour(Colour.WHITE);
-		this.texture.getOpenGLImage().bind();
 		this.sky.getOpenGLImage().bind();
 		this.skybox.render(this.camera.position);
+		this.texture.getOpenGLImage().bind();
 		System.out.println(this.model.faces.size() + " Polygons");
-		BasicRenderer3DOpenGL.renderTexturedTriangle(this.texture, new Vector3D(0,1,-2), new Vector3D(0, 0, -2), new Vector3D(-1, 0, -2));
-		DisplayList.render(this.draw);
 		//Wireframe mode
-		GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
+		if (this.wireframeMode)
+			OpenGLUtils.enableWireframeMode();
+		else
+			OpenGLUtils.disableWireframeMode();
 		DisplayList.render(this.drawModel);
-		GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
-		
 	}
 	
 	public void onMouseMoved(MouseMotionEvent event) {
@@ -156,6 +105,11 @@ public class OBJModelTest extends BaseGame {
 			Mouse.setCursorPosition((int) Settings.Window.Size.Width / 2, (int) Settings.Window.Size.Height / 2);
 			this.changeCursorPos = true;
 		}
+	}
+	
+	public void onKeyReleased(KeyboardEvent event) {
+		if (event.keyCode == KeyboardInput.KEY_M_CODE)
+			this.wireframeMode = ! this.wireframeMode;
 	}
 	
 	public static void main(String[] args) {
