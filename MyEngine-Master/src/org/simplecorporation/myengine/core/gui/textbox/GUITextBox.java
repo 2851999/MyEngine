@@ -12,6 +12,7 @@ package org.simplecorporation.myengine.core.gui.textbox;
 
 import org.simplecorporation.myengine.core.gui.GUIComponent;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
+import org.simplecorporation.myengine.core.input.KeyboardInput;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
@@ -136,6 +137,16 @@ public abstract class GUITextBox extends GUIComponent {
 			String end = this.text.substring(this.visibleTextStartIndex + (this.cursorPlace), this.text.length());
 			//Set the new text
 			this.text = front + e.keyChar + end;
+			//Check to see whether the key was backspace
+			if (e.getCode() == KeyboardInput.KEY_BACKSPACE_CODE && front.length() > 1) {
+				//Remove the character before the 
+				this.text = front.substring(0, front.length() - 1) + end;
+				//Check the start of the viewing index to decide whether
+				//the cursor should be moved back
+				if (this.visibleTextStartIndex == 0)
+					//Move the cursor back by taking away 1
+					this.cursorPlace --;
+			}
 			//Remove any unwanted characters
 			this.removeUnwantedCharacters();
 			//Calculate the view index (Causes a glitch)

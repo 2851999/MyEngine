@@ -6,8 +6,7 @@ import org.simplecorporation.myengine.core.game.BaseGame;
 import org.simplecorporation.myengine.core.game.GameValues;
 import org.simplecorporation.myengine.core.game3d.camera.Camera;
 import org.simplecorporation.myengine.core.game3d.camera.skybox.Skybox;
-import org.simplecorporation.myengine.core.game3d.model.Model;
-import org.simplecorporation.myengine.core.game3d.model.OBJLoader;
+import org.simplecorporation.myengine.core.game3d.terrain.HeightmapTerrain;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.input.KeyboardInput;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
@@ -21,19 +20,19 @@ import org.simplecorporation.myengine.utils.opengl.OpenGLSetupUtils;
 import org.simplecorporation.myengine.utils.opengl.OpenGLUtils;
 import org.simplecorporation.myengine.utils.opengl.shader.OpenGLShaderUtils;
 
-public class ShaderTest extends BaseGame {
+public class HeightmapTerrainTest extends BaseGame {
 	
 	public Camera camera;
 	public Image texture;
 	public Image sky;
 	public Skybox skybox;
 	public boolean changeCursorPos;
-	public Model model;
-	public int drawModel;
+	public int draw;
 	public boolean wireframeMode;
 	public Shader shader;
+	public HeightmapTerrain terrain;
 	
-	public ShaderTest() {
+	public HeightmapTerrainTest() {
 		Settings.Window.Title = "Shader Test";
 		Settings.Window.Fullscreen = false;
 		Settings.Window.Size.Width = 1024;
@@ -50,10 +49,10 @@ public class ShaderTest extends BaseGame {
 		this.texture = new Image("C:\\grass1.png", "PNG", true);
 		this.sky = new Image("C:\\sky.png", "PNG", true);
 		this.camera = new Camera();
-		this.skybox = new Skybox(100, 100, 100, this.sky, this.sky, this.sky, this.sky, this.sky, this.sky);
-		this.model = OBJLoader.loadModel("/testdata/models/unitologist.obj", false);
-		this.drawModel = DisplayList.generate();
-		this.model.render();
+		this.skybox = new Skybox(600, 600, 600, this.sky, this.sky, this.sky, this.sky, this.sky, this.sky);
+		this.terrain = new HeightmapTerrain("/heightmap.bmp", false);
+		this.draw = DisplayList.generate();
+		this.terrain.render();
 		DisplayList.end();
 		shader = new Shader();
 		shader.attachShader(OpenGLShaderUtils.createShader("/testdata/shaders/toonshader.vert", GL20.GL_VERTEX_SHADER, false));
@@ -71,13 +70,13 @@ public class ShaderTest extends BaseGame {
 			this.camera.rotation.y += GameValues.CURRENT_DELTA * 0.2;
 		
 		if (KeyboardInput.KEY_W)
-			this.camera.moveZ(GameValues.CURRENT_DELTA * 0.01);
+			this.camera.moveZ(GameValues.CURRENT_DELTA * 0.1);
 		if (KeyboardInput.KEY_S)
 			this.camera.moveZ(-GameValues.CURRENT_DELTA * 0.1);
 		if (KeyboardInput.KEY_A)
-			this.camera.moveX(GameValues.CURRENT_DELTA * 0.01);
+			this.camera.moveX(GameValues.CURRENT_DELTA * 0.1);
 		if (KeyboardInput.KEY_D)
-			this.camera.moveX(-GameValues.CURRENT_DELTA * 0.01);
+			this.camera.moveX(-GameValues.CURRENT_DELTA * 0.1);
 		OpenGLSetupUtils.setupPerspective(70, 0.1f, 1000);
 		OpenGLSetupUtils.setupDepthTest();
 		OpenGLUtils.clearColourBuffer();
@@ -89,13 +88,12 @@ public class ShaderTest extends BaseGame {
 		this.sky.getOpenGLImage().bind();
 		this.skybox.render(this.camera.position);
 		this.texture.getOpenGLImage().bind();
-		System.out.println(this.model.faces.size() + " Polygons");
 		//Wireframe mode
 		if (this.wireframeMode)
 			OpenGLUtils.enableWireframeMode();
 		else
 			OpenGLUtils.disableWireframeMode();
-		shader.useShader();
+		//shader.useShader();
 		//shader.setValuef("lightPosition", 0, 1, 0);
 		//shader.setValuef("mambient", 0.2f, 0.2f, 0.2f);
 		//shader.setValuef("mdiffuse", 0.6f, 0.6f, 0.6f);
@@ -104,9 +102,9 @@ public class ShaderTest extends BaseGame {
 		//shader.setValuef("ldiffuse", 0.6f, 0.6f, 0.6f);
 		//shader.setValuef("lspecular", 1, 1, 1);
 		//shader.setValuef("shininess", 32.0f);
-		shader.setValuef("lightDir", 1,1,1);
-		DisplayList.render(this.drawModel);
-		shader.stopUsingShader();
+		//shader.setValuef("lightDir", 1,-1,-1);
+		DisplayList.render(this.draw);
+		//shader.stopUsingShader();
 	}
 	
 	public void onMouseMoved(MouseMotionEvent event) {
@@ -130,7 +128,7 @@ public class ShaderTest extends BaseGame {
 	}
 	
 	public static void main(String[] args) {
-		new ShaderTest();
+		new HeightmapTerrainTest();
 	}
 	
 }

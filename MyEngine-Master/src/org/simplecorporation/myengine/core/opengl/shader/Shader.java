@@ -43,4 +43,40 @@ public class Shader {
 		GL20.glValidateProgram(this.shaderProgram);
 	}
 	
+	/* The method used to set a specific value in this shader */
+	public void setValuef(String variableName, float v1) {
+		//Set the value in the shader
+		GL20.glUniform1f(GL20.glGetUniformLocation(this.shaderProgram, variableName), v1);
+	}
+	
+	/* The method used to set a specific value in this shader */
+	public void setValuef(String variableName, float v1, float v2) {
+		//Set the value in the shader
+		GL20.glUniform2f(GL20.glGetUniformLocation(this.shaderProgram, variableName), v1, v2);
+	}
+	
+	/* The method used to set a specific value in this shader */
+	public void setValuef(String variableName, float v1, float v2, float v3) {
+		//Set the value in the shader
+		GL20.glUniform3f(GL20.glGetUniformLocation(this.shaderProgram, variableName), v1, v2, v3);
+	}
+	
+	/* The method used to set a specific value in this shader */
+	public void setValuei(String variableName, int v1) {
+		//Set the value in the shader
+		GL20.glUniform1i(GL20.glGetUniformLocation(this.shaderProgram, variableName), v1);
+	}
+	
+	/* The method used to set a specific value in this shader */
+	public void setValuei(String variableName, int v1, int v2) {
+		//Set the value in the shader
+		GL20.glUniform2i(GL20.glGetUniformLocation(this.shaderProgram, variableName), v1, v2);
+	}
+	
+	/* The method used to set a specific value in this shader */
+	public void setValuei(String variableName, int v1, int v2, int v3) {
+		//Set the value in the shader
+		GL20.glUniform3i(GL20.glGetUniformLocation(this.shaderProgram, variableName), v1, v2, v3);
+	}
+	
 }
