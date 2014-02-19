@@ -52,12 +52,15 @@ public class ShaderTest extends BaseGame {
 		this.camera = new Camera();
 		this.skybox = new Skybox(100, 100, 100, this.sky, this.sky, this.sky, this.sky, this.sky, this.sky);
 		this.model = OBJLoader.loadModel("/testdata/models/unitologist.obj", false);
-		this.drawModel = DisplayList.generate();
-		this.model.render();
-		DisplayList.end();
 		shader = new Shader();
-		shader.attachShader(OpenGLShaderUtils.createShader("/testdata/shaders/toonshader.vert", GL20.GL_VERTEX_SHADER, false));
-		shader.attachShader(OpenGLShaderUtils.createShader("/testdata/shaders/toonshader.frag", GL20.GL_FRAGMENT_SHADER, false));
+		shader.attachShader(OpenGLShaderUtils.createShader("/testdata/shaders/testshader.vert", GL20.GL_VERTEX_SHADER, false));
+		shader.attachShader(OpenGLShaderUtils.createShader("/testdata/shaders/testshader.frag", GL20.GL_FRAGMENT_SHADER, false));
+		this.drawModel = DisplayList.generate();
+		this.shader.useShader();
+		shader.setValuef("lightDir", 1,1,1);
+		this.model.render();
+		this.shader.stopUsingShader();
+		DisplayList.end();
 	}
 	
 	public void gameRender() {
@@ -71,13 +74,13 @@ public class ShaderTest extends BaseGame {
 			this.camera.rotation.y += GameValues.CURRENT_DELTA * 0.2;
 		
 		if (KeyboardInput.KEY_W)
-			this.camera.moveZ(GameValues.CURRENT_DELTA * 0.01);
+			this.camera.moveZ(GameValues.CURRENT_DELTA * 0.1);
 		if (KeyboardInput.KEY_S)
 			this.camera.moveZ(-GameValues.CURRENT_DELTA * 0.1);
 		if (KeyboardInput.KEY_A)
-			this.camera.moveX(GameValues.CURRENT_DELTA * 0.01);
+			this.camera.moveX(GameValues.CURRENT_DELTA * 0.1);
 		if (KeyboardInput.KEY_D)
-			this.camera.moveX(-GameValues.CURRENT_DELTA * 0.01);
+			this.camera.moveX(-GameValues.CURRENT_DELTA * 0.1);
 		OpenGLSetupUtils.setupPerspective(70, 0.1f, 1000);
 		OpenGLSetupUtils.setupDepthTest();
 		OpenGLUtils.clearColourBuffer();
@@ -95,7 +98,7 @@ public class ShaderTest extends BaseGame {
 			OpenGLUtils.enableWireframeMode();
 		else
 			OpenGLUtils.disableWireframeMode();
-		shader.useShader();
+		//shader.useShader();
 		//shader.setValuef("lightPosition", 0, 1, 0);
 		//shader.setValuef("mambient", 0.2f, 0.2f, 0.2f);
 		//shader.setValuef("mdiffuse", 0.6f, 0.6f, 0.6f);
@@ -104,9 +107,9 @@ public class ShaderTest extends BaseGame {
 		//shader.setValuef("ldiffuse", 0.6f, 0.6f, 0.6f);
 		//shader.setValuef("lspecular", 1, 1, 1);
 		//shader.setValuef("shininess", 32.0f);
-		shader.setValuef("lightDir", 1,1,1);
+		//shader.setValuef("lightDir", 1,1,1);
 		DisplayList.render(this.drawModel);
-		shader.stopUsingShader();
+		//shader.stopUsingShader();
 	}
 	
 	public void onMouseMoved(MouseMotionEvent event) {

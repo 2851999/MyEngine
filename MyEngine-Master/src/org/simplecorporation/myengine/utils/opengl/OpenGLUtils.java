@@ -10,6 +10,9 @@
 
 package org.simplecorporation.myengine.utils.opengl;
 
+import java.nio.FloatBuffer;
+
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.simplecorporation.myengine.settings.Settings;
 
@@ -55,6 +58,19 @@ public class OpenGLUtils {
 		//Make sure OpenGL is enabled
 		if (! Settings.Android && Settings.Video.OpenGL)
 			GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
+	}
+	
+	/* The method used to create a flipped float buffer for
+	 * OpenGL using a float array */
+	public static FloatBuffer getFlippedFloatBuffer(float[] data) {
+		//Crate the float buffer
+		FloatBuffer floatBuffer = BufferUtils.createFloatBuffer(data.length);
+		//Give the float buffer the data
+		floatBuffer.put(data);
+		//Flip the float buffer
+		floatBuffer.flip();
+		//Return the float buffer
+		return floatBuffer;
 	}
 	
 	/* The method to get the OpenGL version */
