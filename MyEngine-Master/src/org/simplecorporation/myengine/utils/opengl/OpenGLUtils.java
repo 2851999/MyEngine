@@ -11,9 +11,11 @@
 package org.simplecorporation.myengine.utils.opengl;
 
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
+import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.settings.Settings;
 
 public class OpenGLUtils {
@@ -60,15 +62,57 @@ public class OpenGLUtils {
 			GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
 	}
 	
-	/* The method used to create a flipped float buffer for
+	/* The method used to create an integer buffer for
 	 * OpenGL using a float array */
-	public static FloatBuffer getFlippedFloatBuffer(float[] data) {
-		//Crate the float buffer
+	public static IntBuffer getIntegerBuffer(int[] data) {
+		//Create the float buffer
+		IntBuffer integerBuffer = BufferUtils.createIntBuffer(data.length);
+		//Give the integer buffer the data
+		integerBuffer.put(data);
+		//Retrun the integer buffer
+		return integerBuffer;
+	}
+	
+	/* The method used to create a float buffer for OpenGL
+	 * using a float array */
+	public static FloatBuffer getFloatBuffer(float[] data) {
+		//Create the float buffer
 		FloatBuffer floatBuffer = BufferUtils.createFloatBuffer(data.length);
 		//Give the float buffer the data
 		floatBuffer.put(data);
-		//Flip the float buffer
+		//Return the float buffer
+		return floatBuffer;
+	}
+	
+	/* The method used to create a flipped integer buffer for
+	 * OpenGL using an integer array */
+	public static IntBuffer getFlippedIntegerBuffer(int[] data) {
+		//Create the integer buffer
+		IntBuffer integerBuffer = getIntegerBuffer(data);
+		//Flip the buffer
+		integerBuffer.flip();
+		//Return the integer buffer
+		return integerBuffer;
+	}
+	
+	/* The method used to create a flipped float buffer for
+	 * OpenGL using a float array */
+	public static FloatBuffer getFlippedFloatBuffer(float[] data) {
+		//Create the float buffer
+		FloatBuffer floatBuffer = getFloatBuffer(data);
+		//Flip the buffer
 		floatBuffer.flip();
+		//Return the float buffer
+		return floatBuffer;
+	}
+	
+	/* The method used to create a flipped float buffer for
+	 * OpenGL using a colour */
+	public static FloatBuffer getFlippedFloatBuffer(Colour colour) {
+		//The float buffer
+		FloatBuffer floatBuffer = null;
+		//Create the float buffer
+		floatBuffer = getFlippedFloatBuffer(colour.getFloatValues());
 		//Return the float buffer
 		return floatBuffer;
 	}

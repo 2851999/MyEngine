@@ -11,6 +11,7 @@
 package org.simplecorporation.myengine.core.opengl.shader;
 
 import org.lwjgl.opengl.GL20;
+import org.simplecorporation.myengine.utils.opengl.OpenGLUtils;
 
 public class Shader {
 	
@@ -77,6 +78,18 @@ public class Shader {
 	public void setValuei(String variableName, int v1, int v2, int v3) {
 		//Set the value in the shader
 		GL20.glUniform3i(GL20.glGetUniformLocation(this.shaderProgram, variableName), v1, v2, v3);
+	}
+	
+	/* The method used to set a specific value in this shader */
+	public void setValuei(String variableName, int[] arrayValues) {
+		//Set the value in the shader
+		GL20.glUniform1(GL20.glGetUniformLocation(this.shaderProgram, variableName), OpenGLUtils.getIntegerBuffer(arrayValues));
+	}
+	
+	/* The method used to set a specific value in this shader */
+	public void setValuef(String variableName, float[] arrayValues) {
+		//Set the value in the shader
+		GL20.glUniform1(GL20.glGetUniformLocation(this.shaderProgram, variableName), OpenGLUtils.getFloatBuffer(arrayValues));
 	}
 	
 }
