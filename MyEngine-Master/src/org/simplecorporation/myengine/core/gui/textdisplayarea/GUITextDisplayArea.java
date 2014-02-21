@@ -10,7 +10,8 @@
 
 package org.simplecorporation.myengine.core.gui.textdisplayarea;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.simplecorporation.myengine.core.gui.GUIComponent;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
@@ -18,12 +19,12 @@ import org.simplecorporation.myengine.core.gui.font.GUIFont;
 public class GUITextDisplayArea extends GUIComponent {
 	
 	/* The text in the display area */
-	private LinkedList<String> text;
+	private List<String> text;
 	
 	/* The font */
 	private GUIFont font;
 	
-	public GUITextDisplayArea(String name , LinkedList<String> textToDisplay , GUIFont font , double width) {
+	public GUITextDisplayArea(String name , List<String> textToDisplay , GUIFont font , double width) {
 		//Call the super constructor
 		super(name);
 		//Assign the variables
@@ -50,9 +51,9 @@ public class GUITextDisplayArea extends GUIComponent {
 	}
 	
 	/* The method to setup word wrap */
-	public void wordWrap(LinkedList<String> textToDisplay) {
+	public void wordWrap(List<String> textToDisplay) {
 		//Create the text linked list
-		text = new LinkedList<String>();
+		text = new ArrayList<String>();
 		//Add an empty line to the text linked list
 		this.text.add("");
 		//The current line of the new text

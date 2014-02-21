@@ -10,11 +10,9 @@
 
 package org.simplecorporation.myengine.core.gui.scrollbar;
 
-import java.awt.event.KeyEvent;
-
-import org.lwjgl.input.Keyboard;
 import org.simplecorporation.myengine.core.gui.button.GUIButton;
 import org.simplecorporation.myengine.core.gui.slider.GUISlider;
+import org.simplecorporation.myengine.core.input.KeyboardInput;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.ScrollEvent;
 import org.simplecorporation.myengine.settings.Settings;
@@ -98,18 +96,10 @@ public abstract class GUIScrollBar extends GUISlider {
 	public void onKeyPressed(KeyboardEvent e) {
 		//Check whether this is visible
 		if (this.visible) {
-			//Check whether OpenGL is being used
-			if (! Settings.Video.OpenGL && ! Settings.Android) {
-				//Check what key was pressed
-				if (e.getCode() == KeyEvent.VK_SHIFT)
-					//Set shift to true
-					this.shift = true;
-			} else if (Settings.Video.OpenGL && ! Settings.Android) {
-				//Check what key was pressed
-				if (e.getCode() == Keyboard.KEY_LSHIFT || e.getCode() == Keyboard.KEY_RSHIFT)
-					//Set shift to true
-					this.shift = true;
-			}
+			//Check what key was pressed
+			if (e.getCode() == KeyboardInput.KEY_LSHIFT_CODE || e.getCode() == KeyboardInput.KEY_RSHIFT_CODE)
+				//Set shift to true
+				this.shift = true;
 		}
 	}
 	
@@ -117,18 +107,10 @@ public abstract class GUIScrollBar extends GUISlider {
 	public void onKeyReleased(KeyboardEvent e) {
 		//Check whether this is visible
 		if (this.visible) {
-			//Check whether OpenGL is being used
-			if (! Settings.Video.OpenGL && ! Settings.Android) {
-				//Check what key was released
-				if (e.getCode() == KeyEvent.VK_SHIFT)
-					//Set shift to false
-					this.shift = false;
-			} else if (Settings.Video.OpenGL && ! Settings.Android) {
-				//Check what key was released
-				if (e.getCode() == Keyboard.KEY_LSHIFT || e.getCode() == Keyboard.KEY_RSHIFT)
-					//Set shift to false
-					this.shift = false;
-			}
+			//Check what key was released
+			if (e.getCode() == KeyboardInput.KEY_LSHIFT_CODE || e.getCode() == KeyboardInput.KEY_RSHIFT_CODE)
+				//Set shift to false
+				this.shift = false;
 		}
 	}
 	

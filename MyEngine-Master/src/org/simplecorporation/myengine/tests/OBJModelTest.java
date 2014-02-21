@@ -47,7 +47,7 @@ public class OBJModelTest extends BaseGame {
 		this.sky = new Image("C:\\sky.png", "PNG", true);
 		this.camera = new Camera();
 		this.skybox = new Skybox(100, 100, 100, this.sky, this.sky, this.sky, this.sky, this.sky, this.sky);
-		this.model = OBJLoader.loadModel("/texturedmonkeyface.obj", false);
+		this.model = OBJLoader.loadModel("C:/Users/Joel/Documents/cup.obj", true);
 		this.drawModel = DisplayList.generate();
 		this.model.render();
 		DisplayList.end();

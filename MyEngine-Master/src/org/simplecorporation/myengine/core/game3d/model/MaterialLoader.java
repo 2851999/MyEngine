@@ -56,6 +56,13 @@ public class MaterialLoader {
 				Vector3D values = ModelParserUtils.getVectorValue(line);
 				//Set the specular colour in the current material
 				currentMaterial.specularColour = new Colour(values.x, values.y, values.z);
+			} else if (line.startsWith("Ns ")) {
+				//Split up the current line
+				String[] split = line.split(" ");
+				//Get the shininess value
+				double shininess = Double.parseDouble(split[1]);
+				//Set the shininess colour in the current material
+				currentMaterial.shininess = shininess;
 			} else if (line.startsWith("d ") || line.startsWith("Tr ")) {
 				//Split up the current line using a space
 				String[] split = line.split(" ");
