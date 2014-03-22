@@ -55,8 +55,14 @@ public class Logger {
 	/* The last debug log */
 	public static String lastDebugLog = "";
 	
-	/* The method to log a message */
+	/* The method used to log a message */
 	public static void log(Log log) {
+		//Log the log using the IGNORE_NONE property
+		log(log, LogIgnore.IGNORE_NONE);
+	}
+	
+	/* The method used to log a message */
+	public static void log(Log log, LogIgnore logIgnore) {
 		GregorianCalendar date = new GregorianCalendar();
 		int seconds = date.get(Calendar.SECOND);
 		int minutes = date.get(Calendar.MINUTE);
@@ -69,7 +75,7 @@ public class Logger {
 			if (logLevel == LogLevel.LOG_LEVEL_ALL || logLevel == LogLevel.LOG_LEVEL_INFORMATION ||
 					logLevel == LogLevel.LOG_LEVEL_INFORMATION_AND_WARNING || logLevel == LogLevel.LOG_LEVEL_INFORMATION_AND_ERROR) {
 				//Set the message
-				message = "[" + hours + ":" + minutes + ":" + seconds + "]" + "[INFORMATION]" + "[" + log.source + "] " + log.message;
+				message = getMessage("[" + hours + ":" + minutes + ":" + seconds + "]", "[INFORMATION]", "[" + log.source + "]", log.message, logIgnore);
 				//Add the message to the logs
 				logs.add(message);
 				informationLogs.add(message);
@@ -84,7 +90,7 @@ public class Logger {
 			if (logLevel == LogLevel.LOG_LEVEL_ALL || logLevel == LogLevel.LOG_LEVEL_WARNING ||
 					logLevel == LogLevel.LOG_LEVEL_INFORMATION_AND_WARNING || logLevel == LogLevel.LOG_LEVEL_WARNING_AND_ERROR) {
 				//Set the message
-				message = "[" + hours + ":" + minutes + ":" + seconds + "]" + "[WARNING]" + "[" + log.source + "] " + log.message;
+				message = getMessage("[" + hours + ":" + minutes + ":" + seconds + "]", "[WARNING]", "[" + log.source + "]", log.message, logIgnore);
 				//Add the message to the logs
 				logs.add(message);
 				warningLogs.add(message);
@@ -99,7 +105,8 @@ public class Logger {
 			if (logLevel == LogLevel.LOG_LEVEL_ALL || logLevel == LogLevel.LOG_LEVEL_ERROR ||
 					logLevel == LogLevel.LOG_LEVEL_WARNING_AND_ERROR || logLevel == LogLevel.LOG_LEVEL_INFORMATION_AND_ERROR) {
 				//Set the message
-				message = "[" + hours + ":" + minutes + ":" + seconds + "]" + "[ERROR]" + "[" + log.source + "] " + log.message;
+				//Set the message
+				message = getMessage("[" + hours + ":" + minutes + ":" + seconds + "]", "[ERROR]", "[" + log.source + "]", log.message, logIgnore);
 				//Add the message to the logs
 				logs.add(message);
 				errorLogs.add(message);
@@ -113,7 +120,8 @@ public class Logger {
 			//Check if debugging is enabled
 			if (debugging) {
 				//Set the message
-				message = "[" + hours + ":" + minutes + ":" + seconds + "]" + "[DEBUG]" + "[" + log.source + "] " + log.message;
+				//Set the message
+				message = getMessage("[" + hours + ":" + minutes + ":" + seconds + "]", "[DEBUG]", "[" + log.source + "]", log.message, logIgnore);
 				//Add the message to the logs
 				logs.add(message);
 				debugLogs.add(message);
@@ -124,6 +132,31 @@ public class Logger {
 				println(message);
 			}
 		}
+	}
+	
+	/* The method used to determine the message using the LogIgnore */
+	public static String getMessage(String time, String type, String source, String message, LogIgnore logIgnore) {
+		//The new message
+		String newMessage = "";
+		//Check the log ignore
+		if (logIgnore == LogIgnore.IGNORE_NONE)
+			newMessage = time + type + source + " " + message;
+		else if (logIgnore == LogIgnore.IGNORE_TIME)
+			newMessage = type + source + " " + message;
+		else if (logIgnore == LogIgnore.IGNORE_TYPE)
+			newMessage = time + source + " " + message;
+		else if (logIgnore == LogIgnore.IGNORE_SOURCE)
+			newMessage = time + type + " " + message;
+		else if (logIgnore == LogIgnore.IGNORE_TIME_AND_TYPE)
+			newMessage = source + " " + message;
+		else if (logIgnore == LogIgnore.IGNORE_TIME_AND_SOURCE)
+			newMessage = type + " " + message;
+		else if (logIgnore == LogIgnore.IGNORE_TYPE_AND_SOURCE)
+			newMessage = time + " " + message;
+		else if (logIgnore == LogIgnore.IGNORE_ALL)
+			newMessage = message;
+		//Return the new message
+		return newMessage;
 	}
 	
 	/* The method to print out a line */

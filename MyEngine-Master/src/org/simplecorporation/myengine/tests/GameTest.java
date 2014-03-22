@@ -34,4 +34,8 @@ public class GameTest extends Game {
 		new GameTest();
 	}
 	
+	public void loadResources() {
+		
+	}
+	
 }
