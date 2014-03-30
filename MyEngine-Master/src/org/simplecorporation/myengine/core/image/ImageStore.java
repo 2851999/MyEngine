@@ -12,9 +12,9 @@ package org.simplecorporation.myengine.core.image;
 
 import java.util.LinkedList;
 
-import org.simplecorporation.myengine.core.logger.Log;
-import org.simplecorporation.myengine.core.logger.LogType;
-import org.simplecorporation.myengine.core.logger.Logger;
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
+import org.simplecorporation.myengine.utils.logger.Logger;
 
 /**
  * The ImageStore is a <code>class</code> made up of static fields and

@@ -17,7 +17,7 @@ import java.util.List;
 import org.simplecorporation.myengine.core.game3d.vector.Vector3D;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.utils.FileUtils;
+import org.simplecorporation.myengine.utils.file.FileUtils;
 
 public class MaterialLoader {
 	

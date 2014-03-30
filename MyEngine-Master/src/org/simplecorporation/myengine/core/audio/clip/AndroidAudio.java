@@ -10,8 +10,8 @@
 
 package org.simplecorporation.myengine.core.audio.clip;
 
-import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.android.AndroidStore;
+import org.simplecorporation.myengine.settings.Settings;
 
 import android.media.MediaPlayer;
 

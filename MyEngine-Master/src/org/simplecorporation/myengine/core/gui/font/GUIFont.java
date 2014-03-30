@@ -10,8 +10,8 @@
 
 package org.simplecorporation.myengine.core.gui.font;
 
-import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.gui.font.bitmap.BitmapFont;
+import org.simplecorporation.myengine.settings.Settings;
 
 public class GUIFont {
 	

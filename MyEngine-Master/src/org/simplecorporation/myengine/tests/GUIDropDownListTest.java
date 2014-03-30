@@ -1,11 +1,11 @@
 package org.simplecorporation.myengine.tests;
 
-import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.engine.loop.EngineLoop;
 import org.simplecorporation.myengine.core.gui.builder.GUIBuilder;
 import org.simplecorporation.myengine.core.gui.dropdownlist.GUIRenderableDropDownList;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
+import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.font.FontUtils;
 import org.simplecorporation.myengine.utils.opengl.OpenGLSetupUtils;
 import org.simplecorporation.myengine.utils.opengl.OpenGLUtils;

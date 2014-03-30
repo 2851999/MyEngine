@@ -11,9 +11,9 @@
 package org.simplecorporation.myengine.core.gui.font.bitmap;
 
 import org.lwjgl.opengl.GL11;
-import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
+import org.simplecorporation.myengine.settings.Settings;
 
 
 public class BitmapFont {

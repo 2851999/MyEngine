@@ -22,11 +22,11 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import org.newdawn.slick.openal.Audio;
 import org.newdawn.slick.openal.AudioLoader;
 import org.newdawn.slick.util.ResourceLoader;
-import org.simplecorporation.myengine.core.Settings;
-import org.simplecorporation.myengine.core.logger.Log;
-import org.simplecorporation.myengine.core.logger.LogType;
-import org.simplecorporation.myengine.core.logger.Logger;
-import org.simplecorporation.myengine.utils.FileUtils;
+import org.simplecorporation.myengine.settings.Settings;
+import org.simplecorporation.myengine.utils.file.FileUtils;
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
+import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class JavaAudio {
 	

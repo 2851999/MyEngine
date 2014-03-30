@@ -16,7 +16,7 @@ import org.simplecorporation.myengine.core.gui.button.listener.GUIButtonListener
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.gui.textdisplayarea.GUITextDisplayArea;
 import org.simplecorporation.myengine.core.gui.window.GUIWindow;
-import org.simplecorporation.myengine.utils.ArrayUtils;
+import org.simplecorporation.myengine.utils.array.ArrayUtils;
 
 public class GUIMessageDialogBox implements GUIButtonListener {
 	

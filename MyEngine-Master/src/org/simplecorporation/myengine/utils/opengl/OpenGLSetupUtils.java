@@ -12,7 +12,7 @@ package org.simplecorporation.myengine.utils.opengl;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
-import org.simplecorporation.myengine.core.Settings;
+import org.simplecorporation.myengine.settings.Settings;
 
 public class OpenGLSetupUtils {
 	

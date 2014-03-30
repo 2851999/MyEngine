@@ -18,12 +18,12 @@ import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
-import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.image.Image;
-import org.simplecorporation.myengine.core.logger.Log;
-import org.simplecorporation.myengine.core.logger.LogType;
-import org.simplecorporation.myengine.core.logger.Logger;
-import org.simplecorporation.myengine.utils.MessageBox;
+import org.simplecorporation.myengine.settings.Settings;
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
+import org.simplecorporation.myengine.utils.logger.Logger;
+import org.simplecorporation.myengine.utils.messagebox.MessageBox;
 
 public class OpenGLWindow {
 	

@@ -1,9 +1,9 @@
 package org.simplecorporation.myengine.tests;
 
-import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.game.BaseGame;
 import org.simplecorporation.myengine.core.input.MouseInput;
-import org.simplecorporation.myengine.utils.Timer;
+import org.simplecorporation.myengine.settings.Settings;
+import org.simplecorporation.myengine.utils.timer.Timer;
 
 public class TimerTest extends BaseGame {
 	

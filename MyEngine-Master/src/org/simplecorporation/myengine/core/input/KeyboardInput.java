@@ -12,8 +12,8 @@ package org.simplecorporation.myengine.core.input;
 
 import java.awt.event.KeyEvent;
 
-import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
+import org.simplecorporation.myengine.settings.Settings;
 
 /**
  * The KeyboardInput <code>class</code> that contains all of the key codes

@@ -14,9 +14,9 @@ import java.util.LinkedList;
 
 import org.simplecorporation.myengine.core.effect.Effect;
 import org.simplecorporation.myengine.core.game2d.vector.Vector2D;
-import org.simplecorporation.myengine.core.logger.Log;
-import org.simplecorporation.myengine.core.logger.LogType;
-import org.simplecorporation.myengine.core.logger.Logger;
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
+import org.simplecorporation.myengine.utils.logger.Logger;
 
 public abstract class AbstractEntity2D extends Entity2D {
 	

@@ -10,8 +10,8 @@
 
 package org.simplecorporation.myengine.core.render.basic;
 
-import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.image.Image;
+import org.simplecorporation.myengine.settings.Settings;
 
 public class BasicRenderer2D {
 	

@@ -1,11 +1,11 @@
 package org.simplecorporation.myengine.tests;
 
-import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.game.BaseGame;
 import org.simplecorporation.myengine.core.game2d.entity.AnimatedImageEntity2D;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
+import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.opengl.OpenGLSetupUtils;
 
 public class AnimationTest extends BaseGame {

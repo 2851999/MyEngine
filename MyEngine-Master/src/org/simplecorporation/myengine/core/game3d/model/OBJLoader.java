@@ -18,10 +18,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import org.simplecorporation.myengine.core.game3d.vector.Vector3D;
-import org.simplecorporation.myengine.core.logger.Log;
-import org.simplecorporation.myengine.core.logger.LogType;
-import org.simplecorporation.myengine.core.logger.Logger;
-import org.simplecorporation.myengine.utils.FileUtils;
+import org.simplecorporation.myengine.utils.file.FileUtils;
+import org.simplecorporation.myengine.utils.logger.Log;
+import org.simplecorporation.myengine.utils.logger.LogType;
+import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class OBJLoader {
 	
