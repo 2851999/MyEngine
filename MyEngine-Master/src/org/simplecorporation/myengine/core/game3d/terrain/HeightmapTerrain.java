@@ -10,6 +10,13 @@
 
 package org.simplecorporation.myengine.core.game3d.terrain;
 
+import static org.lwjgl.opengl.GL11.GL_TRIANGLE_STRIP;
+import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glEnd;
+import static org.lwjgl.opengl.GL11.glTexCoord2d;
+import static org.lwjgl.opengl.GL11.glVertex3d;
+import static org.lwjgl.opengl.GL11.glVertex3f;
+
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -17,12 +24,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import org.simplecorporation.myengine.utils.file.FileUtils;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
-
-import static org.lwjgl.opengl.GL11.*;
+import org.simplecorporation.myengine.core.logger.Log;
+import org.simplecorporation.myengine.core.logger.LogType;
+import org.simplecorporation.myengine.core.logger.Logger;
+import org.simplecorporation.myengine.utils.FileUtils;
 
 public class HeightmapTerrain {
 	

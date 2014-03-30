@@ -13,6 +13,7 @@ package org.simplecorporation.myengine.core.gui;
 import java.io.File;
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.game2d.vector.Vector2D;
 import org.simplecorporation.myengine.core.gui.builder.GUIBuilder;
 import org.simplecorporation.myengine.core.gui.button.GUIImageButton;
@@ -24,16 +25,15 @@ import org.simplecorporation.myengine.core.gui.loadingbar.GUIRenderableLoadingBa
 import org.simplecorporation.myengine.core.gui.textbox.GUIImageTextBox;
 import org.simplecorporation.myengine.core.gui.textbox.GUIRenderableTextBox;
 import org.simplecorporation.myengine.core.image.Image;
+import org.simplecorporation.myengine.core.logger.Log;
+import org.simplecorporation.myengine.core.logger.LogType;
+import org.simplecorporation.myengine.core.logger.Logger;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.core.window.Window;
 import org.simplecorporation.myengine.core.window.WindowListener;
 import org.simplecorporation.myengine.core.window.WindowSizeChangedEvent;
-import org.simplecorporation.myengine.settings.Settings;
-import org.simplecorporation.myengine.utils.file.FileUtils;
+import org.simplecorporation.myengine.utils.FileUtils;
 import org.simplecorporation.myengine.utils.font.FontUtils;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class GUIPanel implements WindowListener {
 	

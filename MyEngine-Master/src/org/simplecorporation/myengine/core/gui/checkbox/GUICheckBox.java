@@ -12,13 +12,13 @@ package org.simplecorporation.myengine.core.gui.checkbox;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.gui.GUIComponent;
 import org.simplecorporation.myengine.core.gui.button.event.GUICheckBoxEvent;
 import org.simplecorporation.myengine.core.gui.button.listener.GUICheckBoxListener;
 import org.simplecorporation.myengine.core.input.MouseInput;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.input.event.TouchEvent;
-import org.simplecorporation.myengine.settings.Settings;
 
 public abstract class GUICheckBox extends GUIComponent {
 	

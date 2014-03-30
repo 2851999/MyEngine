@@ -10,7 +10,7 @@
 
 package org.simplecorporation.myengine.core.audio.clip;
 
-import org.simplecorporation.myengine.settings.Settings;
+import org.simplecorporation.myengine.core.Settings;
 
 public class AudioClip {
 	

@@ -15,8 +15,8 @@ import java.nio.IntBuffer;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.settings.Settings;
 
 public class OpenGLUtils {
 	

@@ -12,7 +12,7 @@ package org.simplecorporation.myengine.core.effect;
 
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.utils.timer.Timer;
+import org.simplecorporation.myengine.utils.Timer;
 
 public class EffectColourFade extends Effect {
 	

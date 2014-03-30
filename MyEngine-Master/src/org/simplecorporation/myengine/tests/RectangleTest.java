@@ -1,10 +1,10 @@
 package org.simplecorporation.myengine.tests;
 
 import org.lwjgl.opengl.GL11;
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.engine.loop.EngineLoop;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.settings.Settings;
 
 public class RectangleTest extends EngineLoop {
 	

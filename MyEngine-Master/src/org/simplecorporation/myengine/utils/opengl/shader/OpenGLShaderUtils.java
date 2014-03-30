@@ -14,10 +14,11 @@ import java.util.LinkedList;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
-import org.simplecorporation.myengine.utils.file.FileUtils;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
+
+import org.simplecorporation.myengine.core.logger.Log;
+import org.simplecorporation.myengine.core.logger.LogType;
+import org.simplecorporation.myengine.core.logger.Logger;
+import org.simplecorporation.myengine.utils.FileUtils;
 
 public class OpenGLShaderUtils {
 	

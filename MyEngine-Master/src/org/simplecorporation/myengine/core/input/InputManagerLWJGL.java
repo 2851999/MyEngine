@@ -13,14 +13,14 @@ package org.simplecorporation.myengine.core.input;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
 import org.simplecorporation.myengine.core.input.event.ScrollEvent;
-import org.simplecorporation.myengine.settings.Settings;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
+import org.simplecorporation.myengine.core.logger.Log;
+import org.simplecorporation.myengine.core.logger.LogType;
+import org.simplecorporation.myengine.core.logger.Logger;
 
 /**
  * The InputManagerLWJGL <code>class</code> is used to manage input for LWJGL

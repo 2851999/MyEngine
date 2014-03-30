@@ -10,7 +10,7 @@
 
 package org.simplecorporation.myengine.core.input;
 
-import org.simplecorporation.myengine.settings.Settings;
+import org.simplecorporation.myengine.core.Settings;
 
 /**
  * The InputManager <code>class</code> is used to manage input both on

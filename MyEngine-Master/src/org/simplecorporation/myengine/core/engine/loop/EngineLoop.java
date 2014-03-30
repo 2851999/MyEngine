@@ -10,20 +10,20 @@
 
 package org.simplecorporation.myengine.core.engine.loop;
 
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.applet.Applet;
 import org.simplecorporation.myengine.core.game.GameValues;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.input.InputManager;
+import org.simplecorporation.myengine.core.logger.Log;
+import org.simplecorporation.myengine.core.logger.LogType;
+import org.simplecorporation.myengine.core.logger.Logger;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.core.window.Window;
-import org.simplecorporation.myengine.settings.Settings;
+import org.simplecorporation.myengine.utils.SystemInfo;
 import org.simplecorporation.myengine.utils.font.FontUtils;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
 import org.simplecorporation.myengine.utils.opengl.OpenGLSetupUtils;
 import org.simplecorporation.myengine.utils.opengl.OpenGLUtils;
-import org.simplecorporation.myengine.utils.system.SystemInfo;
 
 public abstract class EngineLoop {
 	

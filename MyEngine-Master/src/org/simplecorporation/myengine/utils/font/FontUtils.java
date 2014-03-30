@@ -1,10 +1,10 @@
 package org.simplecorporation.myengine.utils.font;
 
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.gui.font.bitmap.BitmapFont;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.settings.Settings;
 
 public class FontUtils {
 	
