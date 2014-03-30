@@ -10,9 +10,11 @@
 
 package org.simplecorporation.myengine.core.gui;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
+import org.simplecorporation.myengine.core.rectangle.Rectangle;
 
 public class GUIDropDownMenu extends GUIComponent implements GUIButtonListener {
 	
@@ -20,13 +22,16 @@ public class GUIDropDownMenu extends GUIComponent implements GUIButtonListener {
 	public GUIButton menuButton;
 	
 	/* The buttons in the drop down menu */
-	public LinkedList<GUIButton> buttons;
+	public List<GUIButton> buttons;
 	
 	/* The boolean that represents whether the drop down list is open */
 	public boolean menuOpen;
 	
 	/* The boolean used to determine whether the menu can be toggled */
 	public boolean canMenuToggle;
+	
+	/* The height of this menu when the buttons are shown */
+	public double fullHeight;
 	
 	/* The constructor */
 	public GUIDropDownMenu(String name , GUIButton menuButton, GUIRenderer renderer) {
@@ -37,10 +42,11 @@ public class GUIDropDownMenu extends GUIComponent implements GUIButtonListener {
 		this.menuOpen = false;
 		this.canMenuToggle = true;
 		this.height = menuButton.height;
+		this.fullHeight = menuButton.height;
 		//Add this button listener to the menu button
 		this.menuButton.addListener(this);
 		//Create the buttons linked list
-		this.buttons = new LinkedList<GUIButton>();
+		this.buttons = new ArrayList<GUIButton>();
 	}
 	
 	/* The method called to update this component */
@@ -85,6 +91,17 @@ public class GUIDropDownMenu extends GUIComponent implements GUIButtonListener {
 		this.renderIndex = 0;
 		//Render the background
 		this.renderer.render(this);
+		//Render the menu button if it is set
+		if (this.menuButton != null)
+			this.menuButton.render();
+		//(Increases performance) make sure that the buttons
+		//are only rendered if this menu is open
+		if (this.menuOpen) {
+			//Go through all of the buttons
+			for (int a = 0; a < this.buttons.size(); a++)
+				//Render the current button
+				this.buttons.get(a).render();
+		}
 	}
 	
 	/* The method called when a button is clicked */
@@ -108,9 +125,9 @@ public class GUIDropDownMenu extends GUIComponent implements GUIButtonListener {
 		//Add this listener to the button
 		button.addListener(this);
 		//Add onto the height
-		this.height += button.height;
+		this.fullHeight += button.height;
 		//Add the button to the buttons linked list
-		this.buttons.addLast(button);
+		this.buttons.add(button);
 	}
 	
 	/* The method called when a mouse button is pressed */
@@ -118,7 +135,7 @@ public class GUIDropDownMenu extends GUIComponent implements GUIButtonListener {
 		//Make sure this menu is visible
 		if (this.visible) {
 			//Check if the mouse was clicked in this drop down menu's area
-			if (! this.getBounds().contains(e.x , e.y)) {
+			if (! new Rectangle(this.position.x, this.position.y, this.width, this.fullHeight).contains(e.x , e.y)) {
 				//Close this menu
 				this.menuOpen = false;
 			}

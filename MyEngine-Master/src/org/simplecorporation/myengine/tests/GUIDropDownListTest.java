@@ -17,6 +17,7 @@ public class GUIDropDownListTest extends EngineLoop {
 	
 	public GUIDropDownListTest() {
 		Settings.Video.OpenGL = true;
+		Settings.Window.Title = "DropDownList";
 		create();
 	}
 	
