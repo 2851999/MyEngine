@@ -93,7 +93,7 @@ public class GUITextBox extends GUIComponent {
 			//Check to see whether to use images
 			if (! this.renderer.useImage()) {
 				//Render the middle
-				this.renderer.render(new Vector2D(this.position.x - 1, this.position.y - 1), this.width + 2, this.height + 2, 1);
+				this.renderer.render(new Vector2D(this.position.x + 1, this.position.y + 1), this.width - 2, this.height - 2, 1);
 			}
 			
 			//The colour of the text
