@@ -8,14 +8,9 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.gui.dialogbox;
+package org.simplecorporation.myengine.core.gui;
 
-import org.simplecorporation.myengine.core.gui.button.GUIButton;
-import org.simplecorporation.myengine.core.gui.button.event.GUIButtonEvent;
-import org.simplecorporation.myengine.core.gui.button.listener.GUIButtonListener;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
-import org.simplecorporation.myengine.core.gui.textdisplayarea.GUITextDisplayArea;
-import org.simplecorporation.myengine.core.gui.window.GUIWindow;
 import org.simplecorporation.myengine.utils.ArrayUtils;
 
 public class GUIMessageDialogBox implements GUIButtonListener {

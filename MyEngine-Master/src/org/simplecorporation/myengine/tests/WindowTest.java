@@ -3,15 +3,16 @@ package org.simplecorporation.myengine.tests;
 import org.lwjgl.opengl.GL11;
 import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.engine.loop.EngineLoop;
+import org.simplecorporation.myengine.core.gui.GUIRenderer;
+import org.simplecorporation.myengine.core.gui.GUIWindow;
 import org.simplecorporation.myengine.core.gui.builder.GUIBuilder;
-import org.simplecorporation.myengine.core.gui.window.GUIRenderableWindow;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.utils.font.FontUtils;
 
 public class WindowTest extends EngineLoop {
 	
-	GUIRenderableWindow window;
+	GUIWindow window;
 	
 	public WindowTest() {
 		Settings.Video.OpenGL = true;
@@ -25,9 +26,9 @@ public class WindowTest extends EngineLoop {
 	@Override
 	public void engineCreated() {
 		// TODO Auto-generated method stub
-		window = new GUIRenderableWindow("Window" , "TITLE" , FontUtils.buildGUIFont("Arial", Colour.BLACK, 10) ,
-				GUIBuilder.createRenderableButton("NAME" , "" , new Colour[] { Colour.RED ,  Colour.BLACK ,  Colour.BLACK } , FontUtils.buildGUIFont("Arial", Colour.BLACK, 10) , 0 , 0 , 30, 30) ,
-				40 , 100 , 100 , 300 , 200 , Colour.WHITE , Colour.GREEN);
+		window = new GUIWindow("Window" , "TITLE" ,
+				GUIBuilder.createButton("NAME" , "" , new Colour[] { Colour.RED ,  Colour.BLACK ,  Colour.BLACK } , FontUtils.buildGUIFont("Arial", Colour.BLACK, 10) , 0 , 0 , 30, 30) ,
+				40 , 100 , 100 , 300 , 200 , new GUIRenderer(new Colour[] { Colour.WHITE , Colour.GREEN }, FontUtils.buildGUIFont("Arial", Colour.BLACK, 10)));
 		window.showPanel();
 	}
 

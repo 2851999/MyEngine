@@ -3,15 +3,16 @@ package org.simplecorporation.myengine.tests;
 import org.lwjgl.opengl.GL11;
 import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.engine.loop.EngineLoop;
+import org.simplecorporation.myengine.core.gui.GUIDropDownMenu;
+import org.simplecorporation.myengine.core.gui.GUIRenderer;
 import org.simplecorporation.myengine.core.gui.builder.GUIBuilder;
-import org.simplecorporation.myengine.core.gui.dropdownmenu.GUIRenderableDropDownMenu;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.utils.font.FontUtils;
 
 public class GUIDropDownMenuTest extends EngineLoop {
 	
-	GUIRenderableDropDownMenu menu;
+	GUIDropDownMenu menu;
 	
 	public GUIDropDownMenuTest() {
 		Settings.Video.OpenGL = false;
@@ -25,13 +26,13 @@ public class GUIDropDownMenuTest extends EngineLoop {
 	@Override
 	public void engineCreated() {
 		// TODO Auto-generated method stub
-		menu = new GUIRenderableDropDownMenu("DropDownMenu" , GUIBuilder.createRenderableButton("NAME" , "Menu" , new Colour[] { Colour.BLUE ,  Colour.BLACK ,  Colour.GREEN } , FontUtils.buildGUIFont("Segoe UI", Colour.WHITE, 20) , 0, 0, 0, 30) , Colour.GREY);
+		menu = new GUIDropDownMenu("DropDownMenu" , GUIBuilder.createButton("NAME" , "Menu" , new Colour[] { Colour.BLUE ,  Colour.BLACK ,  Colour.GREEN } , FontUtils.buildGUIFont("Segoe UI", Colour.WHITE, 20) , 0, 0, 0, 30) , new GUIRenderer(new Colour[] { Colour.GREY }));
 		menu.position.x = 100;
 		menu.position.y = 100;
 		menu.width = 100;
 		menu.visible = true;
-		menu.addButton(GUIBuilder.createRenderableButton("NAME" , "Button 1" , new Colour[] { Colour.BLUE ,  Colour.BLACK ,  Colour.GREEN } , FontUtils.buildGUIFont("Segoe UI", Colour.WHITE, 20) , 0, 0, 0, 30));
-		menu.addButton(GUIBuilder.createRenderableButton("NAME" , "Button 2" , new Colour[] { Colour.BLUE ,  Colour.BLACK ,  Colour.GREEN } , FontUtils.buildGUIFont("Segoe UI", Colour.WHITE, 20) , 0, 0, 0, 30));
+		menu.addButton(GUIBuilder.createButton("NAME" , "Button 1" , new Colour[] { Colour.BLUE ,  Colour.BLACK ,  Colour.GREEN } , FontUtils.buildGUIFont("Segoe UI", Colour.WHITE, 20) , 0, 0, 0, 30));
+		menu.addButton(GUIBuilder.createButton("NAME" , "Button 2" , new Colour[] { Colour.BLUE ,  Colour.BLACK ,  Colour.GREEN } , FontUtils.buildGUIFont("Segoe UI", Colour.WHITE, 20) , 0, 0, 0, 30));
 	}
 
 	@Override

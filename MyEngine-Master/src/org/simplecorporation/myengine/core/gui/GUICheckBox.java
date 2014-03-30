@@ -8,19 +8,16 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.gui.checkbox;
+package org.simplecorporation.myengine.core.gui;
 
 import java.util.LinkedList;
 
 import org.simplecorporation.myengine.core.Settings;
-import org.simplecorporation.myengine.core.gui.GUIComponent;
-import org.simplecorporation.myengine.core.gui.button.event.GUICheckBoxEvent;
-import org.simplecorporation.myengine.core.gui.button.listener.GUICheckBoxListener;
 import org.simplecorporation.myengine.core.input.MouseInput;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.input.event.TouchEvent;
 
-public abstract class GUICheckBox extends GUIComponent {
+public class GUICheckBox extends GUIComponent {
 	
 	/* Is the button selected */
 	public boolean buttonSelected;
@@ -45,9 +42,9 @@ public abstract class GUICheckBox extends GUIComponent {
 	public LinkedList<GUICheckBoxListener> listeners;
 	
 	/* The constructor */
-	public GUICheckBox(String name) {
+	public GUICheckBox(String name, GUIRenderer renderer) {
 		//Call the super constructor
-		super(name);
+		super(name, renderer);
 		//Set selected, clicked and checked to false
 		this.buttonSelected = false;
 		this.clicked = false;
@@ -87,6 +84,32 @@ public abstract class GUICheckBox extends GUIComponent {
 				//Set clicked to false
 				this.clicked = false;
 		}
+	}
+	
+	/* The render method */
+	protected void renderComponent() {
+		//Render the check box based on whether it is checked or not
+		
+		//Check what image should be used then set it
+		if (this.checked && this.buttonSelected && this.renderer.getLength() == 4) {
+			this.renderIndex = 3;
+		} else if (this.checked && ! this.buttonSelected && this.renderer.getLength() == 4) {
+			this.renderIndex = 2;
+		} else if (this.buttonSelected && this.renderer.getLength() == 4) {
+			this.renderIndex = 1;
+		} else if (this.checked && this.renderer.getLength() == 2) {
+			this.renderIndex = 1;
+		} else if (this.checked && this.renderer.getLength() == 3) {
+			this.renderIndex = 2;
+		} else if (this.buttonSelected && this.renderer.getLength() == 3) {
+			this.renderIndex = 1;
+		} else {
+			this.renderIndex = 0;
+		}
+		
+		//Render the check box
+		this.renderer.render(this);
+		
 	}
 	
 	/* The mouse released event */

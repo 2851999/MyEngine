@@ -8,19 +8,16 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.gui.button;
+package org.simplecorporation.myengine.core.gui;
 
 import java.util.LinkedList;
 
 import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.audio.clip.AudioClip;
-import org.simplecorporation.myengine.core.gui.GUIComponent;
-import org.simplecorporation.myengine.core.gui.button.event.GUIButtonEvent;
-import org.simplecorporation.myengine.core.gui.button.listener.GUIButtonListener;
 import org.simplecorporation.myengine.core.input.MouseInput;
 import org.simplecorporation.myengine.core.input.event.TouchEvent;
 
-public abstract class GUIButton extends GUIComponent {
+public class GUIButton extends GUIComponent {
 	
 	/* Is the button selected */
 	public boolean buttonSelected;
@@ -38,14 +35,16 @@ public abstract class GUIButton extends GUIComponent {
 	public String text;
 	
 	/* The constructor */
-	public GUIButton(String name) {
+	public GUIButton(String name, String text, GUIRenderer renderer) {
 		//Call the super constructor
-		super(name);
+		super(name, renderer);
 		//Set selected and clicked to false
 		this.buttonSelected = false;
 		this.clicked = false;
 		//Create the linked list
 		this.listeners = new LinkedList<GUIButtonListener>();
+		//Assign the other variables
+		this.text = text;
 	}
 	
 	/* The update method */
@@ -82,6 +81,22 @@ public abstract class GUIButton extends GUIComponent {
 				//Set clicked to false
 				this.clicked = false;
 		}
+	}
+	
+	/* The render method */
+	protected void renderComponent() {
+		//Set the correct render index
+		if (! this.buttonSelected && ! this.clicked)
+			this.renderIndex = 0;
+		else if (this.buttonSelected && this.renderer.getLength() > 1)
+			this.renderIndex = 1;
+		else if (this.clicked && this.renderer.getLength() > 2)
+			this.renderIndex = 2;
+		//Render the image
+		this.renderer.render(this);
+		//Render the text
+		this.renderer.font.render(this.text , (this.position.x + (this.width) / 2) - (this.renderer.font.getWidth(this.text) / 2) ,
+				(this.position.y + (this.height / 2)) - (this.renderer.font.getHeight(this.text) / 2));
 	}
 	
 	/* The method that returns whether the button is selected */

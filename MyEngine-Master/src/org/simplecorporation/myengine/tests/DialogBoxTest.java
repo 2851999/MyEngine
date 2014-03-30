@@ -3,10 +3,11 @@ package org.simplecorporation.myengine.tests;
 import org.lwjgl.opengl.GL11;
 import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.engine.loop.EngineLoop;
+import org.simplecorporation.myengine.core.gui.GUIInputDialogBox;
+import org.simplecorporation.myengine.core.gui.GUIRenderer;
+import org.simplecorporation.myengine.core.gui.GUIWindow;
 import org.simplecorporation.myengine.core.gui.builder.GUIBuilder;
-import org.simplecorporation.myengine.core.gui.dialogbox.GUIInputDialogBox;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
-import org.simplecorporation.myengine.core.gui.window.GUIRenderableWindow;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.utils.font.FontUtils;
@@ -28,13 +29,13 @@ public class DialogBoxTest extends EngineLoop {
 	public void engineCreated() {
 		// TODO Auto-generated method stub
 		GUIFont font = FontUtils.buildGUIFont("Arial", Colour.BLACK, 20);
-		GUIRenderableWindow window = new GUIRenderableWindow("" , "TITLE" , font ,
-				GUIBuilder.createRenderableButton("NAME" , "" , new Colour[] { Colour.RED ,  Colour.BLACK ,  Colour.BLACK } , font , 0 , 0 , 30, 30) ,
-				40 , 100 , 100 , 300 , 200 , Colour.WHITE , Colour.GREEN);
+		GUIWindow window = new GUIWindow("" , "TITLE" ,
+				GUIBuilder.createButton("NAME" , "" , new Colour[] { Colour.RED ,  Colour.BLACK ,  Colour.BLACK } , font , 0 , 0 , 30, 30) ,
+				40 , 100 , 100 , 300 , 200 , new GUIRenderer(new Colour[] { Colour.WHITE , Colour.GREEN }, font));
 		dialogBox = new GUIInputDialogBox("DialogBox" , "This is a message box" , font , window ,
-				GUIBuilder.createRenderableButton("NAME" , "Confirm" , new Colour[] { Colour.RED ,  Colour.BLACK ,  Colour.BLACK } , font , 0 , 0 , 100, 30) ,
-				GUIBuilder.createRenderableButton("NAME" , "Cancel" , new Colour[] { Colour.RED ,  Colour.BLACK ,  Colour.BLACK } , font , 0 , 0 , 100, 30) ,
-				GUIBuilder.createRenderableTextBox("NAME" , Colour.WHITE , Colour.BLACK , font , 0 , 0 , 100 , 30));
+				GUIBuilder.createButton("NAME" , "Confirm" , new Colour[] { Colour.RED ,  Colour.BLACK ,  Colour.BLACK } , font , 0 , 0 , 100, 30) ,
+				GUIBuilder.createButton("NAME" , "Cancel" , new Colour[] { Colour.RED ,  Colour.BLACK ,  Colour.BLACK } , font , 0 , 0 , 100, 30) ,
+				GUIBuilder.createTextBox("NAME" , Colour.WHITE , Colour.BLACK , font , 0 , 0 , 100 , 30));
 		dialogBox.window.showPanel();
 	}
 

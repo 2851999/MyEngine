@@ -8,16 +8,14 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.gui.scrollbar;
+package org.simplecorporation.myengine.core.gui;
 
 import org.simplecorporation.myengine.core.Settings;
-import org.simplecorporation.myengine.core.gui.button.GUIButton;
-import org.simplecorporation.myengine.core.gui.slider.GUISlider;
 import org.simplecorporation.myengine.core.input.KeyboardInput;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.ScrollEvent;
 
-public abstract class GUIScrollBar extends GUISlider {
+public class GUIScrollBar extends GUISlider {
 	
 	/* The scroll amount */
 	public double scrollAmount;
@@ -26,9 +24,9 @@ public abstract class GUIScrollBar extends GUISlider {
 	public boolean shift;
 	
 	/* The constructor */
-	public GUIScrollBar(String name , GUIButton button , int scrollDirection , double scrollAmount) {
+	public GUIScrollBar(String name , GUIButton button , int scrollDirection , double scrollAmount, GUIRenderer renderer) {
 		//Call the super constructor
-		super(name , button , scrollDirection);
+		super(name , button , scrollDirection, renderer);
 		//Assign the variables
 		this.scrollAmount = scrollAmount;
 		this.shift = false;

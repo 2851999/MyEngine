@@ -73,7 +73,7 @@ public class Settings {
 		 * on the screen */
 		public static boolean ShowInfo = true;
 		/* The variable that states whether to render boxes around images */
-		public static boolean ShowImageBoxes = true;
+		public static boolean ShowImageBoxes = false;
 	}
 	
 	/* The method to read a configuration file to set all of the settings */

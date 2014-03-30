@@ -3,8 +3,8 @@ package org.simplecorporation.myengine.tests;
 import org.lwjgl.opengl.GL11;
 import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.game.BaseGame;
-import org.simplecorporation.myengine.core.gui.button.GUIImageButton;
-import org.simplecorporation.myengine.core.gui.button.GUIRenderableButton;
+import org.simplecorporation.myengine.core.gui.GUIButton;
+import org.simplecorporation.myengine.core.gui.GUIRenderer;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.input.MouseInput;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
@@ -15,8 +15,8 @@ import org.simplecorporation.myengine.utils.opengl.OpenGLSetupUtils;
 
 public class ButtonTest extends BaseGame {
 	
-	public GUIImageButton button;
-	public GUIRenderableButton button2;
+	public GUIButton button;
+	public GUIButton button2;
 	
 	public ButtonTest() {
 		Settings.Window.Title = "Button Test";
@@ -27,11 +27,11 @@ public class ButtonTest extends BaseGame {
 	}
 	
 	public void gameCreated() {
-		button = new GUIImageButton("Button" , "Test" , new Image[] {
+		button = new GUIButton("Button" , "Test" , new GUIRenderer(new Image[] {
 				new Image(System.getenv("AppData") + "/SimpleCorporation/MyEngine/MainMenuButton1.png" , "PNG" , true) ,
 				new Image(System.getenv("AppData") + "/SimpleCorporation/MyEngine/MainMenuButton2.png" , "PNG" , true) , 
 				new Image(System.getenv("AppData") + "/SimpleCorporation/MyEngine/MainMenuButton3.png" , "PNG" , true)
-		} , FontUtils.buildGUIFont("Segoe UI" , Colour.WHITE , 20f));
+		} , FontUtils.buildGUIFont("Segoe UI" , Colour.WHITE , 20f)));
 		button.visible = true;
 		button.position.x = 100;
 		button.position.y = 100;
@@ -39,11 +39,11 @@ public class ButtonTest extends BaseGame {
 		button.height = 30;
 		button.rotationVelocity = 10;
 		
-		button2 = new GUIRenderableButton("Button2" , "Test2" , new Colour[] {
+		button2 = new GUIButton("Button2" , "Test2" , new GUIRenderer(new Colour[] {
 				Colour.ORANGE ,
 				Colour.LIGHT_BLUE ,
 				Colour.BLUE
-		} , FontUtils.buildGUIFont("Segoe UI" , Colour.WHITE , 20f));
+		} , FontUtils.buildGUIFont("Segoe UI" , Colour.WHITE , 20f)));
 		
 		button2.visible = true;
 		button2.position.x = 200;
@@ -76,7 +76,6 @@ public class ButtonTest extends BaseGame {
 		}
 		BasicRenderer.setColour(Colour.BLACK);
 		BasicRenderer.renderFilledRectangle(0 , 0 , 640 , 480);
-		BasicRenderer.setColour(Colour.WHITE);
 		button.render();
 		button2.render();
 	}

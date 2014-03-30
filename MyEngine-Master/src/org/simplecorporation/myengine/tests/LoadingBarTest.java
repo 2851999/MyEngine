@@ -3,14 +3,15 @@ package org.simplecorporation.myengine.tests;
 import org.lwjgl.opengl.GL11;
 import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.game.BaseGame;
-import org.simplecorporation.myengine.core.gui.loadingbar.GUIRenderableLoadingBar;
+import org.simplecorporation.myengine.core.gui.GUILoadingBar;
+import org.simplecorporation.myengine.core.gui.GUIRenderer;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.utils.opengl.OpenGLSetupUtils;
 
 public class LoadingBarTest extends BaseGame {
 	
-	public GUIRenderableLoadingBar loadingBar;
+	public GUILoadingBar loadingBar;
 	public long lastTime;
 	
 	public LoadingBarTest() {
@@ -20,7 +21,7 @@ public class LoadingBarTest extends BaseGame {
 	}
 	
 	public void gameCreated() {
-		loadingBar = new GUIRenderableLoadingBar("LoadingBar" , 103);
+		loadingBar = new GUILoadingBar("LoadingBar" , 103, new GUIRenderer(new Colour[] { Colour.WHITE, Colour.YELLOW }));
 		loadingBar.position.x = 100;
 		loadingBar.position.y = 100;
 		loadingBar.width = 200;

@@ -8,10 +8,9 @@
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
-package org.simplecorporation.myengine.core.gui.textbox;
+package org.simplecorporation.myengine.core.gui;
 
-import org.simplecorporation.myengine.core.gui.GUIComponent;
-import org.simplecorporation.myengine.core.gui.font.GUIFont;
+import org.simplecorporation.myengine.core.game2d.vector.Vector2D;
 import org.simplecorporation.myengine.core.input.KeyboardInput;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
@@ -19,7 +18,7 @@ import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.utils.Timer;
 
-public abstract class GUITextBox extends GUIComponent {
+public class GUITextBox extends GUIComponent {
 	
 	/* The variables needed by the text box */
 	public String text;                 //The text in this text box
@@ -33,14 +32,13 @@ public abstract class GUITextBox extends GUIComponent {
 	public double cursorWidth;          //The width of the cursor
 	public int cursorPlace;             //The place within the render text the cursor is
 	public Colour cursorColour;         //The colour of the cursor
-	public GUIFont font;                //The font used to render the render text
 	public boolean hideCharacters;      //Should the text be masked
-	public String maskCharacter;       //The character used to mask the text
+	public String maskCharacter;        //The character used to mask the text
 	
 	/* The constructor */
-	public GUITextBox(String name, GUIFont font) {
+	public GUITextBox(String name, GUIRenderer renderer) {
 		//Call the super constructor
-		super(name);
+		super(name, renderer);
 		//Assign variables
 		this.text = "";
 		this.defaultText = "";
@@ -53,7 +51,6 @@ public abstract class GUITextBox extends GUIComponent {
 		this.cursorWidth = 2;
 		this.cursorPlace = 0;
 		this.cursorColour = Colour.BLACK;
-		this.font = font;
 		this.hideCharacters = false ;
 		this.maskCharacter = "*";
 	}
@@ -81,6 +78,43 @@ public abstract class GUITextBox extends GUIComponent {
 				//Set the cursor place
 				this.cursorPlace = this.renderText.length() + 1;
 			}
+		}
+	}
+	
+	/* The method to render the text box */
+	protected void renderComponent() {
+		if (this.visible) {
+			//Render the box
+			
+			//Render the outline
+			this.renderIndex = 0;
+			this.renderer.render(this);
+			
+			//Check to see whether to use images
+			if (! this.renderer.useImage()) {
+				//Render the middle
+				this.renderer.render(new Vector2D(this.position.x - 1, this.position.y - 1), this.width + 2, this.height + 2, 1);
+			}
+			
+			//The colour of the text
+			Colour renderColour = Colour.WHITE;
+			
+			//Check if the java font is null
+			if (this.renderer.font.javaGUIFont != null)
+				//Get the colour
+				renderColour = this.renderer.font.javaGUIFont.colour;
+			
+			//Render the cursor
+			this.renderCursor();
+			
+			//Check if the java font  is null
+			if (this.renderer.font.javaGUIFont != null)
+				//Set the colour of the font
+				this.renderer.font.javaGUIFont.colour = renderColour;
+			
+			//Render the text
+			this.renderer.font.render(this.renderText , this.position.x + 4 ,
+					(this.position.y + (this.height / 2)) - (this.renderer.font.getHeight(this.text) / 2));
 		}
 	}
 	
@@ -184,7 +218,7 @@ public abstract class GUITextBox extends GUIComponent {
 			//Set the render text
 			this.setRenderText();
 			//Continue the loop until the length of the substring is right
-			while (this.font.getWidth(this.renderText) >= this.width - 2) {
+			while (this.renderer.font.getWidth(this.renderText) >= this.width - 2) {
 				//Add 1 to the start index
 				this.visibleTextStartIndex++;
 				//Set the render text
@@ -225,7 +259,7 @@ public abstract class GUITextBox extends GUIComponent {
 			//Set the colour to black
 			BasicRenderer.setColour(this.cursorColour);
 			//Render the cursor
-			BasicRenderer.renderFilledRectangle(this.position.x + this.font.getWidth(this.renderText.substring(0, this.cursorPlace - 1)) + 4, this.position.y + 2, cursorWidth, this.height - 4);
+			BasicRenderer.renderFilledRectangle(this.position.x + this.renderer.font.getWidth(this.renderText.substring(0, this.cursorPlace - 1)) + 4, this.position.y + 2, cursorWidth, this.height - 4);
 		}
 	}
 	
