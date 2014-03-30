@@ -10,12 +10,12 @@
 
 package org.simplecorporation.myengine.core.gui.scrollbar;
 
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.gui.button.GUIButton;
 import org.simplecorporation.myengine.core.gui.slider.GUISlider;
 import org.simplecorporation.myengine.core.input.KeyboardInput;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.ScrollEvent;
-import org.simplecorporation.myengine.settings.Settings;
 
 public abstract class GUIScrollBar extends GUISlider {
 	

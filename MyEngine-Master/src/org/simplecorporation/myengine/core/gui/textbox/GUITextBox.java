@@ -17,7 +17,7 @@ import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.utils.timer.Timer;
+import org.simplecorporation.myengine.utils.Timer;
 
 public abstract class GUITextBox extends GUIComponent {
 	

@@ -12,11 +12,11 @@ package org.simplecorporation.myengine.core.gui.button;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.gui.button.listener.GUIButtonListener;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.settings.Settings;
 
 public class GUIRenderableButton extends GUIButton {
 	

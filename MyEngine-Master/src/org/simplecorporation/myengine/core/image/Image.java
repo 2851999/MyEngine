@@ -19,13 +19,13 @@ import java.net.URL;
 
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.android.AndroidStore;
+import org.simplecorporation.myengine.core.logger.Log;
+import org.simplecorporation.myengine.core.logger.LogType;
+import org.simplecorporation.myengine.core.logger.Logger;
 import org.simplecorporation.myengine.core.window.JavaWindow;
-import org.simplecorporation.myengine.settings.Settings;
-import org.simplecorporation.myengine.utils.file.FileUtils;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
+import org.simplecorporation.myengine.utils.FileUtils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

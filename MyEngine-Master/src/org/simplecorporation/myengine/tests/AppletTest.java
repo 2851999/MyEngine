@@ -1,9 +1,9 @@
 package org.simplecorporation.myengine.tests;
 
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.game.BaseGame;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.settings.Settings;
 
 public class AppletTest extends BaseGame {
 	

@@ -12,7 +12,7 @@ package org.simplecorporation.myengine.utils.opengl;
 
 import static org.lwjgl.opengl.GL11.*;
 
-import org.simplecorporation.myengine.settings.Settings;
+import org.simplecorporation.myengine.core.Settings;
 
 public class DisplayList {
 	

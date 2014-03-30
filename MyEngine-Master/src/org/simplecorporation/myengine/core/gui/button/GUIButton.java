@@ -12,13 +12,13 @@ package org.simplecorporation.myengine.core.gui.button;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.audio.clip.AudioClip;
 import org.simplecorporation.myengine.core.gui.GUIComponent;
 import org.simplecorporation.myengine.core.gui.button.event.GUIButtonEvent;
 import org.simplecorporation.myengine.core.gui.button.listener.GUIButtonListener;
 import org.simplecorporation.myengine.core.input.MouseInput;
 import org.simplecorporation.myengine.core.input.event.TouchEvent;
-import org.simplecorporation.myengine.settings.Settings;
 
 public abstract class GUIButton extends GUIComponent {
 	

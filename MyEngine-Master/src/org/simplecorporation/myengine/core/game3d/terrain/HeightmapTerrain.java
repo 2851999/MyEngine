@@ -17,10 +17,10 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import org.simplecorporation.myengine.utils.file.FileUtils;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
+import org.simplecorporation.myengine.core.logger.Log;
+import org.simplecorporation.myengine.core.logger.LogType;
+import org.simplecorporation.myengine.core.logger.Logger;
+import org.simplecorporation.myengine.utils.FileUtils;
 
 import static org.lwjgl.opengl.GL11.*;
 
