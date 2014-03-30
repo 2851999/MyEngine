@@ -10,9 +10,9 @@
 
 package org.simplecorporation.myengine.core.gui.builder;
 
+import org.simplecorporation.myengine.core.gui.GUIRenderer;
+import org.simplecorporation.myengine.core.gui.GUITextBox;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
-import org.simplecorporation.myengine.core.gui.textbox.GUIImageTextBox;
-import org.simplecorporation.myengine.core.gui.textbox.GUIRenderableTextBox;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 
@@ -21,11 +21,11 @@ public class GUITextBoxBuilder {
 	/* The method to create a renderable text box given its
 	   name, background colour, outline colour, font, x and y position,
 	   width and height */
-	public static GUIRenderableTextBox createRenderableTextBox(String name , Colour backgroundColour ,
+	public static GUITextBox createTextBox(String name , Colour backgroundColour ,
 			Colour outlineColour , GUIFont font , double x , double y , double width , double height) {
 		
 		//Create the text box
-		GUIRenderableTextBox textBox = new GUIRenderableTextBox(name , backgroundColour , outlineColour , font);
+		GUITextBox textBox = new GUITextBox(name, new GUIRenderer(new Colour[] { backgroundColour , outlineColour }, font));
 		
 		//Set the variables in the text box
 		textBox.position.x = x;
@@ -40,13 +40,14 @@ public class GUITextBoxBuilder {
 	/* The method to create a renderable text box given its
 	   name, background colour, outline colour, font, mask character, x and y position,
 	   width and height */
-	public static GUIRenderableTextBox createRenderableTextBox(String name , Colour backgroundColour ,
+	public static GUITextBox createTextBox(String name , Colour backgroundColour ,
 			Colour outlineColour , GUIFont font , String maskCharacter , double x , double y , double width , double height) {
 		
 		//Create the text box
-		GUIRenderableTextBox textBox = new GUIRenderableTextBox(name , backgroundColour , outlineColour , font , maskCharacter);
+		GUITextBox textBox = new GUITextBox(name, new GUIRenderer(new Colour[] { backgroundColour , outlineColour }, font));
 		
 		//Set the variables in the text box
+		textBox.maskCharacter = maskCharacter;
 		textBox.position.x = x;
 		textBox.position.y = y;
 		textBox.width = width;
@@ -59,11 +60,11 @@ public class GUITextBoxBuilder {
 	/* The method to create an image text box given its
 	   name, image, font, x and y position,
 	   width and height */
-	public static GUIImageTextBox createImageTextBox(String name , Image image ,
+	public static GUITextBox createTextBox(String name , Image image ,
 			GUIFont font , double x , double y , double width , double height) {
 		
 		//Create the text box
-		GUIImageTextBox textBox = new GUIImageTextBox(name , image , font);
+		GUITextBox textBox = new GUITextBox(name , new GUIRenderer(new Image[] { image }, font));
 		
 		//Set the variables in the text box
 		textBox.position.x = x;
@@ -78,11 +79,11 @@ public class GUITextBoxBuilder {
 	/* The method to create an image text box given its
 	   name, image, font, mask character, x and y position,
 	   width and height */
-	public static GUIImageTextBox createImageTextBox(String name , Image image ,
+	public static GUITextBox createTextBox(String name , Image image ,
 			GUIFont font , String maskCharacter , double x , double y , double width , double height) {
 		
 		//Create the text box
-		GUIImageTextBox textBox = new GUIImageTextBox(name , image , font);
+		GUITextBox textBox = new GUITextBox(name , new GUIRenderer(new Image[] { image } , font));
 		
 		//Set the variables in the text box
 		textBox.maskCharacter = maskCharacter;

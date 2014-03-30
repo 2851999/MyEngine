@@ -17,10 +17,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.simplecorporation.myengine.core.gui.font.JavaGUIFont;
+import org.simplecorporation.myengine.core.logger.Log;
+import org.simplecorporation.myengine.core.logger.LogType;
+import org.simplecorporation.myengine.core.logger.Logger;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class JavaFontUtils {
 	

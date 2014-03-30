@@ -11,9 +11,9 @@
 package org.simplecorporation.myengine.core.android.sensor;
 
 import org.simplecorporation.myengine.core.android.AndroidStore;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
+import org.simplecorporation.myengine.core.logger.Log;
+import org.simplecorporation.myengine.core.logger.LogType;
+import org.simplecorporation.myengine.core.logger.Logger;
 
 import android.content.Context;
 import android.hardware.Sensor;
