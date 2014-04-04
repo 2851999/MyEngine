@@ -112,6 +112,10 @@ public class Skybox3DTest extends BaseGame {
 			this.camera.moveX(GameValues.CURRENT_DELTA * 0.01);
 		if (KeyboardInput.KEY_D)
 			this.camera.moveX(-GameValues.CURRENT_DELTA * 0.01);
+		if (KeyboardInput.KEY_M)
+			OpenGLUtils.enableWireframeMode();
+		else
+			OpenGLUtils.disableWireframeMode();
 		
 		OpenGLSetupUtils.setupPerspective(70, 1, 1000);
 		OpenGLSetupUtils.setupDepthTest();
