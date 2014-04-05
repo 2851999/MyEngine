@@ -20,18 +20,42 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.simplecorporation.myengine.core.Settings;
+import org.simplecorporation.myengine.core.android.AndroidStore;
 import org.simplecorporation.myengine.core.logger.Log;
 import org.simplecorporation.myengine.core.logger.LogType;
 import org.simplecorporation.myengine.core.logger.Logger;
+
+import android.os.Environment;
 
 public class FileUtils {
 	
 	/* The method that returns the string of a file path */
 	public static String asFileString(String filePath) {
 		return new File(filePath).toPath().toString();
+	}
+	
+	/* The method that returns a file given whether it is in a folder or not */
+	public static File getFile(String filePath, boolean inFolder) {
+		//The file
+		File file = null;
+		//Check the settings
+		if (Settings.Android) {
+			//Check the inFolder variable which now means 'internal' or 'external'
+			if (inFolder)
+				//Create the file
+				file = new File(Environment.getExternalStorageDirectory(), filePath);
+			else
+				//Create the file
+				file = new File(AndroidStore.gameActivity.getFilesDir(), filePath);
+		} else
+			//Create the file
+			file = new File(filePath);
+		//Return the file
+		return file;
 	}
 
 	/* The method that returns whether a file exists */
@@ -102,9 +126,9 @@ public class FileUtils {
 	}
 
 	/* The method that reads a file */
-	public static LinkedList<String> read(String filePath , boolean inFolder) {
+	public static List<String> read(String filePath , boolean inFolder) {
 		//The file text
-		LinkedList<String> fileText = new LinkedList<String>();
+		List<String> fileText = new ArrayList<String>();
 		//Check if it is in a folder
 		if (inFolder) {
 			//Check whether the file exists
@@ -159,7 +183,7 @@ public class FileUtils {
 		return fileText;
 	}
 
-	public static void write(String filePath , LinkedList<String> fileText) {
+	public static void write(String filePath , List<String> fileText) {
 		//Check if the file path already exists
 		if (doesExist(filePath)) {
 			//Log a message
@@ -207,10 +231,10 @@ public class FileUtils {
 		boolean wasSuccessful = true;
 
 		//All of the individual files to be copied
-		LinkedList<String> filesToCopy = new LinkedList<String>();
+		List<String> filesToCopy = new ArrayList<String>();
 
 		//All of the individual folders to be created
-		LinkedList<String> foldersToCreate = new LinkedList<String>();
+		List<String> foldersToCreate = new ArrayList<String>();
 
 		//Add all of the files to the list
 		addAllFiles(filePath1 , "" , filesToCopy , foldersToCreate);
@@ -237,10 +261,10 @@ public class FileUtils {
 		boolean wasSuccessful = true;
 
 		//All of the individual files to be moved
-		LinkedList<String> filesToMove = new LinkedList<String>();
+		List<String> filesToMove = new ArrayList<String>();
 
 		//All of the individual folders to be created
-		LinkedList<String> foldersToMove = new LinkedList<String>();
+		List<String> foldersToMove = new ArrayList<String>();
 
 		//Add all of the files to the list
 		addAllFiles(filePath1 , "" , filesToMove , foldersToMove);
@@ -262,7 +286,7 @@ public class FileUtils {
 	}
 
 	/* The method to add all of the file paths in a folder to a linked list */
-	public static void addAllFiles(String originalFolderPath , String folderPath , LinkedList<String> files , LinkedList<String> folders) {
+	public static void addAllFiles(String originalFolderPath , String folderPath , List<String> files , List<String> folders) {
 		//The list of files in the current directory
 		List<String> filesInCurrentDir = listFiles(originalFolderPath + folderPath);
 

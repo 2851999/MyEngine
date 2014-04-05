@@ -10,7 +10,7 @@
 
 package org.simplecorporation.myengine.utils.opengl.shader;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
@@ -37,7 +37,7 @@ public class OpenGLShaderUtils {
 				return 0;
 			}
 			//Read the file
-			LinkedList<String> shaderFileText = FileUtils.read(shaderFile , inFolder);
+			List<String> shaderFileText = FileUtils.read(shaderFile , inFolder);
 			//The shader source
 			StringBuilder shaderSource = new StringBuilder();
 			//Look at all of the shader file text

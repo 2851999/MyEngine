@@ -88,4 +88,8 @@ public class GUITextDisplayArea extends GUIComponent {
 		}
 	}
 	
+	/* The 'setter' and 'getter' variables */
+	public void setText(List<String> text) { this.text = text; }
+	public List<String> getText() { return this.text; }
+	
 }

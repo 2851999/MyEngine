@@ -10,7 +10,8 @@
 
 package org.simplecorporation.myengine.utils;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PropertiesFile {
 	
@@ -21,14 +22,14 @@ public class PropertiesFile {
 	public boolean inFolder;
 	
 	/* The text in the file */
-	public LinkedList<String> fileText;
+	public List<String> fileText;
 	
 	/* The constructor */
 	public PropertiesFile() {
 		//Assign the values
 		this.filePath = "";
 		this.inFolder = true;
-		this.fileText = new LinkedList<String>();
+		this.fileText = new ArrayList<String>();
 	}
 	
 	/* The constructor with the file name given */
@@ -36,7 +37,7 @@ public class PropertiesFile {
 		//Assign the values
 		this.filePath = filePath;
 		this.inFolder = inFolder;
-		this.fileText = new LinkedList<String>();
+		this.fileText = new ArrayList<String>();
 	}
 	
 	/* The method to read the file assuming the filePath has been set */

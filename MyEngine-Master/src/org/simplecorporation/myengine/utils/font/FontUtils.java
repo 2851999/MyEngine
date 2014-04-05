@@ -22,10 +22,7 @@ public class FontUtils {
 	/* The method to create a bitmap font */
 	public static GUIFont createGUIBitmapFont(Image image , double size , int gridSize) {
 		//The BitmapFont
-		BitmapFont bitmapFont = new BitmapFont(image , size);
-		//Set the grid size of the BitmapFont
-		bitmapFont.gridWidth = gridSize;
-		bitmapFont.gridHeight = gridSize;
+		BitmapFont bitmapFont = new BitmapFont(image , size, gridSize);
 		//Return the GUIFont
 		return new GUIFont(bitmapFont);
 	}

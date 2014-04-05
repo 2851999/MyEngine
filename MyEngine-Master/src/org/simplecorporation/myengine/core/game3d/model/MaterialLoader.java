@@ -11,7 +11,6 @@
 package org.simplecorporation.myengine.core.game3d.model;
 
 import java.io.File;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.simplecorporation.myengine.core.game3d.vector.Vector3D;
@@ -24,7 +23,7 @@ public class MaterialLoader {
 	/* The method used to load a material  and return it */
 	public static List<Material> loadMaterialFile(String filePath, boolean inFolder, List<Material> materials) {
 		//The file text
-		LinkedList<String> fileText = FileUtils.read(filePath, inFolder);
+		List<String> fileText = FileUtils.read(filePath, inFolder);
 		//The current material
 		Material currentMaterial = null;
 		//Go though each line in the material file

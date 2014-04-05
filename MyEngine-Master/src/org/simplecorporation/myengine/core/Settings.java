@@ -11,6 +11,7 @@
 package org.simplecorporation.myengine.core;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import org.simplecorporation.myengine.utils.FileUtils;
 
@@ -79,7 +80,7 @@ public class Settings {
 	/* The method to read a configuration file to set all of the settings */
 	public static void readConfig(String filePath , boolean inFolder) {
 		//Read the file
-		LinkedList<String> fileText = FileUtils.read(filePath , inFolder);
+		List<String> fileText = FileUtils.read(filePath , inFolder);
 		//Look at each string in the list
 		for (int a = 0; a < fileText.size(); a++) {
 			//Split the current line into its setting and value
@@ -126,8 +127,8 @@ public class Settings {
 	
 	/* The method to save the configuration file of all of the settings */
 	public static void writeConfig(String filePath) {
-		//The linked list with all of the configuration data
-		LinkedList<String> fileText = new LinkedList<String>();
+		//The list with all of the configuration data
+		List<String> fileText = new LinkedList<String>();
 		//Add all for the settings to the linked list
 		fileText.add("Android: " + Settings.Android);
 		fileText.add("Window.Title: " + Settings.Window.Title);
