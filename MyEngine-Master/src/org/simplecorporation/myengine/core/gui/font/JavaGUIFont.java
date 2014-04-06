@@ -16,11 +16,11 @@ import java.awt.FontMetrics;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.TrueTypeFont;
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.render.RenderVariablesJava;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 import org.simplecorporation.myengine.core.window.JavaWindow;
-import org.simplecorporation.myengine.settings.Settings;
 
 public class JavaGUIFont {
 	

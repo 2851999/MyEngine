@@ -10,8 +10,13 @@
 
 package org.simplecorporation.myengine.core.game3d.model;
 
+import java.nio.FloatBuffer;
+
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
+import org.simplecorporation.myengine.utils.opengl.OpenGLUtils;
+
+import static org.lwjgl.opengl.GL11.*;
 
 public class Material {
 	
@@ -27,6 +32,9 @@ public class Material {
 	/* The specular colour of this material */
 	public Colour specularColour;
 	
+	/* The shininess of this material */
+	public double shininess;
+	
 	/* The alpha colour value */
 	public double alphaColourValue;
 	
@@ -40,6 +48,7 @@ public class Material {
 		this.ambientColour = null;
 		this.diffuseColour = null;
 		this.specularColour = null;
+		this.shininess = 0;
 		this.alphaColourValue = 1.0;
 		this.alphaTextureMap = null;
 	}
@@ -50,6 +59,27 @@ public class Material {
 		if (this.alphaTextureMap != null)
 			//Bind the alpha texture map
 			this.alphaTextureMap.getOpenGLImage().bind();
+		//Check to see whether any of the colours should be used
+		if (this.ambientColour != null) {
+			//Get the float buffer for the colour
+			FloatBuffer buffer = OpenGLUtils.getFlippedFloatBuffer(this.ambientColour.getFloatValues());
+			//Set the material property
+			glMaterial(GL_FRONT_AND_BACK, GL_AMBIENT, buffer);
+		}
+		if (this.diffuseColour != null) {
+			//Get the float buffer for the colour
+			FloatBuffer buffer = OpenGLUtils.getFlippedFloatBuffer(this.diffuseColour.getFloatValues());
+			//Set the material property
+			glMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE, buffer);
+		}
+		if (this.specularColour != null) {
+			//Get the float buffer for the colour
+			FloatBuffer buffer = OpenGLUtils.getFlippedFloatBuffer(this.specularColour.getFloatValues());
+			//Set the material property
+			glMaterial(GL_FRONT_AND_BACK, GL_SPECULAR, buffer);
+		}
+		//Set the shininess material property
+		glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, (float) this.shininess);
 	}
 	
 }

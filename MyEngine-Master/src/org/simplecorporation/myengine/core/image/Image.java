@@ -19,13 +19,13 @@ import java.net.URL;
 
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.android.AndroidStore;
+import org.simplecorporation.myengine.core.logger.Log;
+import org.simplecorporation.myengine.core.logger.LogType;
+import org.simplecorporation.myengine.core.logger.Logger;
 import org.simplecorporation.myengine.core.window.JavaWindow;
-import org.simplecorporation.myengine.settings.Settings;
-import org.simplecorporation.myengine.utils.file.FileUtils;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
+import org.simplecorporation.myengine.utils.FileUtils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -105,6 +105,12 @@ public class Image {
 		load(id);
 	}
 	
+	/* The constructor with the id, file path, format and inFolder specified */
+	public Image(int id, String filePath, String format, boolean inFolder) {
+		//Load the image
+		load(id, filePath, format, inFolder);
+	}
+	
 	/* The method to load the image */
 	/** This method is used to load an image on a PC.
 	 * 
@@ -158,6 +164,18 @@ public class Image {
 	public void load(int id) {
 		//Set the image
 		this.androidImage = BitmapFactory.decodeResource(AndroidStore.gameResources , id);
+	}
+	
+	/* The method used to load the Android, or Java image appropriately */
+	public void load(int id, String filePath, String format, boolean inFolder) {
+		//Check to see whether this is on Android
+		if (Settings.Android) {
+			//Load the Android image
+			this.load(id);
+		} else if (! Settings.Android) {
+			//Load the Java image
+			this.load(filePath, format, inFolder);
+		}
 	}
 	
 	/* The method to get the URL of the image */

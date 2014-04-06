@@ -12,8 +12,8 @@ package org.simplecorporation.myengine.core.input;
 
 import java.awt.event.KeyEvent;
 
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
-import org.simplecorporation.myengine.settings.Settings;
 
 /**
  * The KeyboardInput <code>class</code> that contains all of the key codes
@@ -147,22 +147,23 @@ public class KeyboardInput {
 	public static int KEY_SCROLLLOCK_CODE = 105;
 	public static int KEY_SECTION_CODE = 106;
 	public static int KEY_SEMICOLON_CODE = 107;
-	public static int KEY_SLASH_CODE = 108;
-	public static int KEY_SLEEP_CODE = 109;
-	public static int KEY_SPACE_CODE = 110;
-	public static int KEY_STOP_CODE = 111;
-	public static int KEY_SUBTRACT_CODE = 112;
-	public static int KEY_SYSRQ_CODE = 113;
-	public static int KEY_TAB_CODE = 114;
-	public static int KEY_UNDERSCORE_CODE = 115;
-	public static int KEY_UNLABELED_CODE = 116;
-	public static int KEY_YEN_CODE = 117;
-	public static int KEY_UP_CODE = 118;
-	public static int KEY_DOWN_CODE = 119;
-	public static int KEY_LEFT_CODE = 120;
-	public static int KEY_RIGHT_CODE = 121;
-	public static int KEY_LSHIFT_CODE = 122;
-	public static int KEY_RSHIFT_CODE = 123;
+	public static int KEY_FORWARD_SLASH_CODE = 108;
+	public static int KEY_BACK_SLASH_CODE = 109;
+	public static int KEY_SLEEP_CODE = 110;
+	public static int KEY_SPACE_CODE = 111;
+	public static int KEY_STOP_CODE = 112;
+	public static int KEY_SUBTRACT_CODE = 113;
+	public static int KEY_SYSRQ_CODE = 114;
+	public static int KEY_TAB_CODE = 115;
+	public static int KEY_UNDERSCORE_CODE = 116;
+	public static int KEY_UNLABELED_CODE = 117;
+	public static int KEY_YEN_CODE = 118;
+	public static int KEY_UP_CODE = 119;
+	public static int KEY_DOWN_CODE = 120;
+	public static int KEY_LEFT_CODE = 121;
+	public static int KEY_RIGHT_CODE = 122;
+	public static int KEY_LSHIFT_CODE = 123;
+	public static int KEY_RSHIFT_CODE = 124;
 	
 	/* ALL OF THE KEYS ON THE KEYBOARD */
 	
@@ -243,7 +244,6 @@ public class KeyboardInput {
 	public static boolean KEY_AT = false;
 	public static boolean KEY_AX = false;
 	public static boolean KEY_BACKSPACE = false;
-	public static boolean KEY_BACKSLASH = false;
 	public static boolean KEY_CAPSLOCK = false;
 	public static boolean KEY_CIRCUMFLEX = false;
 	public static boolean KEY_CLEAR = false;
@@ -282,7 +282,8 @@ public class KeyboardInput {
 	public static boolean KEY_SCROLLLOCK = false;
 	public static boolean KEY_SECTION = false;
 	public static boolean KEY_SEMICOLON = false;
-	public static boolean KEY_SLASH = false;
+	public static boolean KEY_FORWARD_SLASH = false;
+	public static boolean KEY_BACK_SLASH = false;
 	public static boolean KEY_SLEEP = false;
 	public static boolean KEY_SPACE	 = false;
 	public static boolean KEY_STOP = false;
@@ -444,8 +445,6 @@ public class KeyboardInput {
 			return KEY_AX;
 		else if (keyCode == KEY_BACKSPACE_CODE)
 			return KEY_BACKSPACE;
-		else if (keyCode == KEY_BACKSLASH_CODE)
-			return KEY_BACKSLASH;
 		else if (keyCode == KEY_CAPSLOCK_CODE)
 			return KEY_CAPSLOCK;
 		else if (keyCode == KEY_CIRCUMFLEX_CODE)
@@ -522,8 +521,10 @@ public class KeyboardInput {
 			return KEY_SECTION;
 		else if (keyCode == KEY_SEMICOLON_CODE)
 			return KEY_SEMICOLON;
-		else if (keyCode == KEY_SLASH_CODE)
-			return KEY_SLASH;
+		else if (keyCode == KEY_FORWARD_SLASH_CODE)
+			return KEY_FORWARD_SLASH;
+		else if (keyCode == KEY_BACK_SLASH_CODE)
+			return KEY_BACK_SLASH;
 		else if (keyCode == KEY_SLEEP_CODE)
 			return KEY_SLEEP;
 		else if (keyCode == KEY_SPACE_CODE)
@@ -772,7 +773,9 @@ public class KeyboardInput {
 			else if (keyCode == KeyEvent.VK_SEMICOLON)
 				return KEY_SEMICOLON_CODE;
 			else if (keyCode == KeyEvent.VK_SLASH)
-				return KEY_SLASH_CODE;
+				return KEY_FORWARD_SLASH_CODE;
+			else if (keyCode == KeyEvent.VK_BACK_SLASH)
+				return KEY_BACK_SLASH_CODE;
 			else if (keyCode == KeyEvent.VK_SPACE)
 				return KEY_SPACE_CODE;
 			else if (keyCode == KeyEvent.VK_STOP)
@@ -1005,7 +1008,9 @@ public class KeyboardInput {
 			else if (keyCode == org.lwjgl.input.Keyboard.KEY_SEMICOLON)
 				return KEY_SEMICOLON_CODE;
 			else if (keyCode == org.lwjgl.input.Keyboard.KEY_SLASH)
-				return KEY_SLASH_CODE;
+				return KEY_FORWARD_SLASH_CODE;
+			else if (keyCode == org.lwjgl.input.Keyboard.KEY_BACKSLASH)
+				return KEY_BACK_SLASH_CODE;
 			else if (keyCode == org.lwjgl.input.Keyboard.KEY_SLEEP)
 				return KEY_SLEEP_CODE;
 			else if (keyCode == org.lwjgl.input.Keyboard.KEY_SPACE)
@@ -1176,8 +1181,6 @@ public class KeyboardInput {
 			KEY_AT = keyDown;
 		else if (keyCode == KEY_BACKSPACE_CODE)
 			KEY_BACKSPACE = keyDown;
-		else if (keyCode == KEY_BACKSLASH_CODE)
-			KEY_BACKSLASH = keyDown;
 		else if (keyCode == KEY_CAPSLOCK_CODE)
 			KEY_CAPSLOCK = keyDown;
 		else if (keyCode == KEY_CIRCUMFLEX_CODE)
@@ -1246,8 +1249,10 @@ public class KeyboardInput {
 			KEY_SCROLLLOCK = keyDown;
 		else if (keyCode == KEY_SEMICOLON_CODE)
 			KEY_SEMICOLON = keyDown; 
-		else if (keyCode == KEY_SLASH_CODE)
-			KEY_SLASH = keyDown;
+		else if (keyCode == KEY_FORWARD_SLASH_CODE)
+			KEY_FORWARD_SLASH = keyDown;
+		else if (keyCode == KEY_BACK_SLASH_CODE)
+			KEY_BACK_SLASH = keyDown;
 		else if (keyCode == KEY_SPACE_CODE)
 			KEY_SPACE = keyDown;
 		else if (keyCode == KEY_STOP_CODE)

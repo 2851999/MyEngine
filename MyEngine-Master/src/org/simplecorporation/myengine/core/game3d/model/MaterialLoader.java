@@ -11,20 +11,19 @@
 package org.simplecorporation.myengine.core.game3d.model;
 
 import java.io.File;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.simplecorporation.myengine.core.game3d.vector.Vector3D;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.utils.file.FileUtils;
+import org.simplecorporation.myengine.utils.FileUtils;
 
 public class MaterialLoader {
 	
 	/* The method used to load a material  and return it */
 	public static List<Material> loadMaterialFile(String filePath, boolean inFolder, List<Material> materials) {
 		//The file text
-		LinkedList<String> fileText = FileUtils.read(filePath, inFolder);
+		List<String> fileText = FileUtils.read(filePath, inFolder);
 		//The current material
 		Material currentMaterial = null;
 		//Go though each line in the material file
@@ -56,6 +55,13 @@ public class MaterialLoader {
 				Vector3D values = ModelParserUtils.getVectorValue(line);
 				//Set the specular colour in the current material
 				currentMaterial.specularColour = new Colour(values.x, values.y, values.z);
+			} else if (line.startsWith("Ns ")) {
+				//Split up the current line
+				String[] split = line.split(" ");
+				//Get the shininess value
+				double shininess = Double.parseDouble(split[1]);
+				//Set the shininess colour in the current material
+				currentMaterial.shininess = shininess;
 			} else if (line.startsWith("d ") || line.startsWith("Tr ")) {
 				//Split up the current line using a space
 				String[] split = line.split(" ");

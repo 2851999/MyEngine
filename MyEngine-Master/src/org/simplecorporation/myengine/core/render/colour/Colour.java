@@ -110,6 +110,14 @@ public class Colour {
 		this.a = a;
 	}
 	
+	public double[] getValues() {
+		return new double[] { this.r, this.g, this.b, this.a };
+	}
+	
+	public float[] getFloatValues() {
+		return new float[] { (float) this.r, (float) this.g, (float) this.b, (float) this.a };
+	}
+	
 	public void setR(int r) { this.r = r / 255; }
 	public void setR(double r) { this.r = r; }
 	public void setG(int g) { this.g = g / 255; }

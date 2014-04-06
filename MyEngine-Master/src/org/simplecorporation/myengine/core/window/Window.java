@@ -12,8 +12,8 @@ package org.simplecorporation.myengine.core.window;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.image.Image;
-import org.simplecorporation.myengine.settings.Settings;
 
 public class Window {
 	

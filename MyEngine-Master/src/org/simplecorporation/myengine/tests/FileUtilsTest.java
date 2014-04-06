@@ -1,13 +1,13 @@
 package org.simplecorporation.myengine.tests;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import org.lwjgl.opengl.GL11;
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.engine.loop.EngineLoop;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.settings.Settings;
-import org.simplecorporation.myengine.utils.file.FileUtils;
+import org.simplecorporation.myengine.utils.FileUtils;
 
 public class FileUtilsTest extends EngineLoop {
 	
@@ -22,7 +22,7 @@ public class FileUtilsTest extends EngineLoop {
 
 	@Override
 	public void engineCreated() {
-		LinkedList<String> text = FileUtils.read("/NOTES", false);
+		List<String> text = FileUtils.read("/NOTES", false);
 		for (int a = 0; a < text.size(); a++) {
 			System.out.println(text.get(a));
 		}

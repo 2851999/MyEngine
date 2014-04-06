@@ -1,20 +1,20 @@
 package org.simplecorporation.myengine.tests;
 
 import org.lwjgl.opengl.GL11;
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.game.BaseGame;
-import org.simplecorporation.myengine.core.gui.button.GUIRenderableButton;
-import org.simplecorporation.myengine.core.gui.slider.GUIRenderableSlider;
-import org.simplecorporation.myengine.core.gui.slider.GUISlider;
+import org.simplecorporation.myengine.core.gui.GUIButton;
+import org.simplecorporation.myengine.core.gui.GUIRenderer;
+import org.simplecorporation.myengine.core.gui.GUISlider;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.font.FontUtils;
 import org.simplecorporation.myengine.utils.opengl.OpenGLSetupUtils;
 
 public class SliderTest extends BaseGame {
 	
-	public GUIRenderableSlider verticalslider;
-	public GUIRenderableSlider horizontalslider;
+	public GUISlider verticalslider;
+	public GUISlider horizontalslider;
 	
 	public SliderTest() {
 		Settings.Window.Title = "Slider Test";
@@ -25,16 +25,16 @@ public class SliderTest extends BaseGame {
 	}
 	
 	public void gameCreated() {
-		GUIRenderableButton verticalsliderButton = new GUIRenderableButton("Button2" , "" , new Colour[] {
+		GUIButton verticalsliderButton = new GUIButton("Button2" , "" , new GUIRenderer(new Colour[] {
 				Colour.ORANGE ,
 				Colour.LIGHT_BLUE ,
 				Colour.BLUE
-		} , FontUtils.buildGUIFont("Segoe UI" , Colour.WHITE , 20f));
+		} , FontUtils.buildGUIFont("Segoe UI" , Colour.WHITE , 20f)));
 		verticalsliderButton.width = 100;
 		verticalsliderButton.height = 20;
 		verticalsliderButton.visible = true;
 		
-		verticalslider = new GUIRenderableSlider("Slider1" , Colour.RED , verticalsliderButton , GUISlider.DIRECTION_VERTICAL);
+		verticalslider = new GUISlider("Slider1" , verticalsliderButton , GUISlider.DIRECTION_VERTICAL, new GUIRenderer(new Colour[] { Colour.RED }));
 		
 		verticalslider.visible = true;
 		verticalslider.position.x = 200;
@@ -42,16 +42,16 @@ public class SliderTest extends BaseGame {
 		verticalslider.width = 30;
 		verticalslider.height = 100;
 		
-		GUIRenderableButton horizontalsliderButton = new GUIRenderableButton("Button2" , "" , new Colour[] {
+		GUIButton horizontalsliderButton = new GUIButton("Button2" , "" , new GUIRenderer(new Colour[] {
 				Colour.ORANGE ,
 				Colour.LIGHT_BLUE ,
 				Colour.BLUE
-		} , FontUtils.buildGUIFont("Segoe UI" , Colour.WHITE , 20f));
+		} , FontUtils.buildGUIFont("Segoe UI" , Colour.WHITE , 20f)));
 		horizontalsliderButton.width = 20;
 		horizontalsliderButton.height = 100;
 		horizontalsliderButton.visible = true;
 		
-		horizontalslider = new GUIRenderableSlider("Slider2" , Colour.RED , horizontalsliderButton , GUISlider.DIRECTION_HORIZONTAL);
+		horizontalslider = new GUISlider("Slider2" , horizontalsliderButton , GUISlider.DIRECTION_HORIZONTAL, new GUIRenderer(new Colour[] { Colour.RED }));
 		
 		horizontalslider.visible = true;
 		horizontalslider.position.x = 300;

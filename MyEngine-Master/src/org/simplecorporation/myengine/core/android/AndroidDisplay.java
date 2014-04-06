@@ -10,11 +10,11 @@
 
 package org.simplecorporation.myengine.core.android;
 
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.android.input.AndroidInput;
 import org.simplecorporation.myengine.core.game.BaseGame;
 import org.simplecorporation.myengine.core.input.InputManager;
-import org.simplecorporation.myengine.settings.Settings;
-import org.simplecorporation.myengine.utils.screen.ScreenUtils;
+import org.simplecorporation.myengine.utils.ScreenUtils;
 
 import android.app.Activity;
 import android.graphics.Paint;
@@ -45,7 +45,7 @@ public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callbac
 		this.androidGame = androidGame;
 		
 		//Create the android game thread
-		this.androidGameThread = new AndroidGameThread(this.getHolder() ,this.androidGame);
+		this.androidGameThread = new AndroidGameThread(this.getHolder(), this.androidGame);
 		
 		//Set the surface view focusable
 		this.setFocusable(true);

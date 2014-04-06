@@ -10,27 +10,31 @@
 
 package org.simplecorporation.myengine.core.game;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.simplecorporation.myengine.core.audio.clip.AudioStore;
 import org.simplecorporation.myengine.core.gui.font.FontStore;
 import org.simplecorporation.myengine.core.image.ImageStore;
 
-public class Game extends BaseGame {
+public abstract class Game extends BaseGame {
 	
 	/* The image resource packs */
-	public LinkedList<GameImageResourcePack> imageResourcePacks;
+	public List<GameImageResourcePack> imageResourcePacks;
 	
 	/* The audio resource packs */
-	public LinkedList<GameAudioResourcePack> audioResourcePacks;
+	public List<GameAudioResourcePack> audioResourcePacks;
 	
 	/* The constructor */
 	public Game() {
 		//Create the linked lists
-		this.imageResourcePacks = new LinkedList<GameImageResourcePack>();
-		this.audioResourcePacks = new LinkedList<GameAudioResourcePack>();
+		this.imageResourcePacks = new ArrayList<GameImageResourcePack>();
+		this.audioResourcePacks = new ArrayList<GameAudioResourcePack>();
 		
 		////////////////LOAD THE GAME////////////////
+		
+		//Load the resources
+		this.loadResources();
 		
 		//Look at all of the image resource packs
 		for (int a = 0; a < this.imageResourcePacks.size(); a++) {
@@ -53,10 +57,13 @@ public class Game extends BaseGame {
 		this.createGame();
 	}
 	
+	/* The method called to load all of the games resources */
+	public abstract void loadResources();
+	
 	/* The method used to add an image resource pack */
 	public void addResourcePack(GameImageResourcePack resourcePack) {
 		//Add the pack to the correct list
-		this.imageResourcePacks.addLast(resourcePack);
+		this.imageResourcePacks.add(resourcePack);
 	}
 	
 	/* The method used to add an audio resource pack */

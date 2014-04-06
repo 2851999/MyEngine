@@ -1,6 +1,7 @@
 package org.simplecorporation.myengine.tests;
 
 import org.lwjgl.input.Mouse;
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.game.BaseGame;
 import org.simplecorporation.myengine.core.game.GameValues;
 import org.simplecorporation.myengine.core.game3d.camera.Camera;
@@ -13,7 +14,6 @@ import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.settings.Settings;
 import org.simplecorporation.myengine.utils.opengl.DisplayList;
 import org.simplecorporation.myengine.utils.opengl.OpenGLSetupUtils;
 import org.simplecorporation.myengine.utils.opengl.OpenGLUtils;
@@ -47,7 +47,7 @@ public class OBJModelTest extends BaseGame {
 		this.sky = new Image("C:\\sky.png", "PNG", true);
 		this.camera = new Camera();
 		this.skybox = new Skybox(100, 100, 100, this.sky, this.sky, this.sky, this.sky, this.sky, this.sky);
-		this.model = OBJLoader.loadModel("/texturedmonkeyface.obj", false);
+		this.model = OBJLoader.loadModel("C:/Users/Joel/Documents/cup.obj", true);
 		this.drawModel = DisplayList.generate();
 		this.model.render();
 		DisplayList.end();

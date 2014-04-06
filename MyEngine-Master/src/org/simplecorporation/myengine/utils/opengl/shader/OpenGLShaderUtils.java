@@ -10,13 +10,14 @@
 
 package org.simplecorporation.myengine.utils.opengl.shader;
 
-import java.util.LinkedList;
+import java.util.List;
 
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
-import org.simplecorporation.myengine.utils.file.FileUtils;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
+import org.simplecorporation.myengine.core.logger.Log;
+import org.simplecorporation.myengine.core.logger.LogType;
+import org.simplecorporation.myengine.core.logger.Logger;
+import org.simplecorporation.myengine.utils.FileUtils;
 
 public class OpenGLShaderUtils {
 	
@@ -36,7 +37,7 @@ public class OpenGLShaderUtils {
 				return 0;
 			}
 			//Read the file
-			LinkedList<String> shaderFileText = FileUtils.read(shaderFile , inFolder);
+			List<String> shaderFileText = FileUtils.read(shaderFile , inFolder);
 			//The shader source
 			StringBuilder shaderSource = new StringBuilder();
 			//Look at all of the shader file text
@@ -48,14 +49,32 @@ public class OpenGLShaderUtils {
 			GL20.glShaderSource(shader , shaderSource);
 			//Compile the shader
 			GL20.glCompileShader(shader);
+			
+			//Check for an error
+			if (GL20.glGetShaderi(shader, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
+				//Log an error message
+				Logger.log(new Log("MyEngine OpenGLShaderUtils createShader()", "Error compiling the shader " + shaderFile, LogType.ERROR));
+				Logger.log(new Log("ShaderInformation", getLogInformation(shader), LogType.ERROR));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			//Log an error
 			Logger.log(new Log("MyEngine OpenGLShaderUtils createShader()" , "Error when creating shader with the file " + shaderFile , LogType.ERROR));
 		}
 		
+		//Check to see whether the shader was created
+		if (shader == 0)
+			//Log an error
+			Logger.log(new Log("MyEngine OpenGLShaderUtils createShader()", "Error creating shader " + shaderFile, LogType.ERROR));
+		
 		//Return the shader
 		return shader;
+	}
+	
+	/* The method used to get any log information */
+	public static String getLogInformation(int shader) {
+		//Return the information
+		return GL20.glGetShaderInfoLog(shader, 1000);
 	}
 	
 }

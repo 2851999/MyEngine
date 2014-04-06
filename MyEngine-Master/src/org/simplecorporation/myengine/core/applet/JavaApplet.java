@@ -16,14 +16,14 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.image.Image;
+import org.simplecorporation.myengine.core.logger.Log;
+import org.simplecorporation.myengine.core.logger.LogType;
+import org.simplecorporation.myengine.core.logger.Logger;
 import org.simplecorporation.myengine.core.render.RenderVariablesJava;
 import org.simplecorporation.myengine.core.window.Window;
 import org.simplecorporation.myengine.core.window.WindowSizeChangedEvent;
-import org.simplecorporation.myengine.settings.Settings;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
 
 public class JavaApplet {
 	
