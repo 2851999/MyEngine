@@ -24,82 +24,70 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.simplecorporation.myengine.core.Settings;
-import org.simplecorporation.myengine.core.android.AndroidStore;
 import org.simplecorporation.myengine.core.logger.Log;
 import org.simplecorporation.myengine.core.logger.LogType;
 import org.simplecorporation.myengine.core.logger.Logger;
 
-import android.os.Environment;
-
 public class FileUtils {
 	
-	/* The method that returns the string of a file path */
+	/* The static method used to get a file */
+	public static File getFile(String filePath) {
+		//Check the Android setting
+		if (Settings.Android)
+			//Return the file
+			return new File(filePath);
+		else
+			//Return the file
+			return new File(asFileString(filePath));
+	}
+	
+	/* The static method that returns the string of a file path */
 	public static String asFileString(String filePath) {
 		return new File(filePath).toPath().toString();
 	}
-	
-	/* The method that returns a file given whether it is in a folder or not */
-	public static File getFile(String filePath, boolean inFolder) {
-		//The file
-		File file = null;
-		//Check the settings
-		if (Settings.Android) {
-			//Check the inFolder variable which now means 'internal' or 'external'
-			if (inFolder)
-				//Create the file
-				file = new File(Environment.getExternalStorageDirectory(), filePath);
-			else
-				//Create the file
-				file = new File(AndroidStore.gameActivity.getFilesDir(), filePath);
-		} else
-			//Create the file
-			file = new File(filePath);
-		//Return the file
-		return file;
-	}
 
-	/* The method that returns whether a file exists */
+	/* The static method that returns whether a file exists */
 	public static boolean doesExist(String filePath) {
-		return new File(asFileString(filePath)).exists();
+		return getFile(filePath).exists();
 	}
 
-	/* The method that returns whether a file is a file */
+	/* The static method that returns whether a file is a file */
 	public static boolean isFile(String filePath) {
-		return new File(asFileString(filePath)).isFile();
+		return getFile(filePath).isFile();
 	}
 
-	/* The method that returns whether a file is a directory */
+	/* The static method that returns whether a file is a directory */
 	public static boolean isDirectory(String filePath) {
-		return new File(asFileString(filePath)).isDirectory();
+		return getFile(filePath).isDirectory();
 	}
 
-	/* The method that returns whether a file is hidden */
+	/* The static method that returns whether a file is hidden */
 	public static boolean isHidden(String filePath) {
-		return new File(asFileString(filePath)).isHidden();
+		return getFile(filePath).isHidden();
 	}
 
-	/* The method that returns whether a file can be read */
+	/* The static method that returns whether a file can be read */
 	public static boolean canRead(String filePath) {
-		return new File(asFileString(filePath)).canRead();
+		return getFile(filePath).canRead();
 	}
 
-	/* The method that returns whether a file can be written in */
+	/* The static method that returns whether a file can be written in */
 	public static boolean canWrite(String filePath) {
 		//If it returns false it may be because the file doesn't exist
 		//in the first place
-		return new File(asFileString(filePath)).canWrite();
+		return getFile(filePath).canWrite();
 	}
 
-	/* The method to delete a file and return whether it was deleted */
+	/* The static method to delete a file and return whether it was deleted */
 	public static boolean delete(String filePath) {
-		return new File(asFileString(filePath)).delete();
+		return getFile(filePath).delete();
 	}
 
-	/* The method to copy a file and returns whether it was successful*/
+	/* The static method to copy a file and returns whether it was successful*/
 	public static boolean copy(String filePath1, String filePath2) {
 		try {
-			Files.copy(new File(asFileString(filePath1)).toPath(),
-					new File(asFileString(filePath2)).toPath(), StandardCopyOption.REPLACE_EXISTING);
+			Files.copy(getFile(filePath1).toPath(),
+					getFile(filePath2).toPath(), StandardCopyOption.REPLACE_EXISTING);
 			return true;
 		} catch (IOException e) {
 			//Log a message
@@ -110,11 +98,11 @@ public class FileUtils {
 		}
 	}
 
-	/* The method to move a file and returns whether it was successful*/
+	/* The static method to move a file and returns whether it was successful*/
 	public static boolean move(String filePath1, String filePath2) {
 		try {
-			Files.move(new File(asFileString(filePath1)).toPath(),
-					new File(asFileString(filePath2)).toPath(), StandardCopyOption.REPLACE_EXISTING);
+			Files.move(getFile(filePath1).toPath(),
+					getFile(filePath2).toPath(), StandardCopyOption.REPLACE_EXISTING);
 			return true;
 		} catch (IOException e) {
 			//Log a message
@@ -125,7 +113,7 @@ public class FileUtils {
 		}
 	}
 
-	/* The method that reads a file */
+	/* The static method that reads a file */
 	public static List<String> read(String filePath , boolean inFolder) {
 		//The file text
 		List<String> fileText = new ArrayList<String>();
@@ -139,13 +127,13 @@ public class FileUtils {
 					if (canRead(filePath)) {
 						//Read the file and set the text in the linked list
 						try {
-							FileReader fileReader = new FileReader(asFileString(filePath));
-							BufferedReader bufferedReader = new BufferedReader(fileReader);
-							String line = "";
-							while ((line = bufferedReader.readLine()) != null) {
-								fileText.add(line);
-							}
-							bufferedReader.close();
+							//Make sure this is not on Android
+							if (! Settings.Android)
+								//Assign the file path
+								filePath = asFileString(filePath);
+							FileReader fileReader = new FileReader(filePath);
+							//Read the file
+							fileText = read(new BufferedReader(fileReader));
 							fileReader.close();
 						} catch (FileNotFoundException e) {
 							e.printStackTrace();
@@ -167,12 +155,8 @@ public class FileUtils {
 		} else {
 			//Read the file and set the text in the linked list
 			try {
-				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(FileUtils.class.getResourceAsStream(filePath)));
-				String line = "";
-				while ((line = bufferedReader.readLine()) != null) {
-					fileText.add(line);
-				}
-				bufferedReader.close();
+				//Read the file
+				fileText = read(new BufferedReader(new InputStreamReader(FileUtils.class.getResourceAsStream(filePath))));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -191,8 +175,12 @@ public class FileUtils {
 		}
 
 		try {
+			//Make sure this is not on Android
+			if (! Settings.Android)
+				//Assign the file path
+				filePath = asFileString(filePath);
 			//Write the file
-			FileWriter fileWriter = new FileWriter(asFileString(filePath));
+			FileWriter fileWriter = new FileWriter(filePath);
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
 			//Make sure there is text to save (Prevents IndexOutOfBoundsException)
@@ -215,17 +203,17 @@ public class FileUtils {
 		}
 	}
 
-	/* The method to create a directory and return whether it was successful */
+	/* The static method to create a directory and return whether it was successful */
 	public static boolean createDir(String dir) {
-		return new File(asFileString(dir)).mkdir();
+		return getFile(dir).mkdir();
 	}
 
-	/* The method to create directories and return whether it was successful */
+	/* The static method to create directories and return whether it was successful */
 	public static boolean createDirs(String dirs) {
-		return new File(asFileString(dirs)).mkdirs();
+		return getFile(dirs).mkdirs();
 	}
 
-	/* The method to copy a directory and all of its contents */
+	/* The static method to copy a directory and all of its contents */
 	public static boolean copyDir(String filePath1 , String filePath2) {
 		//The boolean that represents whether it was successful
 		boolean wasSuccessful = true;
@@ -255,7 +243,7 @@ public class FileUtils {
 		return wasSuccessful;
 	}
 
-	/* The method to copy a directory and all of its contents */
+	/* The static method to copy a directory and all of its contents */
 	public static boolean moveDir(String filePath1 , String filePath2) {
 		//The boolean that represents whether it was successful
 		boolean wasSuccessful = true;
@@ -285,7 +273,7 @@ public class FileUtils {
 		return wasSuccessful;
 	}
 
-	/* The method to add all of the file paths in a folder to a linked list */
+	/* The static method to add all of the file paths in a folder to a linked list */
 	public static void addAllFiles(String originalFolderPath , String folderPath , List<String> files , List<String> folders) {
 		//The list of files in the current directory
 		List<String> filesInCurrentDir = listFiles(originalFolderPath + folderPath);
@@ -298,7 +286,7 @@ public class FileUtils {
 			if (isDirectory(originalFolderPath + "/" + filePath)) {
 				//Add the folder to the folders list
 				folders.add(filePath);
-				//The current file is another directory so recall this method
+				//The current file is another directory so recall this static method
 				addAllFiles(originalFolderPath , filePath , files , folders);
 			} else {
 				//The current file is a file to be copied so add the current
@@ -308,13 +296,29 @@ public class FileUtils {
 		}
 	}
 
-	/* The method that returns a list of files in a directory */
+	/* The static method that returns a list of files in a directory */
 	public static List<String> listFiles(String filePath) {
 		//The list with the list of the folders contents
-		List<String> listOfFiles = ArrayUtils.toStringList(new File(asFileString(filePath)).list());
+		List<String> listOfFiles = ArrayUtils.toStringList(getFile(filePath).list());
 
 		//Return the list of files in the directory
 		return listOfFiles;
+	}
+	
+	/* The static method used to read some text using a buffered reader */
+	public static List<String> read(BufferedReader bufferedReader) throws IOException {
+		//The file text list
+		List<String> fileText = new ArrayList<String>();
+		//The current line being read
+		String line = "";
+		//Keep going until the end of the file
+		while ((line = bufferedReader.readLine()) != null) {
+			//Add the current line to the file text list
+			fileText.add(line);
+		}
+		bufferedReader.close();
+		//Return the file text
+		return fileText;
 	}
 	
 }
