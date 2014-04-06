@@ -24,12 +24,12 @@ public class GUILabel extends GUIComponent {
 		super(name, new GUIRenderer(new Colour[] {}, font));
 		//Assign the variables
 		this.text = text;
-		this.width = this.renderer.font.getWidth(this.text);
 	}
 	
 	/* The update method */
 	public void updateComponent() {
-		
+		//Update the width
+		this.width = this.renderer.font.getWidth(this.text);
 	}
 	
 	/* The render method */

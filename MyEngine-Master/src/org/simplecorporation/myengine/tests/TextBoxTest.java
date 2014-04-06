@@ -16,7 +16,7 @@ public class TextBoxTest extends BaseGame {
 	
 	public TextBoxTest() {
 		Settings.Window.Title = "TextBox Test";
-		Settings.Video.OpenGL = true;
+		Settings.Video.OpenGL = false;
 		//Create
 		createGame();
 	}
@@ -27,8 +27,8 @@ public class TextBoxTest extends BaseGame {
 		textBox.position.y = 100;
 		textBox.width = 200;
 		textBox.height = 30;
-		textBox.setDefaultText("This is a text box!");
-		textBox.setText("e");
+		//textBox.setDefaultText("This is a text box!");
+		//textBox.setText("e");
 		textBox.visible = true;
 	}
 	

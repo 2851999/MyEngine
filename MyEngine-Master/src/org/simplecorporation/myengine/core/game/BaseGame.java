@@ -12,6 +12,7 @@ package org.simplecorporation.myengine.core.game;
 
 import java.util.LinkedList;
 
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.input.Input;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
@@ -35,8 +36,10 @@ public class BaseGame extends AbstractGame implements InputListener {
 	public void createGame() {
 		//Add this input listener
 		Input.addListener(this);
-		//Create the engine loop
-		create();
+		//Check to see if this is not on Android
+		if (! Settings.Android)
+			//Create the engine loop
+			create();
 	}
 	
 	/* The method to add a game method interface */

@@ -21,18 +21,27 @@ public class GUITextDisplayArea extends GUIComponent {
 	/* The text in the display area */
 	private List<String> text;
 	
+	/* Has the text already been wrapped */
+	private boolean beenWrapped;
+	
 	public GUITextDisplayArea(String name , List<String> textToDisplay , GUIFont font , double width) {
 		//Call the super constructor
 		super(name, new GUIRenderer(new Colour[] {}, font));
 		//Assign the variables
+		this.text = textToDisplay;
 		this.width = width;
-		//Setup the word wrap
-		this.wordWrap(textToDisplay);
+		this.beenWrapped = false;
 	}
 	
 	/* The method to update the display area */
 	protected void updateComponent() {
-		
+		//Check to see whether the text has already been wrapped
+		if (! this.beenWrapped) {
+			//Setup the word wrap
+			this.wordWrap(this.text);
+			//Set beenWrapped to true to avoid loosing significant performancce
+			this.beenWrapped = true;
+		}
 	}
 	
 	protected void renderComponent() {
@@ -42,7 +51,7 @@ public class GUITextDisplayArea extends GUIComponent {
 		//Render all of the text
 		for (int a = 0; a < text.size(); a++) {
 			this.renderer.font.render(text.get(a) , xPos , yPos);
-			yPos += this.renderer.font.getHeight(text.get(a));
+			yPos += this.renderer.font.getHeight(text.get(a)) + 4;
 		}
 	}
 	
@@ -78,5 +87,9 @@ public class GUITextDisplayArea extends GUIComponent {
 			}
 		}
 	}
+	
+	/* The 'setter' and 'getter' variables */
+	public void setText(List<String> text) { this.text = text; }
+	public List<String> getText() { return this.text; }
 	
 }

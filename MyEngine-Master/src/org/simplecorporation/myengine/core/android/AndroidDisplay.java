@@ -45,7 +45,7 @@ public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callbac
 		this.androidGame = androidGame;
 		
 		//Create the android game thread
-		this.androidGameThread = new AndroidGameThread(this.getHolder() ,this.androidGame);
+		this.androidGameThread = new AndroidGameThread(this.getHolder(), this.androidGame);
 		
 		//Set the surface view focusable
 		this.setFocusable(true);

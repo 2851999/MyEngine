@@ -51,7 +51,7 @@ public class GUICheckBox extends GUIComponent {
 		this.checked = false;
 		
 		//Set the default clicked wait time
-		this.clickedWait = 0;
+		this.clickedWait = 100;
 		
 		//Set the last time clicked to the current time
 		this.lastTimeClicked = System.currentTimeMillis();

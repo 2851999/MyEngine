@@ -41,13 +41,13 @@ public class GUITextBoxBuilder {
 	   name, background colour, outline colour, font, mask character, x and y position,
 	   width and height */
 	public static GUITextBox createTextBox(String name , Colour backgroundColour ,
-			Colour outlineColour , GUIFont font , String maskCharacter , double x , double y , double width , double height) {
+			Colour outlineColour , GUIFont font , String maskString , double x , double y , double width , double height) {
 		
 		//Create the text box
 		GUITextBox textBox = new GUITextBox(name, new GUIRenderer(new Colour[] { backgroundColour , outlineColour }, font));
 		
 		//Set the variables in the text box
-		textBox.maskCharacter = maskCharacter;
+		textBox.maskString = maskString;
 		textBox.position.x = x;
 		textBox.position.y = y;
 		textBox.width = width;
@@ -80,14 +80,14 @@ public class GUITextBoxBuilder {
 	   name, image, font, mask character, x and y position,
 	   width and height */
 	public static GUITextBox createTextBox(String name , Image image ,
-			GUIFont font , String maskCharacter , double x , double y , double width , double height) {
+			GUIFont font , String maskString , double x , double y , double width , double height) {
 		
 		//Create the text box
 		GUITextBox textBox = new GUITextBox(name , new GUIRenderer(new Image[] { image } , font));
 		
 		//Set the variables in the text box
-		textBox.maskCharacter = maskCharacter;
-		textBox.hideCharacters = true;
+		textBox.maskString = maskString;
+		textBox.masked = true;
 		textBox.position.x = x;
 		textBox.position.y = y;
 		textBox.width = width;

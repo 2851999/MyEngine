@@ -28,9 +28,7 @@ public class BitmapFontTest extends BaseGame {
 	
 	public void gameCreated() {
 		String PATH = "";
-		font = new BitmapFont(new Image(PATH , "PNG" , true) , 50);
-		font.gridWidth = 16;
-		font.gridHeight = 16;
+		font = new BitmapFont(new Image(PATH , "PNG" , true) , 50, 16);
 		button = new GUIButton("Button" , "Hello" , new GUIRenderer(new Colour[] { Colour.WHITE , Colour.BLUE , Colour.ORANGE } , new GUIFont(font)));
 		button.visible = true;
 		button.position.x = 200;

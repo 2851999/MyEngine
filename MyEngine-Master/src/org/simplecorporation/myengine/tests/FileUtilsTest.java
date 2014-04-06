@@ -1,6 +1,6 @@
 package org.simplecorporation.myengine.tests;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 import org.simplecorporation.myengine.core.Settings;
@@ -22,7 +22,7 @@ public class FileUtilsTest extends EngineLoop {
 
 	@Override
 	public void engineCreated() {
-		LinkedList<String> text = FileUtils.read("/NOTES", false);
+		List<String> text = FileUtils.read("/NOTES", false);
 		for (int a = 0; a < text.size(); a++) {
 			System.out.println(text.get(a));
 		}
