@@ -117,51 +117,55 @@ public class FileUtils {
 	public static List<String> read(String filePath , boolean inFolder) {
 		//The file text
 		List<String> fileText = new ArrayList<String>();
-		//Check if it is in a folder
-		if (inFolder) {
-			//Check whether the file exists
-			if (doesExist(filePath)) {
-				//Check whether the file is a file
-				if (isFile(filePath)) {
-					//Check whether the file can be read
-					if (canRead(filePath)) {
-						//Read the file and set the text in the linked list
-						try {
-							//Make sure this is not on Android
-							if (! Settings.Android)
+		//Make sure this isn't on Android
+		if (! Settings.Android) {
+			//Check if it is in a folder
+			if (inFolder) {
+				//Check whether the file exists
+				if (doesExist(filePath)) {
+					//Check whether the file is a file
+					if (isFile(filePath)) {
+						//Check whether the file can be read
+						if (canRead(filePath)) {
+							//Read the file and set the text in the linked list
+							try {
 								//Assign the file path
 								filePath = asFileString(filePath);
-							FileReader fileReader = new FileReader(filePath);
-							//Read the file
-							fileText = read(new BufferedReader(fileReader));
-							fileReader.close();
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
+								FileReader fileReader = new FileReader(filePath);
+								//Read the file
+								fileText = read(new BufferedReader(fileReader));
+								fileReader.close();
+							} catch (FileNotFoundException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						} else {
+							//Log a message
+							Logger.log(new Log("FileUtils read()" , "File cant be read " + filePath , LogType.ERROR));
 						}
 					} else {
 						//Log a message
-						Logger.log(new Log("FileUtils read()" , "File cant be read " + filePath , LogType.ERROR));
+						Logger.log(new Log("FileUtils read()" , "File not a file " + filePath , LogType.ERROR));
 					}
 				} else {
 					//Log a message
-					Logger.log(new Log("FileUtils read()" , "File not a file " + filePath , LogType.ERROR));
+					Logger.log(new Log("FileUtils read()" , "File not found " + filePath , LogType.ERROR));
 				}
 			} else {
-				//Log a message
-				Logger.log(new Log("FileUtils read()" , "File not found " + filePath , LogType.ERROR));
+				//Read the file and set the text in the linked list
+				try {
+					//Read the file
+					fileText = read(new BufferedReader(new InputStreamReader(FileUtils.class.getResourceAsStream(filePath))));
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		} else {
-			//Read the file and set the text in the linked list
-			try {
-				//Read the file
-				fileText = read(new BufferedReader(new InputStreamReader(FileUtils.class.getResourceAsStream(filePath))));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			//Read the file
+			fileText = AndroidFileUtils.read(filePath, ! inFolder);
 		}
 		//Return the file text
 		return fileText;
@@ -173,33 +177,37 @@ public class FileUtils {
 			//Log a message
 			Logger.log(new Log("FileUtils write()" , "File already exists so will be overwritten " + filePath , LogType.WARNING));
 		}
-
-		try {
-			//Make sure this is not on Android
-			if (! Settings.Android)
+		
+		//Make sure this is not on Android
+		if (! Settings.Android) {
+			try {
 				//Assign the file path
 				filePath = asFileString(filePath);
-			//Write the file
-			FileWriter fileWriter = new FileWriter(filePath);
-			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+				//Write the file
+				FileWriter fileWriter = new FileWriter(filePath);
+				BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-			//Make sure there is text to save (Prevents IndexOutOfBoundsException)
-			if (fileText.size() > 0) {
-				//Write the first line
-				bufferedWriter.write(fileText.get(0));
-				for (int a = 1; a < fileText.size(); a++) {
-					bufferedWriter.newLine();
-					bufferedWriter.write(fileText.get(a));
+				//Make sure there is text to save (Prevents IndexOutOfBoundsException)
+				if (fileText.size() > 0) {
+					//Write the first line
+					bufferedWriter.write(fileText.get(0));
+					for (int a = 1; a < fileText.size(); a++) {
+						bufferedWriter.newLine();
+						bufferedWriter.write(fileText.get(a));
+					}
 				}
-			}
 
-			//Close the objects
-			bufferedWriter.close();
-			fileWriter.close();
-		} catch (IOException e) {
-			//Log a message
-			Logger.log(new Log("FileUtils write()" , "IOException writing the file " + filePath , LogType.ERROR));
-			e.printStackTrace();
+				//Close the objects
+				bufferedWriter.close();
+				fileWriter.close();
+			} catch (IOException e) {
+				//Log a message
+				Logger.log(new Log("FileUtils write()" , "IOException writing the file " + filePath , LogType.ERROR));
+				e.printStackTrace();
+			}
+		} else {
+			//Write the file on Android using the default mode
+			AndroidFileUtils.write(filePath, fileText);
 		}
 	}
 
@@ -312,10 +320,9 @@ public class FileUtils {
 		//The current line being read
 		String line = "";
 		//Keep going until the end of the file
-		while ((line = bufferedReader.readLine()) != null) {
+		while ((line = bufferedReader.readLine()) != null)
 			//Add the current line to the file text list
 			fileText.add(line);
-		}
 		bufferedReader.close();
 		//Return the file text
 		return fileText;
