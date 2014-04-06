@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -13,17 +13,24 @@ package org.simplecorporation.myengine.core.input;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
-import org.simplecorporation.myengine.settings.Settings;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
+import org.simplecorporation.myengine.core.input.event.ScrollEvent;
+import org.simplecorporation.myengine.core.logger.Log;
+import org.simplecorporation.myengine.core.logger.LogType;
+import org.simplecorporation.myengine.core.logger.Logger;
 
+/**
+ * The InputManagerLWJGL <code>class</code> is used to manage input for LWJGL
+ */
 public class InputManagerLWJGL {
 	
 	/* The method to check the input */
+	/**
+	 * This method checks for input
+	 */
 	public static void checkInput() {
 		//Check the mouse
 		checkMouse();
@@ -32,6 +39,9 @@ public class InputManagerLWJGL {
 	}
 	
 	/* The method to check the mouse */
+	/**
+	 * This method checks for input for the mouse
+	 */
 	public static void checkMouse() {
 		//Check if a mouse button is down
 		
@@ -78,19 +88,37 @@ public class InputManagerLWJGL {
 			Input.callMouseMoved(new MouseMotionEvent(MouseInput.x , MouseInput.y ,
 					MouseInput.lastX , MouseInput.lastY));
 		}
+		
+		//Check the scroll wheel
+		int dWheel = Mouse.getDWheel();
+		if (dWheel != 0)
+			//Call a scroll event
+			Input.callOnScroll(new ScrollEvent(dWheel , dWheel));
 	}
 	
+	
 	/* The method to check the keyboard */
+	/**
+	 * This method checks for input for the keyboard
+	 */
 	public static void checkKeyboard() {
 		//Enable repeat events (To allow for holding down keys etc.)
 		Keyboard.enableRepeatEvents(true);
 		//Check for an event
 		while (Keyboard.next()) {
 			if (Keyboard.getEventKeyState()) {
+				//Get the correct key code
+				int keyCode = KeyboardInput.convertKeyCode(Keyboard.getEventKey());
+				//Call the key event
+				KeyboardInput.onKeyPressed(new KeyboardEvent(Keyboard.getEventCharacter() , keyCode));
 				//Call a keyboard event
-				Input.callKeyPressed(new KeyboardEvent(Keyboard.getEventCharacter() , Keyboard.getEventKey()));
-				KeyboardInput.lastKeyboardEvent = new KeyboardEvent(Keyboard.getEventCharacter() , Keyboard.getEventKey());
+				Input.callKeyPressed(new KeyboardEvent(Keyboard.getEventCharacter() , keyCode));
+				KeyboardInput.lastKeyboardEvent = new KeyboardEvent(Keyboard.getEventCharacter() , keyCode);
 			} else {
+				//Get the correct key code
+				int keyCode = KeyboardInput.convertKeyCode(Keyboard.getEventKey());
+				//Call the key event
+				KeyboardInput.onKeyReleased(new KeyboardEvent(Keyboard.getEventCharacter() , keyCode));
 				//Call a keyboard event
 				Input.callKeyTyped(KeyboardInput.lastKeyboardEvent);
 				Input.callKeyReleased(KeyboardInput.lastKeyboardEvent);
@@ -98,6 +126,9 @@ public class InputManagerLWJGL {
 		}
 	}
 	
+	/**
+	 * This method creates and sets up input to receive future input events
+	 */
 	/* The method to setup the keyboard and mouse */
 	public static void create() {
 		try {
@@ -111,6 +142,9 @@ public class InputManagerLWJGL {
 		}
 	}
 	
+	/**
+	 * This method destroys the input
+	 */
 	/* The method to destroy the keyboard and mouse */
 	public static void destroy() {
 		//Destroy the keyboard and mouse

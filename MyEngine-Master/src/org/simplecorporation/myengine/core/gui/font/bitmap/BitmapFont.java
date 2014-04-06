@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -11,9 +11,9 @@
 package org.simplecorporation.myengine.core.gui.font.bitmap;
 
 import org.lwjgl.opengl.GL11;
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
-import org.simplecorporation.myengine.settings.Settings;
 
 
 public class BitmapFont {
@@ -25,10 +25,10 @@ public class BitmapFont {
 	public double fontSize;
 	
 	/* The number of cells on the width */
-	public double gridWidth;
+	public int gridWidth;
 	
 	/* The number of cells on the height */
-	public double gridHeight;
+	public int gridHeight;
 	
 	/* The width of a cell */
 	public double cellWidth;
@@ -37,10 +37,12 @@ public class BitmapFont {
 	public double cellHeight;
 	
 	/* The constructor of the font */
-	public BitmapFont(Image image , double fontSize) {
+	public BitmapFont(Image image , double fontSize, int gridSize) {
 		//Load the font image
 		this.image = image;
-		
+		//Set the grid size
+		this.gridWidth = gridSize;
+		this.gridHeight = gridSize;
 		//Set the size
 		this.fontSize = fontSize;
 	}

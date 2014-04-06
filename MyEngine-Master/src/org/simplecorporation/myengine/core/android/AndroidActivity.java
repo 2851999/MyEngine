@@ -1,16 +1,17 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
 package org.simplecorporation.myengine.core.android;
 
-import org.simplecorporation.myengine.settings.Settings;
+import org.simplecorporation.myengine.core.Settings;
+import org.simplecorporation.myengine.core.game.BaseGame;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
@@ -51,7 +52,7 @@ public abstract class AndroidActivity extends Activity {
 	}
 	
 	/* The onCreate method */
-	protected void onCreate(AndroidGame androidGame , Bundle savedInstanceState) {
+	protected void onCreate(BaseGame androidGame , Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//Set the title
 		this.setTitle(Settings.Window.Title);

@@ -1,19 +1,20 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
 package org.simplecorporation.myengine.core.android;
 
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.android.input.AndroidInput;
+import org.simplecorporation.myengine.core.game.BaseGame;
 import org.simplecorporation.myengine.core.input.InputManager;
-import org.simplecorporation.myengine.settings.Settings;
-import org.simplecorporation.myengine.utils.screen.ScreenUtils;
+import org.simplecorporation.myengine.utils.ScreenUtils;
 
 import android.app.Activity;
 import android.graphics.Paint;
@@ -24,13 +25,13 @@ import android.view.SurfaceView;
 public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callback {
 	
 	/* The android game */
-	public AndroidGame androidGame;
+	public BaseGame androidGame;
 	
 	/* The android game thread */
 	public AndroidGameThread androidGameThread;
 	
 	/* The constructor */
-	public AndroidDisplay(Activity gameActivity , AndroidGame androidGame) {
+	public AndroidDisplay(Activity gameActivity , BaseGame androidGame) {
 		//Call the super constructor
 		super(gameActivity);
 		
@@ -44,7 +45,7 @@ public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callbac
 		this.androidGame = androidGame;
 		
 		//Create the android game thread
-		this.androidGameThread = new AndroidGameThread(this.getHolder() ,this.androidGame);
+		this.androidGameThread = new AndroidGameThread(this.getHolder(), this.androidGame);
 		
 		//Set the surface view focusable
 		this.setFocusable(true);
@@ -88,8 +89,10 @@ public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callbac
 		while(retry) {
 			//Try and catch statement
 			try {
-				//Destroy the game
-				this.androidGame.gameDestroy();
+				//Stop the game
+				this.androidGame.gameStopped();
+				//Close the game
+				this.androidGame.gameClosing();
 				//Join the thread
 				this.androidGameThread.join();
 				//Stop the while loop

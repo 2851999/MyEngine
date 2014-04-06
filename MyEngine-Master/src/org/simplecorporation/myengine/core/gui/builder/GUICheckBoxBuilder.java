@@ -1,17 +1,17 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
 package org.simplecorporation.myengine.core.gui.builder;
 
-import org.simplecorporation.myengine.core.gui.checkbox.GUIImageCheckBox;
-import org.simplecorporation.myengine.core.gui.checkbox.GUIRenderableCheckBox;
+import org.simplecorporation.myengine.core.gui.GUICheckBox;
+import org.simplecorporation.myengine.core.gui.GUIRenderer;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 
@@ -20,11 +20,11 @@ public class GUICheckBoxBuilder {
 	/* The method to create a renderable check box button
 	   given the name, check box colour, check colour, x and y position,
 	   width and height */
-	public static GUIRenderableCheckBox createRenderableCheckBox(String name ,
+	public static GUICheckBox createCheckBox(String name ,
 			Colour checkBoxColour , Colour checkColour , double x , double y , double width , double height) {
 		
 		//Create the check box
-		GUIRenderableCheckBox checkBox = new GUIRenderableCheckBox(name , checkBoxColour , checkColour);
+		GUICheckBox checkBox = new GUICheckBox(name , new GUIRenderer(new Colour[] { checkBoxColour , checkColour }));
 		
 		//Set the variables of the check box
 		checkBox.position.x = x;
@@ -39,12 +39,12 @@ public class GUICheckBoxBuilder {
 	/* The method to create a renderable check box button
 	   given the name, check box colour, check colour, check width, check height, x and y position,
 	   width and height */
-	public static GUIRenderableCheckBox createRenderableCheckBox(String name ,
+	public static GUICheckBox createCheckBox(String name ,
 			Colour checkBoxColour , Colour checkColour , double checkWidth , double checkHeight , double x , double y ,
 			double width , double height) {
 		
 		//Create the check box
-		GUIRenderableCheckBox checkBox = new GUIRenderableCheckBox(name , checkBoxColour , checkColour);
+		GUICheckBox checkBox = new GUICheckBox(name , new GUIRenderer(new Colour[] { checkBoxColour , checkColour }));
 		
 		//Set the variables of the check box
 		checkBox.checkWidth = checkWidth;
@@ -61,11 +61,11 @@ public class GUICheckBoxBuilder {
 	/* The method to create an image check box button
 	   given the name, images, x and y position,
 	   width and height */
-	public static GUIImageCheckBox createImageCheckBox(String name ,
+	public static GUICheckBox createCheckBox(String name ,
 			Image[] images , double x , double y , double width , double height) {
 		
 		//Create the check box
-		GUIImageCheckBox checkBox = new GUIImageCheckBox(name , images);
+		GUICheckBox checkBox = new GUICheckBox(name , new GUIRenderer(images));
 		
 		//Set the variables of the check box
 		checkBox.position.x = x;
@@ -80,7 +80,7 @@ public class GUICheckBoxBuilder {
 	/* The method to create an image check box button
 	   given the name, image path, number of images, x and y position,
 	   width and height */
-	public static GUIImageCheckBox createImageCheckBox(String name ,
+	public static GUICheckBox createCheckBox(String name ,
 			String imagePath , int numberOfImages , double x , double y , double width , double height) {
 		
 		//The images
@@ -93,7 +93,7 @@ public class GUICheckBoxBuilder {
 		}
 		
 		//Create the check box
-		GUIImageCheckBox checkBox = new GUIImageCheckBox(name , images);
+		GUICheckBox checkBox = new GUICheckBox(name , new GUIRenderer(images));
 		
 		//Set the variables of the check box
 		checkBox.position.x = x;

@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -15,6 +15,7 @@ import org.simplecorporation.myengine.core.input.Input;
 import org.simplecorporation.myengine.core.input.event.KeyboardEvent;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.input.event.MouseMotionEvent;
+import org.simplecorporation.myengine.core.input.event.ScrollEvent;
 import org.simplecorporation.myengine.core.input.event.TouchEvent;
 import org.simplecorporation.myengine.core.input.listener.InputListener;
 
@@ -26,16 +27,27 @@ public abstract class GUIComponent extends AbstractEntity2D implements InputList
 	/* The boolean that represents whether the component is visible */
 	public boolean visible;
 	
+	/* The boolean that represents whether the component is selected */
+	public boolean selected;
+	
+	/* The current item in the rendering list to render */
+	public int renderIndex;
+	
+	/* The GUIRenderer instance */
+	public GUIRenderer renderer;
+	
 	/* The abstract methods */
 	protected abstract void updateComponent();
 	protected abstract void renderComponent();
 	
 	/* The constructor */
-	public GUIComponent(String name) {
-		//Assign the name
+	public GUIComponent(String name, GUIRenderer renderer) {
+		//Assign the variables
 		this.name = name;
-		//Set visible to false
 		this.visible = false;
+		this.selected = false;
+		this.renderIndex = 0;
+		this.renderer = renderer;
 		//Add the listener
 		Input.addListener(this);
 	}
@@ -88,6 +100,11 @@ public abstract class GUIComponent extends AbstractEntity2D implements InputList
 	
 	/* Method inherited from InputListener */
 	public void onKeyTyped(KeyboardEvent e) {
+		
+	}
+	
+	/* Method inherited from InputListener */
+	public void onScroll(ScrollEvent e) {
 		
 	}
 	

@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -15,7 +15,7 @@ public class GameMethods implements GameMethodsInterface {
 	/* The constructor */
 	public GameMethods() {
 		//Add the GameMethods interface
-		Game.addGameMethodsInterface(this);
+		BaseGame.addGameMethodsInterface(this);
 	}
 	
 	/* An implemented method */

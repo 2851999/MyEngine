@@ -1,10 +1,10 @@
 package org.simplecorporation.myengine.utils.font;
 
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.gui.font.GUIFont;
 import org.simplecorporation.myengine.core.gui.font.bitmap.BitmapFont;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.settings.Settings;
 
 public class FontUtils {
 	
@@ -22,10 +22,7 @@ public class FontUtils {
 	/* The method to create a bitmap font */
 	public static GUIFont createGUIBitmapFont(Image image , double size , int gridSize) {
 		//The BitmapFont
-		BitmapFont bitmapFont = new BitmapFont(image , size);
-		//Set the grid size of the BitmapFont
-		bitmapFont.gridWidth = gridSize;
-		bitmapFont.gridHeight = gridSize;
+		BitmapFont bitmapFont = new BitmapFont(image , size, gridSize);
 		//Return the GUIFont
 		return new GUIFont(bitmapFont);
 	}

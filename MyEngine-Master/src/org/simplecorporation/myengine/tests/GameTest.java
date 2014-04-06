@@ -1,19 +1,16 @@
 package org.simplecorporation.myengine.tests;
 
 import org.lwjgl.opengl.GL11;
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.game.Game;
 import org.simplecorporation.myengine.core.input.event.MouseEvent;
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.settings.Settings;
 
 public class GameTest extends Game {
 	
 	public GameTest() {
-		Settings.Window.Title = "Game Test";
-		Settings.Video.OpenGL = false;
-		//Create
-		createGame();
+		
 	}
 	
 	public void gameRender() {
@@ -32,7 +29,13 @@ public class GameTest extends Game {
 	}
 	
 	public static void main(String[] args) {
+		Settings.Window.Title = "Game Test";
+		Settings.Video.OpenGL = false;
 		new GameTest();
+	}
+	
+	public void loadResources() {
+		
 	}
 	
 }

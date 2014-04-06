@@ -1,16 +1,16 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
 package org.simplecorporation.myengine.core.audio.clip;
 
-import org.simplecorporation.myengine.settings.Settings;
+import org.simplecorporation.myengine.core.Settings;
 
 public class AudioClip {
 	

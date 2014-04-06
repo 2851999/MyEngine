@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -13,10 +13,10 @@ package org.simplecorporation.myengine.core.game2d.entity;
 import java.util.LinkedList;
 
 import org.simplecorporation.myengine.core.effect.Effect;
-import org.simplecorporation.myengine.core.game2d.point.Point2D;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
+import org.simplecorporation.myengine.core.game2d.vector.Vector2D;
+import org.simplecorporation.myengine.core.logger.Log;
+import org.simplecorporation.myengine.core.logger.LogType;
+import org.simplecorporation.myengine.core.logger.Logger;
 
 public abstract class AbstractEntity2D extends Entity2D {
 	
@@ -38,7 +38,7 @@ public abstract class AbstractEntity2D extends Entity2D {
 	}
 	
 	/* The constructor with the position given */
-	public AbstractEntity2D(Point2D position) {
+	public AbstractEntity2D(Vector2D position) {
 		//Call the super constructor
 		super(position);
 		//Create the effects linked list
@@ -46,7 +46,7 @@ public abstract class AbstractEntity2D extends Entity2D {
 	}
 	
 	/* The constructor with the position and velocity given */
-	public AbstractEntity2D(Point2D position , Point2D velocity) {
+	public AbstractEntity2D(Vector2D position , Vector2D velocity) {
 		//Call the super constructor
 		super(position , velocity);
 		//Create the effects linked list
@@ -54,7 +54,7 @@ public abstract class AbstractEntity2D extends Entity2D {
 	}
 	
 	/* The constructor with the position and width and height given */
-	public AbstractEntity2D(Point2D position , double width , double height) {
+	public AbstractEntity2D(Vector2D position , double width , double height) {
 		//Call the super constructor
 		super(position , width , height);
 		//Create the effects linked list
@@ -62,7 +62,7 @@ public abstract class AbstractEntity2D extends Entity2D {
 	}
 	
 	/* The constructor with the position and velocity and width and height given */
-	public AbstractEntity2D(Point2D position , Point2D velocity , double width , double height) {
+	public AbstractEntity2D(Vector2D position , Vector2D velocity , double width , double height) {
 		//Call the super constructor
 		super(position , velocity , width , height);
 		//Create the effects linked list
@@ -72,7 +72,7 @@ public abstract class AbstractEntity2D extends Entity2D {
 	/* The update method */
 	public void update() {
 		//Add the velocity to the position
-		this.position.add(this.velocity);
+		this.position = this.position.add(this.velocity);
 		//Add the rotation velocity to the rotation
 		this.rotation += this.rotationVelocity;
 		//Update all of the effects

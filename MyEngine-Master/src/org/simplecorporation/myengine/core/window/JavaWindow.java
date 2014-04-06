@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -20,11 +20,12 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.image.Image;
-import org.simplecorporation.myengine.settings.Settings;
-import org.simplecorporation.myengine.utils.logger.Log;
-import org.simplecorporation.myengine.utils.logger.LogType;
-import org.simplecorporation.myengine.utils.logger.Logger;
+import org.simplecorporation.myengine.core.logger.Log;
+import org.simplecorporation.myengine.core.logger.LogType;
+import org.simplecorporation.myengine.core.logger.Logger;
+import org.simplecorporation.myengine.core.render.RenderVariablesJava;
 
 public class JavaWindow {
 	
@@ -106,6 +107,9 @@ public class JavaWindow {
 	
 	/* The method to set the window to the right settings */
 	public static void updateSettings() {
+		//The current screen size
+		float windowWidth = frame.getWidth();
+		float windowHeight = frame.getHeight();
 		//Check if the window settings are right
 		if (frame.getTitle() != Settings.Window.Title || frame.getWidth() - frame.getInsets().left + frame.getInsets().right != Settings.Window.Size.Width ||
 				frame.getHeight() + frame.getInsets().top + frame.getInsets().bottom != Settings.Window.Size.Height || frame.isUndecorated() != Settings.Window.Fullscreen ||
@@ -145,6 +149,9 @@ public class JavaWindow {
 			//Create the back buffer and the graphics 2D objects
 			backBuffer = new BufferedImage(frame.getWidth() , frame.getHeight() , BufferedImage.TYPE_INT_RGB);
 			g2d = backBuffer.createGraphics();
+			RenderVariablesJava.g2d = g2d;
+			RenderVariablesJava.backBuffer = backBuffer;
+			RenderVariablesJava.container = frame;
 		}
 		
 		//Check if the max FPS has changed since it was last set
@@ -158,6 +165,11 @@ public class JavaWindow {
 			else
 				//Set the wait time
 				waitTime = 1000 / maxFPS;
+		}
+		//Check if the screen size has changed
+		if (windowWidth != frame.getWidth() || windowHeight != frame.getHeight()) {
+			//Call an event
+			Window.callWindowSizeChangedEvent(new WindowSizeChangedEvent(windowWidth , windowHeight , frame.getWidth() , frame.getHeight()));
 		}
 	}
 	
@@ -189,7 +201,11 @@ public class JavaWindow {
 		
 		//Make the system wait
 		try {
-			Thread.sleep(waitTime);
+			//Make sure the wait time isn't 0 or less
+			if (waitTime <= 0)
+				Thread.sleep(0);
+			else
+				Thread.sleep(waitTime);
 		} catch (InterruptedException e) {
 			//Log a message
 			Logger.log(new Log("JavaWindow updateGraphics()" , "InterruptedException" , LogType.ERROR));

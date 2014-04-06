@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -37,21 +37,6 @@ public class Colour {
 	/* The alpha value */
 	public double a;
 	
-	/* The constructor of a colour r,g,b using integers */
-	public Colour(int r , int g , int b) {
-		this.r = r / 255;
-		this.g = g / 255;
-		this.b = b / 255;
-	}
-	
-	/* The constructor of a colour r,g,b,a using integers */
-	public Colour(int r , int g , int b , int a) {
-		this.r = r / 255;
-		this.g = g / 255;
-		this.b = b / 255;
-		this.a = a / 255;
-	}
-	
 	/* The constructor of a colour r,g,b using doubles*/
 	public Colour(double r , double g , double b) {
 		this.r = r;
@@ -66,6 +51,23 @@ public class Colour {
 		this.g = g;
 		this.b = b;
 		this.a = a;
+	}
+	
+	/* The method used to create and return a colour using 3 integers */
+	public static Colour create(int r, int g, int b) {
+		return new Colour(
+				(double)((double) r / (double) 255) ,
+				(double)((double) g / (double) 255) ,
+				(double)((double) b / (double) 255));
+	}
+	
+	/* The method used to create and return a colour using 4 integers */
+	public static Colour create(int r, int g, int b, int a) {
+		return new Colour(
+				(double)((double) r / (double) 255) ,
+				(double)((double) g / (double) 255) ,
+				(double)((double) b / (double) 255) ,
+				(double)((double) a / (double) 255));
 	}
 	
 	/* The method to clone this colour */
@@ -106,6 +108,14 @@ public class Colour {
 		this.g = g;
 		this.b = b;
 		this.a = a;
+	}
+	
+	public double[] getValues() {
+		return new double[] { this.r, this.g, this.b, this.a };
+	}
+	
+	public float[] getFloatValues() {
+		return new float[] { (float) this.r, (float) this.g, (float) this.b, (float) this.a };
 	}
 	
 	public void setR(int r) { this.r = r / 255; }

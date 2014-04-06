@@ -1,17 +1,17 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
 
 package org.simplecorporation.myengine.core.gui.font;
 
+import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.gui.font.bitmap.BitmapFont;
-import org.simplecorporation.myengine.settings.Settings;
 
 public class GUIFont {
 	
@@ -68,6 +68,35 @@ public class GUIFont {
 		}
 	}
 	
+	/* The method that renders the font in the centre
+	 * of the screen (Used for convenience) */
+	public void renderInCentre(String text) {
+		//Render the text in the centre of the screen
+		this.render(text,
+				(Settings.Window.Size.Width / 2) - (this.getWidth(text) / 2),
+				(Settings.Window.Size.Height / 2) - (this.getHeight(text) / 2));
+	}
+	
+	/* The method that renders the font in the centre
+	 * of the screen given the x position
+	 * (Used for convenience) */
+	public void renderInCentreAtX(String text, double x) {
+		//Render the text in the centre of the screen
+		this.render(text,
+				x,
+				(Settings.Window.Size.Height / 2) - (this.getHeight(text) / 2));
+	}
+	
+	/* The method that renders the font in the centre
+	 * of the screen given the y position
+	 * (Used for convenience) */
+	public void renderInCentreAtY(String text, double y) {
+		//Render the text in the centre of the screen
+		this.render(text,
+				(Settings.Window.Size.Width / 2) - (this.getWidth(text) / 2),
+				y);
+	}
+	
 	/* The method to get the width of a string */
 	public double getWidth(String text) {
 		if (this.bitmapFont != null) {
@@ -103,6 +132,5 @@ public class GUIFont {
 		} else
 			return 0;
 	}
-	
 	
 }

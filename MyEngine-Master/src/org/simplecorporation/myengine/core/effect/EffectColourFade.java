@@ -1,9 +1,9 @@
-/***********************************************
+/* *********************************************
  * SIMPLE CORPORATION
  * 
  * MYENGINE
  * 
- * COPYRIGHT @ 2013
+ * COPYRIGHT @ 2013 - 2014
  * 
  * USE - EDUCATIONAL PURPOSES ONLY
  ***********************************************/
@@ -12,7 +12,7 @@ package org.simplecorporation.myengine.core.effect;
 
 import org.simplecorporation.myengine.core.render.basic.BasicRenderer;
 import org.simplecorporation.myengine.core.render.colour.Colour;
-import org.simplecorporation.myengine.utils.timer.Timer;
+import org.simplecorporation.myengine.utils.Timer;
 
 public class EffectColourFade extends Effect {
 	
@@ -49,6 +49,9 @@ public class EffectColourFade extends Effect {
 	/* The number of cycles completed */
 	public int numberOfCompletedCycles;
 	
+	/* The maximum cycles to complete */
+	public int maxNumberOfCycles;
+	
 	/* The constructor */
 	public EffectColourFade(long timeBetweenFade , double amountAlphaChange , Colour colour , int fadeDirection) {
 		//Call the super constructor
@@ -63,12 +66,11 @@ public class EffectColourFade extends Effect {
 		this.colour = colour;
 		//Set the fade direction
 		this.fadeDirection = fadeDirection;
-		//Set the number of completed cycles
-		this.numberOfCompletedCycles = 0;
 		//Set up the cycle counting variables
 		this.isFirstCycle = true;
 		this.originalFadeDirection = this.fadeDirection;
 		this.numberOfCompletedCycles = 0;
+		this.maxNumberOfCycles = 0;
 	}
 	
 	/* The method called to update the effect */
@@ -111,6 +113,12 @@ public class EffectColourFade extends Effect {
 				this.isFirstCycle = false;
 			}
 		}
+		
+		//Check the number of cycles
+		if (this.maxNumberOfCycles != 0 && this.maxNumberOfCycles == this.numberOfCompletedCycles) {
+			//Stop the effect
+			this.stopEffect();
+		}
 	}
 	
 	/* The method called to apply the effect */
@@ -131,6 +139,14 @@ public class EffectColourFade extends Effect {
 		this.timer.stop();
 		//Set the fade direction to 0
 		this.fadeDirection = 0;
+	}
+	
+	/* The method called to reset an effect */
+	public void resetEffect() {
+		//Set up the cycle counting variables
+		this.isFirstCycle = true;
+		this.fadeDirection = this.originalFadeDirection;
+		this.numberOfCompletedCycles = 0;
 	}
 	
 }
