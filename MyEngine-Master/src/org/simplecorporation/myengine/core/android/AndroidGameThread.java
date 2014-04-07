@@ -23,6 +23,9 @@ public class AndroidGameThread extends Thread {
 	/* Is the thread paused */
 	public boolean paused;
 	
+	/* The boolean that states whether the game has already been created */
+	public boolean gameAlreadyCreated;
+	
 	/* The surface holder */
 	public SurfaceHolder surfaceHolder;
 	
@@ -34,15 +37,12 @@ public class AndroidGameThread extends Thread {
 	
 	/* The constructor */
 	public AndroidGameThread(SurfaceHolder surfaceHolder , BaseGame androidGame, AndroidDisplay androidDisplay) {
-		//Set running to false
+		//Assign the variables
 		this.running = false;
-		//Set paused to false
 		this.paused = false;
-		//Assign the surface holder
+		this.gameAlreadyCreated = false;
 		this.surfaceHolder = surfaceHolder;
-		//Assign the android game
 		this.androidGame = androidGame;
-		//Assign the android display
 		this.androidDisplay = androidDisplay;
 	}
 	
@@ -60,8 +60,13 @@ public class AndroidGameThread extends Thread {
 	public void run() {
 		//Set the game canvas to null
 		AndroidStore.gameCanvas = null;
-		//Start the game
-		this.androidGame.create();
+		//Make sure the game hasn't already been created
+		if (! this.gameAlreadyCreated) {
+			//Assign 'gameAlreadyCreated' to true
+			this.gameAlreadyCreated = true;
+			//Start the game
+			this.androidGame.create();
+		}
 		//Run while the variable running is true
 		while (running) {
 			//Check if the thread is paused and make sure the android display has been created
