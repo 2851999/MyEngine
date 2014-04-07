@@ -29,8 +29,11 @@ public class AndroidGameThread extends Thread {
 	/* The android game */
 	public BaseGame androidGame;
 	
+	/* The android display */
+	public AndroidDisplay androidDisplay;
+	
 	/* The constructor */
-	public AndroidGameThread(SurfaceHolder surfaceHolder , BaseGame androidGame) {
+	public AndroidGameThread(SurfaceHolder surfaceHolder , BaseGame androidGame, AndroidDisplay androidDisplay) {
 		//Set running to false
 		this.running = false;
 		//Set paused to false
@@ -39,6 +42,8 @@ public class AndroidGameThread extends Thread {
 		this.surfaceHolder = surfaceHolder;
 		//Assign the android game
 		this.androidGame = androidGame;
+		//Assign the android display
+		this.androidDisplay = androidDisplay;
 	}
 	
 	/* The method to set the running variable */
@@ -53,16 +58,16 @@ public class AndroidGameThread extends Thread {
 	
 	/* The run method */
 	public void run() {
+		//Set the game canvas to null
+		AndroidStore.gameCanvas = null;
 		//Start the game
 		this.androidGame.create();
 		//Run while the variable running is true
 		while (running) {
-			//Check if the thread is paused
-			if (! this.paused) {
+			//Check if the thread is paused and make sure the android display has been created
+			if (! this.paused && this.androidDisplay.created) {
 				//Check the input
 				InputManager.checkInput();
-				//Set the game canvas to null
-				AndroidStore.gameCanvas = null;
 				//Try statement
 				try {
 					//Set the game canvas
