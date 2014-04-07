@@ -46,7 +46,8 @@ public class InputManagerAndroid extends AndroidGestureListener implements Andro
 	 * This method destroys the input
 	 */
 	public void destroy() {
-		
+		//Remove all of the listeners
+		AndroidInput.androidTouchListeners.clear();
 	}
 	
 	/* The onTouch method called when an event has occurred */

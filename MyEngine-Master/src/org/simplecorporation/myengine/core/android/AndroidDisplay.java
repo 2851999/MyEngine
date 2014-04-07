@@ -30,6 +30,9 @@ public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callbac
 	/* The android game thread */
 	public AndroidGameThread androidGameThread;
 	
+	/* The boolean that states whether this has been created */
+	public boolean created;
+	
 	/* The constructor */
 	public AndroidDisplay(Activity gameActivity , BaseGame androidGame) {
 		//Call the super constructor
@@ -44,8 +47,11 @@ public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callbac
 		//Set the android game
 		this.androidGame = androidGame;
 		
+		//Set created to false
+		this.created = false;
+		
 		//Create the android game thread
-		this.androidGameThread = new AndroidGameThread(this.getHolder(), this.androidGame);
+		this.androidGameThread = new AndroidGameThread(this.getHolder(), this.androidGame, this);
 		
 		//Set the surface view focusable
 		this.setFocusable(true);
@@ -53,9 +59,11 @@ public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callbac
 	
 	/* Called when the surface is created */
 	public void surfaceCreated(SurfaceHolder surfaceHolder) {
+		//Set created to true
+		this.created = true;
 		//Create the input
 		InputManager.create();
-		//Set the size of the screen in the settings if full screen
+		//Set the size of the screen in the settings based on the value of fullscreen
 		if (Settings.Window.Fullscreen) {
 			Settings.Window.Size.Width = ScreenUtils.getScreenWidth();
 			Settings.Window.Size.Height = ScreenUtils.getScreenHeight();
@@ -70,20 +78,37 @@ public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callbac
 		this.androidGame.gameCreated();
 		//Create the paint object
 		AndroidStore.gamePaint = new Paint();
-		//Start the android game thread
+		//Start the android game thread if it has not already started
 		this.androidGameThread.setRunning(true);
-		this.androidGameThread.start();
+		if (! this.androidGameThread.isAlive())
+			this.androidGameThread.start();
 	}
 	
 	/* Called when the surface is changed */
 	public void surfaceChanged(SurfaceHolder surfaceHolder , int format , int width , int height) {
-		//Set the size of the screen in the settings
-		Settings.Window.Size.Width = ScreenUtils.getScreenWidth();
-		Settings.Window.Size.Height = ScreenUtils.getScreenHeight();
+		//Set the size of the screen in the settings based on the value of fullscreen
+		if (Settings.Window.Fullscreen) {
+			Settings.Window.Size.Width = ScreenUtils.getScreenWidth();
+			Settings.Window.Size.Height = ScreenUtils.getScreenHeight();
+		} else {
+			//Set the size of the screen in the settings
+			Settings.Window.Size.Width = this.getWidth();
+			Settings.Window.Size.Height = this.getHeight();
+		}
+		//Reassign the surface holder
+		this.androidGameThread.surfaceHolder = surfaceHolder;
 	}
 	
 	/* Called when the surface is destroyed */
 	public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+		//Set created to false
+		this.created = false;
+		//Destroy the input
+		InputManager.destroy();
+	}
+	
+	/* The method used to stop the thread */
+	public void stopThread() {
 		//Should the loop continue
 		boolean retry = true;
 		while(retry) {
@@ -103,7 +128,9 @@ public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callbac
 		}
 	}
 	
-	/* The on touch method */
+	/* The on touch method NOTE: DO NOT MOVE, IF YOU MOVE THIS THIS
+	 * TO AndroidActivity, the coordinates given will include the title
+	 * bar and the engine will not work properly when fullscreen = false */
 	public boolean onTouchEvent(MotionEvent e) {
 		//Call the touch event
 		AndroidInput.callTouchEvent(e);

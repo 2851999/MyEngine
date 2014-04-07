@@ -23,22 +23,27 @@ public class AndroidGameThread extends Thread {
 	/* Is the thread paused */
 	public boolean paused;
 	
+	/* The boolean that states whether the game has already been created */
+	public boolean gameAlreadyCreated;
+	
 	/* The surface holder */
 	public SurfaceHolder surfaceHolder;
 	
 	/* The android game */
 	public BaseGame androidGame;
 	
+	/* The android display */
+	public AndroidDisplay androidDisplay;
+	
 	/* The constructor */
-	public AndroidGameThread(SurfaceHolder surfaceHolder , BaseGame androidGame) {
-		//Set running to false
+	public AndroidGameThread(SurfaceHolder surfaceHolder , BaseGame androidGame, AndroidDisplay androidDisplay) {
+		//Assign the variables
 		this.running = false;
-		//Set paused to false
 		this.paused = false;
-		//Assign the surface holder
+		this.gameAlreadyCreated = false;
 		this.surfaceHolder = surfaceHolder;
-		//Assign the android game
 		this.androidGame = androidGame;
+		this.androidDisplay = androidDisplay;
 	}
 	
 	/* The method to set the running variable */
@@ -53,16 +58,21 @@ public class AndroidGameThread extends Thread {
 	
 	/* The run method */
 	public void run() {
-		//Start the game
-		this.androidGame.create();
+		//Set the game canvas to null
+		AndroidStore.gameCanvas = null;
+		//Make sure the game hasn't already been created
+		if (! this.gameAlreadyCreated) {
+			//Assign 'gameAlreadyCreated' to true
+			this.gameAlreadyCreated = true;
+			//Start the game
+			this.androidGame.create();
+		}
 		//Run while the variable running is true
 		while (running) {
-			//Check if the thread is paused
-			if (! this.paused) {
+			//Check if the thread is paused and make sure the android display has been created
+			if (! this.paused && this.androidDisplay.created) {
 				//Check the input
 				InputManager.checkInput();
-				//Set the game canvas to null
-				AndroidStore.gameCanvas = null;
 				//Try statement
 				try {
 					//Set the game canvas
