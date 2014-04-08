@@ -12,6 +12,7 @@ package org.simplecorporation.myengine.core.audio.clip;
 
 import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.android.AndroidActivityListener;
+import org.simplecorporation.myengine.core.android.AndroidSettings;
 import org.simplecorporation.myengine.core.android.AndroidStore;
 
 import android.media.MediaPlayer;
@@ -85,8 +86,9 @@ public class AndroidAudio extends AndroidActivityListener {
 	
 	/* The method called when the activity pauses */
 	public void activityPaused() {
-		//Check to see whether the audio is playing
-		if (isPlaying()) {
+		//Check to see whether the PauseSoundsOnPause setting is enabled
+		//and the audio is playing
+		if (AndroidSettings.PauseSoundsOnPause && this.isPlaying()) {
 			//Assign 'wasPlayingBeforePause' to true
 			this.wasPlayingBeforePause = true;
 			//Pause the audio clip
@@ -96,8 +98,9 @@ public class AndroidAudio extends AndroidActivityListener {
 	
 	/* The method called when the activity resumes */
 	public void activityResumed() {
-		//Check to see whether the clip was playing before the activity was paused
-		if (this.wasPlayingBeforePause) {
+		//Check to see whether the PauseSoundsOnPause setting is enabled
+		//clip was playing before the activity was paused
+		if (AndroidSettings.PauseSoundsOnPause && this.wasPlayingBeforePause) {
 			//Assign 'wasPlayingBeforePause' to false
 			this.wasPlayingBeforePause = false;
 			//Resume the audio clip
