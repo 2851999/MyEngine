@@ -64,7 +64,7 @@ public class AndroidGameThread extends Thread {
 		if (! this.gameAlreadyCreated) {
 			//Assign 'gameAlreadyCreated' to true
 			this.gameAlreadyCreated = true;
-			//Start the game
+			//Create the game
 			this.androidGame.create();
 		}
 		//Run while the variable running is true

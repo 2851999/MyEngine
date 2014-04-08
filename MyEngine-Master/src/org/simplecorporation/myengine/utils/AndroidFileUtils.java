@@ -40,10 +40,10 @@ public class AndroidFileUtils {
 		//The directory
 		File directory = null;
 		//Check to see whether the file is in the external storage
-		if (external)
+		if (! external)
 			//Assign the directory
 			directory = AndroidStore.gameActivity.getFilesDir();
-		else
+		else if (external)
 			//Assign the directory
 			directory = Environment.getExternalStorageDirectory();
 		//Return the file
