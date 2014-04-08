@@ -38,6 +38,9 @@ public abstract class AndroidActivity extends Activity {
 	/* The android display */
 	public AndroidDisplay androidDisplay;
 	
+	/* The android OpenGL ES display */
+	public AndroidDisplayOpenGLES androidDisplayOpenGLES;
+	
 	/* The onCreate method */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,11 +58,6 @@ public abstract class AndroidActivity extends Activity {
 			//Make the activity fullscreen
 			this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN , WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		}
-		
-		//Go though all of the activity listeners
-		for (AndroidActivityListenerInterface listener : activityListeners)
-			//Call the method in the current listener
-			listener.activityCreated();
 	}
 	
 	/* The onCreate method */
@@ -79,10 +77,22 @@ public abstract class AndroidActivity extends Activity {
 			//Make the activity fullscreen
 			this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN , WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		}
-		//Create the display
-		androidDisplay = new AndroidDisplay(this , androidGame);
-		//Set the content view
-		this.setContentView(androidDisplay);
+		//Check the OpenGL setting
+		if (! Settings.Video.OpenGL) {
+			//Create the display
+			this.androidDisplay = new AndroidDisplay(this , androidGame);
+			//Set the content view
+			this.setContentView(this.androidDisplay);
+		} else if (Settings.Video.OpenGL) {
+			//Create the OpenGL ES display
+			this.androidDisplayOpenGLES = new AndroidDisplayOpenGLES(this, androidGame);
+			//Set the content view
+			this.setContentView(this.androidDisplayOpenGLES);
+		}
+		//Go though all of the activity listeners
+		for (AndroidActivityListenerInterface listener : activityListeners)
+			//Call the method in the current listener
+			listener.activityCreated();
 		//Call the activity create method
 		this.activityCreated();
 	}
@@ -90,8 +100,13 @@ public abstract class AndroidActivity extends Activity {
 	/* Called when the activity is paused */
 	public void onPause() {
 		super.onPause();
-		//Pause the thread
-		this.androidDisplay.androidGameThread.paused = true;
+		//Check the OpenGL setting
+		if (! Settings.Video.OpenGL)
+			//Pause the thread
+			this.androidDisplay.androidGameThread.paused = true;
+		else if (Settings.Video.OpenGL)
+			//Pause the OpenGL ES display
+			this.androidDisplayOpenGLES.onPause();
 		//Go though all of the activity listeners
 		for (AndroidActivityListenerInterface listener : activityListeners)
 			//Call the method in the current listener
@@ -103,8 +118,13 @@ public abstract class AndroidActivity extends Activity {
 	/* Called when the activity is resumed */
 	public void onResume() {
 		super.onResume();
-		//Resume the thread
-		this.androidDisplay.androidGameThread.paused = false;
+		//Check the OpenGL setting
+		if (! Settings.Video.OpenGL)
+			//Resume the thread
+			this.androidDisplay.androidGameThread.paused = false;
+		else if (Settings.Video.OpenGL)
+			//Resume the OpenGL ES display
+			this.androidDisplayOpenGLES.onResume();
 		//Go though all of the activity listeners
 		for (AndroidActivityListenerInterface listener : activityListeners)
 			//Call the method in the current listener

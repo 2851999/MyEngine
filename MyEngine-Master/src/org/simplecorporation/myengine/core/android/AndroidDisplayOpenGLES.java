@@ -17,50 +17,38 @@ import org.simplecorporation.myengine.core.input.InputManager;
 import org.simplecorporation.myengine.utils.ScreenUtils;
 
 import android.app.Activity;
-import android.graphics.Paint;
+import android.opengl.GLSurfaceView;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 
-public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callback {
+public class AndroidDisplayOpenGLES extends GLSurfaceView {
 	
 	/* The android game */
 	public BaseGame androidGame;
 	
-	/* The android game thread */
-	public AndroidGameThread androidGameThread;
-	
-	/* The boolean that states whether this has been created */
-	public boolean created;
+	/* The boolean that states whether the game has already been created */
+	public boolean gameAlreadyCreated;
 	
 	/* The constructor */
-	public AndroidDisplay(Activity gameActivity , BaseGame androidGame) {
+	public AndroidDisplayOpenGLES(Activity gameActivity , BaseGame androidGame) {
 		//Call the super constructor
 		super(gameActivity);
 		
 		//Add the callback
 		this.getHolder().addCallback(this);
 		
-		//Set the game activity in the AndroidStore
+		//Assign the variables
 		AndroidStore.gameActivity = gameActivity;
-		
-		//Set the android game
 		this.androidGame = androidGame;
+		this.gameAlreadyCreated = false;
 		
-		//Set created to false
-		this.created = false;
-		
-		//Create the android game thread
-		this.androidGameThread = new AndroidGameThread(this.getHolder(), this.androidGame, this);
+		//Create the renderer
+		this.setRenderer(new AndroidRendererOpenGLES(this, this.androidGame));
 		
 		//Set the surface view focusable
 		this.setFocusable(true);
-	}
-	
-	/* Called when the surface is created */
-	public void surfaceCreated(SurfaceHolder surfaceHolder) {
-		//Set created to true
-		this.created = true;
+		
 		//Create the input
 		InputManager.create();
 		//Set the size of the screen in the settings based on the value of fullscreen
@@ -74,16 +62,17 @@ public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callbac
 		}
 		//Set the game resources
 		AndroidStore.gameResources = this.getResources();
-		//Create the paint object
-		AndroidStore.gamePaint = new Paint();
-		//Start the android game thread if it has not already started
-		this.androidGameThread.setRunning(true);
-		if (! this.androidGameThread.isAlive())
-			this.androidGameThread.start();
+		//Make sure the game hasn't already been created
+		if (! this.gameAlreadyCreated) {
+			//Assign 'gameAlreadyCreated' to true
+			this.gameAlreadyCreated = true;
+			//Create the game
+			this.androidGame.create();
+		}
 	}
 	
-	/* Called when the surface is changed */
-	public void surfaceChanged(SurfaceHolder surfaceHolder , int format , int width , int height) {
+	/* Called to change the display */
+	public void changeDisplay(int width , int height) {
 		//Set the size of the screen in the settings based on the value of fullscreen
 		if (Settings.Window.Fullscreen) {
 			Settings.Window.Size.Width = ScreenUtils.getScreenWidth();
@@ -93,37 +82,11 @@ public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callbac
 			Settings.Window.Size.Width = this.getWidth();
 			Settings.Window.Size.Height = this.getHeight();
 		}
-		//Reassign the surface holder
-		this.androidGameThread.surfaceHolder = surfaceHolder;
 	}
 	
 	/* Called when the surface is destroyed */
 	public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-		//Set created to false
-		this.created = false;
-		//Destroy the input
-		InputManager.destroy();
-	}
-	
-	/* The method used to stop the thread */
-	public void stopThread() {
-		//Should the loop continue
-		boolean retry = true;
-		while(retry) {
-			//Try and catch statement
-			try {
-				//Stop the game
-				this.androidGame.gameStopped();
-				//Close the game
-				this.androidGame.gameClosing();
-				//Join the thread
-				this.androidGameThread.join();
-				//Stop the while loop
-				retry = false;
-			} catch (InterruptedException e) {
-				
-			}
-		}
+		Log.d("HELLO", "SURFACE DESTROYED");
 	}
 	
 	/* The on touch method NOTE: DO NOT MOVE, IF YOU MOVE THIS THIS
