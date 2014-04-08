@@ -18,7 +18,6 @@ import org.simplecorporation.myengine.utils.ScreenUtils;
 
 import android.app.Activity;
 import android.opengl.GLSurfaceView;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
@@ -86,7 +85,7 @@ public class AndroidDisplayOpenGLES extends GLSurfaceView {
 	
 	/* Called when the surface is destroyed */
 	public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-		Log.d("HELLO", "SURFACE DESTROYED");
+		
 	}
 	
 	/* The on touch method NOTE: DO NOT MOVE, IF YOU MOVE THIS THIS
