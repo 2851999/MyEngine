@@ -34,13 +34,14 @@ public class AndroidRendererOpenGLES implements GLSurfaceView.Renderer {
 	
 	/* The method called when this surface is created */
 	public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
-		
 	}
 	
 	/* The method called when this surface is changed */
 	public void onSurfaceChanged(GL10 gl10, int width, int height) {
 		//Change the display
 		this.androidDisplay.changeDisplay(width, height);
+		//Setup the view port
+		gl10.glViewport(0, 0, width, height);
 	}
 	
 	/* The method called to draw the frame */

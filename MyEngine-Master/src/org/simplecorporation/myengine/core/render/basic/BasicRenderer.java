@@ -28,6 +28,9 @@ public class BasicRenderer {
 		else if (Settings.Android && ! Settings.Video.OpenGL)
 			//Set the colour of Android
 			BasicRenderer2DAndroid.setColour(colour);
+		else if (Settings.Android && Settings.Video.OpenGL)
+			//Set the colour of Android OpenGL ES
+			BasicRenderer2DOpenGLES.setColour(colour);
 	}
 	
 	/* The method to render an unfilled rectangle */

@@ -10,9 +10,12 @@
 
 package org.simplecorporation.myengine.utils.opengl;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 import org.simplecorporation.myengine.core.Settings;
+import org.simplecorporation.myengine.core.android.AndroidStore;
 
 public class OpenGLSetupUtils {
 	
@@ -26,6 +29,13 @@ public class OpenGLSetupUtils {
 					0 , znear , zfar);
 			GL11.glMatrixMode(GL11.GL_MODELVIEW);
 			GL11.glLoadIdentity();
+		} else if (Settings.Android && Settings.Video.OpenGL) {
+			AndroidStore.gl10.glMatrixMode(GL10.GL_PROJECTION);
+			AndroidStore.gl10.glLoadIdentity();
+			AndroidStore.gl10.glOrthof(0 , Settings.Window.Size.Width , Settings.Window.Size.Height ,
+					0 , znear , zfar);
+			AndroidStore.gl10.glMatrixMode(GL10.GL_MODELVIEW);
+			AndroidStore.gl10.glLoadIdentity();
 		}
 	}
 	

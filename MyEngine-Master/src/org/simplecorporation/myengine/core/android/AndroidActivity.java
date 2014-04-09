@@ -115,7 +115,7 @@ public abstract class AndroidActivity extends Activity {
 			 * it again when resumed */
 			
 			//Get the frame layout which has the AndroidDisplayOpenGLES instance in it
-			FrameLayout layout = (FrameLayout) this.androidDisplay.getParent();
+			FrameLayout layout = (FrameLayout) this.androidDisplayOpenGLES.getParent();
 			//Remove the instance of AndroidDisplayOpenGLES
 			layout.removeView(this.androidDisplayOpenGLES);
 			//Pause the OpenGL ES display
