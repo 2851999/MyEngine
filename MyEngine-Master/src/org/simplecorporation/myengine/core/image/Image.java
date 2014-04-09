@@ -55,8 +55,7 @@ public class Image {
 	
 	/* The image object for Android */
 	/**
-	 * An instance of the image used on Android without
-	 * OpenGL (Android Bitmap)
+	 * An instance of the image used on Android  (Android Bitmap)
 	 */
 	private Bitmap androidImage;
 	
@@ -256,9 +255,9 @@ public class Image {
 	 */
 	public int getWidth() {
 		//Return the right image's width
-		if (Settings.Video.OpenGL)
+		if (!Settings.Android && Settings.Video.OpenGL)
 			return this.openGLImage.getImageWidth();
-		else if (! Settings.Android)
+		else if (! Settings.Android && ! Settings.Video.OpenGL)
 			return this.javaImage.getWidth(JavaWindow.frame);
 		else if (Settings.Android)
 			return this.androidImage.getWidth();
@@ -274,9 +273,9 @@ public class Image {
 	 */
 	public int getHeight() {
 		//Return the right image's height
-		if (Settings.Video.OpenGL)
+		if (!Settings.Android && Settings.Video.OpenGL)
 			return this.openGLImage.getImageHeight();
-		else if (! Settings.Android)
+		else if (! Settings.Android && ! Settings.Video.OpenGL)
 			return this.javaImage.getHeight(JavaWindow.frame);
 		else if (Settings.Android)
 			return this.androidImage.getHeight();

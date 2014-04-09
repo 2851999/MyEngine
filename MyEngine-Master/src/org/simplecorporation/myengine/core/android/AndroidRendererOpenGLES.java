@@ -34,6 +34,7 @@ public class AndroidRendererOpenGLES implements GLSurfaceView.Renderer {
 	
 	/* The method called when this surface is created */
 	public void onSurfaceCreated(GL10 gl10, EGLConfig eglConfig) {
+		
 	}
 	
 	/* The method called when this surface is changed */
@@ -49,8 +50,7 @@ public class AndroidRendererOpenGLES implements GLSurfaceView.Renderer {
 		//Assign the 'gl10' object in the AndroidStore
 		AndroidStore.gl10 = gl10;
 		//Update and render the game
-		this.androidGame.engineUpdate();
-		this.androidGame.engineRender();
+		this.androidGame.tick();
 	}
 	
 }
