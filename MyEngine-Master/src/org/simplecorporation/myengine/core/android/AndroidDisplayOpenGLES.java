@@ -13,6 +13,7 @@ package org.simplecorporation.myengine.core.android;
 import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.android.input.AndroidInput;
 import org.simplecorporation.myengine.core.game.BaseGame;
+import org.simplecorporation.myengine.core.input.Input;
 import org.simplecorporation.myengine.core.input.InputManager;
 import org.simplecorporation.myengine.utils.ScreenUtils;
 
@@ -65,6 +66,8 @@ public class AndroidDisplayOpenGLES extends GLSurfaceView {
 		if (! this.gameAlreadyCreated) {
 			//Assign 'gameAlreadyCreated' to true
 			this.gameAlreadyCreated = true;
+			//Add the game to the input listeners
+			Input.addListener(this.androidGame);
 			//Create the game
 			this.androidGame.create();
 		}

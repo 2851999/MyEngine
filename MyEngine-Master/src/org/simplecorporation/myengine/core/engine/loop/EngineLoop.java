@@ -103,8 +103,12 @@ public abstract class EngineLoop {
 		this.fps = 0;
 		//Set the delta
 		this.delta = 0;
-		//Set the default font (Arial)
-		this.font = FontUtils.buildGUIFont("Arial" , Colour.WHITE , 10);
+		//Check to see whether the font has been set, if not set it
+		//to the default font since the program has not set a custom
+		//one when it was created and engineCreated() was called
+		if (this.font == null)
+			//Set the default font (Arial)
+			this.font = FontUtils.buildGUIFont("Arial" , Colour.WHITE , 10);
 		//Check if using android
 		if (! Settings.Android && ! Settings.Applet) {
 			//While the window is open
@@ -151,13 +155,26 @@ public abstract class EngineLoop {
 		if (Settings.Debugging.ShowInfo) {
 			//Setup the remove alpha to allow the rendering of text when using OpenGL
 			OpenGLSetupUtils.setupRemoveAlpha();
-			//Render some information using the default font
-			this.font.render("DEBUGGING" , 0 , 0);
-			this.font.render("FPS: " + getFPS() , 0 , 12);
-			this.font.render("Current Delta: " + getDelta() , 0 , 24);
-			this.font.render("Memory Usage: " + ((SystemInfo.getMaxMemory() / (1024 * 1024)) - (SystemInfo.getFreeMemory() / (1024 * 1024))) , 0 , 36);
-			this.font.render("Processors: " + SystemInfo.getAvailableProcessors() , 0 , 48);
-			this.font.render("OpenGL: " + Settings.Video.OpenGL , 0 , 60);
+			//The text being rendered
+			String[] debuggingInfo = new String[] {
+					"DEBUGGING",
+					"FPS: " + getFPS(),
+					"Current Delta: " + getDelta(),
+					"Memory Usage: " + ((SystemInfo.getMaxMemory() / (1024 * 1024)) - (SystemInfo.getFreeMemory() / (1024 * 1024))),
+					"Processors: " + SystemInfo.getAvailableProcessors(),
+					"OpenGL: " + Settings.Video.OpenGL
+			};
+			//The current y position
+			double currentY = 0;
+			//Go through the debugging information
+			for (int a = 0; a < debuggingInfo.length; a++) {
+				//Get the current text
+				String currentText = debuggingInfo[a];
+				//Render the current text
+				this.font.render(currentText, 0, currentY);
+				//Add onto the current y position
+				currentY += this.font.getHeight(currentText) + 2;
+			}
 		}
 		
 		//Check if this is on android or an applet

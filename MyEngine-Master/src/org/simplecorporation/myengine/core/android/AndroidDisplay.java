@@ -13,6 +13,7 @@ package org.simplecorporation.myengine.core.android;
 import org.simplecorporation.myengine.core.Settings;
 import org.simplecorporation.myengine.core.android.input.AndroidInput;
 import org.simplecorporation.myengine.core.game.BaseGame;
+import org.simplecorporation.myengine.core.input.Input;
 import org.simplecorporation.myengine.core.input.InputManager;
 import org.simplecorporation.myengine.utils.ScreenUtils;
 
@@ -46,6 +47,9 @@ public class AndroidDisplay extends SurfaceView implements SurfaceHolder.Callbac
 		
 		//Set the android game
 		this.androidGame = androidGame;
+		
+		//Add the game to the input listeners
+		Input.addListener(this.androidGame);
 		
 		//Set created to false
 		this.created = false;

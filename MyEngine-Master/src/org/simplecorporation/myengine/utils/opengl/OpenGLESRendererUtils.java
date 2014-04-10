@@ -21,8 +21,6 @@ import org.simplecorporation.myengine.core.android.AndroidStore;
 import org.simplecorporation.myengine.core.image.Image;
 import org.simplecorporation.myengine.core.render.colour.Colour;
 
-import android.opengl.GLUtils;
-
 public class OpenGLESRendererUtils {
 	
 	/* The static method used to render something using OpenGL ES (GL10) 
@@ -47,8 +45,9 @@ public class OpenGLESRendererUtils {
 		//Enable 2D textures
 		gl.glEnable(GL10.GL_TEXTURE_2D);
 		
-		//Bind the image
-		int textureId = bindTexture(gl, texture);
+		//Bind the texture if needed
+		texture.getAndroidOpenGLESImage().bind();;
+		int textureId = texture.getAndroidOpenGLESImage().textureId;
 		
 		//Tell OpenGL where the texture is
 		gl.glBindTexture(GL10.GL_TEXTURE_2D, textureId);
@@ -80,8 +79,6 @@ public class OpenGLESRendererUtils {
 		
 		//Disable 2D textures
 		gl.glDisable(GL10.GL_TEXTURE_2D);
-		
-		gl.glDeleteTextures(1, new int[] { textureId }, 0);
 	}
 	
 	/* The static method used to render something using OpenGL ES (GL10) 
@@ -118,40 +115,6 @@ public class OpenGLESRendererUtils {
 		//Disable the things used to render
 		gl.glDisableClientState(GL10.GL_COLOR_ARRAY);
 		gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
-	}
-	
-	/* The static method used to bind an image given the image and return the id of that image */
-	public static int bindTexture(GL10 gl, Image image) {
-		//Set the id to -1
-		int id = -1;
-		
-		//Create the array to store the texture pointer
-		int[] texturePointers = new int[1];
-		//Generate the texture
-		//1 = number of textures
-		//0 = offset (Starting index in the array)
-		gl.glGenTextures(1, texturePointers, 0);
-		//Assign the id
-		id = texturePointers[0];
-		
-		//Bind the texture pointer (id) to the array
-		gl.glBindTexture(GL10.GL_TEXTURE_2D, id);
-		
-		//NOTE: Future, add video setting to change render quality
-		//GL_LINEAR = blurred, better performance
-		//GL_NEAREST = crisper, slower performance
-		
-		//Setup the parameters
-		//MAG = Magnification
-		//MIN = Minification (Opposite of MAG)
-		gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_LINEAR);
-		gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
-		
-		//Bind the bitmap to the texture id
-		GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, image.getAndroidImage(), 0);
-		
-		//Return the id of the image
-		return id;
 	}
 	
 	/* The static method used to create a FloatBuffer given the array */

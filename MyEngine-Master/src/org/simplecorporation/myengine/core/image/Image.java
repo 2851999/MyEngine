@@ -59,6 +59,9 @@ public class Image {
 	 */
 	private Bitmap androidImage;
 	
+	/* The image object for Android OpenGL ES */
+	private AndroidOpenGLESImage androidOpenGLESImage;
+	
 	/* The default constructor */
 	/**
 	 * The default constructor for <code>Image</code>
@@ -163,6 +166,10 @@ public class Image {
 	public void load(int id) {
 		//Set the image
 		this.androidImage = BitmapFactory.decodeResource(AndroidStore.gameResources , id);
+		//Check to see whether OpenGL is set to true
+		if (Settings.Android && Settings.Video.OpenGL)
+			//Create the Android OpenGL ES Image
+			this.androidOpenGLESImage = new AndroidOpenGLESImage(this.androidImage);
 	}
 	
 	/* The method used to load the Android, or Java image appropriately */
@@ -245,6 +252,12 @@ public class Image {
 	public Bitmap getAndroidImage() {
 		//Return the image
 		return this.androidImage;
+	}
+	
+	/* Returns the Android OpenGL ES Image */
+	public AndroidOpenGLESImage getAndroidOpenGLESImage() {
+		//Return the image
+		return this.androidOpenGLESImage;
 	}
 	
 	/* The method that returns the width of the image */
