@@ -21,7 +21,7 @@ public class Settings {
 	public static final String EngineVersion = "V1.0.6.0";
 	
 	/* The type of build this version of the engine is */
-	public static final String EngineBuild = "Development";
+	public static final String EngineBuild = "Experimental";
 	
 	/* Is using android */
 	public static boolean Android = false;

@@ -53,8 +53,8 @@ public class ShaderTest extends BaseGame {
 		this.skybox = new Skybox(100, 100, 100, this.sky, this.sky, this.sky, this.sky, this.sky, this.sky);
 		this.model = OBJLoader.loadModel("/testdata/models/unitologist.obj", false);
 		shader = new Shader();
-		shader.attachShader(OpenGLShaderUtils.createShader("/testdata/shaders/testshader.vert", GL20.GL_VERTEX_SHADER, false));
-		shader.attachShader(OpenGLShaderUtils.createShader("/testdata/shaders/testshader.frag", GL20.GL_FRAGMENT_SHADER, false));
+		shader.attachShader(OpenGLShaderUtils.createShader("/testdata/shaders/toonshader.vert", GL20.GL_VERTEX_SHADER, false));
+		shader.attachShader(OpenGLShaderUtils.createShader("/testdata/shaders/toonshader.frag", GL20.GL_FRAGMENT_SHADER, false));
 		this.drawModel = DisplayList.generate();
 		this.shader.useShader();
 		shader.setValuef("lightDir", 1,1,1);

@@ -41,6 +41,8 @@ public class AndroidRendererOpenGLES implements GLSurfaceView.Renderer {
 	public void onSurfaceChanged(GL10 gl10, int width, int height) {
 		//Change the display
 		this.androidDisplay.changeDisplay(width, height);
+		//Setup the view port
+		gl10.glViewport(0, 0, width, height);
 	}
 	
 	/* The method called to draw the frame */
@@ -48,8 +50,7 @@ public class AndroidRendererOpenGLES implements GLSurfaceView.Renderer {
 		//Assign the 'gl10' object in the AndroidStore
 		AndroidStore.gl10 = gl10;
 		//Update and render the game
-		this.androidGame.engineUpdate();
-		this.androidGame.engineRender();
+		this.androidGame.tick();
 	}
 	
 }

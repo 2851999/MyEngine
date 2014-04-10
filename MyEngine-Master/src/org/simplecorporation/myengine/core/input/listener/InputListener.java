@@ -42,7 +42,7 @@ public interface InputListener {
 	/* The on scroll event */
 	public void onScroll(ScrollEvent e);
 	
-	/* The on touch event (Android) */
+	/* The on touch event (Android */
 	public void onTouch(TouchEvent e);
 	
 }

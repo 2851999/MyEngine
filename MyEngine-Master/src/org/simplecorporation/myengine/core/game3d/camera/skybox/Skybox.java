@@ -12,7 +12,7 @@ package org.simplecorporation.myengine.core.game3d.camera.skybox;
 
 import org.simplecorporation.myengine.core.game3d.vector.Vector3D;
 import org.simplecorporation.myengine.core.image.Image;
-import org.simplecorporation.myengine.core.render.basic.BasicRenderer3DOpenGL;
+import org.simplecorporation.myengine.core.render.basic.BasicRenderer3D;
 
 public class Skybox {
 	
@@ -57,7 +57,7 @@ public class Skybox {
 	/* The method used to render the skybox given a position */
 	public void render(Vector3D position) {
 		//Render the skybox
-		BasicRenderer3DOpenGL.renderTexturedCube(this.images, position.multiply(-1).minus(new Vector3D(xOffset, yOffset, zOffset)), xOffset * 2, yOffset * 2, zOffset * 2);
+		BasicRenderer3D.renderTexturedCube(this.images, position.multiply(-1).minus(new Vector3D(xOffset, yOffset, zOffset)), xOffset * 2, yOffset * 2, zOffset * 2);
 	}
 	
 	/* The method used to set the images given the images */
