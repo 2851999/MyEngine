@@ -21,4 +21,8 @@ public class AndroidSettings {
 	/* The setting for the screen orientation */
 	public static int ScreenOrientation = SCREEN_ORIENTATION_PORTRAIT;
 	
+	/* The setting that states whether sounds should be paused when
+	 * onPause() is called */
+	public static boolean PauseSoundsOnPause = true;
+	
 }

@@ -16,6 +16,9 @@ import org.simplecorporation.myengine.core.render.colour.Colour;
 
 public class BasicRenderer {
 	
+	/* The current colour set to its default value (White) */
+	public static Colour currentColour = new Colour(1.0, 1.0, 1.0, 1.0);
+	
 	/* The method to set the colour */
 	public static void setColour(Colour colour) {
 		//Find out what rendering mode to use
@@ -28,6 +31,11 @@ public class BasicRenderer {
 		else if (Settings.Android && ! Settings.Video.OpenGL)
 			//Set the colour of Android
 			BasicRenderer2DAndroid.setColour(colour);
+		else if (Settings.Android && Settings.Video.OpenGL)
+			//Set the colour of Android OpenGL ES
+			BasicRenderer2DOpenGLES.setColour(colour);
+		//Assign the current colour
+		currentColour = colour;
 	}
 	
 	/* The method to render an unfilled rectangle */

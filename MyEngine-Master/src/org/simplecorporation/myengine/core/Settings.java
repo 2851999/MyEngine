@@ -18,9 +18,9 @@ import org.simplecorporation.myengine.utils.FileUtils;
 public class Settings {
 	
 	/* The version of the engine goes up 1 every development build */
-	public static final String EngineVersion = "V1.0.5.8";
+	public static final String EngineVersion = "V1.0.6.1";
 	
-	/* The type of build this version of the engine is*/
+	/* The type of build this version of the engine is */
 	public static final String EngineBuild = "Beta";
 	
 	/* Is using android */

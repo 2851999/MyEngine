@@ -55,10 +55,12 @@ public class Image {
 	
 	/* The image object for Android */
 	/**
-	 * An instance of the image used on Android without
-	 * OpenGL (Android Bitmap)
+	 * An instance of the image used on Android  (Android Bitmap)
 	 */
 	private Bitmap androidImage;
+	
+	/* The image object for Android OpenGL ES */
+	private AndroidOpenGLESImage androidOpenGLESImage;
 	
 	/* The default constructor */
 	/**
@@ -164,6 +166,10 @@ public class Image {
 	public void load(int id) {
 		//Set the image
 		this.androidImage = BitmapFactory.decodeResource(AndroidStore.gameResources , id);
+		//Check to see whether OpenGL is set to true
+		if (Settings.Android && Settings.Video.OpenGL)
+			//Create the Android OpenGL ES Image
+			this.androidOpenGLESImage = new AndroidOpenGLESImage(this.androidImage);
 	}
 	
 	/* The method used to load the Android, or Java image appropriately */
@@ -248,6 +254,12 @@ public class Image {
 		return this.androidImage;
 	}
 	
+	/* Returns the Android OpenGL ES Image */
+	public AndroidOpenGLESImage getAndroidOpenGLESImage() {
+		//Return the image
+		return this.androidOpenGLESImage;
+	}
+	
 	/* The method that returns the width of the image */
 	/**
 	 * Checks what image should have been created then returns the
@@ -256,9 +268,9 @@ public class Image {
 	 */
 	public int getWidth() {
 		//Return the right image's width
-		if (Settings.Video.OpenGL)
+		if (!Settings.Android && Settings.Video.OpenGL)
 			return this.openGLImage.getImageWidth();
-		else if (! Settings.Android)
+		else if (! Settings.Android && ! Settings.Video.OpenGL)
 			return this.javaImage.getWidth(JavaWindow.frame);
 		else if (Settings.Android)
 			return this.androidImage.getWidth();
@@ -274,9 +286,9 @@ public class Image {
 	 */
 	public int getHeight() {
 		//Return the right image's height
-		if (Settings.Video.OpenGL)
+		if (!Settings.Android && Settings.Video.OpenGL)
 			return this.openGLImage.getImageHeight();
-		else if (! Settings.Android)
+		else if (! Settings.Android && ! Settings.Video.OpenGL)
 			return this.javaImage.getHeight(JavaWindow.frame);
 		else if (Settings.Android)
 			return this.androidImage.getHeight();

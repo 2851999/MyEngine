@@ -16,7 +16,7 @@ import org.lwjgl.BufferUtils;
 
 public class OpenGLBufferUtils {
 	
-	/* The method to create an flip a float buffer with 4 values */
+	/* The method to create and flip a float buffer with 4 values */
 	public static FloatBuffer createFlipBuffer4f(float v1 , float v2 , float v3 , float v4) {
 		//The float buffer
 		FloatBuffer buffer = BufferUtils.createFloatBuffer(4);

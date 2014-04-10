@@ -10,6 +10,8 @@
 
 package org.simplecorporation.myengine.core.android;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -28,5 +30,8 @@ public class AndroidStore {
 	
 	/* The game's resources */
 	public static Resources gameResources;
+	
+	/* The GL10 object */
+	public static GL10 gl10;
 	
 }

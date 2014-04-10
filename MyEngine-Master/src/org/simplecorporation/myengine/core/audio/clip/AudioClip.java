@@ -29,16 +29,27 @@ public class AudioClip {
 			this.androidAudio = new AndroidAudio();
 	}
 	
-	/* The constructor for java */
+	/* The constructor */
 	public AudioClip(String filePath , String fileFormat , boolean loop , boolean music) {
-		//Check if android is enabled
+		//Check what audio to create
 		if (! Settings.Android)
 			this.javaAudio = new JavaAudio(filePath , fileFormat , loop , music);
+		else if (Settings.Android)
+			this.androidAudio = new AndroidAudio(filePath, loop, music);
+	}
+	
+	/* The constructor given the external variable for easy porting to Android*/
+	public AudioClip(String filePath , String fileFormat , boolean external, boolean loop , boolean music) {
+		//Check what audio to create
+		if (! Settings.Android)
+			this.javaAudio = new JavaAudio(filePath , fileFormat , loop , music);
+		else if (Settings.Android)
+			this.androidAudio = new AndroidAudio(filePath, external, loop, music);
 	}
 	
 	/* The constructor for android */
 	public AudioClip(int id , boolean loop , boolean music) {
-		//Check if android is enabled
+		//Check what audio to create
 		if (Settings.Android)
 			this.androidAudio = new AndroidAudio(id , loop , music);
 	}
@@ -68,11 +79,23 @@ public class AudioClip {
 			this.androidAudio.stop();
 	}
 	
-	/* The method to load the audio for Java */
+	/* The method to load the audio */
 	public void load(String filePath , String fileFormat) {
 		//Check if android is enabled
 		if (! Settings.Android)
 			this.javaAudio.load(filePath , fileFormat);
+		else if (Settings.Android)
+			this.androidAudio.load(filePath);
+	}
+	
+	/* The method to load the audio given the external variable to allow
+	 * for easy porting to Android */
+	public void load(String filePath , String fileFormat, boolean external) {
+		//Check if android is enabled
+		if (! Settings.Android)
+			this.javaAudio.load(filePath , fileFormat);
+		else if (Settings.Android)
+			this.androidAudio.load(filePath, external);
 	}
 	
 	/* The method to load the audio for Android */

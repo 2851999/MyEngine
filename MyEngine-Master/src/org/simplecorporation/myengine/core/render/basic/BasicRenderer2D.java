@@ -24,10 +24,12 @@ public class BasicRenderer2D {
 		else if (! Settings.Android && ! Settings.Video.OpenGL)
 			//Render an unfilled rectangle using Java
 			BasicRenderer2DJava.renderRectangle(x , y , width , height);
-		else if (Settings.Android && ! Settings.Video.OpenGL) {
+		else if (Settings.Android && ! Settings.Video.OpenGL)
 			//Render an unfilled rectangle using Android
 			BasicRenderer2DAndroid.renderRectangle(x , y , width , height);
-		}
+		else if (Settings.Android && Settings.Video.OpenGL)
+			//Render an unfilled rectangle using Android OpenGL ES
+			BasicRenderer2DOpenGLES.renderRectangle(x, y, width, height);
 	}
 	
 	/* The method to render a filled rectangle */
@@ -42,6 +44,9 @@ public class BasicRenderer2D {
 		else if (Settings.Android && ! Settings.Video.OpenGL)
 			//Render a filled rectangle using android
 			BasicRenderer2DAndroid.renderFilledRectangle(x , y , width , height);
+		else if (Settings.Android && Settings.Video.OpenGL)
+			//Render an filled rectangle using Android OpenGL ES
+			BasicRenderer2DOpenGLES.renderFilledRectangle(x, y, width, height);
 	}
 	
 	/* The method to render a line */
@@ -56,6 +61,9 @@ public class BasicRenderer2D {
 		else if (Settings.Android && ! Settings.Video.OpenGL)
 			//Render a line using Android
 			BasicRenderer2DAndroid.renderLine(startx , starty , endx , endy);
+		else if (Settings.Android && Settings.Video.OpenGL)
+			//Render a line using Android OpenGL ES
+			BasicRenderer2DOpenGLES.renderLine(startx, starty, endx, endy);
 	}
 	
 	/* The method to render an image */
@@ -70,6 +78,9 @@ public class BasicRenderer2D {
 		else if (Settings.Android && ! Settings.Video.OpenGL)
 			//Render the image using Android
 			BasicRenderer2DAndroid.renderImage(image , x , y);
+		else if (Settings.Android && Settings.Video.OpenGL)
+			//Render the image using Android OpenGL ES
+			BasicRenderer2DOpenGLES.renderImage(image, x, y);
 	}
 	
 	/* The method to render an image with a rotation */
@@ -84,6 +95,9 @@ public class BasicRenderer2D {
 		else if (Settings.Android && ! Settings.Video.OpenGL)
 			//Render the image using Android
 			BasicRenderer2DAndroid.renderImage(image , x , y , rotation);
+		else if (Settings.Android && Settings.Video.OpenGL)
+			//Render the image using Android OpenGL ES
+			BasicRenderer2DOpenGLES.renderImage(image, x, y, rotation);
 	}
 	
 	/* The method to render an image with a specified width and height */
@@ -98,6 +112,9 @@ public class BasicRenderer2D {
 		else if (Settings.Android && ! Settings.Video.OpenGL)
 			//Render the image using Android
 			BasicRenderer2DAndroid.renderImage(image , x , y , width , height);
+		else if (Settings.Android && Settings.Video.OpenGL)
+			//Render the image using Android OpenGL ES
+			BasicRenderer2DOpenGLES.renderImage(image, x, y, width, height);
 	}
 	
 	/* The method to render an image with a specified width, height and rotation */
@@ -112,6 +129,9 @@ public class BasicRenderer2D {
 		else if (Settings.Android && ! Settings.Video.OpenGL)
 			//Render the image using Android
 			BasicRenderer2DAndroid.renderImage(image , x , y , width , height , rotation);
+		else if (Settings.Android && Settings.Video.OpenGL)
+			//Render the image using Android OpenGL ES
+			BasicRenderer2DOpenGLES.renderImage(image, x, y, width, height, rotation);
 	}
 	
 	/* The method to render an image with a specified x, y, width, height, imageX, imageY, imageWidth, imageHeight */
@@ -127,6 +147,9 @@ public class BasicRenderer2D {
 		else if (Settings.Android && ! Settings.Video.OpenGL)
 			//Render the image using Android
 			BasicRenderer2DAndroid.renderImage(image , x , y , width , height , imageX , imageY , imageWidth , imageHeight);
+		else if (Settings.Android && Settings.Video.OpenGL)
+			//Render the image using Android OpenGL ES
+			BasicRenderer2DOpenGLES.renderImage(image, x, y, width , height , imageX , imageY , imageWidth , imageHeight);
 	}
 	
 }

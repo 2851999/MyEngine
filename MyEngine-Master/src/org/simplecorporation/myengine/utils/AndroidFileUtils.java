@@ -30,15 +30,20 @@ import android.os.Environment;
 
 public class AndroidFileUtils {
 	
+	/* The different write modes */
+	public static final int MODE_INTERNAL_STORAGE = 1;
+	public static final int MODE_EXTERNAL_STORAGE = 2;
+	public static final int MODE_ASSETS = 3;
+	
 	/* The static method used to get an instance of a file */
 	public static File getFile(String filePath, boolean external) {
 		//The directory
 		File directory = null;
 		//Check to see whether the file is in the external storage
-		if (external)
+		if (! external)
 			//Assign the directory
 			directory = AndroidStore.gameActivity.getFilesDir();
-		else
+		else if (external)
 			//Assign the directory
 			directory = Environment.getExternalStorageDirectory();
 		//Return the file
@@ -166,26 +171,72 @@ public class AndroidFileUtils {
 		return fileText;
 	}
 	
-	/* The static method used to write a file */
-	public static void write(String filePath, List<String> fileText, boolean external) {
-		//Check to see whether to use external or internal storage
-		if (external)
+	/* The static method used to read a file from the assets */
+	public static List<String> readFromAssets(String filePath) {
+		//The file text
+		List<String> fileText = new ArrayList<String>();
+		//Try and catch statement
+		try {
+			//Read the file
+			fileText = FileUtils.read(new BufferedReader(new InputStreamReader(AndroidStore.gameActivity.getAssets().open(filePath))));
+		} catch (FileNotFoundException e) {
+			
+		} catch (IOException e) {
+			
+		}
+		//Return the file text
+		return fileText;
+	}
+	
+	/* The static method used to write a file given the mode */
+	public static void write(String filePath, List<String> fileText, int mode) {
+		//Check the mode
+		if (mode == MODE_INTERNAL_STORAGE)
+			//Write the file to internal storage
+			writeToInternalStorage(filePath, fileText);
+		else if (mode == MODE_EXTERNAL_STORAGE)
 			//Write the file to external storage
 			writeToExternalStorage(filePath, fileText);
 		else
-			//Write the file to internal storage
-			writeToInternalStorage(filePath, fileText);
+			//Log an error
+			Logger.log(new Log("AndroidFileUtils write()", "The mode " + mode + " is not defined", LogType.ERROR));
 	}
 	
-	/* The static method used to read a file */
-	public static List<String> read(String filePath, boolean external) {
-		//Check to see whether to use external or internal storage
-		if (external)
-			//Read the file from external storage
-			return readFromExternalStorage(filePath);
-		else
+	/* The static method used to read a file given the mode */
+	public static List<String> read(String filePath, int mode) {
+		//Check the mode
+		if (mode == MODE_INTERNAL_STORAGE)
 			//Read the file from internal storage
 			return readFromInternalStorage(filePath);
+		else if (mode == MODE_EXTERNAL_STORAGE)
+			//Read the file from external storage
+			return readFromExternalStorage(filePath);
+		else if (mode == MODE_ASSETS)
+			//Read the file from the assets
+			return readFromAssets(filePath);
+		else {
+			//Log an error
+			Logger.log(new Log("AndroidFileUtils read()", "The mode " + mode + " is not defined", LogType.ERROR));
+			//Return null
+			return null;
+		}
+	}
+	
+	/* The static method used to read a file where isAsset is similar to inFolder */
+	public static List<String> read(String filePath, boolean isAsset) {
+		//Check to see whether to use the assets or internal storage
+		if (isAsset)
+			//Read the file from the assets
+			return read(filePath, MODE_ASSETS);
+		else
+			//Read the file from internal storage
+			return read(filePath, MODE_INTERNAL_STORAGE);
+	}
+	
+	/* The static method used to write a file */
+	public static void write(String filePath, List<String> fileText) {
+		//Write in the default place which is the internal storage
+		write(filePath, fileText, MODE_INTERNAL_STORAGE);
 	}
 	
 }
