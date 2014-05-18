@@ -23,7 +23,7 @@ public class ArrayUtils {
 		
 		//Set all of the lines
 		for (int a = 0; a < stringArray.length; a++)
-			stringArray[0] = list.get(a);
+			stringArray[a] = list.get(a);
 		
 		//Return the array
 		return stringArray;
@@ -36,7 +36,7 @@ public class ArrayUtils {
 		
 		//Set all of the lines
 		for (int a = 0; a < stringArray.length; a++)
-			stringArray[0] = linkedList.get(a);
+			stringArray[a] = linkedList.get(a);
 		
 		//Return the array
 		return stringArray;
@@ -46,10 +46,13 @@ public class ArrayUtils {
 	public static List<String> toStringList(String[] stringArray) {
 		//Create the list
 		List<String> stringList = new ArrayList<String>();
-		
-		//Add all of the lines
-		for (int a = 0; a < stringArray.length; a++)
-			stringList.add(stringArray[a]);
+	
+		//Make sure the array has been created (Prevents a NullPointerException)
+		if (stringArray != null) {
+			//Add all of the lines
+			for (int a = 0; a < stringArray.length; a++)
+				stringList.add(stringArray[a]);
+		}
 		
 		//Return the linked list
 		return stringList;
@@ -60,9 +63,12 @@ public class ArrayUtils {
 		//Create the linked list
 		LinkedList<String> stringLinkedList = new LinkedList<String>();
 		
-		//Add all of the lines
-		for (int a = 0; a < stringArray.length; a++)
-			stringLinkedList.add(stringArray[a]);
+		//Make sure the array has been created (Prevents a NullPointerException)
+		if (stringArray != null) {
+			//Add all of the lines
+			for (int a = 0; a < stringArray.length; a++)
+				stringLinkedList.add(stringArray[a]);
+		}
 		
 		//Return the linked list
 		return stringLinkedList;

@@ -34,4 +34,9 @@ public class MessageBox {
 		return JOptionPane.showConfirmDialog(null , message , title , JOptionPane.YES_NO_OPTION) == JOptionPane.OK_OPTION;
 	}
 	
+	/* The method used to get input from the user */
+	public static String getInput(String message) {
+		return JOptionPane.showInputDialog(message);
+	}
+	
 }
